@@ -5,5 +5,9 @@ const Api = axios.create({
 })
 
 export const getDetail = () => {
-    return Api.get('get/read-form')
+    return Api.get('form/read-form')
+}
+
+export const getComplaint = () => {
+    return Api.get('complain/read-form')
 }
