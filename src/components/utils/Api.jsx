@@ -9,5 +9,9 @@ export const getDetail = () => {
 }
 
 export const getComplaint = () => {
-    return Api.get('complain/read-form')
+    return Api.get('complaint/read-form')
+}
+
+export const getAdmissionForm = () => {
+    return Api.get("admission-form/read-form", );
 }
