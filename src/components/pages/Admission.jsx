@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAdmissionForm } from "../utils/Api";
+import { Search, Users, ChevronLeft, ChevronRight, Eye, Calendar, Mail, Phone, User, GraduationCap } from "lucide-react";
 import Header from "../common/Header";
 import SideNavbar from "../common/SideNavbar";
 import ClientModal from "../modal/ClientModal";
@@ -96,6 +97,15 @@ const Admission = () => {
     setShowModal(true);
   };
 
+  const formatDateShort = (dateString) => {
+    if (!dateString) return "N/A";
+    return new Date(dateString).toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
@@ -149,83 +159,129 @@ const Admission = () => {
             </h1>
 
             {/* Search */}
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full md:w-1/3 px-4 py-2 border rounded-lg shadow-sm focus:ring focus:ring-indigo-200"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+            <div className="mb-6">
+              <div className="relative w-full md:w-1/3">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search admission records..."
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
             </div>
 
             {/* Table */}
             <div className="overflow-x-auto bg-white shadow rounded-lg">
-              <table className="min-w-full border border-gray-200 text-sm">
-                <thead className="bg-gray-100">
+              <table className="min-w-full table-fixed border border-gray-200 text-sm">
+                <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
                   <tr>
                     {[
-                      { label: "Name", field: "fullName" },
-                      { label: "Father Name", field: "fatherName" },
-                      { label: "Qualification", field: "qualification" },
-                      { label: "DOB", field: "dob" },
-                      { label: "Phone", field: "phoneNo" },
-                      { label: "Email", field: "email" },
-                      { label: "Course", field: "course.courseName" },
-                      { label: "Created", field: "createdAt" },
-                      { label: "Action", field: null },
+                      { label: "Name", field: "fullName", width: "w-40" },
+                      { label: "Father Name", field: "fatherName", width: "w-40" },
+                      { label: "Qualification", field: "qualification", width: "w-32" },
+                      { label: "DOB", field: "dob", width: "w-28" },
+                      { label: "Phone", field: "phoneNo", width: "w-32" },
+                      { label: "Email", field: "email", width: "w-56" },
+                      { label: "Course", field: "course.courseName", width: "w-40" },
+                      { label: "Created", field: "createdAt", width: "w-28" },
+                      { label: "Action", field: null, width: "w-20" },
                     ].map((col, idx) => (
                       <th
                         key={idx}
-                        className="px-4 py-2 text-left cursor-pointer"
+                        className={`${col.width} px-4 py-3 text-left font-medium ${
+                          col.field ? 'cursor-pointer hover:bg-blue-700 transition' : ''
+                        }`}
                         onClick={() =>
                           col.field ? handleSort(col.field) : undefined
                         }
                       >
-                        {col.label}
-                        {sortField === col.field &&
-                          (sortDirection === "asc" ? " ▲" : " ▼")}
+                        <div className="flex items-center space-x-1">
+                          <span>{col.label}</span>
+                          {sortField === col.field && (
+                            <span className="text-blue-200">
+                              {sortDirection === "asc" ? "▲" : "▼"}
+                            </span>
+                          )}
+                        </div>
                       </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems.map((item) => (
-                    <tr
-                      key={item._id}
-                      className="border-t hover:bg-gray-50 transition"
-                    >
-                      <td className="px-4 py-2">{item.fullName}</td>
-                      <td className="px-4 py-2">{item.fatherName}</td>
-                      <td className="px-4 py-2">{item.qualification}</td>
-                      <td className="px-4 py-2">
-                        {new Date(item.dob).toLocaleDateString()}
-                      </td>
-                      <td className="px-4 py-2">{item.phoneNo}</td>
-                      <td className="px-4 py-2">{item.email}</td>
-                      <td className="px-4 py-2">
-                        {item.course?.courseName || "-"}
-                      </td>
-                      <td className="px-4 py-2">
-                        {new Date(item.createdAt).toLocaleDateString()}
-                      </td>
-                      <td className="px-4 py-2">
-                        <button
-                          onClick={() => handleViewDetails(item)}
-                          className="text-indigo-600 hover:underline"
-                        >
-                          View
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                  {currentItems.length === 0 && (
-                    <tr>
-                      <td
-                        colSpan="9"
-                        className="text-center py-4 text-gray-500"
+                  {currentItems.length > 0 ? (
+                    currentItems.map((item, index) => (
+                      <tr
+                        key={item._id}
+                        className={`border-t hover:bg-blue-50 transition ${
+                          index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                        }`}
                       >
-                        No records found
+                        <td className="px-4 py-3 truncate" title={item.fullName}>
+                          <div className="flex items-center space-x-2">
+                            <User className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <span className="truncate">{item.fullName}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 truncate" title={item.fatherName}>
+                          {item.fatherName}
+                        </td>
+                        <td className="px-4 py-3 truncate" title={item.qualification}>
+                          <div className="flex items-center space-x-2">
+                            <GraduationCap className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <span className="truncate">{item.qualification}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <span>{formatDateShort(item.dob)}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center space-x-2">
+                            <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <span className="truncate">{item.phoneNo}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center space-x-2">
+                            <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <span className="truncate" title={item.email}>{item.email}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 truncate" title={item.course?.courseName || "-"}>
+                          {item.course?.courseName || "-"}
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          {formatDateShort(item.createdAt)}
+                        </td>
+                        <td className="px-4 py-3">
+                          <button
+                            onClick={() => handleViewDetails(item)}
+                            className="text-indigo-600 hover:text-indigo-800 hover:underline"
+                          >
+                            <div className="flex items-center space-x-1">
+                              <Eye className="w-4 h-4" />
+                              <span>View</span>
+                            </div>
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="9" className="text-center py-8 text-gray-500">
+                        <div className="flex flex-col items-center space-y-3">
+                          <Users className="w-12 h-12 text-gray-300" />
+                          <p className="text-lg font-medium">No admission records found</p>
+                          {searchTerm && (
+                            <p className="text-sm text-gray-400">
+                              Try adjusting your search criteria
+                            </p>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   )}
@@ -234,23 +290,25 @@ const Admission = () => {
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center mt-6">
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((prev) => prev - 1)}
-                className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
               >
-                Prev
+                <ChevronLeft className="w-4 h-4" />
+                <span>Prev</span>
               </button>
-              <span>
+              <span className="text-gray-600 font-medium">
                 Page {currentPage} of {totalPages}
               </span>
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage((prev) => prev + 1)}
-                className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
               >
-                Next
+                <span>Next</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 

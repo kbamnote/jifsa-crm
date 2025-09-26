@@ -92,16 +92,16 @@ const Complaint = () => {
             </h1>
 
             <div className="overflow-x-auto bg-white shadow rounded-lg">
-              <table className="min-w-full border border-gray-200 text-sm">
+              <table className="min-w-full table-fixed border border-gray-200 text-sm">
                 <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
                   <tr>
-                    <th className="px-4 py-2 text-left">Full Name</th>
-                    <th className="px-4 py-2 text-left">Student ID</th>
-                    <th className="px-4 py-2 text-left">Email</th>
-                    <th className="px-4 py-2 text-left">Phone</th>
-                    <th className="px-4 py-2 text-left">Message</th>
-                    <th className="px-4 py-2 text-left">Date</th>
-                    <th className="px-4 py-2 text-left">Action</th>
+                    <th className="w-40 px-4 py-3 text-left font-medium">Full Name</th>
+                    <th className="w-24 px-4 py-3 text-left font-medium">Student ID</th>
+                    <th className="w-56 px-4 py-3 text-left font-medium">Email</th>
+                    <th className="w-32 px-4 py-3 text-left font-medium">Phone</th>
+                    <th className="w-64 px-4 py-3 text-left font-medium">Message</th>
+                    <th className="w-28 px-4 py-3 text-left font-medium">Date</th>
+                    <th className="w-20 px-4 py-3 text-left font-medium">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,24 +113,36 @@ const Complaint = () => {
                           index % 2 === 0 ? "bg-gray-50" : "bg-white"
                         }`}
                       >
-                        <td className="px-4 py-2">{item.fullName}</td>
-                        <td className="px-4 py-2">{item.studentId}</td>
-                        <td className="px-4 py-2 flex items-center space-x-2">
-                          <Mail className="w-4 h-4 text-gray-400" />
-                          <span>{item.email}</span>
+                        <td className="px-4 py-3 truncate" title={item.fullName}>
+                          {item.fullName}
                         </td>
-                        <td className="px-4 py-2 flex items-center space-x-2">
-                          <Phone className="w-4 h-4 text-gray-400" />
-                          <span>{item.phoneNo}</span>
+                        <td className="px-4 py-3">
+                          {item.studentId}
                         </td>
-                        <td className="px-4 py-2 max-w-xs truncate" title={item.message}>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center space-x-2">
+                            <Mail className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <span className="truncate" title={item.email}>{item.email}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center space-x-2">
+                            <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                            <span className="truncate">{item.phoneNo}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 truncate" title={item.message}>
                           {item.message}
                         </td>
-                        <td className="px-4 py-2">{formatDateShort(item.createdAt)}</td>
-                        <td className="px-4 py-2">
-                          <button className="text-indigo-600 hover:underline flex items-center space-x-1">
-                            <Eye className="w-4 h-4" />
-                            <span>View</span>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          {formatDateShort(item.createdAt)}
+                        </td>
+                        <td className="px-4 py-3">
+                          <button className="text-indigo-600 hover:text-indigo-800 hover:underline">
+                            <div className="flex items-center space-x-1">
+                              <Eye className="w-4 h-4" />
+                              <span>View</span>
+                            </div>
                           </button>
                         </td>
                       </tr>
@@ -150,23 +162,25 @@ const Complaint = () => {
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center mt-6">
               <button
                 disabled={currentPage === 1}
                 onClick={() => setCurrentPage((prev) => prev - 1)}
-                className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
               >
-                <ChevronLeft className="w-4 h-4" /> Prev
+                <ChevronLeft className="w-4 h-4" />
+                <span>Prev</span>
               </button>
-              <span>
+              <span className="text-gray-600 font-medium">
                 Page {currentPage} of {totalPages}
               </span>
               <button
                 disabled={currentPage === totalPages}
                 onClick={() => setCurrentPage((prev) => prev + 1)}
-                className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+                className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
               >
-                Next <ChevronRight className="w-4 h-4" />
+                <span>Next</span>
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           </div>
