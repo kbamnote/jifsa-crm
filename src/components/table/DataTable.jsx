@@ -12,6 +12,8 @@ import {
   User,
   UserCheck
 } from "lucide-react";
+import ClickToCallButton from "../calling/ClickToCallButton";
+import { logCall } from "../utils/Api";
 
 const DataTable = ({
   currentItems,
@@ -27,6 +29,15 @@ const DataTable = ({
   handleViewDetails,
   setCurrentPage
 }) => {
+  // Call logging function
+  const handleCallLog = async (callData) => {
+    try {
+      await logCall(callData);
+      console.log('Call logged successfully:', callData);
+    } catch (error) {
+      console.error('Failed to log call:', error);
+    }
+  };
   const getSortIcon = (field) => {
     if (sortField !== field) {
       return <ArrowUpDown className="w-4 h-4 text-blue-200 opacity-60" />;
@@ -132,12 +143,28 @@ const DataTable = ({
                     <div className="flex items-center space-x-2">
                       <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
                       <span className="truncate text-gray-700">{item.phoneNo}</span>
+                      <ClickToCallButton 
+                        phoneNumber={item.phoneNo}
+                        customerName={`${item.firstName} ${item.lastName}`}
+                        onCallLog={handleCallLog}
+                        size="xs"
+                      />
                     </div>
                   </td>
                   <td className="px-4 py-3 truncate text-gray-700" title={item.fatherName}>
                     {item.fatherName}
                   </td>
-                  <td className="px-4 py-3 text-gray-700">{item.contactNo}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-gray-700">{item.contactNo}</span>
+                      <ClickToCallButton 
+                        phoneNumber={item.contactNo}
+                        customerName={`${item.firstName} ${item.lastName}`}
+                        onCallLog={handleCallLog}
+                        size="xs"
+                      />
+                    </div>
+                  </td>
                   <td className="px-4 py-3 truncate text-gray-700" title={item.message}>
                     {item.message}
                   </td>

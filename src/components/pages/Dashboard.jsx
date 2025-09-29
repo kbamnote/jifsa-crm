@@ -6,6 +6,9 @@ import StatsCard from "../pages/StatsCard";
 import SearchFilter from "../pages/SearchFilter";
 import DataTable from "../table/DataTable";
 import ClientModal from "../modal/ClientModal";
+import CallInterface from "../calling/CallInterface";
+import CallHistory from "../calling/CallHistory";
+import { logCall } from "../utils/Api";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -19,6 +22,16 @@ const Dashboard = () => {
   const [sortField, setSortField] = useState('createdAt');
   const [sortDirection, setSortDirection] = useState('desc');
   const [sidebarOpen, setSidebarOpen] = useState(false); // New state for sidebar
+
+  // Call logging function
+  const handleCallLog = async (callData) => {
+    try {
+      await logCall(callData);
+      console.log('Call logged successfully:', callData);
+    } catch (error) {
+      console.error('Failed to log call:', error);
+    }
+  };
 
   // Enhanced sorting function
   const sortData = (dataToSort, field, direction) => {
@@ -147,6 +160,12 @@ const Dashboard = () => {
 
           {/* Main content */}
           <div className="flex-1 overflow-auto p-6">
+            {/* Call Interface */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+              <CallInterface onCallLog={handleCallLog} />
+              <CallHistory />
+            </div>
+
             <StatsCard data={data} />
 
             <SearchFilter 

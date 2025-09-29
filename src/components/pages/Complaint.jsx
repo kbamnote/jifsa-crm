@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getComplaint } from "../utils/Api";
+import { getComplaint, logCall } from "../utils/Api";
 import { Mail, Phone, Eye, Users, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "../common/Header";
 import SideNavbar from "../common/SideNavbar";
+import ClickToCallButton from "../calling/ClickToCallButton";
 
 const Complaint = () => {
   const [complaints, setComplaints] = useState([]);
@@ -10,6 +11,16 @@ const Complaint = () => {
   const [itemsPerPage] = useState(10);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // Call logging function
+  const handleCallLog = async (callData) => {
+    try {
+      await logCall(callData);
+      console.log('Call logged successfully:', callData);
+    } catch (error) {
+      console.error('Failed to log call:', error);
+    }
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -129,6 +140,12 @@ const Complaint = () => {
                           <div className="flex items-center space-x-2">
                             <Phone className="w-4 h-4 text-gray-400 flex-shrink-0" />
                             <span className="truncate">{item.phoneNo}</span>
+                            <ClickToCallButton 
+                              phoneNumber={item.phoneNo}
+                              customerName={item.fullName}
+                              onCallLog={handleCallLog}
+                              size="xs"
+                            />
                           </div>
                         </td>
                         <td className="px-4 py-3 truncate" title={item.message}>

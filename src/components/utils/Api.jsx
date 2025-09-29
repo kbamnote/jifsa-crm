@@ -35,3 +35,12 @@ export const getDetail = () => Api.get("/form/read-form");
 export const getComplaint = () => Api.get("/complaint/read-form");
 
 export const getAdmissionForm = () => Api.get("/admission-form/read-form");
+
+// Call logging APIs
+export const logCall = (callData) => Api.post("/calls/log", callData);
+
+export const getCallHistory = (customerId) => Api.get(`/calls/history/${customerId}`);
+
+export const getAllCallLogs = () => Api.get("/calls/all");
+
+export const updateCallStatus = (callId, status) => Api.patch(`/calls/${callId}/status`, { status });
