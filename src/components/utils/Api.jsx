@@ -1,17 +1,37 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
+// Create Axios instance for authenticated requests
 const Api = axios.create({
-    baseURL:'https://jifsa-backend.onrender.com/'
-})
+  baseURL: "https://elite-backend-three.vercel.app",
+});
 
-export const getDetail = () => {
-    return Api.get('form/read-form')
-}
+// Create Axios instance for unauthenticated requests
+const Apione = axios.create({
+  baseURL: "https://elite-backend-three.vercel.app",
+});
 
-export const getComplaint = () => {
-    return Api.get('complaint/read-form')
-}
+// Add a request interceptor to include token from cookies
+Api.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
-export const getAdmissionForm = () => {
-    return Api.get("admission-form/read-form", );
-}
+// Login API (no token required)
+export const login = (post) => {
+  // expects { email: "...", password: "..." }
+  return Apione.post("/auth/login", post);
+};
+
+// Protected APIs (token will be automatically attached)
+export const getDetail = () => Api.get("/form/read-form");
+
+export const getComplaint = () => Api.get("/complaint/read-form");
+
+export const getAdmissionForm = () => Api.get("/admission-form/read-form");
