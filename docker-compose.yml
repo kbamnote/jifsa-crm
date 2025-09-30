@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  asterisk:
+    image: andrius/asterisk:latest
+    container_name: crm-asterisk
+    ports:
+      - "8088:8088"   # HTTP WebSocket
+      - "8089:8089"   # HTTPS WebRTC
+      - "5060:5060/udp"   # SIP
+      - "10000-10100:10000-10100/udp"  # RTP Media
+    volumes:
+      - ./asterisk-config:/etc/asterisk
+      - ./asterisk-logs:/var/log/asterisk
+    environment:
+      - ASTERISK_UID=1000
+      - ASTERISK_GID=1000
+    restart: unless-stopped
+    networks:
+      - asterisk-net
+
+networks:
+  asterisk-net:
+    driver: bridge

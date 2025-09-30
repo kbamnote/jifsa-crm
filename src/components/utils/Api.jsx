@@ -3,12 +3,12 @@ import Cookies from "js-cookie";
 
 // Create Axios instance for authenticated requests
 const Api = axios.create({
-  baseURL: "https://elite-backend-three.vercel.app",
+  baseURL: "https://elite-backend-rhrk.onrender.com",
 });
 
 // Create Axios instance for unauthenticated requests
 const Apione = axios.create({
-  baseURL: "https://elite-backend-three.vercel.app",
+  baseURL: "https://elite-backend-rhrk.onrender.com",
 });
 
 // Add a request interceptor to include token from cookies
