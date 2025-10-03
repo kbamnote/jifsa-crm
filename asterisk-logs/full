@@ -29137,3 +29137,12 @@
 [2025-10-03 11:55:52] DEBUG[368] utils.c: write() failed due to reading end being closed: Broken pipe
 [2025-10-03 11:55:52] VERBOSE[368] asterisk.c: Remote UNIX connection disconnected
 [2025-10-03 11:56:12] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 11:56:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:56:25] VERBOSE[381] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:56:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:56:25] VERBOSE[384] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:56:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:56:26] VERBOSE[388] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:56:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:56:26] VERBOSE[392] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:56:42] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
