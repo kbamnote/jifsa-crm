@@ -29154,3 +29154,1989 @@
 [2025-10-03 11:57:01] VERBOSE[413] asterisk.c: Remote UNIX connection disconnected
 [2025-10-03 11:57:01] VERBOSE[15] asterisk.c: Remote UNIX connection
 [2025-10-03 11:57:01] VERBOSE[417] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:57:12] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 11:57:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:57:35] VERBOSE[430] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:57:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:57:35] VERBOSE[433] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:57:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:57:35] VERBOSE[437] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:57:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:57:35] VERBOSE[441] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:57:42] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 11:58:12] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 11:58:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:12] VERBOSE[454] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:58:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:12] VERBOSE[457] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:58:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:12] VERBOSE[461] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:58:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:12] VERBOSE[465] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:58:42] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 11:58:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:44] VERBOSE[478] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:58:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:44] VERBOSE[481] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:58:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:44] VERBOSE[485] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:58:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:58:44] VERBOSE[489] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:12] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 11:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:17] VERBOSE[502] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:17] VERBOSE[505] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:17] VERBOSE[509] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:17] VERBOSE[513] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:42] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 11:59:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:50] VERBOSE[527] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:50] VERBOSE[530] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:50] VERBOSE[534] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 11:59:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 11:59:50] VERBOSE[538] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:13] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:00:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:23] VERBOSE[551] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:23] VERBOSE[554] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:23] VERBOSE[558] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:24] VERBOSE[562] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:43] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:00:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:55] VERBOSE[575] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:55] VERBOSE[578] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:55] VERBOSE[582] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:00:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:00:55] VERBOSE[586] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:01:13] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:01:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:01:26] VERBOSE[599] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:01:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:01:26] VERBOSE[602] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:01:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:01:26] VERBOSE[606] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:01:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:01:26] VERBOSE[610] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:01:43] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:02:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:01] VERBOSE[623] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:01] VERBOSE[626] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:01] VERBOSE[630] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:04] VERBOSE[634] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:13] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:02:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:37] VERBOSE[648] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:37] VERBOSE[651] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:37] VERBOSE[655] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:02:38] VERBOSE[659] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:02:43] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:03:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:09] VERBOSE[673] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:09] VERBOSE[676] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:09] VERBOSE[680] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:09] VERBOSE[684] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:13] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:03:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:43] VERBOSE[697] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:43] VERBOSE[700] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:43] VERBOSE[704] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:03:43] VERBOSE[708] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:03:43] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:04:13] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:04:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:14] VERBOSE[721] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:04:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:14] VERBOSE[724] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:04:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:14] VERBOSE[728] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:04:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:14] VERBOSE[732] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:04:44] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:04:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:48] VERBOSE[745] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:04:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:48] VERBOSE[748] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:04:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:48] VERBOSE[752] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:04:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:04:48] VERBOSE[756] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:14] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:05:19] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:19] VERBOSE[769] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:19] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:20] VERBOSE[772] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:20] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:20] VERBOSE[776] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:20] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:20] VERBOSE[780] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:44] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:05:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:51] VERBOSE[793] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:51] VERBOSE[796] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:51] VERBOSE[800] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:05:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:05:51] VERBOSE[804] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:14] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:06:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:22] VERBOSE[817] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:22] VERBOSE[820] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:22] VERBOSE[824] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:22] VERBOSE[828] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:22] VERBOSE[832] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:22] VERBOSE[836] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] DEBUG[840] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:06:22] VERBOSE[840] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:44] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:06:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:52] VERBOSE[853] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:52] VERBOSE[856] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:52] VERBOSE[860] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:06:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:06:52] VERBOSE[864] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:14] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:07:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:24] VERBOSE[877] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:24] VERBOSE[880] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:24] VERBOSE[884] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:24] VERBOSE[888] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:44] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:07:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:55] VERBOSE[901] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:55] VERBOSE[904] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:55] VERBOSE[908] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:07:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:07:55] VERBOSE[912] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:15] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:08:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:26] VERBOSE[925] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:26] VERBOSE[928] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:26] VERBOSE[932] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:26] VERBOSE[936] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:45] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:08:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:57] VERBOSE[949] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:58] VERBOSE[952] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:58] VERBOSE[956] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:08:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:08:58] VERBOSE[960] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:09:15] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:09:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:09:30] VERBOSE[973] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:09:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:09:30] VERBOSE[976] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:09:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:09:30] VERBOSE[980] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:09:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:09:30] VERBOSE[984] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:09:46] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:10:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:01] VERBOSE[997] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:01] VERBOSE[1000] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:02] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:02] VERBOSE[1004] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:02] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:02] VERBOSE[1008] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:16] DEBUG[45] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:10:20] DEBUG[1] cdr.c: CDR Engine termination request received; waiting on messages...
+[2025-10-03 12:10:20] VERBOSE[1] asterisk.c: Asterisk cleanly ending (0).
+[2025-10-03 12:10:20] VERBOSE[1] asterisk.c: Executing last minute cleanups
+[2025-10-03 12:10:20] VERBOSE[1] res_musiconhold.c: Destroying musiconhold processes
+[2025-10-03 12:10:20] DEBUG[1] asterisk.c: Asterisk ending (0).
+[2025-10-03 12:10:46] Asterisk 22.5.2 built by root @ buildkitsandbox on a x86_64 running Linux on 2025-09-28 11:15:22 UTC
+[Oct  3 12:10:46] DEBUG[1] config.c: Parsing /etc/asterisk/logger.conf
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: rtp:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'rtp:all': 0x5717c5ce8160 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: queue:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'queue:all': 0x5717c5ce5b60 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: mwi:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'mwi:all': 0x5717c5ce58d0 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: cache:0/mwi:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'cache:0/mwi:all': 0x5717c6a09e00 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: devicestate:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'devicestate:all': 0x5717c6a0a8e0 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: cache:1/devicestate:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'cache:1/devicestate:all': 0x5717c6a0d740 created
+[2025-10-03 12:10:46] DEBUG[1] channelstorage_ao2_legacy.c: Opening channel storage driver channels
+[2025-10-03 12:10:46] DEBUG[1] channelstorage_ao2_legacy.c: Opened channel storage driver channels. driver: 0x5717c6a0d630  container: 0x5717c6a0dc00
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: channel:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'channel:all': 0x5717c6a0dba0 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: bridge:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'bridge:all': 0x5717c6a0d960 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: parking:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'parking:all': 0x5717c61ae140 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: presence_state:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'presence_state:all': 0x5717c6a09ae0 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: cache:2/presence_state:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'cache:2/presence_state:all': 0x5717c5f60d20 created
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Creating topic. name: security:all, detail: 
+[2025-10-03 12:10:46] DEBUG[1] stasis.c: Topic 'security:all': 0x5717c5f613b0 created
+[2025-10-03 12:10:46] VERBOSE[1] pbx.c: Asterisk PBX Core Initializing
+[2025-10-03 12:10:46] VERBOSE[1] loader.c: Asterisk Dynamic Loader Starting:
+[2025-10-03 12:10:46] DEBUG[1] config.c: Parsing /etc/asterisk/modules.conf
+[2025-10-03 12:10:46] NOTICE[1] loader.c: 338 modules will be loaded.
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: ccss                                           3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cdr                                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cel                                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: extconfig                                      3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: dnsmgr                                         3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: dsp                                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: enum                                           3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: features                                       3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: http                                           3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: indications                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: logger                                         3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: manager                                        3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: acl                                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: plc                                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: sounds                                         3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: udptl                                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: chan_pjsip.so                                  1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip.so                                   1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_session.so                           1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_http_websocket.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_g719.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: codec_adpcm.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_convert.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cel_custom.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_queue.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_http_media_cache.so                        3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_read.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_curl.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_mutestream.so                              3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_path.so                              1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_sf.so                                      3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_enum.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_messaging.so                         1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_stream_echo.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: codec_a_mu.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_reload.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_pjsip_endpoint.so                         1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_channelredirect.so                         3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cel_odbc.so                                    1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_format_attr_opus.so                        3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_sendtext.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: bridge_builtin_features.so                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_gsm.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_pjsip_contact.so                          1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_config_wizard.so                     1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_sorcery.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_waitforring.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_cdr.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_sprintf.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: bridge_simple.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_directory.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_test.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_one_touch_record_info.so             1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_config_odbc.so                             1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_vox.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_verbose.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_pjsip_aor.so                              1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_broadcast.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_fax.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_hangupcause.so                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_fax_spandsp.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_dialog_info_body_generator.so        1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_ilbc.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_outbound_publish.so                  1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_pcm.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_sorcery_memory_cache.so                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_followme.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_endpoint_identifier_anonymous.so     1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_cdr.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_frame_trace.so                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_while.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: bridge_softmix.so                              3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_dialplan.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_ari_recordings.so                          1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_siren7.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_playback.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_module.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_dial.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_format_attr_celt.so                        3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_sln.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: bridge_builtin_interval_features.so            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_ari_events.so                              1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_speech_aeap.so                             1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_rfc3329.so                           1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_adsi.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_security_log.so                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_directed_pickup.so                         3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_odbc.so                                   1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_adsiprog.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_scramble.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_chanspy.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: codec_lpc10.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_amd.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_lock.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_morsecode.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_speech.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_hep.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_ari.so                                     1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_ael_share.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: chan_console.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_uuid.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_ari_sounds.so                              1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_timeout.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_stasis_recording.so                        1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_stasis_snoop.so                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_vmcount.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cdr_sqlite3_custom.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: pbx_ael.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: pbx_loopback.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_rand.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_pidf_digium_body_supplement.so       1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_nat.so                               1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_holdintercept.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_evalexten.so                              3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_sayunixtime.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_dtmf_info.so                         1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_userevent.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_talkdetect.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_privacy.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_statsd.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_geolocation.so                       1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_db.so                                      3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_rtp_asterisk.so                            1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: pbx_spool.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_confbridge.so                              3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_uri.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_logger.so                            1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_hep_pjsip.so                               1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_h264.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_waitforsilence.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_groupcount.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cdr_odbc.so                                    1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_ari_channels.so                            1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_calendar.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_exec.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_g723.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_iconv.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: pbx_dundi.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_format_attr_siren7.so                      3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_parking.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: pbx_realtime.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_odbc_transaction.so                        1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: pbx_config.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_clioriginate.so                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_presencestate.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_format_attr_ilbc.so                        3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_xpidf_body_generator.so              1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_echo.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_diversion.so                         1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cdr_pgsql.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_global.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cdr_csv.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_send_to_voicemail.so                 1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_smdi.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_prometheus.so                              1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_system.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_sorcery_realtime.so                        3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_endpoint_identifier_ip.so            1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_ogg_vorbis.so                           1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_version.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_mwi_devstate.so                            3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_phoneprov.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_logic.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_aes.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_getcpeid.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: chan_unistim.so                                3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: codec_ulaw.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_base64.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_playtones.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_mp3.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_timing_pthread.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_config_sqlite3.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_rtp_multicast.so                           3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_format_attr_g729.so                        3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_pitchshift.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_config.so                                 3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_waituntil.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: chan_iax2.so                                   3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_audiosocket.so                             3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_siren14.so                              3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: cel_sqlite3_custom.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_db.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_header_funcs.so                      1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_pidf_eyebeam_body_supplement.so      1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: func_callerid.so                               3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_dlg_options.so                       1
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: format_wav.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_celgenuserevent.so                         3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_signal.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_crypto.so                                  3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_zapateller.so                              3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_disa.so                                    3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_sms.so                                     3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_sorcery_config.so                          3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: codec_resample.so                              3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: app_controlplayback.so                         3
+[2025-10-03 12:10:46] DEBUG[1] loader.c: PASS 0: res_pjsip_t38.so                               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: format_ogg_speex.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: cel_pgsql.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: bridge_native_rtp.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_sorcery_astdb.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_srv.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_pidf_body_generator.so               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_geolocation.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_blind_transfer.so                          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_transport_websocket.so               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_mixmonitor.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_minivm.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_tonedetect.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_mailboxes.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_acl.so                               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_dtmfstore.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: format_h263.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: cdr_adaptive_odbc.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_json.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_exten_state.so                       1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_sha1.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_mwi.so                               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_srtp.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_waitforcond.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_jack.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_mwi_body_generator.so                1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_dumpchan.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_sips_contact.so                      1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_phoneprov_provider.so                1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_format_attr_h264.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_model.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_export.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_callcompletion.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_softhangup.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_extstate.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_publish_asterisk.so                  1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_format_attr_siren14.so                     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_sayfiles.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: format_g729.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_bridgeaddchan.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_realtime.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_talkdetect.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_authenticate.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_endpoint_identifier_user.so          1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_stasis.so                                  1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_attended_transfer.so                       3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: chan_rtp.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_speex.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: codec_alaw.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_empty_info.so                        1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: codec_speex.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_stasis_mailbox.so                          1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_originate.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_sysinfo.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_clialiases.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_aeap.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_cut.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_math.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_volume.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjproject.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_sla.so                                     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_milliwatt.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_mwi_external.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: chan_bridge_media.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_realtime.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_format_attr_silk.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_bridges.so                             1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_format_attr_vp8.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_musiconhold.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_stasis_device_state.so                     1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_readexten.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_externalivr.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_page.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_stack.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_registrar.so                         1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_timing_timerfd.so                          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_stun_monitor.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_stasis_answer.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_asterisk.so                            1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_channel.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_pubsub.so                            1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_forkcdr.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_device_states.so                       1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_stasis.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_config_curl.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_senddtmf.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_endpoints.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_rfc3326.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_transfer.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_curl.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_refer.so                             1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: format_g726.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_format_attr_h263.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_mf.so                                      3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_dictate.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: cdr_manager.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: cel_manager.so                                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_periodic_hook.so                          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_outbound_registration.so             1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_devstate.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_md5.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_applications.so                        1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_alarmreceiver.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: cdr_custom.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_websocket_client.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_sorcery_memory.so                          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_bridgewait.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_chanisavail.so                             3
+[2025-10-03 12:10:47] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:47] VERBOSE[35] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_caller_id.so                         1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_hep_rtcp.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_ari_playbacks.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: chan_audiosocket.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: codec_gsm.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_speech_utils.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_stasis_playback.so                         1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_if.so                                      3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_strings.so                                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_notify.so                            1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: bridge_holding.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_outbound_authenticator_digest.so     1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: codec_g726.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_manager_presencestate.so                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_authenticator_digest.so              1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_agent_pool.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_frame_drop.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_voicemail.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_record.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: codec_g722.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: app_audiosocket.so                             3
+[2025-10-03 12:10:47] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:47] VERBOSE[38] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_odbc.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_shell.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_history.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_dialgroup.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: codec_ilbc.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_env.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_limit.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_agi.so                                     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: format_wav_gsm.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_manager_devicestate.so                     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_blacklist.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: func_jitterbuffer.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 0: res_pjsip_aoc.so                               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: chan_pjsip.so                                  1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip.so                                   3
+[2025-10-03 12:10:47] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:47] VERBOSE[42] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_session.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_path.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_messaging.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: func_pjsip_endpoint.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: cel_odbc.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: func_pjsip_contact.so                          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_config_wizard.so                     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_one_touch_record_info.so             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_config_odbc.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: func_pjsip_aor.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_dialog_info_body_generator.so        1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_outbound_publish.so                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_endpoint_identifier_anonymous.so     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_recordings.so                          1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_events.so                              1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_speech_aeap.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_rfc3329.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: func_odbc.so                                   1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari.so                                     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_sounds.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_stasis_recording.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_pidf_digium_body_supplement.so       1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_nat.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_dtmf_info.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_geolocation.so                       3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_rtp_asterisk.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_logger.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_hep_pjsip.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: cdr_odbc.so                                    3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_channels.so                            1
+[2025-10-03 12:10:47] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_odbc_transaction.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_xpidf_body_generator.so              1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_diversion.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_send_to_voicemail.so                 3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_prometheus.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_endpoint_identifier_ip.so            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: format_ogg_vorbis.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_header_funcs.so                      3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_pidf_eyebeam_body_supplement.so      1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_dlg_options.so                       3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_t38.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_pidf_body_generator.so               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_transport_websocket.so               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_mailboxes.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_acl.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: cdr_adaptive_odbc.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_exten_state.so                       1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_mwi.so                               1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_mwi_body_generator.so                1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_sips_contact.so                      3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_phoneprov_provider.so                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_publish_asterisk.so                  1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_endpoint_identifier_user.so          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: app_stasis.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_empty_info.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_stasis_mailbox.so                          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_bridges.so                             1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_stasis_device_state.so                     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_registrar.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_stasis_answer.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_asterisk.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_pubsub.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_device_states.so                       3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_endpoints.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_rfc3326.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_refer.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_outbound_registration.so             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_applications.so                        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_caller_id.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_ari_playbacks.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_stasis_playback.so                         3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_notify.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_outbound_authenticator_digest.so     3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_authenticator_digest.so              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_history.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 1: res_pjsip_aoc.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: chan_pjsip.so                                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_dialog_info_body_generator.so        3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_ari_recordings.so                          3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_ari_events.so                              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: func_odbc.so                                   3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_pidf_digium_body_supplement.so       3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_ari_channels.so                            3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_xpidf_body_generator.so              3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: format_ogg_vorbis.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_pidf_eyebeam_body_supplement.so      3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_pidf_body_generator.so               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_ari_mailboxes.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_exten_state.so                       3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_mwi.so                               3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_mwi_body_generator.so                3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_pjsip_publish_asterisk.so                  3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_ari_bridges.so                             3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 2: res_ari_playbacks.so                           3
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 3: format_ogg_vorbis.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: PASS 4: format_ogg_vorbis.so                           1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: extconfig                                     [0] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: logger                                        [0] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_curl.so                                   [10] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module res_odbc.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_odbc has 1 dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_odbc trying to start res_odbc_transaction
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_odbc_transaction.so                       [10] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_odbc started res_odbc_transaction
+[2025-10-03 12:10:47] WARNING[1] res_odbc.c: Unable to load config file res_odbc.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_odbc.so                                   [10] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_curl.so                                  [20] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_opus.so                       [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_sorcery_memory_cache.so                   [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_sorcery_realtime.so                       [30] 0
+[2025-10-03 12:10:47] DEBUG[1] res_config_sqlite3.c: SQLite3 has 'LIKE ... ESCAPE ...' support? Yes
+[2025-10-03 12:10:47] ERROR[1] res_config_sqlite3.c: Missing config file 'res_config_sqlite3.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_config_sqlite3.so                         [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_sorcery_config.so                         [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_sorcery_astdb.so                          [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_config_curl.so                            [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_sorcery_memory.so                         [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_config_wizard.so                    [30] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_config_odbc is already declined, skipping
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract addr from 127.0.0.1 gives 127.0.0.1:0(0)
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'statsd.conf'
+[2025-10-03 12:10:47] NOTICE[1] res_statsd.c: Could not load statsd config; using defaults
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract addr from 127.0.0.1 gives 127.0.0.1:0(0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_statsd.so                                 [35] 0
+[2025-10-03 12:10:47] DEBUG[1] logger.c: Registered dynamic logger level 'CC' with index 16.
+[2025-10-03 12:10:47] WARNING[1] ccss.c: Could not find valid ccss.conf file. Using cc_max_requests default
+[2025-10-03 12:10:47] WARNING[1] ccss.c: Could not find valid ccss.conf file. Using cc_[state]_devstate defaults
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: ccss                                          [40] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [100] in [0, 1000] gives [100](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [300] in [1, 86400] gives [300](0)
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'cdr.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [100] in [0, 1000] gives [100](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [300] in [1, 86400] gives [300](0)
+[2025-10-03 12:10:47] NOTICE[1] cdr.c: Failed to process CDR configuration; using defaults
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: cdr:aggregator, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'cdr:aggregator': 0x5717c60462f0 created
+[2025-10-03 12:10:47] NOTICE[1] cdr.c: CDR simple logging enabled.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cdr                                           [40] 0
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'cel.conf'
+[2025-10-03 12:10:47] NOTICE[1] cel.c: Failed to process CEL configuration; using defaults
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: cel:aggregator, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'cel:aggregator': 0x5717c6b47bb0 created
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: cel:misc, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'cel:misc': 0x5717c5f9d9c0 created
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cel                                           [40] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: dnsmgr                                        [40] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: dsp                                           [40] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: enum                                          [40] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [10] in [-2147483648, 2147483647] gives [10](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [1000] in [-2147483648, 2147483647] gives [1000](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [2] in [-2147483648, 2147483647] gives [2](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [3] in [-2147483648, 2147483647] gives [3](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [15] in [-2147483648, 2147483647] gives [15](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [3] in [-2147483648, 2147483647] gives [3](0)
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'features.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [10] in [-2147483648, 2147483647] gives [10](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [1000] in [-2147483648, 2147483647] gives [1000](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [2] in [-2147483648, 2147483647] gives [2](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [3] in [-2147483648, 2147483647] gives [3](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [15] in [-2147483648, 2147483647] gives [15](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [3] in [-2147483648, 2147483647] gives [3](0)
+[2025-10-03 12:10:47] NOTICE[1] features_config.c: Could not load features config; using defaults
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: features                                      [40] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/http.conf
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [8088] in [0, 65535] gives [8088](0)
+[2025-10-03 12:10:47] VERBOSE[1] http.c: Bound HTTP server 'http server' to address 0.0.0.0:8088
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: http                                          [40] 0
+[2025-10-03 12:10:47] WARNING[1] indications.c: Can't find indications config file indications.conf.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: indications                                   [40] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module manager is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: manager has 1 dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: manager trying to start acl
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'acl.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: acl                                           [40] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: manager started acl
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: manager:core, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'manager:core': 0x5717c5fa5e50 created
+[2025-10-03 12:10:47] NOTICE[1] manager.c: Unable to open AMI configuration manager.conf, or configuration is invalid.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: manager                                       [40] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: plc                                           [40] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [4999] in [1024, 65535] gives [4999](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [4000] in [1024, 65535] gives [4000](0)
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'udptl.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [4999] in [1024, 65535] gives [4999](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [4000] in [1024, 65535] gives [4000](0)
+[2025-10-03 12:10:47] NOTICE[1] udptl.c: Could not load udptl config; using defaults
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: udptl                                         [40] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_timing_pthread.so                         [50] 0
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'geolocation.conf'
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'geolocation.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_geolocation.so                            [50] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_timing_timerfd.so                         [50] 0
+[2025-10-03 12:10:47] DEBUG[1] res_pjproject.c: Starting PJPROJECT logging to Asterisk logger
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'pjproject.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjproject.so                              [54] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_mwi_external.so                           [55] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'system' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [32000] in [0, 4294967295] gives [32000](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [60] in [0, 4294967295] gives [60](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [50] in [0, 4294967295] gives [50](0)
+[2025-10-03 12:10:47] DEBUG[53] threadpool.c: Not changing threadpool size since new size 0 is the same as current 0
+[2025-10-03 12:10:47] VERBOSE[1] res_pjsip.c: Local IPv4 address determined to be: 172.18.0.2
+[2025-10-03 12:10:47] VERBOSE[1] res_pjsip.c: Local IPv6 address determined to be: ::1
+[2025-10-03 12:10:47] DEBUG[53] threadpool.c: Increasing threadpool pjsip/pool's size by 5
+[2025-10-03 12:10:47] DEBUG[56] dns.c: Discovered nameserver: 127.0.0.11
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Global header (0x730b538e2a20)
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip_config_wizard.c: Wizard mapped for object_type 'auth'
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip_config_wizard.c: Wizard mapped for object_type 'endpoint'
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip_config_wizard.c: Wizard mapped for object_type 'aor'
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'global' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip/config_global.c: No pjsip.conf type=global object exists so applying defaults.
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [70] in [0, 4294967295] gives [70](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [-1] in [-2147483648, 2147483647] gives [-1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'auth' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [32] in [0, 4294967295] gives [32](0)
+[2025-10-03 12:10:47] ERROR[1] res_pjsip_config_wizard.c: Unable to load config file 'pjsip_wizard.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'aor' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract double from [3.0] in [-inf, inf] gives [3.000000](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [7200] in [0, 4294967295] gives [7200](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [3600] in [0, 4294967295] gives [3600](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [60] in [0, 4294967295] gives [60](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1] in [0, 4294967295] gives [1](0)
+[2025-10-03 12:10:47] ERROR[1] res_pjsip_config_wizard.c: Unable to load config file 'pjsip_wizard.conf'
+[2025-10-03 12:10:47] DEBUG[12] threadpool.c: Increasing threadpool sorcery/pool's size by 1
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'transport' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1] in [0, 4294967295] gives [1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 65535] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [100] in [1, 2147483647] gives [100](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [1] in [-2147483648, 2147483647] gives [1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [30] in [-2147483648, 2147483647] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [5] in [-2147483648, 2147483647] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'endpoint' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1800] in [0, 4294967295] gives [1800](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1] in [0, 4294967295] gives [1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1] in [0, 4294967295] gives [1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: endpoint:PJSIP, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'endpoint:PJSIP': 0x5717c68a1400 created
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: cache:3/endpoint:PJSIP, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'cache:3/endpoint:PJSIP': 0x5717c68a4860 created
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: endpoint:PJSIP/1001, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'endpoint:PJSIP/1001': 0x5717c68a3870 created
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Creating topic. name: cache:4/endpoint:PJSIP/1001, detail: 
+[2025-10-03 12:10:47] DEBUG[1] stasis.c: Topic 'cache:4/endpoint:PJSIP/1001': 0x5717c68a5060 created
+[2025-10-03 12:10:47] ERROR[1] res_pjsip_config_wizard.c: Unable to load config file 'pjsip_wizard.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'system' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'global' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip/config_global.c: No pjsip.conf type=global object exists so applying defaults.
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [70] in [0, 4294967295] gives [70](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [-1] in [-2147483648, 2147483647] gives [-1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'domain_alias' from 'pjsip.conf'
+[2025-10-03 12:10:47] VERBOSE[56] res_pjsip/pjsip_resolver.c: 'UDP+IPv4' is not an available SIP transport, disabling resolver support for it
+[2025-10-03 12:10:47] VERBOSE[56] res_pjsip/pjsip_resolver.c: 'TCP+IPv4' is not an available SIP transport, disabling resolver support for it
+[2025-10-03 12:10:47] VERBOSE[56] res_pjsip/pjsip_resolver.c: 'TLS+IPv4' is not an available SIP transport, disabling resolver support for it
+[2025-10-03 12:10:47] VERBOSE[56] res_pjsip/pjsip_resolver.c: 'UDP+IPv6' is not an available SIP transport, disabling resolver support for it
+[2025-10-03 12:10:47] VERBOSE[56] res_pjsip/pjsip_resolver.c: 'TCP+IPv6' is not an available SIP transport, disabling resolver support for it
+[2025-10-03 12:10:47] VERBOSE[56] res_pjsip/pjsip_resolver.c: 'TLS+IPv6' is not an available SIP transport, disabling resolver support for it
+[2025-10-03 12:10:47] DEBUG[56] dns.c: Discovered nameserver: 127.0.0.11
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service idle monitor module (0x730b538e33e0)
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Config file 'pjsip.conf' was unchanged
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip/config_global.c: No pjsip.conf type=global object exists so applying defaults.
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [70] in [0, 4294967295] gives [70](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [-1] in [-2147483648, 2147483647] gives [-1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Config file 'pjsip.conf' was unchanged
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip/config_global.c: No pjsip.conf type=global object exists so applying defaults.
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [70] in [0, 4294967295] gives [70](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [-1] in [-2147483648, 2147483647] gives [-1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1800] in [0, 4294967295] gives [1800](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1] in [0, 4294967295] gives [1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [1] in [0, 4294967295] gives [1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[61] config.c: extract uint from [32] in [0, 4294967295] gives [32](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [32] in [0, 4294967295] gives [32](0)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Request Distributor (0x730b538e28c0)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Endpoint Identifier (0x730b538e2840)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Request Authenticator (0x730b538e27c0)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Out of dialog supplement hook (0x730b538e15a0)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip/pjsip_options.c: Synchronizing AOR '1001' with current state of configuration and world
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip/pjsip_options.c: Configuring AOR '1001' with current state of configuration and world
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip/pjsip_options.c: AOR '1001' is unqualified, number of available contacts is therefore '0'
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip/pjsip_options.c: AOR '1001' now has 0 available contacts
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip/pjsip_options.c: Synchronizing endpoint '1001' with AORs '1001'
+[2025-10-03 12:10:47] DEBUG[57] res_pjsip/pjsip_options.c: Adding endpoint compositor '1001' to AOR '1001'
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Message Filtering Transport (0x730b538e2bc0)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Message Filtering TSX (0x730b538e2b40)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip.so                                  [55] 0
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Config file 'pjsip.conf' was unchanged
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip/config_global.c: No pjsip.conf type=global object exists so applying defaults.
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [70] in [0, 4294967295] gives [70](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [-1] in [-2147483648, 2147483647] gives [-1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Registered SIP authenticator module 0x730b5363f2e0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_authenticator_digest.so             [55] 0
+[2025-10-03 12:10:47] DEBUG[61] config.c: extract uint from [32] in [0, 4294967295] gives [32](0)
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip_config_wizard.c: Wizard mapped for object_type 'identify'
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'identify' from 'pjsip.conf'
+[2025-10-03 12:10:47] ERROR[1] res_pjsip_config_wizard.c: Unable to load config file 'pjsip_wizard.conf'
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Register endpoint identifier ip(0x730b537335c0)
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Register endpoint identifier header(0x730b537335b8)
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Register endpoint identifier request_uri(0x730b537335b0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_endpoint_identifier_ip.so           [56] 0
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Register endpoint identifier username(0x730b536ec188)
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Register endpoint identifier auth_username(0x730b536ec180)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_endpoint_identifier_user.so         [56] 0
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Registrar (0x730b536d1460)
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Config file 'pjsip.conf' was unchanged
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip/config_global.c: No pjsip.conf type=global object exists so applying defaults.
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [70] in [0, 4294967295] gives [70](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [-1] in [-2147483648, 2147483647] gives [-1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_registrar.so                        [57] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module res_pjsip_geolocation.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[61] config.c: extract uint from [32] in [0, 4294967295] gives [32](0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation has 3 dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation trying to start res_pjsip_pubsub
+[2025-10-03 12:10:47] DEBUG[61] res_pjsip_registrar.c: Interval = 30, starting thread
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'resource_list' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'inbound-publication' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service PubSub Module (0x730b536b7c60)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_pubsub.so                           [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation started res_pjsip_pubsub
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation trying to start chan_pjsip
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module chan_pjsip.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation failed to start chan_pjsip
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation trying to start res_pjsip_session
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Session Module (0x730b53873a80)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Session Re-Invite Module (0x730b53873a00)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Outbound INVITE Auth (0x730b53873980)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_session.so                          [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation started res_pjsip_session
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation trying to start chan_pjsip
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service REFER Callback (0x730b53622aa0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: chan_pjsip.so                                 [70] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_geolocation started chan_pjsip
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_geolocation.so                      [59] 0
+[2025-10-03 12:10:47] DEBUG[20] devicestate.c: Changing state for PJSIP/1001 - state 5 (Unavailable)
+[2025-10-03 12:10:47] DEBUG[20] stasis.c: Creating topic. name: devicestate:all/PJSIP/1001, detail: 
+[2025-10-03 12:10:47] DEBUG[20] stasis.c: Topic 'devicestate:all/PJSIP/1001': 0x730b68001650 created
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_http_websocket.so                         [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_celt.so                       [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_siren7.so                     [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_ilbc.so                       [60] 0
+[2025-10-03 12:10:47] NOTICE[1] res_smdi.c: Unable to load config smdi.conf: SMDI disabled
+[2025-10-03 12:10:47] NOTICE[1] res_smdi.c: No SMDI interfaces are available to listen on, not starting SMDI listener.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_smdi.so                                   [60] 0
+[2025-10-03 12:10:47] ERROR[1] res_phoneprov.c: Unable to load config phoneprov.conf
+[2025-10-03 12:10:47] ERROR[1] res_phoneprov.c: Unable to load provisioning profiles.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_phoneprov.so                              [60] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_rtp_multicast.so                          [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_g729.so                       [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_audiosocket.so                            [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_crypto.so                                 [60] 0
+[2025-10-03 12:10:47] VERBOSE[1] res_srtp.c: libsrtp2 2.7.0 initialized
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_srtp.so                                   [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_siren14.so                    [60] 0
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'aeap.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_aeap.so                                   [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_silk.so                       [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_vp8.so                        [60] 0
+[2025-10-03 12:10:47] WARNING[1] res_musiconhold.c: No music on hold classes configured, disabling music on hold.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_musiconhold.so                            [60] 0
+[2025-10-03 12:10:47] WARNING[1] res_stun_monitor.c: Unable to load config res_stun_monitor.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_stun_monitor.so                           [60] 1
+[2025-10-03 12:10:47] DEBUG[1] res_websocket_client.c: Initializing Websocket Client Configuration
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'websocket_client.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_websocket_client.so                       [60] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'outbound-publish' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_outbound_publish.so                 [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module res_speech_aeap.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_speech_aeap has 1 dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_speech_aeap trying to start res_speech
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_speech.so                                 [79] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_speech_aeap started res_speech
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_speech_aeap.so                            [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_rtp_asterisk.so                           [60] 0
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Registered SIP outbound authenticator module 0x730b536461c0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_outbound_authenticator_digest.so    [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_aoc.so                              [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_dialog_info_body_generator.so       [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_pidf_digium_body_supplement.so      [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_xpidf_body_generator.so             [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_pidf_eyebeam_body_supplement.so     [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_pidf_body_generator.so              [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_mwi_body_generator.so               [60] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_exten_state.so                      [65] 0
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Config file 'pjsip.conf' was unchanged
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip/config_global.c: No pjsip.conf type=global object exists so applying defaults.
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [90] in [0, 4294967295] gives [90](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [70] in [0, 4294967295] gives [70](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [500] in [0, 4294967295] gives [500](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [30] in [0, 4294967295] gives [30](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [-1] in [-2147483648, 2147483647] gives [-1](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [5] in [0, 4294967295] gives [5](0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_mwi.so                              [65] 0
+[2025-10-03 12:10:47] DEBUG[61] config.c: extract uint from [32] in [0, 4294967295] gives [32](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'asterisk-publication' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_publish_asterisk.so                 [65] 0
+[2025-10-03 12:10:47] NOTICE[1] chan_console.c: Unable to open configuration file console.conf!
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: chan_console.so                               [70] 1
+[2025-10-03 12:10:47] ERROR[1] chan_iax2.c: Unable to load config iax.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: chan_iax2.so                                  [70] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: chan_rtp.so                                   [70] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: chan_audiosocket.so                           [70] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_audiosocket.so                            [70] 0
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip_session.c: Registered SDP stream handler 'image' for stream type 'image'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_t38.so                              [70] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_stasis.so                                 [79] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_g719.so                                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_gsm.so                                 [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_vox.so                                 [80] 0
+[2025-10-03 12:10:47] NOTICE[1] res_fax.c: Configuration file 'res_fax.conf' not found, using default options.
+[2025-10-03 12:10:47] DEBUG[1] logger.c: Registered dynamic logger level 'FAX' with index 17.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_fax.so                                    [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_ilbc.so                                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_pcm.so                                 [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_dialplan.so                              [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_siren7.so                              [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_sln.so                                 [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_adsi.so                                   [80] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract uint from [0] in [0, 4294967295] gives [0](0)
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'hep.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_hep.so                                    [80] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_h264.so                                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_g723.so                                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_siren14.so                             [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_wav.so                                 [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_ogg_speex.so                           [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_h263.so                                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_ari_model.so                              [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_g729.so                                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module app_stack.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_stack has 1 dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_stack trying to start res_agi
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_agi.so                                    [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_stack started res_agi
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_stack.so                                  [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_g726.so                                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: format_wav_gsm.so                             [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_path.so                             [80] 0
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Messaging Module (0x730b53844380)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_messaging.so                        [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_one_touch_record_info.so            [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_rfc3329.so                          [80] 0
+[2025-10-03 12:10:47] DEBUG[1] ari/config.c: Initializing ARI configuration
+[2025-10-03 12:10:47] DEBUG[1] ari/config.c: Loading ARI 'general' configuration
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'ari.conf'
+[2025-10-03 12:10:47] DEBUG[1] ari/config.c: Loading ARI 'user' configuration
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'ari.conf'
+[2025-10-03 12:10:47] DEBUG[1] ari/ari_websockets.c: Initializing ARI websockets.  Enabled: no
+[2025-10-03 12:10:47] DEBUG[1] ari/config.c: Loading ARI 'outbound_websocket' configuration
+[2025-10-03 12:10:47] ERROR[1] res_sorcery_config.c: Unable to load config file 'ari.conf'
+[2025-10-03 12:10:47] DEBUG[61] ari/ari_websockets.c: Reloading ARI websockets
+[2025-10-03 12:10:47] DEBUG[1] res_ari.c: ARI disabled
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_ari.so                                    [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_stasis_recording.so                       [80] 0
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service NAT (0x730b537b4280)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_nat.so                              [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_dtmf_info.so                        [80] 0
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service Logging Module (0x730b5376c340)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_logger.so                           [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_diversion.so                        [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_send_to_voicemail.so                [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_header_funcs.so                     [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_dlg_options.so                      [80] 0
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service WebSocket Transport Module (0x730b53711340)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_transport_websocket.so              [80] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'acl' from 'pjsip.conf'
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service ACL Module (0x730b53708220)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_acl.so                              [80] 0
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service SIPS Contact (0x730b536f7120)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_sips_contact.so                     [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_pjsip_phoneprov_provider is already declined, skipping
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_empty_info.so                       [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_rfc3326.so                          [80] 0
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service REFER Out-of-dialog Module (0x730b5368b5e0)
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service REFER Progress (0x730b5368b6a0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_refer.so                            [80] 0
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip_config_wizard.c: Wizard mapped for object_type 'registration'
+[2025-10-03 12:10:47] DEBUG[1] res_pjsip.c: Register endpoint identifier (0x730b5367bb30)
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/pjsip.conf
+[2025-10-03 12:10:47] DEBUG[1] res_sorcery_config.c: Using bucket size of '1' for objects of type 'registration' from 'pjsip.conf'
+[2025-10-03 12:10:47] ERROR[1] res_pjsip_config_wizard.c: Unable to load config file 'pjsip_wizard.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_outbound_registration.so            [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_caller_id.so                        [80] 0
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'pjsip_notify.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_notify.so                           [80] 1
+[2025-10-03 12:10:47] DEBUG[1] logger.c: Registered dynamic logger level 'PJSIP_HISTORY' with index 18.
+[2025-10-03 12:10:47] DEBUG[56] res_pjsip.c: Registered SIP service History Module (0x730b53635440)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_pjsip_history.so                          [80] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: sounds                                        [81] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module app_confbridge.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_confbridge has 2 dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_confbridge trying to start codec_speex
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] codec_speex.c: Default quality (cbr): 3
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] codec_speex.c: Default quality (cbr): 3
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'speexuwbtolin32' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'lin32tospeexuwb' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: codec_speex.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_confbridge started codec_speex
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_confbridge trying to start func_jitterbuffer
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_jitterbuffer.so                          [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_confbridge started func_jitterbuffer
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'confbridge.conf'
+[2025-10-03 12:10:47] ERROR[1] app_confbridge.c: Unable to load config. Not loading module.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_confbridge.so                             [90] 1
+[2025-10-03 12:10:47] ERROR[1] res_calendar.c: Unable to load config calendar.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_calendar.so                               [90] 1
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'res_parking.conf'
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_parking.so                                [90] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_presencestate.so                         [90] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_mwi_devstate.so                           [90] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_sla.so                                    [90] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_devstate.so                              [90] 0
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'agents.conf'
+[2025-10-03 12:10:47] ERROR[1] app_agent_pool.c: Unable to load config. Not loading module.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_agent_pool.so                             [90] 1
+[2025-10-03 12:10:47] ERROR[1] cel_custom.c: Unable to load cel_custom.conf. Not logging CEL to custom CSVs.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cel_custom.so                                 [110] 0
+[2025-10-03 12:10:47] WARNING[1] cdr_sqlite3_custom.c: Failed to load configuration file. Module not activated.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cdr_sqlite3_custom.so                         [110] 1
+[2025-10-03 12:10:47] WARNING[1] cdr_pgsql.c: Unable to load config for PostgreSQL CDR's: cdr_pgsql.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cdr_pgsql.so                                  [110] 1
+[2025-10-03 12:10:47] WARNING[1] cdr_csv.c: unable to load config: cdr.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cdr_csv.so                                    [110] 1
+[2025-10-03 12:10:47] WARNING[1] cel_sqlite3_custom.c: Failed to load configuration file. Module not activated.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cel_sqlite3_custom.so                         [110] 1
+[2025-10-03 12:10:47] WARNING[1] cel_pgsql.c: Unable to load config for PostgreSQL CEL's: cel_pgsql.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cel_pgsql.so                                  [110] 1
+[2025-10-03 12:10:47] WARNING[1] cdr_manager.c: Failed to load configuration file. Module not activated.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cdr_manager.so                                [110] 1
+[2025-10-03 12:10:47] WARNING[1] cel_manager.c: Failed to load configuration file. CEL manager Module not activated.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cel_manager.so                                [110] 1
+[2025-10-03 12:10:47] ERROR[1] cdr_custom.c: Unable to load cdr_custom.conf. Not logging custom CSV CDRs.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: cdr_custom.so                                 [110] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: cel_odbc is already declined, skipping
+[2025-10-03 12:10:47] DEBUG[1] loader.c: cdr_odbc is already declined, skipping
+[2025-10-03 12:10:47] DEBUG[1] loader.c: cdr_adaptive_odbc is already declined, skipping
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: codec_adpcm.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_convert.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [8] in [-2147483648, 2147483647] gives [8](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [60] in [-2147483648, 2147483647] gives [60](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [180] in [-2147483648, 2147483647] gives [180](0)
+[2025-10-03 12:10:47] ERROR[1] config_options.c: Unable to load config file 'res_http_media_cache.conf'
+[2025-10-03 12:10:47] NOTICE[1] res_http_media_cache.c: Could not load res_http_media_cache config; using defaults
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [8] in [-2147483648, 2147483647] gives [8](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [60] in [-2147483648, 2147483647] gives [60](0)
+[2025-10-03 12:10:47] DEBUG[1] config.c: extract int from [180] in [-2147483648, 2147483647] gives [180](0)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_http_media_cache.so                       [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_read.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_mutestream.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_sf.so                                     [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_enum.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_stream_echo.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: codec_a_mu.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_reload.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_channelredirect.so                        [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_sendtext.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: bridge_builtin_features.so                    [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_sorcery.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_waitforring.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_cdr.so                                    [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_sprintf.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: bridge_simple.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_directory.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_test.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_verbose.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_broadcast.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_hangupcause.so                           [128] 0
+[2025-10-03 12:10:47] VERBOSE[1] res_fax.c: Registered handler for 'Spandsp' (Spandsp FAX Driver)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_fax_spandsp.so                            [128] 0
+[2025-10-03 12:10:47] WARNING[1] app_followme.c: No follow me config file (followme.conf), so no follow me
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_followme.so                               [128] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_cdr.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_frame_trace.so                           [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_while.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: bridge_softmix.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_playback.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_module.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_dial.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: bridge_builtin_interval_features.so           [128] 0
+[2025-10-03 12:10:47] DEBUG[1] logger.c: Registered dynamic logger level 'SECURITY' with index 19.
+[2025-10-03 12:10:47] VERBOSE[1] res_security_log.c: Security Logging Enabled
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_security_log.so                           [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_directed_pickup.so                        [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_adsiprog.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_scramble.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_chanspy.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: codec_lpc10.so                                [128] 0
+[2025-10-03 12:10:47] ERROR[1] app_amd.c: Configuration file amd.conf missing.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_amd.so                                    [128] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_lock.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_morsecode.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_ael_share.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_uuid.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_timeout.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_stasis_snoop.so                           [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_vmcount.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] pbx_ael.c: Starting AEL load process.
+[2025-10-03 12:10:47] NOTICE[1] pbx_ael.c: File /etc/asterisk/extensions.ael not found; AEL declining load
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: pbx_ael.so                                    [128] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: pbx_loopback.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_rand.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_holdintercept.so                         [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_evalexten.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_sayunixtime.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_userevent.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_talkdetect.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_privacy.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_db.so                                     [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: pbx_spool.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_uri.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_waitforsilence.so                         [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_groupcount.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_exec.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_iconv.so                                 [128] 0
+[2025-10-03 12:10:47] ERROR[1] pbx_dundi.c: Unable to load config dundi.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: pbx_dundi.so                                  [128] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: pbx_realtime.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] config.c: Parsing /etc/asterisk/extensions.conf
+[2025-10-03 12:10:47] VERBOSE[1] pbx_variables.c: Setting global variable 'CONSOLE' to 'Console/dsp'
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Registered extension context 'from-internal'; registrar: pbx_config
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '_10XX' priority 1 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '_10XX' priority 2 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '_10XX' priority 3 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1234' priority 1 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1234' priority 2 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1234' priority 3 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1234' priority 4 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1234' priority 5 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1234' priority 6 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '9999' priority 1 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '9999' priority 2 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '9999' priority 3 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '9999' priority 4 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '9999' priority 5 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '9999' priority 6 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '_NXXNXXXXXX' priority 1 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '_NXXNXXXXXX' priority 2 to from-internal (0x5717c6ad14f0)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Registered extension context 'ivr-context'; registrar: pbx_config
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '5000' priority 1 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '5000' priority 2 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '5000' priority 3 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '5000' priority 4 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1' priority 1 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '1' priority 2 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '2' priority 1 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension '2' priority 2 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'i' priority 1 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'i' priority 2 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 't' priority 1 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 't' priority 2 to ivr-context (0x5717c6a93a80)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: pbx_config.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_clioriginate.so                           [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_echo.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_global.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_system.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_version.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_logic.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_aes.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_getcpeid.so                               [128] 0
+[2025-10-03 12:10:47] ERROR[1] chan_unistim.c: Unable to load config unistim.conf
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: chan_unistim.so                               [128] 1
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: codec_ulaw.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_base64.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_playtones.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_mp3.so                                    [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_pitchshift.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_config.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_waituntil.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_db.so                                    [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_callerid.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_celgenuserevent.so                        [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_signal.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_zapateller.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_disa.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_sms.so                                    [128] 0
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 8000khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 12000khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 16000khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 24000khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 32000khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 44100khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 48000khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 96000khz -> 192000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 8000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 12000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 16000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 24000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 32000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 44100khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 48000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Translator 'slin 192000khz -> 96000khz' does not produce sample frames.
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: codec_resample.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_controlplayback.so                        [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: bridge_native_rtp.so                          [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_srv.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_blind_transfer.so                         [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module app_mixmonitor.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_mixmonitor has 2 dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_mixmonitor trying to start func_periodic_hook
+[2025-10-03 12:10:47] DEBUG[1] loader.c: Module func_periodic_hook.so is missing dependencies
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_mixmonitor failed to start func_periodic_hook
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_mixmonitor trying to start func_cut
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_cut.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_mixmonitor started func_cut
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_mixmonitor trying to start func_periodic_hook
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Registered extension context '__func_periodic_hook_context__'; registrar: func_periodic_hook
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'hook' priority 1 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'hook' priority 2 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'hook' priority 3 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'hook' priority 4 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'hook' priority 5 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'hook' priority 6 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'beep' priority 1 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'beep' priority 2 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] pbx.c: Added extension 'beep' priority 3 (CID match '') to __func_periodic_hook_context__ (0x5717c6ab7100)
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_periodic_hook.so                         [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_mixmonitor started func_periodic_hook
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_mixmonitor.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] app_minivm.c: Destroyed memory objects...
+[2025-10-03 12:10:47] WARNING[1] app_minivm.c: Failed to load configuration file. Module activated with default settings.
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_minivm.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_tonedetect.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_dtmfstore.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_json.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_sha1.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_waitforcond.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_jack.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_dumpchan.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_h264.so                       [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_export.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_callcompletion.so                        [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_softhangup.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_extstate.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_sayfiles.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_bridgeaddchan.so                          [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_realtime.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_talkdetect.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_authenticate.so                           [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_attended_transfer.so                      [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_speex.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: codec_alaw.so                                 [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_originate.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_sysinfo.so                               [128] 0
+[2025-10-03 12:10:47] ERROR[1] res_clialiases.c: res_clialiases configuration file 'cli_aliases.conf' not found
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_clialiases.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_math.so                                  [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_volume.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_milliwatt.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: chan_bridge_media.so                          [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_realtime.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_readexten.so                              [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_externalivr.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: app_page is already declined, skipping
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_channel.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_forkcdr.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_senddtmf.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_transfer.so                               [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: res_format_attr_h263.so                       [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_mf.so                                     [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_dictate.so                                [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: func_md5.so                                   [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_alarmreceiver.so                          [128] 1
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_bridgewait.so                             [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: START: app_chanisavail.so                            [128] 0
+[2025-10-03 12:10:47] DEBUG[1] loader.c: res_hep_rtcp is already declined, skipping
+[2025-10-03 12:10:47] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: codec_gsm.so                                  [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: app_speech_utils.so                           [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: app_if.so                                     [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_strings.so                               [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: bridge_holding.so                             [128] 0
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: codec_g726.so                                 [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_frame_drop.so                            [128] 0
+[2025-10-03 12:10:48] WARNING[1] app_voicemail.c: Failed to load configuration file.
+[2025-10-03 12:10:48] WARNING[1] app.c: Voicemail provider already registered by res_mwi_external.
+[2025-10-03 12:10:48] ERROR[1] app_voicemail.c: Failure registering as a voicemail provider
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: app_voicemail.so                              [128] 1
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: app_record.so                                 [128] 0
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: codec_g722.so                                 [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_shell.so                                 [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_dialgroup.so                             [128] 0
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] translate.c: Resetting translation matrix
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: codec_ilbc.so                                 [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_env.so                                   [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_limit.so                                  [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_blacklist.so                             [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_pjsip_endpoint.so                        [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_pjsip_contact.so                         [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: func_pjsip_aor.so                             [128] 0
+[2025-10-03 12:10:48] DEBUG[1] res_pjsip.c: Register endpoint identifier anonymous(0x730b537fb160)
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_pjsip_endpoint_identifier_anonymous.so    [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_sounds.so                             [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: res_hep_pjsip is already declined, skipping
+[2025-10-03 12:10:48] ERROR[1] config_options.c: Unable to load config file 'prometheus.conf'
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_prometheus.so                             [128] 1
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: app_stasis.so                                 [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_stasis_mailbox.so                         [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_stasis_device_state.so                    [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_stasis_answer.so                          [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_asterisk.so                           [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_device_states.so                      [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_endpoints.so                          [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_applications.so                       [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_stasis_playback.so                        [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_recordings.so                         [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_events.so                             [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: func_odbc is already declined, skipping
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_channels.so                           [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_mailboxes.so                          [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_bridges.so                            [128] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_ari_playbacks.so                          [128] 0
+[2025-10-03 12:10:48] NOTICE[1] app_queue.c: No queuerules.conf file found, queues will not follow penalty rules
+[2025-10-03 12:10:48] NOTICE[1] app_queue.c: No call queueing config file (queues.conf), so no call queues
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: app_queue.so                                  [150] 1
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_manager_presencestate.so                  [150] 0
+[2025-10-03 12:10:48] DEBUG[1] loader.c: START: res_manager_devicestate.so                    [150] 0
+[2025-10-03 12:10:48] WARNING[1] loader.c: Some non-required modules failed to load.
+[2025-10-03 12:10:48] WARNING[1] loader.c: Module 'res_adsi' has been loaded but may be removed in a future release.
+[2025-10-03 12:10:48] WARNING[1] loader.c: Module 'app_adsiprog' has been loaded but may be removed in a future release.
+[2025-10-03 12:10:48] WARNING[1] loader.c: Module 'app_getcpeid' has been loaded but may be removed in a future release.
+[2025-10-03 12:10:48] ERROR[1] loader.c: Error loading module 'format_ogg_vorbis.so': libvorbisenc.so.2: cannot open shared object file: No such file or directory
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_odbc declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: Declined modules which depend on res_odbc: res_config_odbc, cel_odbc, cdr_odbc, cdr_adaptive_odbc, func_odbc
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_phoneprov declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: Declined modules which depend on res_phoneprov: res_pjsip_phoneprov_provider
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_stun_monitor declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: chan_console declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: chan_iax2 declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_hep declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: Declined modules which depend on res_hep: res_hep_rtcp, res_hep_pjsip
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_pjsip_notify declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: app_confbridge declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: Declined modules which depend on app_confbridge: app_page
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_calendar declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_parking declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: app_agent_pool declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: cdr_sqlite3_custom declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: cdr_pgsql declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: cdr_csv declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: cel_sqlite3_custom declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: cel_pgsql declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: cdr_manager declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: cel_manager declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: app_followme declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: app_amd declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: pbx_ael declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: pbx_dundi declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: chan_unistim declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: app_alarmreceiver declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: app_voicemail declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: res_prometheus declined to load.
+[2025-10-03 12:10:48] ERROR[1] loader.c: app_queue declined to load.
+[2025-10-03 12:10:48] DEBUG[1] loader.c: Loader time with AST_XML_DOCS: 1.478220
+[2025-10-03 12:10:48] VERBOSE[46] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:48] VERBOSE[1] asterisk.c: Asterisk Ready.
+[2025-10-03 12:10:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:48] VERBOSE[83] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:48] VERBOSE[87] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:48] VERBOSE[91] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:10:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:10:52] VERBOSE[98] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:00] VERBOSE[105] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:06] DEBUG[11] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:06] DEBUG[13] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:06] DEBUG[8] threadpool.c: Destroying worker thread 2
+[2025-10-03 12:11:06] DEBUG[8] threadpool.c: Destroying worker thread 3
+[2025-10-03 12:11:06] DEBUG[14] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:06] DEBUG[8] threadpool.c: Destroying worker thread 4
+[2025-10-03 12:11:08] DEBUG[9] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:08] DEBUG[8] threadpool.c: Destroying worker thread 0
+[2025-10-03 12:11:08] DEBUG[10] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:08] DEBUG[8] threadpool.c: Destroying worker thread 1
+[2025-10-03 12:11:17] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:11:18] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:18] VERBOSE[130] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:18] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:18] VERBOSE[133] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:18] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:18] VERBOSE[137] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:18] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:18] VERBOSE[141] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:47] DEBUG[58] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:47] DEBUG[59] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:47] DEBUG[60] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:47] DEBUG[61] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:48] DEBUG[53] threadpool.c: Destroying worker thread 8
+[2025-10-03 12:11:48] DEBUG[12] threadpool.c: Destroying worker thread 10
+[2025-10-03 12:11:48] DEBUG[56] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:48] DEBUG[57] threadpool.c: Worker thread idle timeout reached. Dying.
+[2025-10-03 12:11:48] DEBUG[53] threadpool.c: Destroying worker thread 9
+[2025-10-03 12:11:48] DEBUG[53] threadpool.c: Destroying worker thread 7
+[2025-10-03 12:11:48] DEBUG[53] threadpool.c: Destroying worker thread 5
+[2025-10-03 12:11:48] DEBUG[53] threadpool.c: Destroying worker thread 6
+[2025-10-03 12:11:48] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:11:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:51] VERBOSE[155] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:51] VERBOSE[158] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:51] VERBOSE[162] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:11:51] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:11:51] VERBOSE[166] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:18] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:12:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:24] VERBOSE[179] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:24] VERBOSE[182] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:24] VERBOSE[186] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:24] VERBOSE[190] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:48] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:12:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:54] VERBOSE[203] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:54] VERBOSE[206] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:55] VERBOSE[210] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:55] VERBOSE[214] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:55] VERBOSE[218] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:55] VERBOSE[222] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:12:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] DEBUG[226] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:12:55] VERBOSE[226] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:13:18] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:13:27] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:13:27] VERBOSE[239] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:13:27] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:13:27] VERBOSE[242] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:13:27] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:13:27] VERBOSE[246] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:13:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:13:28] VERBOSE[250] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:13:48] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:14:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:07] VERBOSE[263] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:07] VERBOSE[266] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:07] VERBOSE[270] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:07] VERBOSE[274] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:18] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:14:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:38] VERBOSE[287] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:38] VERBOSE[290] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:39] VERBOSE[294] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:14:39] VERBOSE[298] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:14:48] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:15:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:10] VERBOSE[312] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:10] VERBOSE[315] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:10] VERBOSE[319] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:10] VERBOSE[323] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:18] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:15:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:46] VERBOSE[336] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:46] VERBOSE[339] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:46] VERBOSE[343] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:47] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:15:47] VERBOSE[347] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:15:48] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:16:18] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:16:20] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:20] VERBOSE[360] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:16:20] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:20] VERBOSE[363] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:16:20] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:20] VERBOSE[367] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:16:20] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:20] VERBOSE[371] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:16:48] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:16:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:52] VERBOSE[384] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:16:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:52] VERBOSE[387] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:16:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:52] VERBOSE[391] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:16:52] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:16:52] VERBOSE[395] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:18] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:17:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:23] VERBOSE[408] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:23] VERBOSE[411] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:23] VERBOSE[415] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:23] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:23] VERBOSE[419] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:48] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:17:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:54] VERBOSE[432] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:54] VERBOSE[435] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:54] VERBOSE[439] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:54] VERBOSE[443] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:54] VERBOSE[447] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:54] VERBOSE[451] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:17:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] DEBUG[455] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:17:54] VERBOSE[455] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:18:18] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:18:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:18:25] VERBOSE[468] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:18:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:18:25] VERBOSE[471] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:18:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:18:25] VERBOSE[475] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:18:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:18:26] VERBOSE[479] asterisk.c: Remote UNIX connection disconnected
