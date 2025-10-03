@@ -31302,3 +31302,20 @@
 [2025-10-03 12:22:36] VERBOSE[15] asterisk.c: Remote UNIX connection
 [2025-10-03 12:22:36] VERBOSE[671] asterisk.c: Remote UNIX connection disconnected
 [2025-10-03 12:22:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:23:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:08] VERBOSE[684] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:08] VERBOSE[687] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:08] VERBOSE[691] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:08] VERBOSE[695] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:23:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:39] VERBOSE[708] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:39] VERBOSE[711] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:39] VERBOSE[715] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:23:39] VERBOSE[719] asterisk.c: Remote UNIX connection disconnected
