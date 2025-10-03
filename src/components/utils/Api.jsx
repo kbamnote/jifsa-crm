@@ -29,6 +29,8 @@ export const login = (post) => {
   return Apione.post("/auth/login", post);
 };
 
+
+//Jifsa Api
 // Protected APIs (token will be automatically attached)
 export const getDetail = () => Api.get("/form/read-form");
 
@@ -44,3 +46,8 @@ export const getCallHistory = (customerId) => Api.get(`/calls/history/${customer
 export const getAllCallLogs = () => Api.get("/calls/all");
 
 export const updateCallStatus = (callId, status) => Api.patch(`/calls/${callId}/status`, { status });
+
+
+//Bim Api
+
+export const getBimDetail = () => Api.get("/bim-enquiry/read-form");

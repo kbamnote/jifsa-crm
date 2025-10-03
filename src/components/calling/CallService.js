@@ -6,6 +6,7 @@ class CallService {
     this.registerer = null;
     this.currentSession = null;
     this.isRegistered = false;
+    this.keepAliveInterval = null;
     this.callbacks = {
       onRegistered: null,
       onUnregistered: null,
@@ -22,10 +23,19 @@ class CallService {
       const { sipServer, username, password, domain = sipServer } = config;
       
       const uri = `sip:${username}@${domain}`;
+      // Optimized transport options for stable connection
       const transportOptions = {
-        server: `wss://${sipServer}:8089/ws`,
-        // Fallback to ws if wss fails
-        connectionTimeout: 5000,
+        server: `ws://${sipServer}:8088/ws`,
+        connectionTimeout: 10000,
+        keepAliveInterval: 20, // Reduced to 20 seconds
+        keepAliveDebounce: 10,
+        // Add explicit WebSocket options
+        wsOptions: {
+          skipWebsocketUpgrade: false,
+          // Add ping mechanism
+          pingInterval: 15000, // 15 seconds
+          pongTimeout: 5000    // 5 seconds
+        }
       };
 
       const userAgentOptions = {
@@ -38,7 +48,13 @@ class CallService {
             audio: true,
             video: false
           }
-        }
+        },
+        // Improved reconnection options
+        reconnectionAttempts: 3,
+        reconnectionDelay: 4,
+        // Add keep-alive handling
+        keepAliveInterval: 20,
+        noAnswerTimeout: 60
       };
 
       this.userAgent = new UserAgent(userAgentOptions);
@@ -58,6 +74,18 @@ class CallService {
         }
       };
 
+      // Handle transport events for better debugging
+      this.userAgent.transport.on('connected', () => {
+        console.log('SIP transport connected');
+        // Start manual keep-alive if needed
+        this.startKeepAlive();
+      });
+      
+      this.userAgent.transport.on('disconnected', () => {
+        console.log('SIP transport disconnected');
+        this.stopKeepAlive();
+      });
+
       await this.userAgent.start();
       
       // Create registerer
@@ -73,6 +101,7 @@ class CallService {
           }
         } else if (state === 'Unregistered') {
           this.isRegistered = false;
+          this.stopKeepAlive();
           if (this.callbacks.onUnregistered) {
             this.callbacks.onUnregistered();
           }
@@ -85,7 +114,38 @@ class CallService {
       return true;
     } catch (error) {
       console.error('Failed to initialize SIP:', error);
+      this.stopKeepAlive();
       throw error;
+    }
+  }
+
+  // Manual keep-alive mechanism
+  startKeepAlive() {
+    this.stopKeepAlive(); // Clear any existing interval
+    
+    // Send OPTIONS request periodically to keep connection alive
+    this.keepAliveInterval = setInterval(() => {
+      if (this.userAgent && this.isRegistered) {
+        try {
+          // Send a simple OPTIONS request to keep the connection alive
+          const optionsRequest = this.userAgent.options(this.userAgent.configuration.uri);
+          optionsRequest.then(() => {
+            console.log('Keep-alive OPTIONS request sent successfully');
+          }).catch((error) => {
+            console.log('Keep-alive OPTIONS request failed:', error);
+          });
+        } catch (error) {
+          console.log('Error sending keep-alive:', error);
+        }
+      }
+    }, 25000); // Send every 25 seconds
+  }
+
+  // Stop keep-alive mechanism
+  stopKeepAlive() {
+    if (this.keepAliveInterval) {
+      clearInterval(this.keepAliveInterval);
+      this.keepAliveInterval = null;
     }
   }
 
@@ -191,6 +251,8 @@ class CallService {
   // Disconnect from SIP server
   async disconnect() {
     try {
+      this.stopKeepAlive();
+      
       if (this.currentSession) {
         await this.hangup();
       }

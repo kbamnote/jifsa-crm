@@ -1,4 +1,5 @@
 import React from "react";
+import { Database, User, Mail, Phone, MessageSquare, Calendar, BookOpen } from "lucide-react";
 
 const ClientModal = ({ showModal, selectedRecord, setShowModal }) => {
   const formatDate = (dateString) => {
@@ -14,12 +15,24 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal }) => {
 
   if (!showModal || !selectedRecord) return null;
 
+  // Determine if this is BIM data based on the source field or presence of BIM-specific fields
+  const isBimData = selectedRecord.source === 'bim' || selectedRecord.course;
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="px-6 py-4 border-b border-gray-200">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-gray-800">Client Details</h3>
+            <div className="flex items-center space-x-2">
+              {isBimData ? (
+                <Database className="w-5 h-5 text-blue-600" />
+              ) : (
+                <User className="w-5 h-5 text-gray-600" />
+              )}
+              <h3 className="text-lg font-semibold text-gray-800">
+                {isBimData ? 'Elite BIM Client Details' : 'Jifsa Client Details'}
+              </h3>
+            </div>
             <button
               onClick={() => setShowModal(false)}
               className="text-gray-400 hover:text-gray-600 transition-colors"
@@ -49,18 +62,37 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal }) => {
               <label className="block text-sm font-medium text-gray-600 mb-1">Phone</label>
               <p className="text-gray-900">{selectedRecord.phoneNo}</p>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">Father Name</label>
-              <p className="text-gray-900">{selectedRecord.fatherName}</p>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">Contact No</label>
-              <p className="text-gray-900">{selectedRecord.contactNo}</p>
-            </div>
+            
+            {isBimData ? (
+              <>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Course</label>
+                  <p className="text-gray-900">{selectedRecord.course || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Contact No</label>
+                  <p className="text-gray-900">{selectedRecord.contactNo}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Father Name</label>
+                  <p className="text-gray-900">{selectedRecord.fatherName}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-600 mb-1">Contact No</label>
+                  <p className="text-gray-900">{selectedRecord.contactNo}</p>
+                </div>
+              </>
+            )}
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-600 mb-1">Message</label>
+            <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center">
+              <MessageSquare className="w-4 h-4 mr-1" />
+              Message
+            </label>
             <div className="bg-gray-50 rounded-lg p-4">
               <p className="text-gray-900">{selectedRecord.message}</p>
             </div>
@@ -68,8 +100,23 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal }) => {
           
           {selectedRecord.createdAt && (
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">Date Created</label>
+              <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center">
+                <Calendar className="w-4 h-4 mr-1" />
+                Date Created
+              </label>
               <p className="text-gray-900">{formatDate(selectedRecord.createdAt)}</p>
+            </div>
+          )}
+          
+          {isBimData && selectedRecord.source && (
+            <div>
+              <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center">
+                <Database className="w-4 h-4 mr-1" />
+                Data Source
+              </label>
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                Elite BIM
+              </span>
             </div>
           )}
         </div>

@@ -133,7 +133,7 @@ cd /etc/asterisk/keys
 
 # Generate self-signed certificate for testing
 sudo openssl req -new -x509 -days 365 -nodes -out asterisk.crt -keyout asterisk.key \
-  -subj "/C=US/ST=State/L=City/O=Organization/CN=localhost"
+  -subj "/C=US/ST=State/L=City/O=Organization/CN=elitebmi.in"
 
 sudo chown asterisk:asterisk asterisk.*
 sudo chmod 600 asterisk.*
@@ -184,10 +184,10 @@ docker-compose up -d
 
 ### 1. SIP Settings in Your CRM
 In the CRM's Phone interface, configure:
-- **SIP Server**: `localhost` (or your server IP)
+- **SIP Server**: `elitebmi.in` (or your server IP)
 - **Username**: `1001` (or your extension)
 - **Password**: `SecurePassword123` (or your password)
-- **Domain**: `localhost` (or your domain)
+- **Domain**: `elitebmi.in` (or your domain)
 
 ### 2. Testing the Connection
 1. Open your CRM Dashboard

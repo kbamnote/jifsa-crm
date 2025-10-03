@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, PhoneCall, PhoneOff, Mic, MicOff, Settings } from 'lucide-react';
+import { Phone, PhoneCall, PhoneOff, Mic, MicOff, Settings, RefreshCw } from 'lucide-react';
 import callService from './CallService';
 
 const CallInterface = ({ onCallLog }) => {
@@ -9,11 +9,13 @@ const CallInterface = ({ onCallLog }) => {
   const [callStatus, setCallStatus] = useState('idle');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [showSettings, setShowSettings] = useState(false);
+  const [connectionError, setConnectionError] = useState('');
+  const [isConnecting, setIsConnecting] = useState(false);
   const [sipConfig, setSipConfig] = useState({
-    sipServer: 'localhost',
+    sipServer: 'elitebmi.in',
     username: '',
     password: '',
-    domain: 'localhost'
+    domain: 'elitebmi.in'
   });
 
   useEffect(() => {
@@ -22,10 +24,13 @@ const CallInterface = ({ onCallLog }) => {
       onRegistered: () => {
         setIsConnected(true);
         setCallStatus('registered');
+        setConnectionError('');
+        setIsConnecting(false);
       },
       onUnregistered: () => {
         setIsConnected(false);
         setCallStatus('disconnected');
+        setIsConnecting(false);
       },
       onCallReceived: (callerNumber) => {
         setCallStatus('incoming');
@@ -59,6 +64,8 @@ const CallInterface = ({ onCallLog }) => {
       },
       onCallFailed: (error) => {
         setCallStatus('failed');
+        setConnectionError(error);
+        setIsConnecting(false);
         console.error('Call failed:', error);
       }
     });
@@ -70,17 +77,25 @@ const CallInterface = ({ onCallLog }) => {
 
   const handleConnect = async () => {
     try {
+      setConnectionError('');
+      setIsConnecting(true);
+      setCallStatus('connecting');
       await callService.initialize(sipConfig);
     } catch (error) {
       console.error('Connection failed:', error);
       setCallStatus('failed');
+      setConnectionError(error.message || 'Failed to connect to SIP server');
+      setIsConnecting(false);
     }
   };
 
   const handleDisconnect = async () => {
+    setIsConnecting(true);
     await callService.disconnect();
     setIsConnected(false);
     setCallStatus('idle');
+    setConnectionError('');
+    setIsConnecting(false);
   };
 
   const handleMakeCall = async () => {
@@ -91,6 +106,7 @@ const CallInterface = ({ onCallLog }) => {
       await callService.makeCall(phoneNumber);
     } catch (error) {
       setCallStatus('failed');
+      setConnectionError(error.message || 'Failed to make call');
     }
   };
 
@@ -99,6 +115,7 @@ const CallInterface = ({ onCallLog }) => {
       await callService.answerCall();
     } catch (error) {
       console.error('Failed to answer:', error);
+      setConnectionError(error.message || 'Failed to answer call');
     }
   };
 
@@ -114,6 +131,7 @@ const CallInterface = ({ onCallLog }) => {
   const getStatusColor = () => {
     switch (callStatus) {
       case 'registered': return 'text-green-600';
+      case 'connecting': return 'text-yellow-600';
       case 'calling': return 'text-yellow-600';
       case 'active': return 'text-blue-600';
       case 'incoming': return 'text-purple-600';
@@ -125,6 +143,7 @@ const CallInterface = ({ onCallLog }) => {
   const getStatusText = () => {
     switch (callStatus) {
       case 'registered': return 'Connected';
+      case 'connecting': return 'Connecting...';
       case 'calling': return 'Calling...';
       case 'active': return 'In Call';
       case 'incoming': return 'Incoming Call';
@@ -157,7 +176,7 @@ const CallInterface = ({ onCallLog }) => {
               value={sipConfig.sipServer}
               onChange={(e) => setSipConfig({...sipConfig, sipServer: e.target.value})}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-              placeholder="localhost or your.asterisk.server"
+              placeholder="elitebmi.in or your.asterisk.server"
             />
           </div>
           
@@ -200,12 +219,31 @@ const CallInterface = ({ onCallLog }) => {
             />
           </div>
           
-          <button
-            onClick={() => setShowSettings(false)}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
-          >
-            Save Settings
-          </button>
+          <div className="flex space-x-2">
+            <button
+              onClick={() => setShowSettings(false)}
+              className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition"
+            >
+              Save Settings
+            </button>
+            <button
+              onClick={handleConnect}
+              disabled={!sipConfig.username || !sipConfig.password || isConnecting}
+              className="flex items-center justify-center bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+            >
+              {isConnecting ? (
+                <>
+                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                  <span>Connecting...</span>
+                </>
+              ) : (
+                <>
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span>Connect</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -228,6 +266,12 @@ const CallInterface = ({ onCallLog }) => {
         </div>
       </div>
 
+      {connectionError && (
+        <div className="mb-3 p-2 bg-red-100 text-red-700 rounded text-sm">
+          {connectionError}
+        </div>
+      )}
+
       {!isConnected ? (
         <div className="space-y-3">
           <p className="text-sm text-gray-600">
@@ -235,13 +279,20 @@ const CallInterface = ({ onCallLog }) => {
           </p>
           <button
             onClick={handleConnect}
-            disabled={!sipConfig.username || !sipConfig.password}
-            className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+            disabled={!sipConfig.username || !sipConfig.password || isConnecting}
+            className="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition flex items-center justify-center"
           >
-            <div className="flex items-center justify-center space-x-2">
-              <Phone className="w-4 h-4" />
-              <span>Connect</span>
-            </div>
+            {isConnecting ? (
+              <>
+                <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                <span>Connecting...</span>
+              </>
+            ) : (
+              <>
+                <Phone className="w-4 h-4 mr-2" />
+                <span>Connect</span>
+              </>
+            )}
           </button>
         </div>
       ) : (
@@ -320,9 +371,15 @@ const CallInterface = ({ onCallLog }) => {
                 </button>
                 <button
                   onClick={handleDisconnect}
-                  className="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 transition"
+                  disabled={isConnecting}
+                  className="flex items-center justify-center bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
                 >
-                  Disconnect
+                  {isConnecting ? (
+                    <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                  ) : (
+                    <PhoneOff className="w-4 h-4 mr-2" />
+                  )}
+                  <span>Disconnect</span>
                 </button>
               </div>
             </div>
