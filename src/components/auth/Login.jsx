@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { User, Lock, Eye, EyeOff, Building2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../utils/Api";
+import logo from '../../assets/image.png'
 import Cookies from "js-cookie";
 
 const Login = () => {
@@ -73,10 +74,10 @@ const Login = () => {
       <div className="relative w-full max-w-md">
         <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-2xl border border-white/20">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl mb-4 shadow-lg">
-              <Building2 className="w-8 h-8 text-white" />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">JIFSA</h1>
+            <img src={logo} className="inline-flex items-center justify-center w-16 h-16 mb-4">
+              
+            </img>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">ELITE ASSOCIATE</h1>
             <div className="w-12 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mx-auto mt-3"></div>
           </div>
 
@@ -157,7 +158,7 @@ const Login = () => {
           </form>
 
           <div className="mt-8 pt-6 border-t border-gray-200 text-center">
-            <p className="text-xs text-gray-500">© 2024 JIFSAS. All rights reserved.</p>
+            <p className="text-xs text-gray-500">© 2024 Elite Associate. All rights reserved.</p>
             <p className="text-xs text-gray-400 mt-1">
               Secure login portal for authorized personnel only
             </p>

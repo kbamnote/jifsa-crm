@@ -19,7 +19,7 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal }) => {
   const isBimData = selectedRecord.source === 'bim' || selectedRecord.course;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 backdrop-blur-lg bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="px-6 py-4 border-b border-gray-200">
           <div className="flex items-center justify-between">
@@ -30,7 +30,7 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal }) => {
                 <User className="w-5 h-5 text-gray-600" />
               )}
               <h3 className="text-lg font-semibold text-gray-800">
-                {isBimData ? 'Elite BIM Client Details' : 'Jifsa Client Details'}
+                Elite Client Details
               </h3>
             </div>
             <button
@@ -47,13 +47,10 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal }) => {
         <div className="p-6 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">First Name</label>
-              <p className="text-gray-900 font-medium">{selectedRecord.firstName}</p>
+              <label className="block text-sm font-medium text-gray-600 mb-1">Full Name</label>
+              <p className="text-gray-900 font-medium">{selectedRecord.fullName}</p>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-1">Last Name</label>
-              <p className="text-gray-900 font-medium">{selectedRecord.lastName}</p>
-            </div>
+            
             <div>
               <label className="block text-sm font-medium text-gray-600 mb-1">Email</label>
               <p className="text-blue-600">{selectedRecord.email}</p>
