@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getDetail, getBimDetail } from "../utils/Api";
+import { getDetail } from "../utils/Api";
 import Header from "../common/Header";
 import SideNavbar from "../common/SideNavbar"; // Import the new component
 import StatsCard from "../pages/StatsCard";
@@ -70,7 +70,7 @@ const Dashboard = () => {
   // API call to fetch data
   useEffect(() => {
     setLoading(true);
-    Promise.all([getDetail(), getBimDetail()])
+    Promise.all([getDetail()])
       .then(([jifsaRes, bimRes]) => {
         const jifsaData = jifsaRes.data.map(item => ({ ...item, source: 'jifsa' }));
         const bimData = bimRes.data.map(item => ({ ...item, source: 'bim' }));

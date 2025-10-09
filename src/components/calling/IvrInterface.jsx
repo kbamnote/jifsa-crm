@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Phone, PhoneCall, PhoneOff, Mic, MicOff, Settings, Keypad } from 'lucide-react';
+import { Phone, PhoneCall, PhoneOff, Mic, MicOff, Settings, Keyboard } from 'lucide-react';
 import { UserAgent, Inviter } from 'sip.js';
 
 const IvrInterface = () => {
@@ -310,7 +310,7 @@ const IvrInterface = () => {
           {/* DTMF Keypad */}
           <div className="bg-gray-50 rounded-lg p-4">
             <h4 className="text-lg font-medium text-gray-800 mb-3 flex items-center">
-              <Keypad className="w-5 h-5 mr-2" />
+              <Keyboard className="w-5 h-5 mr-2" />
               IVR Menu
             </h4>
             <div className="grid grid-cols-3 gap-3">

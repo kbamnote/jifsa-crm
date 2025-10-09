@@ -48,6 +48,3 @@ export const getAllCallLogs = () => Api.get("/calls/all");
 export const updateCallStatus = (callId, status) => Api.patch(`/calls/${callId}/status`, { status });
 
 
-//Bim Api
-
-export const getBimDetail = () => Api.get("/bim-enquiry/read-form");
