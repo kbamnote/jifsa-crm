@@ -31319,3 +31319,1273 @@
 [2025-10-03 12:23:39] VERBOSE[715] asterisk.c: Remote UNIX connection disconnected
 [2025-10-03 12:23:39] VERBOSE[15] asterisk.c: Remote UNIX connection
 [2025-10-03 12:23:39] VERBOSE[719] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:23:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:24:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:12] VERBOSE[732] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:12] VERBOSE[735] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:12] VERBOSE[739] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:12] VERBOSE[743] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:24:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:43] VERBOSE[756] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:43] VERBOSE[759] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:43] VERBOSE[763] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:24:43] VERBOSE[767] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:24:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:25:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:15] VERBOSE[780] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:25:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:15] VERBOSE[783] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:25:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:15] VERBOSE[787] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:25:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:15] VERBOSE[791] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:25:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:25:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:25:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:50] VERBOSE[804] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:25:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:50] VERBOSE[807] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:25:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:50] VERBOSE[811] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:25:50] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:25:51] VERBOSE[815] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:26:21] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:21] VERBOSE[828] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:21] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:21] VERBOSE[831] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:22] VERBOSE[835] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:22] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:22] VERBOSE[839] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:26:53] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:53] VERBOSE[852] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:53] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:53] VERBOSE[855] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:53] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:53] VERBOSE[859] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:26:53] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:26:54] VERBOSE[863] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:27:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:24] VERBOSE[876] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:24] VERBOSE[879] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:24] VERBOSE[883] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:24] VERBOSE[887] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:24] VERBOSE[891] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:24] VERBOSE[895] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:24] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] DEBUG[899] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:27:24] VERBOSE[899] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:27:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:54] VERBOSE[913] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:54] VERBOSE[916] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:54] VERBOSE[920] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:54] VERBOSE[924] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:54] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:54] VERBOSE[928] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:55] VERBOSE[932] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:27:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:27:55] VERBOSE[936] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:28:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:25] VERBOSE[947] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:25] VERBOSE[950] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:25] VERBOSE[954] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:25] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:25] VERBOSE[958] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:28:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:55] VERBOSE[972] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:55] VERBOSE[975] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:55] VERBOSE[979] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:55] VERBOSE[983] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:55] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:55] VERBOSE[987] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:56] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:56] VERBOSE[991] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:28:56] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] DEBUG[995] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:28:56] VERBOSE[995] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:29:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:26] VERBOSE[1008] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:26] VERBOSE[1011] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:26] VERBOSE[1015] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:26] VERBOSE[1019] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:26] VERBOSE[1023] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:26] VERBOSE[1027] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:26] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:26] VERBOSE[1031] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:29:56] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:56] VERBOSE[1043] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:56] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:56] VERBOSE[1046] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:57] VERBOSE[1050] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:57] VERBOSE[1054] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:57] VERBOSE[1058] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:57] VERBOSE[1062] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:29:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:29:57] VERBOSE[1066] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:30:27] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:27] VERBOSE[1077] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:27] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:27] VERBOSE[1080] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:27] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:27] VERBOSE[1084] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:27] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:27] VERBOSE[1088] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:30:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:57] VERBOSE[1101] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:57] VERBOSE[1104] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:57] VERBOSE[1108] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:57] VERBOSE[1112] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:57] VERBOSE[1116] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:57] VERBOSE[1120] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:30:57] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] DEBUG[1124] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:30:57] VERBOSE[1124] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:31:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:28] VERBOSE[1137] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:28] VERBOSE[1140] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:28] VERBOSE[1144] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:28] VERBOSE[1148] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:28] VERBOSE[1152] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:28] VERBOSE[1156] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:28] DEBUG[1160] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:31:28] DEBUG[1160] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:31:28] DEBUG[1160] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:31:28] DEBUG[1160] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:31:28] DEBUG[1160] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:31:28] DEBUG[1160] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:31:28] VERBOSE[1160] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:31:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:58] VERBOSE[1173] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:58] VERBOSE[1176] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:58] VERBOSE[1180] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:58] VERBOSE[1184] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:58] VERBOSE[1188] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:58] VERBOSE[1192] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:31:58] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:31:58] VERBOSE[1196] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:32:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:28] VERBOSE[1207] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:28] VERBOSE[1210] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:28] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:28] VERBOSE[1214] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:29] VERBOSE[1218] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:29] VERBOSE[1222] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:29] VERBOSE[1226] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] DEBUG[1230] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:32:29] VERBOSE[1230] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:32:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:59] VERBOSE[1243] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:59] VERBOSE[1246] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:59] VERBOSE[1250] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:59] VERBOSE[1254] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:59] VERBOSE[1258] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:59] VERBOSE[1262] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:32:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:32:59] VERBOSE[1266] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:33:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:29] VERBOSE[1277] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:29] VERBOSE[1280] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:29] VERBOSE[1284] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:29] VERBOSE[1288] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:29] VERBOSE[1292] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:29] VERBOSE[1296] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:29] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:29] VERBOSE[1300] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:33:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:59] VERBOSE[1313] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:59] VERBOSE[1316] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:59] VERBOSE[1320] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:59] VERBOSE[1324] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:59] VERBOSE[1328] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:33:59] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:33:59] VERBOSE[1332] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] DEBUG[1336] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:34:00] VERBOSE[1336] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:34:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:30] VERBOSE[1349] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:30] VERBOSE[1352] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:30] VERBOSE[1356] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:30] VERBOSE[1360] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:30] VERBOSE[1364] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:30] VERBOSE[1368] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:34:30] VERBOSE[1372] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:34:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:35:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:00] VERBOSE[1383] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:00] VERBOSE[1386] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:00] VERBOSE[1390] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:00] VERBOSE[1394] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:00] VERBOSE[1398] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:00] VERBOSE[1402] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:00] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:00] VERBOSE[1406] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:35:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:30] VERBOSE[1417] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:30] VERBOSE[1420] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:30] VERBOSE[1424] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:30] VERBOSE[1428] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:30] VERBOSE[1432] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:30] VERBOSE[1436] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:30] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:35:30] VERBOSE[1440] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:35:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:36:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:01] VERBOSE[1452] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:01] VERBOSE[1455] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:01] VERBOSE[1459] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:01] VERBOSE[1463] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:01] VERBOSE[1467] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:01] VERBOSE[1471] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] DEBUG[1475] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:36:01] VERBOSE[1475] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:36:31] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:31] VERBOSE[1488] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:31] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:31] VERBOSE[1491] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:31] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:31] VERBOSE[1495] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:31] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:31] VERBOSE[1499] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:31] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:31] VERBOSE[1503] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:31] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:31] VERBOSE[1507] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:31] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:36:31] VERBOSE[1511] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:36:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:37:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:01] VERBOSE[1524] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:01] VERBOSE[1527] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:01] VERBOSE[1531] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:01] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:01] VERBOSE[1535] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:02] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:02] VERBOSE[1539] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:02] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:02] VERBOSE[1543] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:02] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:02] DEBUG[1547] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:37:02] DEBUG[1547] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:37:02] VERBOSE[1547] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:37:32] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:32] VERBOSE[1560] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:32] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:32] VERBOSE[1563] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:32] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:32] VERBOSE[1567] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:37:33] VERBOSE[1571] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:37:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:38:03] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:03] VERBOSE[1584] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:03] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:03] VERBOSE[1587] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:03] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:03] VERBOSE[1591] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:03] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:03] VERBOSE[1595] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:03] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:03] VERBOSE[1599] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:03] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:03] VERBOSE[1603] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:03] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] DEBUG[1607] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:38:03] VERBOSE[1607] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:38:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:33] VERBOSE[1620] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:33] VERBOSE[1623] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:33] VERBOSE[1627] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:33] VERBOSE[1631] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:33] VERBOSE[1635] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:33] VERBOSE[1639] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:33] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:38:33] VERBOSE[1643] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:38:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:39:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:04] VERBOSE[1656] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:04] VERBOSE[1659] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:04] VERBOSE[1663] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:04] VERBOSE[1667] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:04] VERBOSE[1671] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:04] VERBOSE[1675] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:04] VERBOSE[1679] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:39:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:34] VERBOSE[1690] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:34] VERBOSE[1693] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:34] VERBOSE[1697] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:34] VERBOSE[1701] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:34] VERBOSE[1705] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:34] VERBOSE[1709] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:39:34] VERBOSE[1713] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:39:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:40:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:04] VERBOSE[1724] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:04] VERBOSE[1727] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:04] VERBOSE[1731] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:04] VERBOSE[1735] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:04] VERBOSE[1739] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:04] VERBOSE[1743] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:04] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:04] VERBOSE[1747] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:40:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:34] VERBOSE[1758] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:34] VERBOSE[1761] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:34] VERBOSE[1765] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:34] VERBOSE[1769] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:34] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:34] VERBOSE[1773] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:35] VERBOSE[1777] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:40:35] VERBOSE[1781] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:40:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:41:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:05] VERBOSE[1792] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:05] VERBOSE[1795] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:05] VERBOSE[1799] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:05] VERBOSE[1803] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:05] VERBOSE[1807] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:05] VERBOSE[1811] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:05] VERBOSE[1815] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:41:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:35] VERBOSE[1827] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:35] VERBOSE[1830] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:35] VERBOSE[1834] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:35] VERBOSE[1838] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:35] VERBOSE[1842] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:35] VERBOSE[1846] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:35] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:41:35] VERBOSE[1850] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:41:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:42:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:05] VERBOSE[1863] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:05] VERBOSE[1866] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:05] VERBOSE[1870] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:05] VERBOSE[1874] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:05] VERBOSE[1878] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:05] VERBOSE[1882] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:05] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:05] VERBOSE[1886] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:42:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:36] VERBOSE[1897] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:36] VERBOSE[1900] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:36] VERBOSE[1904] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:36] VERBOSE[1908] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:36] VERBOSE[1912] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:36] VERBOSE[1916] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:42:36] VERBOSE[1920] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:42:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:43:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:06] VERBOSE[1931] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:06] VERBOSE[1934] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:06] VERBOSE[1938] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:06] VERBOSE[1942] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:06] VERBOSE[1946] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:06] VERBOSE[1950] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:06] VERBOSE[1954] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:43:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:36] VERBOSE[1967] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:36] VERBOSE[1970] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:36] VERBOSE[1974] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:36] VERBOSE[1978] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:36] VERBOSE[1982] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:36] VERBOSE[1986] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:36] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:43:36] VERBOSE[1990] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:43:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:44:06] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:06] VERBOSE[2001] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:07] VERBOSE[2004] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:07] VERBOSE[2008] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:07] VERBOSE[2012] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:07] VERBOSE[2016] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:07] VERBOSE[2020] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] DEBUG[2024] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:44:07] VERBOSE[2024] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:44:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:37] VERBOSE[2037] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:37] VERBOSE[2040] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:37] VERBOSE[2044] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:37] VERBOSE[2048] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:37] VERBOSE[2052] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:37] VERBOSE[2056] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:37] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:44:37] VERBOSE[2060] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:44:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:45:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:07] VERBOSE[2072] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:07] VERBOSE[2075] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:07] VERBOSE[2079] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:07] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:07] VERBOSE[2083] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:08] VERBOSE[2087] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:08] VERBOSE[2091] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:08] VERBOSE[2095] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:45:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:38] VERBOSE[2106] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:38] VERBOSE[2109] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:38] VERBOSE[2113] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:38] VERBOSE[2117] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:38] VERBOSE[2121] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:38] VERBOSE[2125] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:45:38] VERBOSE[2129] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:45:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:46:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:08] VERBOSE[2140] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:08] VERBOSE[2143] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:08] VERBOSE[2147] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:08] VERBOSE[2151] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:08] VERBOSE[2155] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:08] VERBOSE[2159] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:08] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:08] VERBOSE[2163] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:46:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:38] VERBOSE[2176] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:38] VERBOSE[2179] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:38] VERBOSE[2183] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:38] VERBOSE[2187] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:38] VERBOSE[2191] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:38] VERBOSE[2195] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:38] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:46:38] VERBOSE[2199] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:46:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:47:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:09] VERBOSE[2210] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:09] VERBOSE[2213] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:09] VERBOSE[2217] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:09] VERBOSE[2221] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:09] VERBOSE[2225] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:09] VERBOSE[2229] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:09] VERBOSE[2233] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:47:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:39] VERBOSE[2244] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:39] VERBOSE[2247] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:39] VERBOSE[2251] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:39] VERBOSE[2255] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:39] VERBOSE[2259] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:39] VERBOSE[2263] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:47:39] VERBOSE[2267] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:47:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:48:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:09] VERBOSE[2278] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:09] VERBOSE[2281] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:09] VERBOSE[2285] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:09] VERBOSE[2289] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:09] VERBOSE[2293] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:09] VERBOSE[2297] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:09] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:09] VERBOSE[2301] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:48:39] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:39] VERBOSE[2314] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:40] VERBOSE[2317] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:40] VERBOSE[2321] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:40] VERBOSE[2325] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:40] VERBOSE[2329] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:40] VERBOSE[2333] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:48:40] VERBOSE[2337] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:48:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:49:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:10] VERBOSE[2350] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:10] VERBOSE[2353] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:10] VERBOSE[2357] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:10] VERBOSE[2361] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:10] VERBOSE[2365] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:10] VERBOSE[2369] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:10] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:10] VERBOSE[2373] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:49:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:40] VERBOSE[2384] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:40] VERBOSE[2387] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:40] VERBOSE[2391] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:40] VERBOSE[2395] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:40] VERBOSE[2399] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:40] VERBOSE[2403] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:40] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:49:40] VERBOSE[2407] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:49:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:50:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:11] VERBOSE[2420] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:11] VERBOSE[2423] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:11] VERBOSE[2427] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:11] VERBOSE[2431] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:11] VERBOSE[2435] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:11] VERBOSE[2439] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:11] DEBUG[2443] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:50:11] DEBUG[2443] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:50:11] DEBUG[2443] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:50:11] DEBUG[2443] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:50:11] VERBOSE[2443] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:50:41] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:41] VERBOSE[2456] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:41] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:41] VERBOSE[2459] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:41] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:41] VERBOSE[2463] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:41] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:41] VERBOSE[2467] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:41] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:41] VERBOSE[2471] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:41] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:41] VERBOSE[2475] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:41] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:50:41] VERBOSE[2479] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:50:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:51:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:11] VERBOSE[2490] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:11] VERBOSE[2493] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:11] VERBOSE[2497] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:11] VERBOSE[2501] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:11] VERBOSE[2505] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:11] VERBOSE[2509] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:11] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:11] VERBOSE[2513] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:51:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:42] VERBOSE[2524] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:42] VERBOSE[2527] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:42] VERBOSE[2531] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:42] VERBOSE[2535] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:42] VERBOSE[2539] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:42] VERBOSE[2543] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:42] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:51:42] VERBOSE[2547] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:51:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:52:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:12] VERBOSE[2558] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:12] VERBOSE[2561] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:12] VERBOSE[2565] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:12] VERBOSE[2569] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:12] VERBOSE[2573] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:12] VERBOSE[2577] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:12] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:12] VERBOSE[2581] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:52:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:43] VERBOSE[2594] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:43] VERBOSE[2597] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:43] VERBOSE[2601] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:43] VERBOSE[2605] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:43] VERBOSE[2609] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:43] VERBOSE[2613] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:52:43] VERBOSE[2617] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:52:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:53:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:13] VERBOSE[2630] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:13] VERBOSE[2633] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:13] VERBOSE[2637] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:13] VERBOSE[2641] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:13] VERBOSE[2645] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:13] VERBOSE[2649] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:13] VERBOSE[2653] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:53:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:43] VERBOSE[2665] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:43] VERBOSE[2668] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:43] VERBOSE[2672] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:43] VERBOSE[2676] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:43] VERBOSE[2680] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:43] VERBOSE[2684] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:43] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:53:43] VERBOSE[2688] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:53:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:54:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:13] VERBOSE[2699] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:13] VERBOSE[2702] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:13] VERBOSE[2706] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:13] VERBOSE[2710] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:13] VERBOSE[2714] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:13] VERBOSE[2718] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:13] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:13] VERBOSE[2722] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:54:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:44] VERBOSE[2735] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:44] VERBOSE[2738] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:44] VERBOSE[2742] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:44] VERBOSE[2746] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:44] VERBOSE[2750] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:44] VERBOSE[2754] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:54:44] VERBOSE[2758] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:54:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:55:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:14] VERBOSE[2771] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:14] VERBOSE[2774] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:14] VERBOSE[2778] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:14] VERBOSE[2782] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:14] VERBOSE[2786] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:14] VERBOSE[2790] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:14] VERBOSE[2794] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:55:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:44] VERBOSE[2805] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:44] VERBOSE[2808] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:44] VERBOSE[2812] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:44] VERBOSE[2816] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:44] VERBOSE[2820] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:44] VERBOSE[2824] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:44] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:55:44] VERBOSE[2828] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:55:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:56:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:14] VERBOSE[2839] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:14] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:14] VERBOSE[2842] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:15] VERBOSE[2846] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:15] VERBOSE[2850] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:15] VERBOSE[2854] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:15] VERBOSE[2858] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:15] VERBOSE[2862] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:56:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:45] VERBOSE[2873] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:45] VERBOSE[2876] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:45] VERBOSE[2880] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:45] VERBOSE[2884] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:45] VERBOSE[2888] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:45] VERBOSE[2892] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:56:45] VERBOSE[2896] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:56:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:57:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:15] VERBOSE[2907] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:15] VERBOSE[2910] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:15] VERBOSE[2914] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:15] VERBOSE[2918] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:15] VERBOSE[2922] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:15] VERBOSE[2926] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:15] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:15] DEBUG[2930] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:57:15] DEBUG[2930] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:57:15] DEBUG[2930] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:57:15] DEBUG[2930] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:57:15] DEBUG[2930] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:57:15] DEBUG[2930] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:57:15] VERBOSE[2930] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:57:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:45] VERBOSE[2944] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:45] VERBOSE[2947] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:45] VERBOSE[2951] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:45] VERBOSE[2955] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:45] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:45] VERBOSE[2959] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:46] VERBOSE[2963] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:57:46] VERBOSE[2967] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:57:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:58:16] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:16] VERBOSE[2978] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:16] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:16] VERBOSE[2981] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:16] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:16] VERBOSE[2985] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:16] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:16] VERBOSE[2989] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:16] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:16] VERBOSE[2993] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:16] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:16] VERBOSE[2997] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:16] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:16] VERBOSE[3001] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:58:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:46] VERBOSE[3012] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:46] VERBOSE[3015] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:46] VERBOSE[3019] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:46] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:58:46] VERBOSE[3023] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:58:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:17] VERBOSE[3037] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:17] VERBOSE[3040] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:17] VERBOSE[3044] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:17] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:17] VERBOSE[3048] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:20] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
+[2025-10-03 12:59:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:48] VERBOSE[3061] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:48] VERBOSE[3064] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:48] VERBOSE[3068] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:48] VERBOSE[3072] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:48] VERBOSE[3076] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:48] VERBOSE[3080] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:48] VERBOSE[15] asterisk.c: Remote UNIX connection
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] DEBUG[3084] utils.c: write() failed due to reading end being closed: Broken pipe
+[2025-10-03 12:59:48] VERBOSE[3084] asterisk.c: Remote UNIX connection disconnected
+[2025-10-03 12:59:50] DEBUG[67] res_pjsip_registrar.c: Expiring 0 contacts
