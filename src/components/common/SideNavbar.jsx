@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import logo from '../../assets/image.png'
-import jifsaImg from '../../assets/jifsa.png'
-import bimImg from '../../assets/bim.png'
+import { MdPayment, MdDashboard } from "react-icons/md";
+import { FaBox, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import logo from '../../assets/image.png';
+import jifsaImg from '../../assets/jifsa.png';
+import bimImg from '../../assets/bim.png';
 
 const SideNavbar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isProductOpen, setIsProductOpen] = useState(false);
 
   const handleLogout = () => {
     // Remove token from cookies
@@ -21,41 +24,37 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       id: "dashboard",
       name: "Dashboard",
       path: "/dashboard",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M8 5a2 2 0 012-2h4a2 2 0 012 2v4H8V5z"
-          />
-        </svg>
-      ),
+      icon: <MdDashboard className="w-5 h-5" />,
     },
     {
-      id: "jifsa",
-      name: "JIFSA",
-      path: "/jifsa",
-      image: jifsaImg,
+      id: "products",
+      name: "Products",
+      icon: <FaBox className="w-5 h-5" />,
+      isDropdown: true,
+      subItems: [
+        {
+          id: "jifsa",
+          name: "JIFSA",
+          path: "/jifsa",
+          image: jifsaImg,
+        },
+        {
+          id: "elitebim",
+          name: "Elite BIM",
+          path: "/bim",
+          image: bimImg,
+        },
+      ],
     },
     {
-      id: "elitebim",
-      name: "Elite BIM",
-      path: "/bim",
-      image: bimImg,
+      id: "payment-detail",
+      name: "Payment Details",
+      path: "/payment-detail",
+      icon: <MdPayment className="w-5 h-5" />,
     },
   ];
+
+  const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";
 
   return (
     <>
@@ -87,6 +86,69 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
         {/* Menu */}
         <nav className="flex-1 px-4 py-6 space-y-2">
           {menuItems.map((item) => {
+            if (item.isDropdown) {
+              return (
+                <div key={item.id}>
+                  {/* Dropdown Button */}
+                  <button
+                    onClick={() => setIsProductOpen(!isProductOpen)}
+                    className={`
+                      w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200
+                      ${
+                        isProductActive
+                          ? "bg-blue-50 text-blue-700 border-r-2 border-blue-600"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
+                      }
+                    `}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className={`${isProductActive ? "text-blue-600" : "text-gray-400"}`}>
+                        {item.icon}
+                      </span>
+                      <span className="font-medium">{item.name}</span>
+                    </div>
+                    {isProductOpen ? (
+                      <FaChevronUp className="w-4 h-4" />
+                    ) : (
+                      <FaChevronDown className="w-4 h-4" />
+                    )}
+                  </button>
+
+                  {/* Dropdown Items */}
+                  {isProductOpen && (
+                    <div className="ml-4 mt-1 space-y-1">
+                      {item.subItems.map((subItem) => {
+                        const isActive = location.pathname === subItem.path;
+                        return (
+                          <Link
+                            key={subItem.id}
+                            to={subItem.path}
+                            onClick={() => setIsOpen(false)}
+                            className={`
+                              w-full flex items-center space-x-3 px-4 py-2 rounded-lg transition-all duration-200
+                              ${
+                                isActive
+                                  ? "bg-blue-50 text-blue-700"
+                                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
+                              }
+                            `}
+                          >
+                            <img 
+                              src={subItem.image} 
+                              alt={subItem.name} 
+                              className="w-16 h-6 object-contain"
+                            />
+                            <span className="font-medium text-sm">{subItem.name}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            // Regular menu items
             const isActive = location.pathname === item.path;
             return (
               <Link
@@ -102,17 +164,9 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
                   }
                 `}
               >
-                {item.image ? (
-                  <img 
-                    src={item.image} 
-                    alt={item.name} 
-                    className="w-16 h-6 object-contain "
-                  />
-                ) : (
-                  <span className={`${isActive ? "text-blue-600" : "text-gray-400"}`}>
-                    {item.icon}
-                  </span>
-                )}
+                <span className={`${isActive ? "text-blue-600" : "text-gray-400"}`}>
+                  {item.icon}
+                </span>
                 <span className="font-medium">{item.name}</span>
               </Link>
             );

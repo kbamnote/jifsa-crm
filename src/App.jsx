@@ -4,6 +4,7 @@ import Dashboard from "./components/pages/dashboard/Dashboard";
 import JIFSA from "./components/pages/JIFSA/Jifsa";
 import EliteBim from "./components/pages/EliteBIM/EliteBim";
 import Layout from "./components/common/Layout";
+import PaymentDetail from "./components/pages/paymentDetail/PaymentDetail";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/jifsa" element={<JIFSA />} />
           <Route path="/bim" element={<EliteBim />} />
+          <Route path="/payment-detail" element={<PaymentDetail/>}/>
         </Route>
       </Routes>
     </>
