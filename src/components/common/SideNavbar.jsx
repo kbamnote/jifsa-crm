@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdPayment, MdDashboard } from "react-icons/md";
-import { FaBox, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaBox, FaChevronDown, FaChevronUp, FaUserShield, FaUserTie } from "react-icons/fa";
+import { HiOutlineUserGroup } from "react-icons/hi2";
+import Cookies from "js-cookie";
 import logo from '../../assets/image.png';
 import jifsaImg from '../../assets/jifsa.png';
 import bimImg from '../../assets/bim.png';
@@ -10,10 +12,18 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isProductOpen, setIsProductOpen] = useState(false);
+  const [userRole, setUserRole] = useState("");
+
+  useEffect(() => {
+    // Get role from cookies
+    const role = Cookies.get("role");
+    setUserRole(role || "User");
+  }, []);
 
   const handleLogout = () => {
-    // Remove token from cookies
-    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    // Remove token and role from cookies
+    Cookies.remove("token");
+    Cookies.remove("role");
     // Navigate to home page
     navigate('/');
     setIsOpen(false);
@@ -52,9 +62,53 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       path: "/payment-detail",
       icon: <MdPayment className="w-5 h-5" />,
     },
+    {
+      id: "team",
+      name: "Team",
+      path: "/team",
+      icon: <HiOutlineUserGroup className="w-5 h-5" />,
+    },
   ];
 
   const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";
+
+  // Get display name and avatar based on role
+  const getDisplayName = () => {
+    if (userRole.toLowerCase().includes("admin")) return "Elite Admin";
+    if (userRole.toLowerCase().includes("sales")) return "Elite Sales";
+    return "Elite User";
+  };
+
+  const getRoleDisplay = () => {
+    if (userRole.toLowerCase().includes("admin")) return "Administrator";
+    if (userRole.toLowerCase().includes("sales")) return "Sales Manager";
+    return userRole || "User";
+  };
+
+  const getInitials = () => {
+    const name = getDisplayName();
+    return name.split(' ').map(word => word[0]).join('');
+  };
+
+  const getRoleIcon = () => {
+    if (userRole.toLowerCase().includes("admin")) {
+      return <FaUserShield className="w-4 h-4 text-white" />;
+    }
+    if (userRole.toLowerCase().includes("sales")) {
+      return <FaUserTie className="w-4 h-4 text-white" />;
+    }
+    return <FaUserTie className="w-4 h-4 text-white" />;
+  };
+
+  const getGradient = () => {
+    if (userRole.toLowerCase().includes("admin")) {
+      return "from-blue-500 via-indigo-500 to-purple-600";
+    }
+    if (userRole.toLowerCase().includes("sales")) {
+      return "from-emerald-500 via-teal-500 to-cyan-600";
+    }
+    return "from-purple-500 to-red-500";
+  };
 
   return (
     <>
@@ -84,7 +138,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
         </div>
 
         {/* Menu */}
-        <nav className="flex-1 px-4 py-6 space-y-2">
+        <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             if (item.isDropdown) {
               return (
@@ -173,25 +227,48 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
           })}
         </nav>
 
-        {/* Profile & Logout */}
-        <div className="p-4 border-t border-gray-200 space-y-2">
-          <div className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 cursor-pointer">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-semibold">E</span>
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-medium text-gray-800">Elite Admin</p>
-              <p className="text-xs text-gray-500">Administrator</p>
+        {/* Enhanced Profile & Logout Section */}
+        <div className="p-4 border-t border-gray-200 space-y-3">
+          {/* Profile Card */}
+          <div className="relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl opacity-0 group-hover:opacity-100 blur transition duration-300"></div>
+            <div className="relative bg-gradient-to-br from-gray-50 to-white p-3 rounded-xl border border-gray-200 hover:border-transparent transition-all duration-300">
+              <div className="flex items-center space-x-3">
+                {/* Avatar with role icon */}
+                <div className="relative">
+                  <div className={`w-11 h-11 bg-gradient-to-br ${getGradient()} rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 group-hover:scale-110`}>
+                    <span className="text-white text-sm font-bold">{getInitials()}</span>
+                  </div>
+                  {/* Role badge */}
+                  <div className={`absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br ${getGradient()} rounded-full flex items-center justify-center border-2 border-white shadow-md`}>
+                    {getRoleIcon()}
+                  </div>
+                </div>
+
+                {/* User info */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-gray-800 truncate">
+                    {getDisplayName()}
+                  </p>
+                  <div className="flex items-center space-x-1">
+                    <div className={`w-1.5 h-1.5 bg-gradient-to-r ${getGradient()} rounded-full animate-pulse`}></div>
+                    <p className="text-xs font-medium text-gray-600 truncate">
+                      {getRoleDisplay()}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Logout Button */}
           <button
             onClick={handleLogout}
-            className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-all duration-200"
+            className="w-full group relative overflow-hidden flex items-center justify-center space-x-2 px-4 py-3 rounded-xl bg-gradient-to-r from-red-500 to-rose-600 text-white hover:from-red-600 hover:to-rose-700 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
+            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             <svg
-              className="w-5 h-5"
+              className="w-5 h-5 relative z-10 transform group-hover:scale-110 transition-transform duration-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -203,7 +280,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
               />
             </svg>
-            <span className="font-medium">Logout</span>
+            <span className="font-semibold relative z-10">Logout</span>
           </button>
         </div>
       </div>

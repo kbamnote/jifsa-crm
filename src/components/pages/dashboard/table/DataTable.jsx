@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaEdit, FaEye } from 'react-icons/fa';
 
 const DataTable = ({
   currentItems,
@@ -12,9 +13,9 @@ const DataTable = ({
   sortDirection,
   handleSort,
   handleViewDetails,
+  handleEditLead,
   setCurrentPage,
-  productFilter,
-  onProductFilterChange
+  userRole
 }) => {
   
   const getSortIcon = (field) => {
@@ -37,36 +38,37 @@ const DataTable = ({
     );
   };
 
+  const getStatusBadge = (status) => {
+    const statusConfig = {
+      'unread': { bg: 'bg-gray-100', text: 'text-gray-800', label: 'Unread' },
+      'read': { bg: 'bg-blue-100', text: 'text-blue-800', label: 'Read' },
+      'interested': { bg: 'bg-green-100', text: 'text-green-800', label: 'Interested' },
+      'not_interested': { bg: 'bg-red-100', text: 'text-red-800', label: 'Not Interested' }
+    };
+
+    const config = statusConfig[status] || statusConfig['unread'];
+    return (
+      <span className={`px-2 py-1 rounded-full text-xs font-medium ${config.bg} ${config.text}`}>
+        {config.label}
+      </span>
+    );
+  };
+
+  // Role-based permissions for actions
+  const canEditLeads = ['admin', 'manager'].includes(userRole);
+  const canEditOwnLeads = userRole === 'sales';
+
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-      {/* Filter Section */}
-      <div className="p-4 border-b border-gray-200 bg-gray-50">
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      {/* Header Section */}
+      <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">Data Records</h3>
-          
-          {/* Product Filter Dropdown */}
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-gray-700">Filter by Product:</label>
-            <select
-              value={productFilter}
-              onChange={(e) => onProductFilterChange(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
-            >
-              <option value="All">All</option>
-              <option value="JIFSA">JIFSA</option>
-              <option value="Elite-BIM">Elite-BIM</option>
-            </select>
+          <div>
+            <h3 className="text-xl font-bold text-gray-800">Lead Records</h3>
+            <p className="text-sm text-gray-600 mt-1">
+              Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredData.length)} of {filteredData.length} total leads
+            </p>
           </div>
-        </div>
-        
-        {/* Results count */}
-        <div className="mt-2 text-sm text-gray-600">
-          Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredData.length)} of {filteredData.length} results
-          {productFilter !== 'All' && (
-            <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
-              Filtered: {productFilter}
-            </span>
-          )}
         </div>
       </div>
 
@@ -75,11 +77,11 @@ const DataTable = ({
         <table className="w-full">
           <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                 S.No
               </th>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
                 onClick={() => handleSort('fullName')}
               >
                 <div className="flex items-center">
@@ -88,7 +90,7 @@ const DataTable = ({
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
                 onClick={() => handleSort('email')}
               >
                 <div className="flex items-center">
@@ -97,7 +99,7 @@ const DataTable = ({
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
                 onClick={() => handleSort('phoneNo')}
               >
                 <div className="flex items-center">
@@ -106,16 +108,25 @@ const DataTable = ({
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
                 onClick={() => handleSort('productCompany')}
               >
                 <div className="flex items-center">
-                  Product Company
+                  Product
                   {getSortIcon('productCompany')}
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                onClick={() => handleSort('status')}
+              >
+                <div className="flex items-center">
+                  Status
+                  {getSortIcon('status')}
+                </div>
+              </th>
+              <th 
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
                 onClick={() => handleSort('createdAt')}
               >
                 <div className="flex items-center">
@@ -123,7 +134,7 @@ const DataTable = ({
                   {getSortIcon('createdAt')}
                 </div>
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              <th className="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider">
                 Actions
               </th>
             </tr>
@@ -132,55 +143,94 @@ const DataTable = ({
             {currentItems.length > 0 ? (
               currentItems.map((item, index) => (
                 <tr key={item._id} className="hover:bg-blue-50 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {indexOfFirstItem + index + 1}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {item.fullName}
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0 h-10 w-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">
+                          {item.fullName?.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                      <div className="ml-3">
+                        <p className="text-sm font-semibold text-gray-900">{item.fullName}</p>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    {item.email}
+                    <div className="flex items-center">
+                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      {item.email}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    {item.phoneNo}
+                    <div className="flex items-center">
+                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      {item.phoneNo}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      item.productCompany === 'JIFSA' 
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                      item.productCompany?.toLowerCase() === 'jifsa' 
                         ? 'bg-green-100 text-green-800' 
                         : 'bg-purple-100 text-purple-800'
                     }`}>
-                      {item.productCompany}
+                      {item.productCompany?.toUpperCase()}
                     </span>
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    {getStatusBadge(item.status)}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    {new Date(item.createdAt).toLocaleDateString('en-IN', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
+                    <div className="flex items-center">
+                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      {new Date(item.createdAt).toLocaleDateString('en-IN', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                      })}
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <button
-                      onClick={() => handleViewDetails(item)}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                    >
-                      View Details
-                    </button>
+                    <div className="flex items-center justify-center space-x-2">
+                      <button
+                        onClick={() => handleViewDetails(item)}
+                        className="flex items-center space-x-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm hover:shadow-md"
+                        title="View Details"
+                      >
+                        <FaEye className="w-4 h-4" />
+                        <span>View</span>
+                      </button>
+                      {(canEditLeads || (canEditOwnLeads && item.assignedTo === userRole)) && (
+                        <button
+                          onClick={() => handleEditLead(item)}
+                          className="flex items-center space-x-1 px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm hover:shadow-md"
+                          title="Edit Lead"
+                        >
+                          <FaEdit className="w-4 h-4" />
+                          <span>Edit</span>
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="px-6 py-12 text-center">
+                <td colSpan="8" className="px-6 py-16 text-center">
                   <div className="flex flex-col items-center justify-center text-gray-500">
-                    <svg className="w-16 h-16 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-20 h-20 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <p className="text-lg font-medium">No records found</p>
-                    <p className="text-sm mt-1">Try adjusting your filters or search criteria</p>
+                    <p className="text-xl font-semibold mb-2">No Leads Found</p>
+                    <p className="text-sm text-gray-400">Try adjusting your filters or search criteria</p>
                   </div>
                 </td>
               </tr>
@@ -189,28 +239,28 @@ const DataTable = ({
         </table>
       </div>
 
-      {/* Pagination */}
+      {/* Pagination */ }
       {totalPages > 1 && (
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+        <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-white border-t border-gray-200">
           <div className="flex items-center justify-between">
             <div className="text-sm text-gray-700">
-              Page <span className="font-medium">{currentPage}</span> of <span className="font-medium">{totalPages}</span>
+              Page <span className="font-bold text-blue-600">{currentPage}</span> of <span className="font-bold text-blue-600">{totalPages}</span>
             </div>
             
             <div className="flex gap-2">
               <button
                 onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-5 py-2 rounded-lg font-semibold transition-all duration-200 ${
                   currentPage === 1
                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
                 }`}
               >
                 Previous
               </button>
               
-              {/* Page numbers */}
+              {/* Page numbers */ }
               <div className="hidden sm:flex gap-1">
                 {[...Array(totalPages)].map((_, i) => {
                   const pageNum = i + 1;
@@ -224,10 +274,10 @@ const DataTable = ({
                       <button
                         key={pageNum}
                         onClick={() => setCurrentPage(pageNum)}
-                        className={`px-3 py-2 rounded-lg font-medium transition-colors ${
+                        className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
                           currentPage === pageNum
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
+                            : 'bg-white text-gray-700 hover:bg-gray-100 border-2 border-gray-200 hover:border-blue-400'
                         }`}
                       >
                         {pageNum}
@@ -237,7 +287,7 @@ const DataTable = ({
                     pageNum === currentPage - 2 ||
                     pageNum === currentPage + 2
                   ) {
-                    return <span key={pageNum} className="px-2 py-2 text-gray-500">...</span>;
+                    return <span key={pageNum} className="px-2 py-2 text-gray-500 font-bold">...</span>;
                   }
                   return null;
                 })}
@@ -246,10 +296,10 @@ const DataTable = ({
               <button
                 onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-5 py-2 rounded-lg font-semibold transition-all duration-200 ${
                   currentPage === totalPages
                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
                 }`}
               >
                 Next

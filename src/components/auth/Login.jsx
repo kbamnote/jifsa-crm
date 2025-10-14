@@ -24,9 +24,17 @@ const Login = () => {
       const response = await login({ email: id, password });
       console.log("Login response:", response.data);
 
-      // store token safely
+      // store token, role, and email safely
       if (response.data?.token) {
         Cookies.set("token", response.data.token, { expires: 1 }); // expires in 1 day
+        
+        // Store role if present in response
+        if (response.data?.role) {
+          Cookies.set("role", response.data.role, { expires: 1 }); // expires in 1 day
+        }
+        
+        // Store email for assignment functionality
+        Cookies.set("email", id, { expires: 1 }); // expires in 1 day
       } else {
         throw new Error("Token not found in response");
       }
