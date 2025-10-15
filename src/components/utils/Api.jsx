@@ -34,6 +34,8 @@ export const markRead = (id) => Api.patch(`/form/${id}/read`);
 
 export const updateStatus = (id, status) => Api.patch(`/form/${id}/status`, { status });
 
+export const deleteForm = (id) => Api.delete(`/form/delete-form/${id}`);
+
 // Fixed the assignLead endpoint - it should be /form/:id/assign not /form/:id/assign/
 export const assignLead = (id, assignmentData) => {
   console.log(`Assigning lead with ID: ${id}`);

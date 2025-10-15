@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Database, User, Mail, Phone, MessageSquare, Calendar, BookOpen, FileText, Image as ImageIcon, Eye, Edit, UserPlus, Users } from "lucide-react";
+import { Database, User, Mail, Phone, MessageSquare, Calendar, BookOpen, FileText, Image as ImageIcon, Eye, Edit, UserPlus, Users, MapPin, Building, Hash } from "lucide-react";
 import Cookies from "js-cookie";
 import { getTeamDetail, assignLead } from "../utils/Api";
 
@@ -265,6 +265,39 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal, onEdit, onAssign
                   </div>
                 </div>
 
+                {/* Location Information */}
+                {(selectedRecord.city || selectedRecord.state || selectedRecord.pincode) && (
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 border border-gray-200">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                      <MapPin className="w-5 h-5 mr-2 text-blue-600" />
+                      Location Information
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center">
+                          <MapPin className="w-4 h-4 mr-1" />
+                          City
+                        </label>
+                        <p className="text-gray-900">{selectedRecord.city || 'N/A'}</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center">
+                          <Building className="w-4 h-4 mr-1" />
+                          State
+                        </label>
+                        <p className="text-gray-900">{selectedRecord.state || 'N/A'}</p>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-600 mb-1 flex items-center">
+                          <Hash className="w-4 h-4 mr-1" />
+                          Pincode
+                        </label>
+                        <p className="text-gray-900">{selectedRecord.pincode || 'N/A'}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Family Information */}
                 <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 border border-gray-200">
                   <h4 className="text-lg font-semibold text-gray-800 mb-4">Family Information</h4>
@@ -311,13 +344,61 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal, onEdit, onAssign
                 </div>
 
                 {/* Additional Information */}
-                {selectedRecord.message && (
+                {(selectedRecord.message || selectedRecord.feedback) && (
                   <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 border border-gray-200">
-                    <label className="block text-sm font-medium text-gray-600 mb-2 flex items-center">
-                      <MessageSquare className="w-4 h-4 mr-1" />
-                      Message/Notes
-                    </label>
-                    <p className="text-gray-900 whitespace-pre-wrap">{selectedRecord.message}</p>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                      <MessageSquare className="w-5 h-5 mr-2 text-blue-600" />
+                      Additional Information
+                    </h4>
+                    {selectedRecord.message && (
+                      <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-600 mb-2">Message/Notes</label>
+                        <p className="text-gray-900 whitespace-pre-wrap">{selectedRecord.message}</p>
+                      </div>
+                    )}
+                    {selectedRecord.feedback && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-600 mb-2">Feedback</label>
+                        <p className="text-gray-900">{selectedRecord.feedback}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Lead Source Information */}
+                {(selectedRecord.createdBy || selectedRecord.source) && (
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 border border-gray-200">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                      <Database className="w-5 h-5 mr-2 text-blue-600" />
+                      Lead Source Information
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {selectedRecord.createdBy && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-600 mb-1">Created By</label>
+                          <p className="text-gray-900 font-medium">
+                            {selectedRecord.createdBy.name || selectedRecord.createdBy.email || 'N/A'}
+                          </p>
+                          <p className="text-sm text-gray-600">
+                            {selectedRecord.createdBy.role && `Role: ${selectedRecord.createdBy.role}`}
+                          </p>
+                        </div>
+                      )}
+                      {selectedRecord.source && (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-600 mb-1">Source</label>
+                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                            selectedRecord.source.toLowerCase() === 'website' 
+                              ? 'bg-blue-100 text-blue-800' 
+                              : selectedRecord.source.toLowerCase() === 'admin'
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-purple-100 text-purple-800'
+                          }`}>
+                            {selectedRecord.source.charAt(0).toUpperCase() + selectedRecord.source.slice(1)}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 

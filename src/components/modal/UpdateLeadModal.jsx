@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaTimes, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendar, FaGraduationCap } from "react-icons/fa";
+import { FaTimes, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendar, FaGraduationCap, FaCity, FaFlag, FaHashtag } from "react-icons/fa";
 import { updateDetail } from "../utils/Api";
 
 const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess }) => {
@@ -20,7 +20,11 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
     collegeOrInstituteName: "",
     schoolName: "",
     productCompany: "jifsa",
-    status: "unread"
+    status: "unread",
+    city: "",
+    state: "",
+    pincode: "",
+    feedback: ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -46,7 +50,11 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
         collegeOrInstituteName: selectedRecord.collegeOrInstituteName || "",
         schoolName: selectedRecord.schoolName || "",
         productCompany: selectedRecord.productCompany || "jifsa",
-        status: selectedRecord.status || "unread"
+        status: selectedRecord.status || "unread",
+        city: selectedRecord.city || "",
+        state: selectedRecord.state || "",
+        pincode: selectedRecord.pincode || "",
+        feedback: selectedRecord.feedback || ""
       });
     }
   }, [selectedRecord]);
@@ -258,6 +266,72 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
             </div>
           </div>
 
+          {/* Location Information */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+              <FaMapMarkerAlt className="mr-2 text-indigo-600" />
+              Location Information
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  City
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaCity className="text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                    placeholder="Enter city"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  State
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaFlag className="text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                    placeholder="Enter state"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Pincode
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaHashtag className="text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    name="pincode"
+                    value={formData.pincode}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                    placeholder="Enter pincode"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Family Information */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">
@@ -378,18 +452,34 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
             <h3 className="text-lg font-semibold text-gray-800 mb-4">
               Additional Information
             </h3>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Message/Notes
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="4"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none resize-none"
-                placeholder="Any additional notes or messages..."
-              />
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Message/Notes
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="4"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none resize-none"
+                  placeholder="Any additional notes or messages..."
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Feedback
+                </label>
+                <textarea
+                  name="feedback"
+                  value={formData.feedback}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none resize-none"
+                  placeholder="Enter feedback..."
+                />
+              </div>
             </div>
           </div>
         </form>

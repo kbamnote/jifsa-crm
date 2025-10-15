@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaEdit, FaEye } from 'react-icons/fa';
+import { FaEdit, FaEye, FaTrash } from 'react-icons/fa';
 
 const DataTable = ({
   currentItems,
@@ -14,6 +14,7 @@ const DataTable = ({
   handleSort,
   handleViewDetails,
   handleEditLead,
+  handleDeleteLead,
   setCurrentPage,
   userRole
 }) => {
@@ -57,6 +58,7 @@ const DataTable = ({
   // Role-based permissions for actions
   const canEditLeads = ['admin', 'manager'].includes(userRole);
   const canEditOwnLeads = userRole === 'sales';
+  const canDeleteLeads = userRole === 'admin';
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -78,43 +80,7 @@ const DataTable = ({
           <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
             <tr>
               <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
-                S.No
-              </th>
-              <th 
-                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('fullName')}
-              >
-                <div className="flex items-center">
-                  Full Name
-                  {getSortIcon('fullName')}
-                </div>
-              </th>
-              <th 
-                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('email')}
-              >
-                <div className="flex items-center">
-                  Email
-                  {getSortIcon('email')}
-                </div>
-              </th>
-              <th 
-                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('phoneNo')}
-              >
-                <div className="flex items-center">
-                  Phone
-                  {getSortIcon('phoneNo')}
-                </div>
-              </th>
-              <th 
-                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('productCompany')}
-              >
-                <div className="flex items-center">
-                  Product
-                  {getSortIcon('productCompany')}
-                </div>
+                Sr. No
               </th>
               <th 
                 className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
@@ -127,12 +93,33 @@ const DataTable = ({
               </th>
               <th 
                 className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                onClick={() => handleSort('fullName')}
+              >
+                <div className="flex items-center">
+                  Name
+                  {getSortIcon('fullName')}
+                </div>
+              </th>
+              <th 
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
+                onClick={() => handleSort('phoneNo')}
+              >
+                <div className="flex items-center">
+                  Phone No.
+                  {getSortIcon('phoneNo')}
+                </div>
+              </th>
+              <th 
+                className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
                 onClick={() => handleSort('createdAt')}
               >
                 <div className="flex items-center">
                   Date
                   {getSortIcon('createdAt')}
                 </div>
+              </th>
+              <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
+                Assigned To
               </th>
               <th className="px-6 py-4 text-center text-xs font-bold uppercase tracking-wider">
                 Actions
@@ -145,6 +132,9 @@ const DataTable = ({
                 <tr key={item._id} className="hover:bg-blue-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                     {indexOfFirstItem + index + 1}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    {getStatusBadge(item.status)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
@@ -161,30 +151,10 @@ const DataTable = ({
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                     <div className="flex items-center">
                       <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                      {item.email}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                       {item.phoneNo}
                     </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      item.productCompany?.toLowerCase() === 'jifsa' 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-purple-100 text-purple-800'
-                    }`}>
-                      {item.productCompany?.toUpperCase()}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    {getStatusBadge(item.status)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                     <div className="flex items-center">
@@ -197,6 +167,23 @@ const DataTable = ({
                         day: 'numeric'
                       })}
                     </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    {item.assignedTo ? (
+                      typeof item.assignedTo === 'string' ? (
+                        <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
+                          {item.assignedTo}
+                        </span>
+                      ) : (
+                        <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
+                          {item.assignedTo.name || item.assignedTo.email}
+                        </span>
+                      )
+                    ) : (
+                      <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">
+                        Not Assigned
+                      </span>
+                    )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <div className="flex items-center justify-center space-x-2">
@@ -218,13 +205,23 @@ const DataTable = ({
                           <span>Edit</span>
                         </button>
                       )}
+                      {canDeleteLeads && (
+                        <button
+                          onClick={() => handleDeleteLead(item._id)}
+                          className="flex items-center space-x-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium shadow-sm hover:shadow-md"
+                          title="Delete Lead"
+                        >
+                          <FaTrash className="w-4 h-4" />
+                          <span>Delete</span>
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="8" className="px-6 py-16 text-center">
+                <td colSpan="7" className="px-6 py-16 text-center">
                   <div className="flex flex-col items-center justify-center text-gray-500">
                     <svg className="w-20 h-20 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />

@@ -5,8 +5,8 @@ import JIFSA from "./components/pages/JIFSA/Jifsa";
 import EliteBim from "./components/pages/EliteBIM/EliteBim";
 import Layout from "./components/common/Layout";
 import PaymentDetail from "./components/pages/paymentDetail/PaymentDetail";
-import Team from "./components/pages/team/Team";
-import LeadAssigned from "./components/pages/team/LeadAssigned";
+import Team from "./components/pages/teamAndLeadAssign/Team";
+import LeadAssigned from "./components/pages/teamAndLeadAssign/LeadAssigned";
 
 function App() {
   return (

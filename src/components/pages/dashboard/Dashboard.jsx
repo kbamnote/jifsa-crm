@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getDetail } from "../../utils/Api";
+import { getDetail, deleteForm } from "../../utils/Api";
 import { FaPlus, FaFilter, FaSearch, FaTimes } from "react-icons/fa";
 import Cookies from "js-cookie";
 import StatsCard from "./StatsCard";
@@ -7,6 +7,7 @@ import DataTable from "./table/DataTable";
 import ClientModal from "../../modal/ClientModal";
 import AddLeadModal from "../../modal/AddLeadModal";
 import UpdateLeadModal from "../../modal/UpdateLeadModal";
+import DeleteConfirmationModal from "../../modal/DeleteConfirmationModal";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -19,6 +20,8 @@ const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [leadToDelete, setLeadToDelete] = useState(null);
   const [sortField, setSortField] = useState('createdAt');
   const [sortDirection, setSortDirection] = useState('desc');
   
@@ -127,12 +130,13 @@ const Dashboard = () => {
       });
     }
 
-    // Search filter
+    // Search filter - improved to include city, name, email, and phone
     if (searchTerm) {
       filtered = filtered.filter(item =>
-        Object.values(item).some(value =>
-          value && value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-        )
+        (item.fullName && item.fullName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item.email && item.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item.phoneNo && item.phoneNo.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (item.city && item.city.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
 
@@ -182,6 +186,30 @@ const Dashboard = () => {
   // Handle assignment success
   const handleAssignmentSuccess = () => {
     fetchData();
+  };
+
+  // Handle delete lead
+  const handleDeleteLead = (id) => {
+    const lead = data.find(item => item._id === id);
+    if (lead) {
+      setLeadToDelete({ id, name: lead.fullName || 'this lead' });
+      setShowDeleteModal(true);
+    }
+  };
+
+  const confirmDeleteLead = async () => {
+    if (leadToDelete) {
+      try {
+        await deleteForm(leadToDelete.id);
+        fetchData(); // Refresh the data after deletion
+        setShowDeleteModal(false);
+        setLeadToDelete(null);
+      } catch (error) {
+        console.error("Error deleting lead:", error);
+        console.error("Error response:", error.response);
+        alert(`Failed to delete lead: ${error.response?.data?.message || error.message || "Please try again."}`);
+      }
+    }
   };
 
   // Pagination
@@ -254,7 +282,7 @@ const Dashboard = () => {
                   <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <input
                     type="text"
-                    placeholder="Search leads by name, email, phone..."
+                    placeholder="Search by name, email, phone, or city..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
@@ -291,7 +319,7 @@ const Dashboard = () => {
                       >
                         <option value="All">All Products</option>
                         <option value="jifsa">JIFSA</option>
-                        <option value="bim">Elite BIM</option>
+                        <option value="elite-bim">Elite BIM</option>
                       </select>
                     </div>
 
@@ -400,6 +428,7 @@ const Dashboard = () => {
               handleSort={handleSort}
               handleViewDetails={handleViewDetails}
               handleEditLead={handleEditLead}
+              handleDeleteLead={handleDeleteLead}
               setCurrentPage={setCurrentPage}
               userRole={userRole}
             />
@@ -416,7 +445,7 @@ const Dashboard = () => {
             {canAddLeads && (
               <AddLeadModal
                 showModal={showAddModal}
-                setShowModal={setShowAddModal}
+                setShowModal={setShowModal}
                 onSuccess={handleAddSuccess}
               />
             )}
@@ -426,6 +455,14 @@ const Dashboard = () => {
               setShowModal={setShowUpdateModal}
               selectedRecord={selectedRecord}
               onSuccess={handleUpdateSuccess}
+            />
+            
+            {/* Delete Confirmation Modal */}
+            <DeleteConfirmationModal
+              showModal={showDeleteModal}
+              setShowModal={setShowDeleteModal}
+              onConfirm={confirmDeleteLead}
+              itemName={leadToDelete ? leadToDelete.name : 'this lead'}
             />
           </div>
         </div>
