@@ -6,6 +6,7 @@ import EliteBim from "./components/pages/EliteBIM/EliteBim";
 import Layout from "./components/common/Layout";
 import PaymentDetail from "./components/pages/paymentDetail/PaymentDetail";
 import Team from "./components/pages/team/Team";
+import LeadAssigned from "./components/pages/team/LeadAssigned";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/bim" element={<EliteBim />} />
           <Route path="/payment-detail" element={<PaymentDetail/>}/>
           <Route path="/team" element={<Team/>}/>
+          <Route path="/lead-assigned" element={<LeadAssigned/>}/>
         </Route>
       </Routes>
     </>

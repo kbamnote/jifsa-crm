@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getDetail, addDetail, updateDetail } from "../../utils/Api";
+import { getDetail } from "../../utils/Api";
 import { FaPlus, FaFilter, FaSearch, FaTimes } from "react-icons/fa";
 import Cookies from "js-cookie";
 import StatsCard from "./StatsCard";
@@ -29,15 +29,36 @@ const Dashboard = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const userRole = Cookies.get("role") || "";
+  const userEmail = Cookies.get("email") || "";
 
   // Fetch data
   const fetchData = async () => {
     setLoading(true);
     try {
       const response = await getDetail();
+      console.log(response)
       const allData = response.data || [];
-      const sortedData = sortData(allData, 'createdAt', 'desc');
-      setData(allData);
+      
+      // For sales persons, only show leads assigned to them
+      let filteredLeads = allData;
+      if (userRole.toLowerCase() === 'sales') {
+        filteredLeads = allData.filter(lead => {
+          // Check if lead is assigned to current user
+          if (!lead.assignedTo) return false;
+          
+          // Handle both string and object formats for assignedTo
+          if (typeof lead.assignedTo === 'string') {
+            return lead.assignedTo.toLowerCase() === userEmail.toLowerCase();
+          } else if (typeof lead.assignedTo === 'object' && lead.assignedTo.email) {
+            return lead.assignedTo.email.toLowerCase() === userEmail.toLowerCase();
+          }
+          
+          return false;
+        });
+      }
+      
+      const sortedData = sortData(filteredLeads, 'createdAt', 'desc');
+      setData(filteredLeads);
       setFilteredData(sortedData);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -204,7 +225,11 @@ const Dashboard = () => {
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                   <h1 className="text-3xl font-bold text-gray-800">Lead Management</h1>
-                  <p className="text-gray-600 mt-1">Manage and track all your leads</p>
+                  <p className="text-gray-600 mt-1">
+                    {userRole.toLowerCase() === 'sales' 
+                      ? "Manage your assigned leads" 
+                      : "Manage and track all your leads"}
+                  </p>
                 </div>
                 {canAddLeads && (
                   <button

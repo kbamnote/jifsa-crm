@@ -62,12 +62,21 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       path: "/payment-detail",
       icon: <MdPayment className="w-5 h-5" />,
     },
-    {
-      id: "team",
-      name: "Team",
-      path: "/team",
-      icon: <HiOutlineUserGroup className="w-5 h-5" />,
-    },
+    // Conditionally show "Team" or "Lead Assigned" based on user role
+    ...(!['admin', 'manager'].includes(userRole.toLowerCase()) 
+      ? [{
+          id: "lead-assigned",
+          name: "Lead Assigned",
+          path: "/lead-assigned",
+          icon: <HiOutlineUserGroup className="w-5 h-5" />,
+        }]
+      : [{
+          id: "team",
+          name: "Team",
+          path: "/team",
+          icon: <HiOutlineUserGroup className="w-5 h-5" />,
+        }]
+    ),
   ];
 
   const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";

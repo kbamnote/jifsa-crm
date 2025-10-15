@@ -56,8 +56,6 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal, onEdit, onAssign
         throw new Error('Selected team member not found');
       }
       
-      // Include both assignedTo and assignedBy as required by the API
-      // Using the member's email instead of ID based on the error message
       const assignmentData = { 
         assignedTo: member.email, // Use email instead of ID
         assignedBy: userEmail // Use the email of the current user (admin)
@@ -90,7 +88,6 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal, onEdit, onAssign
     }
   };
 
-  // Load team members when modal opens and user is admin
   useEffect(() => {
     if (showModal && userRole === 'admin') {
       fetchTeamMembers();
@@ -109,7 +106,7 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal, onEdit, onAssign
   const isAdmin = userRole === 'admin';
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-600 to-indigo-600">
