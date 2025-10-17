@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdPayment, MdDashboard } from "react-icons/md";
 import { FaBox, FaChevronDown, FaChevronUp, FaUserShield, FaUserTie } from "react-icons/fa";
+import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import Cookies from "js-cookie";
 import logo from '../../assets/image.png';
@@ -77,6 +78,12 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
           icon: <HiOutlineUserGroup className="w-5 h-5" />,
         }]
     ),
+    {
+      id: "b2b",
+      name: "B2B",
+      path: "/b2b",
+      icon: <LiaBusinessTimeSolid className="w-5 h-5" />,
+    },
   ];
 
   const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";

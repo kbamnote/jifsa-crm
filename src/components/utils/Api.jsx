@@ -20,6 +20,15 @@ Api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+Api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 // ============== AUTH ==============
 export const login = (post) => Apione.post("/auth/login", post);
 
@@ -72,3 +81,18 @@ export const createPayDetail = (formData) =>
 export const checkPayDetails = () => Api.get("/payment-detail/get-all");
 
 export const deletePayDetail = (id) => Api.delete(`/payment-detail/delete/${id}`);
+
+// ============== B2B ==============
+export const createB2B = (formData) =>
+  Api.post("/b2b/create", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const getB2B = () => Api.get("/b2b/get-all");
+
+export const updateB2B = (id, formData) =>
+  Api.put(`/b2b/update/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const deleteB2B = (id) => Api.delete(`/b2b/delete/${id}`);
