@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { MdPayment, MdDashboard } from "react-icons/md";
+import { MdPayment, MdDashboard, MdEmail } from "react-icons/md";
 import { FaBox, FaChevronDown, FaChevronUp, FaUserShield, FaUserTie } from "react-icons/fa";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { HiOutlineUserGroup } from "react-icons/hi2";
@@ -62,6 +62,12 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       name: "Payment Details",
       path: "/payment-detail",
       icon: <MdPayment className="w-5 h-5" />,
+    },
+    {
+      id: "mail",
+      name: "Email Campaign",
+      path: "/mail",
+      icon: <MdEmail className="w-5 h-5" />,
     },
     // Conditionally show "Team" or "Lead Assigned" based on user role
     ...(!['admin', 'manager'].includes(userRole.toLowerCase()) 

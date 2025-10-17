@@ -8,6 +8,7 @@ import PaymentDetail from "./components/pages/paymentDetail/PaymentDetail";
 import Team from "./components/pages/teamAndLeadAssign/Team";
 import LeadAssigned from "./components/pages/teamAndLeadAssign/LeadAssigned";
 import B2B from "./components/pages/b2b/B2B";
+import Mail from "./components/pages/mail/Mail";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/team" element={<Team/>}/>
           <Route path="/lead-assigned" element={<LeadAssigned/>}/>
           <Route path="/b2b" element={<B2B/>}/>
+          <Route path="/mail" element={<Mail/>}/>
         </Route>
       </Routes>
     </>

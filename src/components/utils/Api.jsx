@@ -82,6 +82,9 @@ export const checkPayDetails = () => Api.get("/payment-detail/get-all");
 
 export const deletePayDetail = (id) => Api.delete(`/payment-detail/delete/${id}`);
 
+// ============== MAIL ==============
+export const sendGroupMail = (mailData) => Api.post("/mail/send-group", mailData);
+
 // ============== B2B ==============
 export const createB2B = (formData) =>
   Api.post("/b2b/create", formData, {

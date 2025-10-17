@@ -68,7 +68,7 @@ const B2B = () => {
 
   // Enhanced sorting function
   const sortData = (dataToSort, field, direction) => {
-    // Ensure dataToSort is an array
+
     if (!Array.isArray(dataToSort)) {
       return [];
     }
