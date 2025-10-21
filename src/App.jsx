@@ -21,7 +21,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/jifsa" element={<JIFSA />} />
           <Route path="/bim" element={<EliteBim />} />
-          <Route path="/payment-detail" element={<PaymentDetail/>}/>
+          <Route path="/billing-details" element={<PaymentDetail/>}/>
           <Route path="/team" element={<Team/>}/>
           <Route path="/lead-assigned" element={<LeadAssigned/>}/>
           <Route path="/b2b" element={<B2B/>}/>

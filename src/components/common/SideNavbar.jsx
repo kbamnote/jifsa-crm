@@ -59,6 +59,12 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       ],
     },
     {
+      id: "billing-details",
+      name: "Billing Records",
+      path: "/billing-details",
+      icon: <MdPayment className="w-5 h-5" />,
+    },
+    {
       id: "mail",
       name: "Email Campaign",
       icon: <MdEmail className="w-5 h-5" />,
