@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getDetail, sendGroupMail } from "../../utils/Api";
-import { FaEnvelope, FaPaperPlane, FaUser, FaCheckSquare, FaSquare, FaSearch } from "react-icons/fa";
+import { FaEnvelope, FaPaperPlane, FaUser, FaCheckSquare, FaSquare, FaSearch, FaPaperclip, FaTimes } from "react-icons/fa";
 import Cookies from "js-cookie";
 
 const Mail = () => {
@@ -11,6 +11,7 @@ const Mail = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedLeads, setSelectedLeads] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const [attachments, setAttachments] = useState([]);
   
   const [mailData, setMailData] = useState({
     subject: "",
@@ -86,6 +87,30 @@ const Mail = () => {
     }));
   };
 
+  // Handle file selection
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    
+    // Validate file types (PDF and images only)
+    const validFiles = files.filter(file => {
+      const isValid = file.type === 'application/pdf' || file.type.startsWith('image/');
+      if (!isValid) {
+        setErrorMessage(`File "${file.name}" is not a valid PDF or image file`);
+        setShowError(true);
+        setTimeout(() => setShowError(false), 3000);
+      }
+      return isValid;
+    });
+    
+    setAttachments(prev => [...prev, ...validFiles]);
+    e.target.value = ''; // Reset input
+  };
+
+  // Remove attachment
+  const removeAttachment = (index) => {
+    setAttachments(prev => prev.filter((_, i) => i !== index));
+  };
+
   // Toggle lead selection
   const toggleLeadSelection = (leadId) => {
     if (selectedLeads.includes(leadId)) {
@@ -127,15 +152,24 @@ const Mail = () => {
     setShowError(false);
     
     try {
-      // Prepare mail data
-      const dataToSend = {
-        leadIds: selectedLeads,
-        to: ["ceo@mail.eliteassociate.in"], // As specified in requirements
-        subject: mailData.subject,
-        message: mailData.message
-      };
+      // Create FormData object
+      const formData = new FormData();
       
-      await sendGroupMail(dataToSend);
+      // Append leadIds as array
+      selectedLeads.forEach(id => {
+        formData.append('leadIds[]', id);
+      });
+      
+      // Append subject and message
+      formData.append('subject', mailData.subject);
+      formData.append('message', mailData.message);
+      
+      // Append attachments
+      attachments.forEach(file => {
+        formData.append('attachments', file);
+      });
+      
+      await sendGroupMail(formData);
       
       // Reset form
       setMailData({
@@ -144,6 +178,7 @@ const Mail = () => {
       });
       setSelectedLeads([]);
       setSelectAll(false);
+      setAttachments([]);
       
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
@@ -165,6 +200,15 @@ const Mail = () => {
   // Get lead email
   const getLeadEmail = (lead) => {
     return lead.email || 'No email';
+  };
+
+  // Format file size
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   };
 
   if (loading) {
@@ -246,6 +290,52 @@ const Mail = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
                       required
                     />
+                  </div>
+                  
+                  {/* Attachments Section */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Attachments (PDF & Images)
+                    </label>
+                    
+                    <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
+                      <FaPaperclip className="text-gray-500" />
+                      <span className="text-sm text-gray-600">Choose files</span>
+                      <input
+                        type="file"
+                        multiple
+                        accept=".pdf,image/*"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                    </label>
+                    
+                    {/* Attachment List */}
+                    {attachments.length > 0 && (
+                      <div className="mt-3 space-y-2">
+                        {attachments.map((file, index) => (
+                          <div 
+                            key={index}
+                            className="flex items-center justify-between bg-gray-50 px-3 py-2 rounded-lg"
+                          >
+                            <div className="flex items-center gap-2 flex-1 min-w-0">
+                              <FaPaperclip className="text-gray-400 flex-shrink-0" />
+                              <div className="min-w-0 flex-1">
+                                <p className="text-sm text-gray-700 truncate">{file.name}</p>
+                                <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => removeAttachment(index)}
+                              className="text-red-500 hover:text-red-700 flex-shrink-0 ml-2"
+                            >
+                              <FaTimes className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                   
                   <div className="bg-blue-50 rounded-lg p-4">

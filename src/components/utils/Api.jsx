@@ -45,7 +45,6 @@ export const updateStatus = (id, status) => Api.patch(`/form/${id}/status`, { st
 
 export const deleteForm = (id) => Api.delete(`/form/delete-form/${id}`);
 
-// Fixed the assignLead endpoint - it should be /form/:id/assign not /form/:id/assign/
 export const assignLead = (id, assignmentData) => {
   console.log(`Assigning lead with ID: ${id}`);
   console.log('Assignment data:', assignmentData);
@@ -53,7 +52,6 @@ export const assignLead = (id, assignmentData) => {
 };
 
 // ============== TEAM ==============
-// FIXED: These functions now accept proper parameters
 export const addMember = (memberData) => Api.post(`/team/create`, memberData);
 
 export const getTeamDetail = () => Api.get(`/team/get-all`);
@@ -83,7 +81,13 @@ export const checkPayDetails = () => Api.get("/payment-detail/get-all");
 export const deletePayDetail = (id) => Api.delete(`/payment-detail/delete/${id}`);
 
 // ============== MAIL ==============
-export const sendGroupMail = (mailData) => Api.post("/mail/send-group", mailData);
+// Updated to accept FormData instead of JSON
+export const sendGroupMail = (formData) => 
+  Api.post("/mail/send-group", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const getMailTrackingData = () => Api.get("/mail/");
 
 // ============== B2B ==============
 export const createB2B = (formData) =>

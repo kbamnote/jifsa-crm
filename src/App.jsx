@@ -9,6 +9,7 @@ import Team from "./components/pages/teamAndLeadAssign/Team";
 import LeadAssigned from "./components/pages/teamAndLeadAssign/LeadAssigned";
 import B2B from "./components/pages/b2b/B2B";
 import Mail from "./components/pages/mail/Mail";
+import MailTracking from "./components/pages/mail/MailTracking";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/lead-assigned" element={<LeadAssigned/>}/>
           <Route path="/b2b" element={<B2B/>}/>
           <Route path="/mail" element={<Mail/>}/>
+          <Route path="/mail-track" element={<MailTracking/>}/>
         </Route>
       </Routes>
     </>

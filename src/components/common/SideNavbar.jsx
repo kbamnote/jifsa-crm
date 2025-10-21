@@ -13,6 +13,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isProductOpen, setIsProductOpen] = useState(false);
+  const [isMailOpen, setIsMailOpen] = useState(false);
   const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
@@ -58,16 +59,26 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       ],
     },
     {
-      id: "payment-detail",
-      name: "Payment Details",
-      path: "/payment-detail",
-      icon: <MdPayment className="w-5 h-5" />,
-    },
-    {
       id: "mail",
       name: "Email Campaign",
-      path: "/mail",
       icon: <MdEmail className="w-5 h-5" />,
+      isDropdown: true,
+      subItems: [
+        {
+          id: "compose",
+          name: "Compose Email",
+          path: "/mail",
+        },
+        // Only show Mail Tracking for admin users
+        ...(userRole.toLowerCase() === "admin" 
+          ? [{
+              id: "tracking",
+              name: "Mail Tracking",
+              path: "/mail-track",
+            }]
+          : []
+        ),
+      ],
     },
     // Conditionally show "Team" or "Lead Assigned" based on user role
     ...(!['admin', 'manager'].includes(userRole.toLowerCase()) 
@@ -93,6 +104,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   ];
 
   const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";
+  const isMailActive = location.pathname === "/mail" || location.pathname === "/mail-track";
 
   // Get display name and avatar based on role
   const getDisplayName = () => {
@@ -163,27 +175,31 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
         <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             if (item.isDropdown) {
+              const isDropdownOpen = item.id === "products" ? isProductOpen : isMailOpen;
+              const setDropdownOpen = item.id === "products" ? setIsProductOpen : setIsMailOpen;
+              const isDropdownActive = item.id === "products" ? isProductActive : isMailActive;
+              
               return (
                 <div key={item.id}>
                   {/* Dropdown Button */}
                   <button
-                    onClick={() => setIsProductOpen(!isProductOpen)}
+                    onClick={() => setDropdownOpen(!isDropdownOpen)}
                     className={`
                       w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200
                       ${
-                        isProductActive
+                        isDropdownActive
                           ? "bg-blue-50 text-blue-700 border-r-2 border-blue-600"
                           : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
                       }
                     `}
                   >
                     <div className="flex items-center space-x-3">
-                      <span className={`${isProductActive ? "text-blue-600" : "text-gray-400"}`}>
+                      <span className={`${isDropdownActive ? "text-blue-600" : "text-gray-400"}`}>
                         {item.icon}
                       </span>
                       <span className="font-medium">{item.name}</span>
                     </div>
-                    {isProductOpen ? (
+                    {isDropdownOpen ? (
                       <FaChevronUp className="w-4 h-4" />
                     ) : (
                       <FaChevronDown className="w-4 h-4" />
@@ -191,7 +207,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
                   </button>
 
                   {/* Dropdown Items */}
-                  {isProductOpen && (
+                  {isDropdownOpen && (
                     <div className="ml-4 mt-1 space-y-1">
                       {item.subItems.map((subItem) => {
                         const isActive = location.pathname === subItem.path;
@@ -209,11 +225,15 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
                               }
                             `}
                           >
-                            <img 
-                              src={subItem.image} 
-                              alt={subItem.name} 
-                              className="w-16 h-6 object-contain"
-                            />
+                            {subItem.image ? (
+                              <img 
+                                src={subItem.image} 
+                                alt={subItem.name} 
+                                className="w-16 h-6 object-contain"
+                              />
+                            ) : (
+                              <div className="w-4 h-4"></div>
+                            )}
                             <span className="font-medium text-sm">{subItem.name}</span>
                           </Link>
                         );
