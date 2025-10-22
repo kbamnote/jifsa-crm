@@ -114,3 +114,7 @@ export const addImgOrDocs = (formData) =>
 export const getImgOrDocs = () => Api.get("/image/get-all");
 
 export const deleteImgOrDocs = (id) => Api.delete(`/image/delete/${id}`);
+
+// ============== Image Sharing ==============
+export const shareImage = (imageId, shareData) => 
+  Api.post(`/image/share/${imageId}`, shareData);

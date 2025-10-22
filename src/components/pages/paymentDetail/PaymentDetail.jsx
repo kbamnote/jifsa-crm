@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { FileText, Image, Trash2, Upload, Eye, X, CheckCircle, AlertCircle } from "lucide-react";
 import { createPayDetail, checkPayDetails, deletePayDetail } from '../../utils/Api';
 import ClientModal from '../../modal/ClientModal';
+import SuccessModal from '../../modal/SuccessModal';
+import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 
 const PaymentDetail = () => {
   const [formData, setFormData] = useState({
@@ -16,8 +18,8 @@ const PaymentDetail = () => {
   
   // Modal states
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
-  const [showDeleteSuccessModal, setShowDeleteSuccessModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -64,6 +66,7 @@ const PaymentDetail = () => {
 
     try {
       await createPayDetail(fd);
+      setSuccessMessage('Payment detail uploaded successfully!');
       setShowSuccessModal(true);
       fetchPayments();
       setFormData({ name: "", details: "", uploadImg: null });
@@ -71,6 +74,8 @@ const PaymentDetail = () => {
       e.target.reset();
     } catch (error) {
       console.error(error);
+      setSuccessMessage('Error uploading payment detail. Please try again.');
+      setShowSuccessModal(true);
     } finally {
       setLoading(false);
     }
@@ -85,10 +90,13 @@ const PaymentDetail = () => {
     try {
       await deletePayDetail(deleteId);
       setShowDeleteConfirmModal(false);
-      setShowDeleteSuccessModal(true);
+      setSuccessMessage('Payment detail deleted successfully!');
+      setShowSuccessModal(true);
       fetchPayments();
     } catch (error) {
       console.error(error);
+      setSuccessMessage('Error deleting payment detail. Please try again.');
+      setShowSuccessModal(true);
     }
   };
 
@@ -107,24 +115,6 @@ const PaymentDetail = () => {
       hour: '2-digit',
       minute: '2-digit'
     });
-  };
-
-  // Simple Modal Component
-  const Modal = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null;
-    return (
-      <div className="fixed inset-0 backdrop-blur-lg bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl max-w-md w-full relative">
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition z-10"
-          >
-            <X className="w-6 h-6" />
-          </button>
-          {children}
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -305,63 +295,19 @@ const PaymentDetail = () => {
       </div>
 
       {/* Success Modal */}
-      <Modal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)}>
-        <div className="p-8 text-center">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-12 h-12 text-green-600" />
-          </div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">Successfully Uploaded!</h3>
-          <p className="text-gray-600 mb-6">Your payment detail has been uploaded successfully.</p>
-          <button
-            onClick={() => setShowSuccessModal(false)}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
-          >
-            Close
-          </button>
-        </div>
-      </Modal>
+      <SuccessModal
+        showModal={showSuccessModal}
+        setShowModal={setShowSuccessModal}
+        message={successMessage}
+      />
 
       {/* Delete Confirmation Modal */}
-      <Modal isOpen={showDeleteConfirmModal} onClose={() => setShowDeleteConfirmModal(false)}>
-        <div className="p-8 text-center">
-          <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <AlertCircle className="w-12 h-12 text-red-600" />
-          </div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">Are you sure?</h3>
-          <p className="text-gray-600 mb-6">Do you really want to delete this payment detail? This action cannot be undone.</p>
-          <div className="flex gap-4 justify-center">
-            <button
-              onClick={() => setShowDeleteConfirmModal(false)}
-              className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={confirmDelete}
-              className="px-6 py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      </Modal>
-
-      {/* Delete Success Modal */}
-      <Modal isOpen={showDeleteSuccessModal} onClose={() => setShowDeleteSuccessModal(false)}>
-        <div className="p-8 text-center">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="w-12 h-12 text-green-600" />
-          </div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-2">Deleted Successfully!</h3>
-          <p className="text-gray-600 mb-6">The payment detail has been deleted successfully.</p>
-          <button
-            onClick={() => setShowDeleteSuccessModal(false)}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
-          >
-            Close
-          </button>
-        </div>
-      </Modal>
+      <DeleteConfirmationModal
+        showModal={showDeleteConfirmModal}
+        setShowModal={setShowDeleteConfirmModal}
+        onConfirm={confirmDelete}
+        itemName="payment detail"
+      />
 
       {/* View Modal using ClientModal */}
       <ClientModal

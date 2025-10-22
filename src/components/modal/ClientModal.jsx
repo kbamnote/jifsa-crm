@@ -181,6 +181,18 @@ const ClientModal = ({ showModal, selectedRecord, setShowModal, onEdit, onAssign
                     </label>
                     <p className="text-gray-700">{formatDate(selectedRecord.createdAt)}</p>
                   </div>
+                  {selectedRecord.creatorRole && (
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-600 mb-1">Creator Role</label>
+                      <p className="text-gray-700">{selectedRecord.creatorRole}</p>
+                    </div>
+                  )}
+                  {selectedRecord.creatorEmail && (
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-600 mb-1">Creator Email</label>
+                      <p className="text-gray-700">{selectedRecord.creatorEmail}</p>
+                    </div>
+                  )}
                   <div>
                     <label className="block text-sm font-semibold text-gray-600 mb-1">Document Type</label>
                     {isPDF(selectedRecord.uploadImg) ? (

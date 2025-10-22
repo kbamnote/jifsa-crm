@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { addImgOrDocs, getImgOrDocs, deleteImgOrDocs } from '../../utils/Api';
+import { addImgOrDocs, getImgOrDocs, deleteImgOrDocs, shareImage } from '../../utils/Api';
 import SuccessModal from '../../modal/SuccessModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
-import { FileText, Image, Download, File } from 'lucide-react';
+import MailModal from '../../modal/MailModal';
+import { FileText, Image, Download, File, Share2, X } from 'lucide-react';
 
 const ImgAndFiles = () => {
   const [images, setImages] = useState([]);
@@ -15,6 +16,15 @@ const ImgAndFiles = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
+  
+  // Image preview modal states
+  const [showImagePreview, setShowImagePreview] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null);
+  
+  // Mail modal states
+  const [showMailModal, setShowMailModal] = useState(false);
+  const [mailAttachment, setMailAttachment] = useState(null);
+  const [imageToShare, setImageToShare] = useState(null);
 
   useEffect(() => {
     const role = Cookies.get('role');
@@ -128,13 +138,30 @@ const ImgAndFiles = () => {
     document.body.removeChild(link);
   };
 
+  // Handle image preview
+  const handleImagePreview = (imageUrl) => {
+    setPreviewImage(imageUrl);
+    setShowImagePreview(true);
+  };
+
+  // Handle share action
+  const handleShare = (image) => {
+    setImageToShare(image);
+    setMailAttachment({
+      name: image.name,
+      url: image.imageUrl,
+      isImage: isImageFile(image.imageUrl)
+    });
+    setShowMailModal(true);
+  };
+
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Gallery & Documents</h1>
+    <div className="p-4 md:p-6">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6">Gallery & Documents</h1>
 
       {/* Upload Form */}
-      <div className="mb-8 p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Upload Image/Document</h2>
+      <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-md">
+        <h2 className="text-xl md:text-2xl font-semibold mb-4">Upload Image/Document</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -164,7 +191,7 @@ const ImgAndFiles = () => {
 
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Upload
           </button>
@@ -173,20 +200,23 @@ const ImgAndFiles = () => {
 
       {/* Gallery Section */}
       <div>
-        <h2 className="text-xl font-semibold mb-4">Gallery</h2>
+        <h2 className="text-xl md:text-2xl font-semibold mb-4">Gallery</h2>
 
         {loading ? (
           <div className="text-center py-8">Loading files...</div>
         ) : images.length === 0 ? (
           <div className="text-center py-8 text-gray-500">No files found</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6">
             {images.map((image) => (
               <div
                 key={image._id}
-                className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+                className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
               >
-                <div className="relative pb-[100%] bg-gray-50">
+                <div 
+                  className="relative pb-[75%] bg-gray-50 cursor-pointer"
+                  onClick={() => isImageFile(image.imageUrl) && handleImagePreview(image.imageUrl)}
+                >
                   {isImageFile(image.imageUrl) ? (
                     <img
                       src={image.imageUrl}
@@ -194,33 +224,40 @@ const ImgAndFiles = () => {
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-2 md:p-4">
                       {getFileIcon(image.imageUrl)}
-                      <span className="mt-2 text-sm text-center text-gray-600 truncate w-full">
+                      <span className="mt-2 text-xs md:text-sm text-center text-gray-600 truncate w-full px-1">
                         {image.name}
                       </span>
                     </div>
                   )}
                 </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-800 truncate">{image.name}</h3>
-                  <p className="text-xs text-gray-500 mt-1">
+                <div className="p-3 md:p-4 flex-grow flex flex-col">
+                  <h3 className="font-semibold text-gray-800 truncate text-sm md:text-base">{image.name}</h3>
+                  <p className="text-xs text-gray-500 mt-1 truncate">
                     Uploaded by: {image.createdBy}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 truncate">
                     Role: {image.creatorRole}
                   </p>
-                  <div className="mt-3 flex justify-between items-center">
+                  <div className="mt-2 md:mt-3 flex justify-between items-center flex-grow">
                     <span className="text-xs text-gray-500">
                       {new Date(image.createdAt).toLocaleDateString()}
                     </span>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-1 md:space-x-2">
                       <button
                         onClick={() => handleDownload(image.imageUrl, image.name)}
                         className="p-1 text-gray-600 hover:text-blue-600"
                         title="Download"
                       >
-                        <Download className="w-4 h-4" />
+                        <Download className="w-4 h-4 md:w-5 md:h-5" />
+                      </button>
+                      <button
+                        onClick={() => handleShare(image)}
+                        className="p-1 text-gray-600 hover:text-green-600"
+                        title="Share"
+                      >
+                        <Share2 className="w-4 h-4 md:w-5 md:h-5" />
                       </button>
                       {userRole === 'admin' && (
                         <button
@@ -229,7 +266,7 @@ const ImgAndFiles = () => {
                           title="Delete"
                         >
                           <svg
-                            className="w-4 h-4"
+                            className="w-4 h-4 md:w-5 md:h-5"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -265,6 +302,39 @@ const ImgAndFiles = () => {
         setShowModal={setShowDeleteModal}
         onConfirm={confirmDelete}
         itemName="file"
+      />
+
+      {/* Image Preview Modal */}
+      {showImagePreview && (
+        <div 
+          className="fixed inset-0 bg-opacity-90 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowImagePreview(false)}
+        >
+          <div 
+            className="relative max-w-6xl max-h-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowImagePreview(false)}
+              className="absolute top-4 right-4 text-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 z-10"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <img
+              src={previewImage}
+              alt="Preview"
+              className="max-w-full max-h-[90vh] object-contain"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Mail Modal */}
+      <MailModal
+        showModal={showMailModal}
+        setShowModal={setShowMailModal}
+        attachmentFile={mailAttachment}
+        imageToShare={imageToShare}
       />
     </div>
   );
