@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getAdmissionForm, getComplaint, getDetail } from "../../utils/Api";
+import { getAdmissionForm, getComplaint, getDetail } from "../../../../utils/Api";
 import { Search, Users, ChevronLeft, ChevronRight, Eye, Calendar, Mail, Phone, User, GraduationCap, MessageSquare } from "lucide-react";
-import ClientModal from "../../modal/ClientModal";
+import ClientModal from "../../../../modal/ClientModal";
 
 const JIFSA = () => {
   const [enquiryData, setEnquiryData] = useState([]);

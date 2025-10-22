@@ -4,6 +4,7 @@ import { MdPayment, MdDashboard, MdEmail } from "react-icons/md";
 import { FaBox, FaChevronDown, FaChevronUp, FaUserShield, FaUserTie } from "react-icons/fa";
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { HiOutlineUserGroup } from "react-icons/hi2";
+import { TfiGallery } from "react-icons/tfi";
 import Cookies from "js-cookie";
 import logo from '../../assets/image.png';
 import jifsaImg from '../../assets/jifsa.png';
@@ -106,6 +107,12 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       name: "B2B",
       path: "/b2b",
       icon: <LiaBusinessTimeSolid className="w-5 h-5" />,
+    },
+    {
+      id: "gallery&doucments",
+      name: "Gallery & Docs",
+      path: "/img-files",
+      icon: <TfiGallery className="w-5 h-5" />,
     },
   ];
 

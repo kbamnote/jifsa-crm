@@ -103,3 +103,14 @@ export const updateB2B = (id, formData) =>
   });
 
 export const deleteB2B = (id) => Api.delete(`/b2b/delete/${id}`);
+
+// ============== Gallery & Docs ==============
+
+export const addImgOrDocs = (formData) => 
+  Api.post("/image/create", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const getImgOrDocs = () => Api.get("/image/get-all");
+
+export const deleteImgOrDocs = (id) => Api.delete(`/image/delete/${id}`);

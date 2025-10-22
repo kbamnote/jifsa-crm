@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getDetail, logCall } from "../../utils/Api";
+import { getDetail, logCall } from "../../../../utils/Api";
 import { Mail, Phone, Eye, Users, ChevronLeft, ChevronRight, User, Search, Briefcase } from "lucide-react";
-import ClickToCallButton from "../../calling/ClickToCallButton";
-import ClientModal from "../../modal/ClientModal";
+import ClickToCallButton from "../../../../calling/ClickToCallButton";
+import ClientModal from "../../../../modal/ClientModal";
 
 const EliteBim = () => {
   const [enquiryData, setEnquiryData] = useState([]);

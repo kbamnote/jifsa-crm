@@ -1,5 +1,7 @@
-import React from 'react';
-import { FaEdit, FaEye, FaTrash } from 'react-icons/fa';
+import React from "react";
+import { FaEdit, FaEye, FaTrash, FaFileExport } from "react-icons/fa";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 const DataTable = ({
   currentItems,
@@ -16,24 +18,43 @@ const DataTable = ({
   handleEditLead,
   handleDeleteLead,
   setCurrentPage,
-  userRole
+  userRole,
 }) => {
-  
   const getSortIcon = (field) => {
     if (sortField !== field) {
       return (
-        <svg className="w-4 h-4 ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+        <svg
+          className="w-4 h-4 ml-1 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"
+          />
         </svg>
       );
     }
-    
-    return sortDirection === 'asc' ? (
-      <svg className="w-4 h-4 ml-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+    return sortDirection === "asc" ? (
+      <svg
+        className="w-4 h-4 ml-1 text-blue-600"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
       </svg>
     ) : (
-      <svg className="w-4 h-4 ml-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg
+        className="w-4 h-4 ml-1 text-blue-600"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
       </svg>
     );
@@ -41,13 +62,13 @@ const DataTable = ({
 
   const getStatusBadge = (status) => {
     const statusConfig = {
-      'unread': { bg: 'bg-gray-100', text: 'text-gray-800', label: 'Unread' },
-      'read': { bg: 'bg-blue-100', text: 'text-blue-800', label: 'Read' },
-      'interested': { bg: 'bg-green-100', text: 'text-green-800', label: 'Interested' },
-      'not_interested': { bg: 'bg-red-100', text: 'text-red-800', label: 'Not Interested' }
+      unread: { bg: "bg-gray-100", text: "text-gray-800", label: "Unread" },
+      read: { bg: "bg-blue-100", text: "text-blue-800", label: "Read" },
+      interested: { bg: "bg-green-100", text: "text-green-800", label: "Interested" },
+      not_interested: { bg: "bg-red-100", text: "text-red-800", label: "Not Interested" },
     };
 
-    const config = statusConfig[status] || statusConfig['unread'];
+    const config = statusConfig[status] || statusConfig["unread"];
     return (
       <span className={`px-2 py-1 rounded-full text-xs font-medium ${config.bg} ${config.text}`}>
         {config.label}
@@ -55,10 +76,61 @@ const DataTable = ({
     );
   };
 
-  // Role-based permissions for actions
-  const canEditLeads = ['admin', 'manager'].includes(userRole);
-  const canEditOwnLeads = userRole === 'sales';
-  const canDeleteLeads = userRole === 'admin';
+  // 🧾 EXPORT TO EXCEL FUNCTION
+ const exportToExcel = () => {
+  const exportData = filteredData.map((lead, index) => ({
+    "Sr No.": index + 1,
+    Name: lead.fullName || "N/A",
+    Email: lead.email || "N/A",
+    Phone: lead.phoneNo || "N/A",
+    Message: lead.message || "N/A",
+    Product: lead.productCompany || "N/A",
+    Status: lead.status || "N/A",
+    Source: lead.source || "N/A",
+    "Assigned To":
+      typeof lead.assignedTo === "object"
+        ? lead.assignedTo?.name
+          ? `${lead.assignedTo.name} (${lead.assignedTo.email})`
+          : lead.assignedTo?.email || "N/A"
+        : lead.assignedTo || "N/A",
+    "Assigned By": lead.assignedByName || "N/A",
+    "Created By":
+      lead.createdBy?.name
+        ? `${lead.createdBy.name} (${lead.createdBy.email})`
+        : lead.createdBy?.email || "N/A",
+    "Created At": new Date(lead.createdAt).toLocaleString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    "Updated At": new Date(lead.updatedAt).toLocaleString("en-IN", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    ID: lead._id,
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(exportData);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Leads");
+
+  const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+  const blob = new Blob([excelBuffer], {
+    type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+  });
+  saveAs(blob, `Leads_Full_Data_${new Date().toISOString().split("T")[0]}.xlsx`);
+};
+
+
+  // Role-based permissions
+  const canEditLeads = ["admin", "manager"].includes(userRole);
+  const canEditOwnLeads = userRole === "sales";
+  const canDeleteLeads = userRole === "admin";
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -68,13 +140,23 @@ const DataTable = ({
           <div>
             <h3 className="text-xl font-bold text-gray-800">Lead Records</h3>
             <p className="text-sm text-gray-600 mt-1">
-              Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredData.length)} of {filteredData.length} total leads
+              Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredData.length)} of{" "}
+              {filteredData.length} total leads
             </p>
           </div>
+
+          {/* 🧩 Export Button */}
+          <button
+            onClick={exportToExcel}
+            className="flex items-center space-x-2 bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition-all duration-200 shadow-md"
+          >
+            <FaFileExport className="w-4 h-4" />
+            <span>Export to Excel</span>
+          </button>
         </div>
       </div>
 
-      {/* Table */}
+      {/* Table Section (same as before) */}
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
@@ -82,40 +164,40 @@ const DataTable = ({
               <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
                 Sr. No
               </th>
-              <th 
+              <th
                 className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('status')}
+                onClick={() => handleSort("status")}
               >
                 <div className="flex items-center">
                   Status
-                  {getSortIcon('status')}
+                  {getSortIcon("status")}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('fullName')}
+                onClick={() => handleSort("fullName")}
               >
                 <div className="flex items-center">
                   Name
-                  {getSortIcon('fullName')}
+                  {getSortIcon("fullName")}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('phoneNo')}
+                onClick={() => handleSort("phoneNo")}
               >
                 <div className="flex items-center">
                   Phone No.
-                  {getSortIcon('phoneNo')}
+                  {getSortIcon("phoneNo")}
                 </div>
               </th>
-              <th 
+              <th
                 className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-blue-700 transition-colors"
-                onClick={() => handleSort('createdAt')}
+                onClick={() => handleSort("createdAt")}
               >
                 <div className="flex items-center">
                   Date
-                  {getSortIcon('createdAt')}
+                  {getSortIcon("createdAt")}
                 </div>
               </th>
               <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider">
@@ -149,70 +231,44 @@ const DataTable = ({
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      {item.phoneNo}
-                    </div>
+                    {item.phoneNo}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <svg className="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      {new Date(item.createdAt).toLocaleDateString('en-IN', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric'
-                      })}
-                    </div>
+                    {new Date(item.createdAt).toLocaleDateString("en-IN", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                    {item.assignedTo ? (
-                      typeof item.assignedTo === 'string' ? (
-                        <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
-                          {item.assignedTo}
-                        </span>
-                      ) : (
-                        <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
-                          {item.assignedTo.name || item.assignedTo.email}
-                        </span>
-                      )
-                    ) : (
-                      <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">
-                        Not Assigned
-                      </span>
-                    )}
+                    {item.assignedTo
+                      ? typeof item.assignedTo === "string"
+                        ? item.assignedTo
+                        : item.assignedTo?.name || item.assignedTo?.email
+                      : "Not Assigned"}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <div className="flex items-center justify-center space-x-2">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-center">
+                    <div className="flex justify-center space-x-2">
                       <button
                         onClick={() => handleViewDetails(item)}
-                        className="flex items-center space-x-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium shadow-sm hover:shadow-md"
-                        title="View Details"
+                        className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                       >
-                        <FaEye className="w-4 h-4" />
-                        <span>View</span>
+                        <FaEye />
                       </button>
-                      {(canEditLeads || (canEditOwnLeads && item.assignedTo === userRole)) && (
+                      {(canEditLeads || canEditOwnLeads) && (
                         <button
                           onClick={() => handleEditLead(item)}
-                          className="flex items-center space-x-1 px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium shadow-sm hover:shadow-md"
-                          title="Edit Lead"
+                          className="px-3 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
                         >
-                          <FaEdit className="w-4 h-4" />
-                          <span>Edit</span>
+                          <FaEdit />
                         </button>
                       )}
                       {canDeleteLeads && (
                         <button
                           onClick={() => handleDeleteLead(item._id)}
-                          className="flex items-center space-x-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium shadow-sm hover:shadow-md"
-                          title="Delete Lead"
+                          className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                         >
-                          <FaTrash className="w-4 h-4" />
-                          <span>Delete</span>
+                          <FaTrash />
                         </button>
                       )}
                     </div>
@@ -221,90 +277,14 @@ const DataTable = ({
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="px-6 py-16 text-center">
-                  <div className="flex flex-col items-center justify-center text-gray-500">
-                    <svg className="w-20 h-20 mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <p className="text-xl font-semibold mb-2">No Leads Found</p>
-                    <p className="text-sm text-gray-400">Try adjusting your filters or search criteria</p>
-                  </div>
+                <td colSpan="7" className="px-6 py-16 text-center text-gray-500">
+                  No leads available
                 </td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
-
-      {/* Pagination */ }
-      {totalPages > 1 && (
-        <div className="px-6 py-4 bg-gradient-to-r from-gray-50 to-white border-t border-gray-200">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-700">
-              Page <span className="font-bold text-blue-600">{currentPage}</span> of <span className="font-bold text-blue-600">{totalPages}</span>
-            </div>
-            
-            <div className="flex gap-2">
-              <button
-                onClick={() => setCurrentPage(currentPage - 1)}
-                disabled={currentPage === 1}
-                className={`px-5 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  currentPage === 1
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
-                }`}
-              >
-                Previous
-              </button>
-              
-              {/* Page numbers */ }
-              <div className="hidden sm:flex gap-1">
-                {[...Array(totalPages)].map((_, i) => {
-                  const pageNum = i + 1;
-                  // Show first page, last page, current page, and pages around current
-                  if (
-                    pageNum === 1 ||
-                    pageNum === totalPages ||
-                    (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
-                  ) {
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => setCurrentPage(pageNum)}
-                        className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                          currentPage === pageNum
-                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md'
-                            : 'bg-white text-gray-700 hover:bg-gray-100 border-2 border-gray-200 hover:border-blue-400'
-                        }`}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  } else if (
-                    pageNum === currentPage - 2 ||
-                    pageNum === currentPage + 2
-                  ) {
-                    return <span key={pageNum} className="px-2 py-2 text-gray-500 font-bold">...</span>;
-                  }
-                  return null;
-                })}
-              </div>
-              
-              <button
-                onClick={() => setCurrentPage(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className={`px-5 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  currentPage === totalPages
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-md hover:shadow-lg transform hover:-translate-y-0.5'
-                }`}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

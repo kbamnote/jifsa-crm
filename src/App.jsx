@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Dashboard from "./components/pages/dashboard/Dashboard";
-import JIFSA from "./components/pages/JIFSA/Jifsa";
-import EliteBim from "./components/pages/EliteBIM/EliteBim";
+import JIFSA from "./components/pages/dashboard/products/JIFSA/Jifsa";
+import EliteBim from "./components/pages/dashboard/products/EliteBIM/EliteBim";
 import Layout from "./components/common/Layout";
 import PaymentDetail from "./components/pages/paymentDetail/PaymentDetail";
 import Team from "./components/pages/teamAndLeadAssign/Team";
@@ -10,6 +10,7 @@ import LeadAssigned from "./components/pages/teamAndLeadAssign/LeadAssigned";
 import B2B from "./components/pages/b2b/B2B";
 import Mail from "./components/pages/mail/Mail";
 import MailTracking from "./components/pages/mail/MailTracking";
+import ImgAndFiles from "./components/pages/image&files/ImgAndFiles";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/b2b" element={<B2B/>}/>
           <Route path="/mail" element={<Mail/>}/>
           <Route path="/mail-track" element={<MailTracking/>}/>
+          <Route path="/img-files" element={<ImgAndFiles/>}/>
         </Route>
       </Routes>
     </>
