@@ -24,6 +24,7 @@ const Dashboard = () => {
   const [leadToDelete, setLeadToDelete] = useState(null);
   const [sortField, setSortField] = useState('createdAt');
   const [sortDirection, setSortDirection] = useState('desc');
+  const [refreshStats, setRefreshStats] = useState(false);
   
   // Filter states
   const [productFilter, setProductFilter] = useState('All');
@@ -175,17 +176,19 @@ const Dashboard = () => {
   const handleAddSuccess = () => {
     fetchData();
     setShowAddModal(false);
+    setRefreshStats(prev => !prev); // Toggle to trigger stats refresh
   };
 
   // Handle update lead success
   const handleUpdateSuccess = () => {
     fetchData();
-    setShowUpdateModal(false);
+    setRefreshStats(prev => !prev); // Toggle to trigger stats refresh
   };
 
   // Handle assignment success
   const handleAssignmentSuccess = () => {
     fetchData();
+    setRefreshStats(prev => !prev); // Toggle to trigger stats refresh
   };
 
   // Handle delete lead
@@ -234,10 +237,39 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading dashboard...</p>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+        <div className="animate-pulse">
+          {/* Header Section */}
+          <div className="mb-6">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
+          
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {[1, 2, 3, 4].map((item) => (
+              <div key={item} className="bg-white p-6 rounded-xl shadow-sm">
+                <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+                <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Search and Filter Section */}
+          <div className="bg-white rounded-xl shadow-md p-6 mb-6">
+            <div className="h-10 bg-gray-200 rounded w-full mb-4"></div>
+            <div className="h-10 bg-gray-200 rounded w-1/4"></div>
+          </div>
+          
+          {/* Table Section */}
+          <div className="bg-white rounded-xl shadow-md p-6">
+            <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
+            <div className="space-y-4">
+              {[1, 2, 3, 4, 5].map((item) => (
+                <div key={item} className="h-16 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -272,7 +304,7 @@ const Dashboard = () => {
             </div>
 
             {/* Stats Cards */}
-            <StatsCard data={data} />
+            <StatsCard data={data} key={refreshStats} />
 
             {/* Search and Filter Section */}
             <div className="bg-white rounded-xl shadow-md p-4 mb-6">

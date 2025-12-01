@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Plus, Trash2, UserPlus, X, Mail, Lock, User, Briefcase, ChevronDown, ChevronUp } from 'lucide-react';
-import { getTeamDetail, addMember, deleteMember } from '../../utils/Api';
+import { Users, Plus, Trash2, UserPlus, X, Mail, Lock, User, Briefcase, ChevronDown, ChevronUp, Edit } from 'lucide-react';
+import { getTeamDetail, addMember, deleteMember, updateMember } from '../../utils/Api';
 import Cookies from "js-cookie";
 import TeamModal from '../../modal/TeamModal';
+import UpdateTeamModal from '../../modal/UpdateTeamModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 
 const Team = () => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [memberToDelete, setMemberToDelete] = useState(null);
+  const [memberToUpdate, setMemberToUpdate] = useState(null);
   const [expandedMember, setExpandedMember] = useState(null);
 
   const userRole = Cookies.get("role") || "";
@@ -46,6 +49,20 @@ const Team = () => {
     }
   };
 
+  const handleUpdateMember = async (id, formData) => {
+    try {
+      const response = await updateMember(id, formData);
+      if (response.data.success) {
+        setShowUpdateModal(false);
+        setMemberToUpdate(null);
+        fetchTeamMembers();
+      }
+    } catch (error) {
+      console.error('Error updating member:', error);
+      alert(error.response?.data?.message || 'Failed to update team member');
+    }
+  };
+
   const handleDeleteMember = (id) => {
     const member = teamMembers.find(m => m._id === id);
     if (member) {
@@ -75,6 +92,7 @@ const Team = () => {
   const canViewTeam = ['admin', 'manager'].includes(userRole);
   const canAddMembers = userRole === 'admin';
   const canDeleteMembers = userRole === 'admin';
+  const canUpdateMembers = userRole === 'admin'; // Only admins can update members
 
   // If user doesn't have permission to view team, show access denied message
   if (!canViewTeam) {
@@ -100,6 +118,71 @@ const Team = () => {
     );
   }
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-8">
+        <div className="max-w-7xl mx-auto animate-pulse">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-3">
+              <div className="bg-gray-200 p-3 rounded-xl w-14 h-14"></div>
+              <div>
+                <div className="h-8 bg-gray-200 rounded w-64 mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-80"></div>
+              </div>
+            </div>
+            <div className="h-12 bg-gray-200 rounded-lg w-48"></div>
+          </div>
+
+          {/* Team Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="bg-white rounded-xl p-6 shadow-md">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="h-4 bg-gray-200 rounded w-32 mb-3"></div>
+                    <div className="h-8 bg-gray-200 rounded w-16"></div>
+                  </div>
+                  <div className="bg-gray-200 p-3 rounded-lg w-12 h-12"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Team Members List */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
+              <div className="h-6 bg-gray-200 rounded w-48"></div>
+            </div>
+            <div className="divide-y divide-gray-200">
+              {[1, 2, 3, 4, 5].map((item) => (
+                <div key={item} className="px-6 py-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 flex-1">
+                      <div className="w-12 h-12 rounded-full bg-gray-200"></div>
+                      <div className="flex-1">
+                        <div className="h-5 bg-gray-200 rounded w-32 mb-2"></div>
+                        <div className="flex items-center gap-4">
+                          <div className="h-4 bg-gray-200 rounded w-48"></div>
+                          <div className="h-4 bg-gray-200 rounded w-20"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 bg-gray-200 rounded-lg"></div>
+                      <div className="w-8 h-8 bg-gray-200 rounded-lg"></div>
+                      <div className="w-8 h-8 bg-gray-200 rounded-lg"></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-8">
       <div className="max-w-7xl mx-auto">
@@ -111,7 +194,7 @@ const Team = () => {
             </div>
             <div>
               <h1 className="text-3xl font-bold text-gray-800">Team Management</h1>
-              <p className="text-gray-600 mt-1">Manage your sales team members</p>
+              <p className="text-gray-600 mt-1">Manage your sales and marketing team members</p>
             </div>
           </div>
           {canAddMembers && (
@@ -200,6 +283,8 @@ const Team = () => {
                             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                               member.role === 'manager' 
                                 ? 'bg-purple-100 text-purple-700' 
+                                : member.role === 'marketing'
+                                ? 'bg-green-100 text-green-700'
                                 : 'bg-blue-100 text-blue-700'
                             }`}>
                               {member.role.charAt(0).toUpperCase() + member.role.slice(1)}
@@ -211,6 +296,17 @@ const Team = () => {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
+                        {canUpdateMembers && member.role !== 'manager' && ( // Only show edit icon for admins and not for managers
+                          <button
+                            onClick={() => {
+                              setMemberToUpdate(member);
+                              setShowUpdateModal(true);
+                            }}
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          >
+                            <Edit className="w-5 h-5" />
+                          </button>
+                        )}
                         {member.assignedLeads?.length > 0 && (
                           <button
                             onClick={() => toggleExpandMember(member._id)}
@@ -223,7 +319,7 @@ const Team = () => {
                             )}
                           </button>
                         )}
-                        {canDeleteMembers && (
+                        {canDeleteMembers && member.role !== 'manager' && ( // Only show delete icon for admins and not for managers
                           <button
                             onClick={() => handleDeleteMember(member._id)}
                             className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
@@ -232,6 +328,7 @@ const Team = () => {
                           </button>
                         )}
                       </div>
+
                     </div>
 
                     {/* Assigned Leads Section */}
@@ -274,6 +371,14 @@ const Team = () => {
         showModal={showAddModal} 
         setShowModal={setShowAddModal} 
         handleAddMember={handleAddMember} 
+      />
+      
+      {/* Update Member Modal - Only shown to admins */}
+      <UpdateTeamModal 
+        showModal={showUpdateModal} 
+        setShowModal={setShowUpdateModal} 
+        handleUpdateMember={handleUpdateMember} 
+        memberToUpdate={memberToUpdate}
       />
       
       {/* Delete Confirmation Modal */}

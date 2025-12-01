@@ -11,6 +11,7 @@ import B2B from "./components/pages/b2b/B2B";
 import Mail from "./components/pages/mail/Mail";
 import MailTracking from "./components/pages/mail/MailTracking";
 import ImgAndFiles from "./components/pages/image&files/ImgAndFiles";
+import SocialMedia from "./components/pages/socialMedia/SocialMedia"; // Add this import
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/mail" element={<Mail/>}/>
           <Route path="/mail-track" element={<MailTracking/>}/>
           <Route path="/img-files" element={<ImgAndFiles/>}/>
+          <Route path="/social-media" element={<SocialMedia/>}/> {/* Add this route */}
         </Route>
       </Routes>
     </>

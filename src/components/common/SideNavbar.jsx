@@ -5,6 +5,7 @@ import { FaBox, FaChevronDown, FaChevronUp, FaUserShield, FaUserTie } from "reac
 import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { TfiGallery } from "react-icons/tfi";
+import { BiSolidVideos } from "react-icons/bi"; // Add this import for social media icon
 import Cookies from "js-cookie";
 import logo from '../../assets/image.png';
 import jifsaImg from '../../assets/jifsa.png';
@@ -108,6 +109,16 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       path: "/b2b",
       icon: <LiaBusinessTimeSolid className="w-5 h-5" />,
     },
+    // Add Social Media item - visible to marketing, manager, sales, and admin users
+    ...(['marketing', 'manager', 'sales', 'admin'].includes(userRole.toLowerCase()) 
+      ? [{
+          id: "social-media",
+          name: "Social Media",
+          path: "/social-media",
+          icon: <BiSolidVideos className="w-5 h-5" />,
+        }]
+      : []
+    ),
     {
       id: "gallery&doucments",
       name: "Gallery & Docs",

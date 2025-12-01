@@ -58,6 +58,8 @@ export const getTeamDetail = () => Api.get(`/team/get-all`);
 
 export const deleteMember = (id) => Api.delete(`/team/${id}`);
 
+export const updateMember = (id, memberData) => Api.put(`/team/${id}`, memberData);
+
 // ============== COMPLAINTS ==============
 export const getComplaint = () => Api.get("/complaint/read-form");
 
@@ -118,3 +120,20 @@ export const deleteImgOrDocs = (id) => Api.delete(`/image/delete/${id}`);
 // ============== Image Sharing ==============
 export const shareImage = (imageId, shareData) => 
   Api.post(`/image/share/${imageId}`, shareData);
+
+// ============== Social Media ==============
+export const createSocialMediaPost = (formData) =>
+  Api.post("/social-media/create", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const getSocialMediaPosts = () => Api.get("/social-media/get-all");
+
+export const getSocialMediaPostById = (id) => Api.get(`/social-media/${id}`);
+
+export const updateSocialMediaPost = (id, formData) =>
+  Api.put(`/social-media/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const deleteSocialMediaPost = (id) => Api.delete(`/social-media/${id}`);

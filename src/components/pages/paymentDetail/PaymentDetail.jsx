@@ -219,8 +219,29 @@ const PaymentDetail = () => {
           </div>
 
           {fetchLoading ? (
-            <div className="flex justify-center items-center py-12">
-              <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <div className="animate-pulse p-6">
+              {/* Header */}
+              <div className="h-8 bg-gray-200 rounded w-1/3 mb-6"></div>
+              
+              {/* Form Section */}
+              <div className="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                <div className="h-6 bg-gray-200 rounded w-1/2 mb-4"></div>
+                <div className="space-y-4">
+                  <div className="h-10 bg-gray-200 rounded"></div>
+                  <div className="h-24 bg-gray-200 rounded"></div>
+                  <div className="h-10 bg-gray-200 rounded"></div>
+                </div>
+              </div>
+              
+              {/* Table Section */}
+              <div className="bg-white rounded-2xl shadow-lg p-6">
+                <div className="h-6 bg-gray-200 rounded w-1/3 mb-4"></div>
+                <div className="space-y-4">
+                  {[1, 2, 3].map((item) => (
+                    <div key={item} className="h-16 bg-gray-200 rounded"></div>
+                  ))}
+                </div>
+              </div>
             </div>
           ) : payments.length === 0 ? (
             <div className="text-center py-12">

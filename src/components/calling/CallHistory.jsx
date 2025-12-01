@@ -109,9 +109,16 @@ const CallHistory = () => {
   if (loading) {
     return (
       <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-        <div className="flex items-center justify-center">
-          <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          <span className="ml-2 text-gray-600">Loading call history...</span>
+        <div className="animate-pulse">
+          {/* Header */}
+          <div className="h-6 bg-gray-200 rounded w-1/3 mb-6"></div>
+          
+          {/* Call History Items */}
+          <div className="space-y-4">
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="h-16 bg-gray-200 rounded"></div>
+            ))}
+          </div>
         </div>
       </div>
     );

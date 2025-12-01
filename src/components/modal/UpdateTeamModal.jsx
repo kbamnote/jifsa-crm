@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Mail, Lock, X } from 'lucide-react';
 
-const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
+const UpdateTeamModal = ({ showModal, setShowModal, handleUpdateMember, memberToUpdate }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -9,18 +9,29 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
     role: 'sales'
   });
 
+  useEffect(() => {
+    if (memberToUpdate) {
+      setFormData({
+        name: memberToUpdate.name || '',
+        email: memberToUpdate.email || '',
+        password: '',
+        role: memberToUpdate.role || 'sales'
+      });
+    }
+  }, [memberToUpdate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAddMember(formData);
+    handleUpdateMember(memberToUpdate._id, formData);
   };
 
-  if (!showModal) return null;
+  if (!showModal || !memberToUpdate) return null;
 
   return (
-    <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-2xl max-w-md w-full">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-          <h3 className="text-xl font-semibold text-gray-800">Add Team Member</h3>
+          <h3 className="text-xl font-semibold text-gray-800">Update Team Member</h3>
           <button
             onClick={() => setShowModal(false)}
             className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -66,7 +77,7 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <div className="flex items-center gap-2">
                 <Lock className="w-4 h-4" />
-                Password
+                Password (leave blank to keep current)
               </div>
             </label>
             <input
@@ -74,7 +85,7 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
+              placeholder="Enter new password"
             />
           </div>
 
@@ -107,7 +118,7 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
               type="submit"
               className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Add Member
+              Update Member
             </button>
           </div>
         </form>
@@ -116,4 +127,4 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
   );
 };
 
-export default TeamModal;
+export default UpdateTeamModal;

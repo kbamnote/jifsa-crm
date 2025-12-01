@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { Download, Share2, X, Mail } from 'lucide-react';
+import { getImgOrDocs, addImgOrDocs, deleteImgOrDocs } from '../../utils/Api';
 import Cookies from 'js-cookie';
-import { addImgOrDocs, getImgOrDocs, deleteImgOrDocs, shareImage } from '../../utils/Api';
 import SuccessModal from '../../modal/SuccessModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 import MailModal from '../../modal/MailModal';
-import { FileText, Image, Download, File, Share2, X } from 'lucide-react';
 
 const ImgAndFiles = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [userRole, setUserRole] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState(null);
-  
-  // Image preview modal states
+  const [imageToDelete, setImageToDelete] = useState(null);
   const [showImagePreview, setShowImagePreview] = useState(false);
-  const [previewImage, setPreviewImage] = useState(null);
-  
-  // Mail modal states
+  const [previewImage, setPreviewImage] = useState('');
   const [showMailModal, setShowMailModal] = useState(false);
   const [mailAttachment, setMailAttachment] = useState(null);
   const [imageToShare, setImageToShare] = useState(null);
 
+  const userRole = Cookies.get("role") || "";
+  const userName = Cookies.get("name") || "";
+  const userEmail = Cookies.get("email") || "";
+
   useEffect(() => {
-    const role = Cookies.get('role');
-    setUserRole(role || '');
     fetchImages();
   }, []);
 
@@ -36,9 +33,7 @@ const ImgAndFiles = () => {
     try {
       setLoading(true);
       const response = await getImgOrDocs();
-      if (response.data.success) {
-        setImages(response.data.data);
-      }
+      setImages(response.data.data);
     } catch (error) {
       console.error('Error fetching images:', error);
     } finally {
@@ -46,85 +41,68 @@ const ImgAndFiles = () => {
     }
   };
 
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
-
   const handleNameChange = (e) => {
     setFileName(e.target.value);
   };
 
-  // ✅ Detect file type from URL instead of name
-  const isImageFile = (fileUrl) => {
-    if (!fileUrl) return false;
-    const extension = fileUrl.split('.').pop().toLowerCase();
-    return ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(extension);
-  };
-
-  // ✅ Return icon based on URL file extension
-  const getFileIcon = (fileUrl) => {
-    if (!fileUrl) return <File className="w-8 h-8 text-gray-500" />;
-    const extension = fileUrl.split('.').pop().toLowerCase();
-    if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(extension)) {
-      return <Image className="w-8 h-8 text-blue-500" />;
-    } else if (['pdf'].includes(extension)) {
-      return <FileText className="w-8 h-8 text-red-500" />;
-    } else {
-      return <File className="w-8 h-8 text-gray-500" />;
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    
+    // Auto-fill name if empty
+    if (file && !fileName) {
+      setFileName(file.name.split('.')[0]);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedFile || !fileName) {
-      alert('Please provide both file and name');
+    if (!selectedFile) {
+      setSuccessMessage('Please select a file to upload');
+      setShowSuccessModal(true);
       return;
     }
 
-    try {
-      const formData = new FormData();
-      formData.append('name', fileName);
-      formData.append('image', selectedFile);
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+    formData.append('name', fileName);
+    formData.append('createdBy', userName);
+    formData.append('creatorEmail', userEmail);
+    formData.append('creatorRole', userRole);
 
-      const response = await addImgOrDocs(formData);
-      if (response.data.success) {
-        setSuccessMessage('File uploaded successfully');
-        setShowSuccessModal(true);
-        setSelectedFile(null);
-        setFileName('');
-        fetchImages(); // Refresh the image list
-      }
+    try {
+      await addImgOrDocs(formData);
+      setSuccessMessage('File uploaded successfully!');
+      setShowSuccessModal(true);
+      setFileName('');
+      setSelectedFile(null);
+      e.target.reset();
+      fetchImages(); // Refresh the image list
     } catch (error) {
       console.error('Error uploading file:', error);
-      alert('Error uploading file');
+      setSuccessMessage(error.response?.data?.message || 'Failed to upload file');
+      setShowSuccessModal(true);
     }
   };
 
   const handleDelete = (id) => {
-    if (userRole !== 'admin') {
-      alert('Only admin users can delete files');
-      return;
-    }
-    setItemToDelete(id);
+    setImageToDelete(id);
     setShowDeleteModal(true);
   };
 
   const confirmDelete = async () => {
-    if (!itemToDelete) return;
-
     try {
-      const response = await deleteImgOrDocs(itemToDelete);
-      if (response.data.success) {
-        setSuccessMessage('File deleted successfully');
-        setShowSuccessModal(true);
-        fetchImages(); // Refresh the image list
-      }
+      await deleteImgOrDocs(imageToDelete);
+      setSuccessMessage('File deleted successfully!');
+      setShowSuccessModal(true);
+      fetchImages(); // Refresh the image list
     } catch (error) {
       console.error('Error deleting file:', error);
-      alert('Error deleting file');
+      setSuccessMessage(error.response?.data?.message || 'Failed to delete file');
+      setShowSuccessModal(true);
     } finally {
       setShowDeleteModal(false);
-      setItemToDelete(null);
+      setImageToDelete(null);
     }
   };
 
@@ -132,7 +110,6 @@ const ImgAndFiles = () => {
     const link = document.createElement('a');
     link.href = url;
     link.download = name;
-    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -154,6 +131,83 @@ const ImgAndFiles = () => {
     });
     setShowMailModal(true);
   };
+
+  // Helper function to determine if a file is an image
+  const isImageFile = (url) => {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'];
+    return imageExtensions.some(ext => url.toLowerCase().includes(ext));
+  };
+
+  // Helper function to get appropriate file icon
+  const getFileIcon = (url) => {
+    if (url.includes('.pdf')) {
+      return (
+        <div className="bg-red-100 p-3 rounded-lg">
+          <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+          </svg>
+        </div>
+      );
+    } else if (url.includes('.doc') || url.includes('.docx')) {
+      return (
+        <div className="bg-blue-100 p-3 rounded-lg">
+          <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+          </svg>
+        </div>
+      );
+    } else {
+      return (
+        <div className="bg-gray-100 p-3 rounded-lg">
+          <svg className="w-8 h-8 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
+          </svg>
+        </div>
+      );
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="p-4 md:p-6">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded w-64 mb-6"></div>
+
+          {/* Upload Form */}
+          <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-md">
+            <div className="h-6 bg-gray-200 rounded w-48 mb-4"></div>
+            <div className="space-y-4">
+              <div>
+                <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded"></div>
+              </div>
+              <div>
+                <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                <div className="h-10 bg-gray-200 rounded"></div>
+              </div>
+              <div className="h-10 bg-gray-200 rounded w-32"></div>
+            </div>
+          </div>
+
+          {/* Gallery Section */}
+          <div>
+            <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6">
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <div key={item} className="border rounded-lg overflow-hidden shadow-md h-48">
+                  <div className="bg-gray-200 h-32 w-full"></div>
+                  <div className="p-3">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 md:p-6">
@@ -239,6 +293,7 @@ const ImgAndFiles = () => {
                   </p>
                   <p className="text-xs text-gray-500 truncate">
                     Role: {image.creatorRole}
+                    {image.isSocialMedia && " (Social Media)"}
                   </p>
                   <div className="mt-2 md:mt-3 flex justify-between items-center flex-grow">
                     <span className="text-xs text-gray-500">
@@ -259,7 +314,7 @@ const ImgAndFiles = () => {
                       >
                         <Share2 className="w-4 h-4 md:w-5 md:h-5" />
                       </button>
-                      {userRole === 'admin' && (
+                      {userRole === 'admin' && !image.isSocialMedia && (
                         <button
                           onClick={() => handleDelete(image._id)}
                           className="p-1 text-gray-600 hover:text-red-600"

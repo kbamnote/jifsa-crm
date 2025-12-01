@@ -128,10 +128,40 @@ const EliteBim = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading Elite-BIM enquiries...</p>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+        <div className="animate-pulse">
+          {/* Header */}
+          <div className="mb-6">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+          </div>
+          
+          {/* Tabs */}
+          <div className="mb-6">
+            <div className="h-10 bg-gray-200 rounded-lg w-32"></div>
+          </div>
+          
+          {/* Search */}
+          <div className="mb-6">
+            <div className="h-12 bg-gray-200 rounded-lg w-1/3"></div>
+          </div>
+          
+          {/* Table */}
+          <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="h-12 bg-gray-200"></div>
+            <div className="divide-y divide-gray-200">
+              {[1, 2, 3, 4, 5].map((item) => (
+                <div key={item} className="h-16 bg-gray-100"></div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Pagination */}
+          <div className="mt-6 flex justify-between">
+            <div className="h-10 bg-gray-200 rounded w-24"></div>
+            <div className="h-4 bg-gray-200 rounded w-32"></div>
+            <div className="h-10 bg-gray-200 rounded w-24"></div>
+          </div>
         </div>
       </div>
     );
