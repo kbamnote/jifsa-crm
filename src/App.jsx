@@ -11,7 +11,8 @@ import B2B from "./components/pages/b2b/B2B";
 import Mail from "./components/pages/mail/Mail";
 import MailTracking from "./components/pages/mail/MailTracking";
 import ImgAndFiles from "./components/pages/image&files/ImgAndFiles";
-import SocialMedia from "./components/pages/socialMedia/SocialMedia"; // Add this import
+import SocialMedia from "./components/pages/socialMedia/SocialMedia"; 
+import EEETechnologies from './components/pages/dashboard/products/eeeTechnologies/EEETechnologies';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/jifsa" element={<JIFSA />} />
           <Route path="/bim" element={<EliteBim />} />
+          <Route path="/eee" element={<EEETechnologies/>}/>
           <Route path="/billing-details" element={<PaymentDetail/>}/>
           <Route path="/team" element={<Team/>}/>
           <Route path="/lead-assigned" element={<LeadAssigned/>}/>

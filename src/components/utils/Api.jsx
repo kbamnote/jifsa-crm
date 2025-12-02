@@ -137,3 +137,12 @@ export const updateSocialMediaPost = (id, formData) =>
   });
 
 export const deleteSocialMediaPost = (id) => Api.delete(`/social-media/${id}`);
+
+// ============== Enrollments ==============
+export const getEnrollments = () => Api.get("/enrollment/get-all");
+
+export const updateEnrollmentStatus = (id, status) => Api.patch(`/enrollment/${id}/status`, { status });
+
+export const deleteEnrollment = (id) => Api.delete(`/enrollment/${id}`);
+
+export default Api;

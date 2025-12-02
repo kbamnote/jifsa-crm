@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import logo from '../../assets/image.png';
 import jifsaImg from '../../assets/jifsa.png';
 import bimImg from '../../assets/bim.png';
+import eeeImg from '../../assets/eee.png'
 
 const SideNavbar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
@@ -57,6 +58,12 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
           name: "Elite BIM",
           path: "/bim",
           image: bimImg,
+        },
+        {
+          id: "eeetechnologies",
+          name: "EEE Technologies",
+          path: "/eee",
+          image: eeeImg,
         },
       ],
     },
@@ -173,7 +180,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       {/* Mobile backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
+          className="fixed inset-0 bg-opacity-50 z-20 lg:hidden"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -196,7 +203,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
         </div>
 
         {/* Menu */}
-        <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+        <nav className="flex-1  py-6 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             if (item.isDropdown) {
               const isDropdownOpen = item.id === "products" ? isProductOpen : isMailOpen;
