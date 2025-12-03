@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { getDetail, getEnrollments, updateEnrollmentStatus, deleteEnrollment, deleteForm } from '../../../../utils/Api';
-import { Search, Users, ChevronLeft, ChevronRight, Eye, Calendar, Mail, Phone, User, GraduationCap, MessageSquare, X, Save } from "lucide-react";
+import React, { useState, useEffect, useRef } from 'react';
+import { getDetail, getEnrollments, updateEnrollmentStatus, updateEnrollmentDetails, deleteEnrollment, deleteForm } from '../../../../utils/Api';
+import { Search, Users, ChevronLeft, ChevronRight, Eye, Calendar, Mail, Phone, User, GraduationCap, MessageSquare, X, Save, Paperclip, Upload } from "lucide-react";
 import SuccessModal from '../../../../modal/SuccessModal';
 import DeleteConfirmationModal from '../../../../modal/DeleteConfirmationModal';
 import ErrorModal from '../../../../modal/ErrorModal';
+import MailModal from '../../../../modal/MailModal';
+import FileSelectionModal from '../../../../modal/FileSelectionModal';
 
 const EEETechnologies = () => {
   const [hasError, setHasError] = useState(false);
@@ -59,6 +61,14 @@ const EEETechnologies = () => {
   const [showModal, setShowModal] = useState(false);
   const [updatedStatus, setUpdatedStatus] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
+  
+  // State for enrollment update fields
+  const [enrollmentUpdateData, setEnrollmentUpdateData] = useState({
+    age: '',
+    gender: '',
+    location: '',
+    qualification: ''
+  });
   const [sortField, setSortField] = useState("createdAt");
   const [sortDirection, setSortDirection] = useState("desc");
   const [activeTab, setActiveTab] = useState("Enquiry"); // Enquiry, Enrollment
@@ -71,6 +81,16 @@ const EEETechnologies = () => {
   const [deleteItemId, setDeleteItemId] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorModalMessage, setErrorModalMessage] = useState('');
+  
+  // Added state for mail modal
+  const [showMailModal, setShowMailModal] = useState(false);
+  const [recordToShare, setRecordToShare] = useState(null);
+  const [selectedLeads, setSelectedLeads] = useState([]);
+  
+  // Added state for file selection modal
+  const [showFileSelectionModal, setShowFileSelectionModal] = useState(false);
+  const [mailAttachments, setMailAttachments] = useState([]);
+  const fileInputRef = useRef(null);
 
   // Sorting helper
   const sortData = (dataToSort, field, direction) => {
@@ -266,6 +286,60 @@ const EEETechnologies = () => {
     setShowModal(true);
   };
 
+  // Added handleShare function
+  const handleShare = (record) => {
+    setRecordToShare(record);
+    // Set the selected lead as the only lead to show in the modal
+    setSelectedLeads([record]);
+    setShowMailModal(true);
+  };
+  
+  // Function to handle attachment selection
+  const handleSelectAttachment = () => {
+    setShowFileSelectionModal(true);
+  };
+  
+  // Function to handle file selection from gallery
+  const handleFileSelectFromGallery = (file) => {
+    // Create attachment object similar to ImgAndFiles.jsx
+    const attachment = {
+      name: file.name,
+      url: file.imageUrl,
+      isImage: isImageFile(file.imageUrl)
+    };
+    setMailAttachments([attachment]);
+    setShowFileSelectionModal(false);
+  };
+  
+  // Helper function to determine if a file is an image (copied from ImgAndFiles.jsx)
+  const isImageFile = (url) => {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'];
+    return imageExtensions.some(ext => url.toLowerCase().includes(ext));
+  };
+  
+  // Function to handle file upload from device
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Store the actual file object so it can be sent via FormData
+      const attachment = {
+        name: file.name,
+        file: file, // Store the actual file object
+        url: URL.createObjectURL(file), // Temporary URL for preview
+        isImage: file.type.startsWith('image/')
+      };
+      setMailAttachments([attachment]);
+      
+      // Reset the file input
+      e.target.value = '';
+    }
+  };
+  
+  // Function to remove attachment
+  const removeAttachment = () => {
+    setMailAttachments([]);
+  };
+
   const handleDeleteEnquiry = async (id) => {
     if (!id) {
       setErrorModalMessage('Cannot delete: Invalid record ID');
@@ -329,6 +403,57 @@ const EEETechnologies = () => {
       setIsUpdating(false);
     }
   };
+  
+  // Handle enrollment details update
+  const handleUpdateEnrollmentDetails = async () => {
+    if (!selectedRecord || !selectedRecord._id) {
+      setErrorModalMessage('No record selected');
+      setShowErrorModal(true);
+      return;
+    }
+    
+    try {
+      setIsUpdating(true);
+      await updateEnrollmentDetails(selectedRecord._id, enrollmentUpdateData);
+      
+      // Update the enrollment data in state
+      setEnrollmentData(enrollmentData.map(item => 
+        item._id === selectedRecord._id ? { ...item, ...enrollmentUpdateData } : item
+      ));
+      
+      // Also update the selected record
+      setSelectedRecord({ ...selectedRecord, ...enrollmentUpdateData });
+      
+      setSuccessMessage('Enrollment details updated successfully');
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error('Error updating enrollment details:', error);
+      setErrorModalMessage('Failed to update enrollment details');
+      setShowErrorModal(true);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+  
+  // Handle enrollment data change
+  const handleEnrollmentDataChange = (field, value) => {
+    setEnrollmentUpdateData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+  
+  // Initialize enrollment update data when modal opens
+  useEffect(() => {
+    if (selectedRecord && activeTab === 'Enrollment') {
+      setEnrollmentUpdateData({
+        age: selectedRecord.age || '',
+        gender: selectedRecord.gender || '',
+        location: selectedRecord.location || '',
+        qualification: selectedRecord.qualification || ''
+      });
+    }
+  }, [selectedRecord, activeTab]);
 
   const handleDeleteEnrollment = async (id) => {
     if (!id) {
@@ -514,6 +639,15 @@ const EEETechnologies = () => {
                     <span>View</span>
                   </div>
                 </button>
+                <button
+                  onClick={() => handleShare(item)}
+                  className="text-green-600 hover:text-green-800 hover:underline"
+                >
+                  <div className="flex items-center space-x-1">
+                    <Mail className="w-4 h-4" />
+                    <span>Mail</span>
+                  </div>
+                </button>
                 {item._id && (
                   <button
                     onClick={() => handleDeleteEnquiry(item._id)}
@@ -578,6 +712,15 @@ const EEETechnologies = () => {
                   <div className="flex items-center space-x-1">
                     <Eye className="w-4 h-4" />
                     <span>View</span>
+                  </div>
+                </button>
+                <button
+                  onClick={() => handleShare(item)}
+                  className="text-green-600 hover:text-green-800 hover:underline"
+                >
+                  <div className="flex items-center space-x-1">
+                    <Mail className="w-4 h-4" />
+                    <span>Mail</span>
                   </div>
                 </button>
                 {item._id && (
@@ -771,6 +914,22 @@ const EEETechnologies = () => {
                             <span>{selectedRecord.studentPhone || 'N/A'}</span>
                           </div>
                           <div className="flex items-center space-x-2">
+                            <span className="font-medium">Age:</span>
+                            <span>{selectedRecord.age || 'N/A'}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="font-medium">Gender:</span>
+                            <span>{selectedRecord.gender || 'N/A'}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="font-medium">Location:</span>
+                            <span>{selectedRecord.location || 'N/A'}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="font-medium">Qualification:</span>
+                            <span>{selectedRecord.qualification || 'N/A'}</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
                             <span className="font-medium">Status:</span>
                             <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                               selectedRecord.status === 'confirmed' ? 'bg-green-100 text-green-800' :
@@ -819,6 +978,73 @@ const EEETechnologies = () => {
                               </button>
                             </div>
                           </div>
+                          
+                          {/* Enrollment details update form */}
+                          <div className="mt-6 pt-4 border-t border-gray-200">
+                            <h3 className="text-lg font-medium text-gray-800 mb-3">Update Enrollment Details</h3>
+                            <div className="space-y-3">
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                                <input
+                                  type="number"
+                                  value={enrollmentUpdateData.age}
+                                  onChange={(e) => handleEnrollmentDataChange('age', e.target.value)}
+                                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                  placeholder="Enter age"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                                <select
+                                  value={enrollmentUpdateData.gender}
+                                  onChange={(e) => handleEnrollmentDataChange('gender', e.target.value)}
+                                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                  <option value="">Select Gender</option>
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                                  <option value="Other">Other</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                                <input
+                                  type="text"
+                                  value={enrollmentUpdateData.location}
+                                  onChange={(e) => handleEnrollmentDataChange('location', e.target.value)}
+                                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                  placeholder="Enter location"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Qualification</label>
+                                <input
+                                  type="text"
+                                  value={enrollmentUpdateData.qualification}
+                                  onChange={(e) => handleEnrollmentDataChange('qualification', e.target.value)}
+                                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                  placeholder="Enter qualification"
+                                />
+                              </div>
+                              <button
+                                onClick={handleUpdateEnrollmentDetails}
+                                disabled={isUpdating}
+                                className="flex items-center space-x-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                              >
+                                {isUpdating ? (
+                                  <>
+                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                    <span>Updating...</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Save className="w-4 h-4" />
+                                    <span>Update Details</span>
+                                  </>
+                                )}
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -848,6 +1074,25 @@ const EEETechnologies = () => {
               setShowModal={setShowErrorModal} 
               message={errorModalMessage} 
             />
+            
+            {/* Added MailModal */}
+            <MailModal
+              showModal={showMailModal}
+              setShowModal={setShowMailModal}
+              attachmentFile={mailAttachments.length > 0 ? mailAttachments[0] : null}
+              imageToShare={recordToShare}
+              selectedLeads={selectedLeads}
+              onAttachmentClick={handleSelectAttachment}
+              mode="send"
+            />
+            
+            {/* File selection modal */}
+            {showFileSelectionModal && (
+              <FileSelectionModal 
+                onClose={() => setShowFileSelectionModal(false)}
+                onFileSelect={handleFileSelectFromGallery}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getDetail, shareImage } from "../utils/Api";
+import { getDetail, shareImage, sendGroupMail } from "../utils/Api";
 import { FaEnvelope, FaPaperPlane, FaUser, FaCheckSquare, FaSquare, FaSearch, FaPaperclip, FaTimes } from "react-icons/fa";
 import Cookies from "js-cookie";
 
-const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) => {
+const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare, selectedLeads: propSelectedLeads, onAttachmentClick, mode = 'share' }) => {
   const [leads, setLeads] = useState([]);
   const [filteredLeads, setFilteredLeads] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,43 +27,59 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
 
   // Fetch leads
   const fetchLeads = async () => {
-    try {
-      setLoading(true);
-      const response = await getDetail();
-      const allLeads = response.data || [];
-      
-      // For sales persons, only show leads assigned to them
-      let filteredLeads = allLeads;
-      if (userRole.toLowerCase() === 'sales') {
-        filteredLeads = allLeads.filter(lead => {
-          // Check if lead is assigned to current user
-          if (!lead.assignedTo) return false;
-          
-          // Handle both string and object formats for assignedTo
-          if (typeof lead.assignedTo === 'string') {
-            return lead.assignedTo.toLowerCase() === userEmail.toLowerCase();
-          } else if (typeof lead.assignedTo === 'object' && lead.assignedTo.email) {
-            return lead.assignedTo.email.toLowerCase() === userEmail.toLowerCase();
-          }
-          
-          return false;
-        });
+    // Only fetch leads if we don't have pre-selected leads
+    if (!propSelectedLeads || propSelectedLeads.length === 0) {
+      try {
+        setLoading(true);
+        const response = await getDetail();
+        const allLeads = response.data || [];
+        
+        // For sales persons, only show leads assigned to them
+        let filteredLeads = allLeads;
+        if (userRole.toLowerCase() === 'sales') {
+          filteredLeads = allLeads.filter(lead => {
+            // Check if lead is assigned to current user
+            if (!lead.assignedTo) return false;
+            
+            // Handle both string and object formats for assignedTo
+            if (typeof lead.assignedTo === 'string') {
+              return lead.assignedTo.toLowerCase() === userEmail.toLowerCase();
+            } else if (typeof lead.assignedTo === 'object' && lead.assignedTo.email) {
+              return lead.assignedTo.email.toLowerCase() === userEmail.toLowerCase();
+            }
+            
+            return false;
+          });
+        }
+        
+        setLeads(filteredLeads);
+        setFilteredLeads(filteredLeads);
+      } catch (error) {
+        console.error("Error fetching leads:", error);
+        setErrorMessage("Failed to load leads. Please try again.");
+        setShowError(true);
+      } finally {
+        setLoading(false);
       }
-      
-      setLeads(filteredLeads);
-      setFilteredLeads(filteredLeads);
-    } catch (error) {
-      console.error("Error fetching leads:", error);
-      setErrorMessage("Failed to load leads. Please try again.");
-      setShowError(true);
-    } finally {
-      setLoading(false);
     }
   };
 
   useEffect(() => {
     if (showModal) {
-      fetchLeads();
+      // If selectedLeads prop is provided, use it directly
+      if (propSelectedLeads && propSelectedLeads.length > 0) {
+        // Set the provided leads as both the full list and filtered list
+        setLeads(propSelectedLeads);
+        setFilteredLeads(propSelectedLeads);
+        // Pre-select the leads
+        setSelectedLeads(propSelectedLeads.map(lead => lead._id || lead.id));
+        // No need to show loading since we already have the leads
+        setLoading(false);
+      } else {
+        // Otherwise, fetch all leads as before
+        fetchLeads();
+      }
+      
       // Initialize with the attachment file if provided
       if (attachmentFile) {
         // For URL-based files, we just store the reference
@@ -71,7 +87,7 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
         setAttachments([attachmentFile]);
       }
     }
-  }, [showModal, attachmentFile]);
+  }, [showModal, attachmentFile, propSelectedLeads]);
 
   // Filter leads based on search term
   useEffect(() => {
@@ -99,21 +115,33 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
 
   // Toggle lead selection
   const toggleLeadSelection = (leadId) => {
-    if (selectedLeads.includes(leadId)) {
-      setSelectedLeads(selectedLeads.filter(id => id !== leadId));
+    // If we have pre-selected leads from props, don't allow deselection
+    if (propSelectedLeads && propSelectedLeads.length > 0) {
+      // Only allow selection, not deselection
+      if (!selectedLeads.includes(leadId)) {
+        setSelectedLeads([...selectedLeads, leadId]);
+      }
     } else {
-      setSelectedLeads([...selectedLeads, leadId]);
+      // Normal behavior for multi-selection
+      if (selectedLeads.includes(leadId)) {
+        setSelectedLeads(selectedLeads.filter(id => id !== leadId));
+      } else {
+        setSelectedLeads([...selectedLeads, leadId]);
+      }
     }
   };
 
   // Toggle select all
   const toggleSelectAll = () => {
-    if (selectAll) {
-      setSelectedLeads([]);
-    } else {
-      setSelectedLeads(filteredLeads.map(lead => lead._id));
+    // Only allow select all if we don't have pre-selected leads
+    if (!propSelectedLeads || propSelectedLeads.length === 0) {
+      if (selectAll) {
+        setSelectedLeads([]);
+      } else {
+        setSelectedLeads(filteredLeads.map(lead => lead._id));
+      }
+      setSelectAll(!selectAll);
     }
-    setSelectAll(!selectAll);
   };
 
   // Send mail
@@ -134,8 +162,12 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
       return;
     }
     
-    // Use the shareImage API for image sharing
-    await handleShareImage();
+    // Use the appropriate API based on mode
+    if (mode === 'share' && imageToShare) {
+      await handleShareImage();
+    } else {
+      await handleSendGroupMail();
+    }
   };
 
   // Handle image sharing
@@ -168,6 +200,64 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
     } catch (error) {
       console.error("Error sharing image:", error);
       setErrorMessage(error.response?.data?.message || "Failed to share image. Please try again.");
+      setShowError(true);
+    } finally {
+      setSending(false);
+    }
+  };
+  
+  // Handle sending group mail
+  const handleSendGroupMail = async () => {
+    setSending(true);
+    setShowError(false);
+    
+    try {
+      // Create FormData object
+      const formData = new FormData();
+      
+      // Append leadIds as array
+      selectedLeads.forEach(id => {
+        formData.append('leadIds[]', id);
+      });
+      
+      // Append subject and message
+      formData.append('subject', mailData.subject);
+      formData.append('message', mailData.message);
+      
+      // If we have an attachment file, we need to handle it
+      // For URL-based attachments, we'll pass the URL in the request
+      if (attachments.length > 0) {
+        if (attachments[0].url && !attachments[0].file) {
+          // This is a URL-based attachment
+          formData.append('attachmentUrls[]', attachments[0].url);
+          formData.append('attachmentNames[]', attachments[0].name);
+        } else if (attachments[0].file) {
+          // This is a file attachment
+          formData.append('attachments', attachments[0].file);
+        } else if (attachments[0] instanceof File) {
+          // This is a file attachment (fallback)
+          formData.append('attachments', attachments[0]);
+        }
+      }
+      
+      await sendGroupMail(formData);
+      
+      // Reset form
+      setMailData({
+        subject: "",
+        message: ""
+      });
+      setSelectedLeads([]);
+      setSelectAll(false);
+      
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+        setShowModal(false);
+      }, 2000);
+    } catch (error) {
+      console.error("Error sending group mail:", error);
+      setErrorMessage(error.response?.data?.message || "Failed to send mail. Please try again.");
       setShowError(true);
     } finally {
       setSending(false);
@@ -260,6 +350,40 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
                         />
                       </div>
                       
+                      {/* Attachment Section */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Attachment
+                        </label>
+                        <div className="flex items-center space-x-2">
+                          {attachments.length > 0 ? (
+                            <div className="flex items-center justify-between bg-gray-100 p-2 rounded w-full">
+                              <div className="flex items-center space-x-2">
+                                <FaPaperclip className="text-gray-500" />
+                                <span className="text-sm truncate">{attachments[0].name || "Attached File"}</span>
+                              </div>
+                              <button 
+                                onClick={() => setAttachments([])}
+                                className="text-red-500 hover:text-red-700"
+                              >
+                                <FaTimes className="w-4 h-4" />
+                              </button>
+                            </div>
+                          ) : (
+                            <button
+                              type="button"
+                              className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm"
+                              onClick={onAttachmentClick}
+                            >
+                              <div className="flex items-center space-x-1">
+                                <FaPaperclip className="w-4 h-4" />
+                                <span>Select Attachment</span>
+                              </div>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                      
                       {/* Attachment Preview */}
                       {attachments.length > 0 && (
                         <div>
@@ -315,9 +439,14 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
                   <div className="p-4 border-b border-gray-200 bg-gray-50">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                       <div>
-                        <h2 className="text-lg font-bold text-gray-800">Select Leads</h2>
+                        <h2 className="text-lg font-bold text-gray-800">
+                          {propSelectedLeads && propSelectedLeads.length > 0 ? 'Lead Selected' : 'Select Leads'}
+                        </h2>
                         <p className="text-gray-600 text-sm">
-                          {selectedLeads.length} of {filteredLeads.length} leads selected
+                          {propSelectedLeads && propSelectedLeads.length > 0 
+                            ? `${selectedLeads.length} of 1 lead selected`
+                            : `${selectedLeads.length} of ${filteredLeads.length} leads selected`
+                          }
                         </p>
                       </div>
                       
@@ -339,7 +468,12 @@ const MailModal = ({ showModal, setShowModal, attachmentFile, imageToShare }) =>
                   <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
                     <button
                       onClick={toggleSelectAll}
-                      className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-800"
+                      className={`flex items-center gap-2 text-sm font-medium hover:text-blue-800 ${
+                        propSelectedLeads && propSelectedLeads.length > 0 
+                          ? 'text-gray-400 cursor-not-allowed' 
+                          : 'text-blue-600 hover:text-blue-800'
+                      }`}
+                      disabled={propSelectedLeads && propSelectedLeads.length > 0}
                     >
                       {selectAll ? (
                         <FaCheckSquare className="w-4 h-4" />

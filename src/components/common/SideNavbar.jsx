@@ -132,6 +132,12 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       path: "/img-files",
       icon: <TfiGallery className="w-5 h-5" />,
     },
+    {
+      id: "company-import",
+      name: "Companies Data",
+      path: "/company-import",
+      icon: <FaBox className="w-5 h-5" />,
+    },
   ];
 
   const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";

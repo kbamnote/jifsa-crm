@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getAdmissionForm, getComplaint, getDetail } from "../../../../utils/Api";
-import { Search, Users, ChevronLeft, ChevronRight, Eye, Calendar, Mail, Phone, User, GraduationCap, MessageSquare } from "lucide-react";
+import { Search, Users, ChevronLeft, ChevronRight, Eye, Calendar, Mail, Phone, User, GraduationCap, MessageSquare, Paperclip, Upload, X } from "lucide-react";
 import ClientModal from "../../../../modal/ClientModal";
+import MailModal from "../../../../modal/MailModal";
+import FileSelectionModal from "../../../../modal/FileSelectionModal";
 
 const JIFSA = () => {
   const [enquiryData, setEnquiryData] = useState([]);
@@ -18,6 +20,14 @@ const JIFSA = () => {
   const [sortDirection, setSortDirection] = useState("desc");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Enquiry"); // Enquiry, Complaint, Admission
+  
+  // Added state for mail modal
+  const [showMailModal, setShowMailModal] = useState(false);
+  const [recordToShare, setRecordToShare] = useState(null);
+  const [selectedLeads, setSelectedLeads] = useState([]);
+  
+  // Ref for file input
+  const fileInputRef = useRef(null);
 
   // Sorting helper
   const sortData = (dataToSort, field, direction) => {
@@ -139,6 +149,64 @@ const JIFSA = () => {
   const handleViewDetails = (record) => {
     setSelectedRecord(record);
     setShowModal(true);
+  };
+
+  // Added handleShare function
+  const handleShare = (record) => {
+    setRecordToShare(record);
+    // Set the selected lead as the only lead to show in the modal
+    setSelectedLeads([record]);
+    setShowMailModal(true);
+  };
+  
+  // Added state for file selection modal
+  const [showFileSelectionModal, setShowFileSelectionModal] = useState(false);
+  const [mailAttachments, setMailAttachments] = useState([]);
+  
+  // Function to handle attachment selection
+  const handleSelectAttachment = () => {
+    setShowFileSelectionModal(true);
+  };
+  
+  // Function to handle file selection from gallery
+  const handleFileSelectFromGallery = (file) => {
+    // Create attachment object similar to ImgAndFiles.jsx
+    const attachment = {
+      name: file.name,
+      url: file.imageUrl,
+      isImage: isImageFile(file.imageUrl)
+    };
+    setMailAttachments([attachment]);
+    setShowFileSelectionModal(false);
+  };
+  
+  // Helper function to determine if a file is an image (copied from ImgAndFiles.jsx)
+  const isImageFile = (url) => {
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'];
+    return imageExtensions.some(ext => url.toLowerCase().includes(ext));
+  };
+  
+  // Function to handle file upload from device
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Store the actual file object so it can be sent via FormData
+      const attachment = {
+        name: file.name,
+        file: file, // Store the actual file object
+        url: URL.createObjectURL(file), // Temporary URL for preview
+        isImage: file.type.startsWith('image/')
+      };
+      setMailAttachments([attachment]);
+      
+      // Reset the file input
+      e.target.value = '';
+    }
+  };
+  
+  // Function to remove attachment
+  const removeAttachment = () => {
+    setMailAttachments([]);
   };
 
   const formatDateShort = (dateString) => {
@@ -303,15 +371,26 @@ const JIFSA = () => {
             {formatDateShort(item.createdAt)}
           </td>
           <td className="px-4 py-3">
-            <button
-              onClick={() => handleViewDetails(item)}
-              className="text-indigo-600 hover:text-indigo-800 hover:underline"
-            >
-              <div className="flex items-center space-x-1">
-                <Eye className="w-4 h-4" />
-                <span>View</span>
-              </div>
-            </button>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => handleViewDetails(item)}
+                className="text-indigo-600 hover:text-indigo-800 hover:underline"
+              >
+                <div className="flex items-center space-x-1">
+                  <Eye className="w-4 h-4" />
+                  <span>View</span>
+                </div>
+              </button>
+              <button
+                onClick={() => handleShare(item)}
+                className="text-green-600 hover:text-green-800 hover:underline"
+              >
+                <div className="flex items-center space-x-1">
+                  <Mail className="w-4 h-4" />
+                  <span>Mail</span>
+                </div>
+              </button>
+            </div>
           </td>
         </tr>
       ));
@@ -355,15 +434,26 @@ const JIFSA = () => {
             {formatDateShort(item.createdAt)}
           </td>
           <td className="px-4 py-3">
-            <button
-              onClick={() => handleViewDetails(item)}
-              className="text-indigo-600 hover:text-indigo-800 hover:underline"
-            >
-              <div className="flex items-center space-x-1">
-                <Eye className="w-4 h-4" />
-                <span>View</span>
-              </div>
-            </button>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => handleViewDetails(item)}
+                className="text-indigo-600 hover:text-indigo-800 hover:underline"
+              >
+                <div className="flex items-center space-x-1">
+                  <Eye className="w-4 h-4" />
+                  <span>View</span>
+                </div>
+              </button>
+              <button
+                onClick={() => handleShare(item)}
+                className="text-green-600 hover:text-green-800 hover:underline"
+              >
+                <div className="flex items-center space-x-1">
+                  <Mail className="w-4 h-4" />
+                  <span>Mail</span>
+                </div>
+              </button>
+            </div>
           </td>
         </tr>
       ));
@@ -415,15 +505,26 @@ const JIFSA = () => {
             {formatDateShort(item.createdAt)}
           </td>
           <td className="px-4 py-3">
-            <button
-              onClick={() => handleViewDetails(item)}
-              className="text-indigo-600 hover:text-indigo-800 hover:underline"
-            >
-              <div className="flex items-center space-x-1">
-                <Eye className="w-4 h-4" />
-                <span>View</span>
-              </div>
-            </button>
+            <div className="flex space-x-2">
+              <button
+                onClick={() => handleViewDetails(item)}
+                className="text-indigo-600 hover:text-indigo-800 hover:underline"
+              >
+                <div className="flex items-center space-x-1">
+                  <Eye className="w-4 h-4" />
+                  <span>View</span>
+                </div>
+              </button>
+              <button
+                onClick={() => handleShare(item)}
+                className="text-green-600 hover:text-green-800 hover:underline"
+              >
+                <div className="flex items-center space-x-1">
+                  <Mail className="w-4 h-4" />
+                  <span>Mail</span>
+                </div>
+              </button>
+            </div>
           </td>
         </tr>
       ));
@@ -583,6 +684,25 @@ const JIFSA = () => {
               selectedRecord={selectedRecord}
               setShowModal={setShowModal}
             />
+            
+            {/* Added MailModal */}
+            <MailModal
+              showModal={showMailModal}
+              setShowModal={setShowMailModal}
+              attachmentFile={mailAttachments.length > 0 ? mailAttachments[0] : null}
+              imageToShare={recordToShare}
+              selectedLeads={selectedLeads}
+              onAttachmentClick={handleSelectAttachment}
+              mode="send"
+            />
+            
+            {/* File selection modal */}
+            {showFileSelectionModal && (
+              <FileSelectionModal 
+                onClose={() => setShowFileSelectionModal(false)}
+                onFileSelect={handleFileSelectFromGallery}
+              />
+            )}
           </div>
         </div>
       </div>

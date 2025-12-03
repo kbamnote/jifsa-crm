@@ -143,6 +143,16 @@ export const getEnrollments = () => Api.get("/enrollment/get-all");
 
 export const updateEnrollmentStatus = (id, status) => Api.patch(`/enrollment/${id}/status`, { status });
 
+export const updateEnrollmentDetails = (id, data) => Api.patch(`/enrollment/${id}/details`, data);
+
 export const deleteEnrollment = (id) => Api.delete(`/enrollment/${id}`);
+
+// ============== Companies ==============
+export const importCompaniesFromExcel = (formData) => 
+  Api.post("/companies/import", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const getAllCompanies = () => Api.get("/companies/get-all");
 
 export default Api;
