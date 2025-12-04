@@ -134,7 +134,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
     },
     {
       id: "company-import",
-      name: "Companies Data",
+      name: "Job Listings",
       path: "/company-import",
       icon: <FaBox className="w-5 h-5" />,
     },

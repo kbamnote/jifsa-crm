@@ -13,7 +13,7 @@ import MailTracking from "./components/pages/mail/MailTracking";
 import ImgAndFiles from "./components/pages/image&files/ImgAndFiles";
 import SocialMedia from "./components/pages/socialMedia/SocialMedia"; 
 import EEETechnologies from './components/pages/dashboard/products/eeeTechnologies/EEETechnologies';
-import CompanyImport from './components/pages/companyImport/CompanyImport';
+import JobListingsImport from './components/pages/companyImport/JobListingsImport';
 
 function App() {
   return (
@@ -33,8 +33,8 @@ function App() {
           <Route path="/mail" element={<Mail/>}/>
           <Route path="/mail-track" element={<MailTracking/>}/>
           <Route path="/img-files" element={<ImgAndFiles/>}/>
-          <Route path="/social-media" element={<SocialMedia/>}/> {/* Add this route */}
-          <Route path="/company-import" element={<CompanyImport/>}/>
+          <Route path="/social-media" element={<SocialMedia/>}/> 
+          <Route path="/company-import" element={<JobListingsImport/>}/>
         </Route>
       </Routes>
     </>
