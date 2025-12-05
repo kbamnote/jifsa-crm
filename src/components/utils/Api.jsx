@@ -153,6 +153,12 @@ export const importCompaniesFromExcel = (formData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
-export const getAllCompanies = () => Api.get("/companies/get-all");
+export const getAllCompanies = () => Api.get("/companies/all");
+
+export const deleteAllCompanies = () => Api.delete("/companies/all");
+
+export const deleteCompany = (id) => Api.delete(`/companies/${id}`);
+
+export const updateCompany = (id, data) => Api.put(`/companies/${id}`, data);
 
 export default Api;
