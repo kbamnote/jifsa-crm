@@ -6,6 +6,7 @@ import { LiaBusinessTimeSolid } from "react-icons/lia";
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import { TfiGallery } from "react-icons/tfi";
 import { BiSolidVideos } from "react-icons/bi"; // Add this import for social media icon
+import { Users } from "lucide-react"; // Add this import for lead management icon
 import Cookies from "js-cookie";
 import logo from '../../assets/image.png';
 import jifsaImg from '../../assets/jifsa.png';
@@ -95,20 +96,32 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
         ),
       ],
     },
-    // Conditionally show "Team" or "Lead Assigned" based on user role
-    ...(!['admin', 'manager'].includes(userRole.toLowerCase()) 
+    // Show Lead Assigned to all non-admin/manager users
+    {
+      id: "lead-assigned",
+      name: "Lead Assigned",
+      path: "/lead-assigned",
+      icon: <HiOutlineUserGroup className="w-5 h-5" />,
+    },
+    // Show Lead Management for admin, manager, counselor, and telecaller users
+    ...(['admin', 'manager', 'counsellor', 'telecaller'].includes(userRole.toLowerCase()) 
       ? [{
-          id: "lead-assigned",
-          name: "Lead Assigned",
-          path: "/lead-assigned",
-          icon: <HiOutlineUserGroup className="w-5 h-5" />,
+          id: "lead-management",
+          name: "Lead Management",
+          path: "/lead-management",
+          icon: <Users className="w-5 h-5" />,
         }]
-      : [{
+      : []
+    ),
+    // Show Team only for admin and manager users
+    ...(['admin', 'manager'].includes(userRole.toLowerCase()) 
+      ? [{
           id: "team",
           name: "Team",
           path: "/team",
           icon: <HiOutlineUserGroup className="w-5 h-5" />,
         }]
+      : []
     ),
     {
       id: "b2b",

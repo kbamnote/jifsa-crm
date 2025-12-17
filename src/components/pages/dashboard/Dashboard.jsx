@@ -352,6 +352,7 @@ const Dashboard = () => {
                         <option value="All">All Products</option>
                         <option value="jifsa">JIFSA</option>
                         <option value="elite-bim">Elite BIM</option>
+                        <option value="eee-technologies">EEE Technologies</option>
                       </select>
                     </div>
 

@@ -92,6 +92,8 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
             >
               <option value="sales">Sales</option>
               <option value="marketing">Marketing</option>
+              <option value="counsellor">Counsellor</option>
+              <option value="telecaller">Telecaller</option>
             </select>
           </div>
 

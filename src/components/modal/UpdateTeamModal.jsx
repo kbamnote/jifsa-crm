@@ -103,6 +103,8 @@ const UpdateTeamModal = ({ showModal, setShowModal, handleUpdateMember, memberTo
             >
               <option value="sales">Sales</option>
               <option value="marketing">Marketing</option>
+              <option value="counsellor">Counsellor</option>
+              <option value="telecaller">Telecaller</option>
             </select>
           </div>
 

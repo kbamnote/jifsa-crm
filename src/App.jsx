@@ -7,6 +7,8 @@ import Layout from "./components/common/Layout";
 import PaymentDetail from "./components/pages/paymentDetail/PaymentDetail";
 import Team from "./components/pages/teamAndLeadAssign/Team";
 import LeadAssigned from "./components/pages/teamAndLeadAssign/LeadAssigned";
+import LeadManagement from "./components/pages/teamAndLeadAssign/LeadManagement";
+import ViewLead from "./components/pages/teamAndLeadAssign/ViewLead";
 import B2B from "./components/pages/b2b/B2B";
 import Mail from "./components/pages/mail/Mail";
 import MailTracking from "./components/pages/mail/MailTracking";
@@ -29,6 +31,8 @@ function App() {
           <Route path="/billing-details" element={<PaymentDetail/>}/>
           <Route path="/team" element={<Team/>}/>
           <Route path="/lead-assigned" element={<LeadAssigned/>}/>
+          <Route path="/lead-management" element={<LeadManagement/>}/>
+          <Route path="/lead/:id" element={<ViewLead/>}/>
           <Route path="/b2b" element={<B2B/>}/>
           <Route path="/mail" element={<Mail/>}/>
           <Route path="/mail-track" element={<MailTracking/>}/>

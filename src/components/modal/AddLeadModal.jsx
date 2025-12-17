@@ -19,7 +19,15 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
     highestDegree: "",
     collegeOrInstituteName: "",
     schoolName: "",
-    productCompany: "jifsa"
+    productCompany: "jifsa",
+    callStatus: "not_called",
+    interviewRoundStatus: "not_scheduled",
+    aptitudeRoundStatus: "not_scheduled",
+    hrRoundStatus: "not_scheduled",
+    admissionLetter: "not_issued",
+    feesStatus: "not_paid",
+    paymentMethod: "other",
+    feesInstallmentStructure: "one_time"
   });
 
   const [loading, setLoading] = useState(false);
@@ -66,7 +74,15 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
         highestDegree: "",
         collegeOrInstituteName: "",
         schoolName: "",
-        productCompany: "jifsa"
+        productCompany: "jifsa",
+        callStatus: "not_called",
+        interviewRoundStatus: "not_scheduled",
+        aptitudeRoundStatus: "not_scheduled",
+        hrRoundStatus: "not_scheduled",
+        admissionLetter: "not_issued",
+        feesStatus: "not_paid",
+        paymentMethod: "other",
+        feesInstallmentStructure: "one_time"
       });
 
       onSuccess();
@@ -367,6 +383,157 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
                 placeholder="Any additional notes or messages..."
               />
+            </div>
+          </div>
+
+          {/* CRM Process Fields */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              CRM Process Status
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Call Status
+                </label>
+                <select
+                  name="callStatus"
+                  value={formData.callStatus}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="not_called">Not Called</option>
+                  <option value="called">Called</option>
+                  <option value="follow_up_required">Follow Up Required</option>
+                  <option value="not_reachable">Not Reachable</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Interview Round Status
+                </label>
+                <select
+                  name="interviewRoundStatus"
+                  value={formData.interviewRoundStatus}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="not_scheduled">Not Scheduled</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="completed">Completed</option>
+                  <option value="rescheduled">Rescheduled</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Aptitude Round Status
+                </label>
+                <select
+                  name="aptitudeRoundStatus"
+                  value={formData.aptitudeRoundStatus}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="not_scheduled">Not Scheduled</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="completed">Completed</option>
+                  <option value="rescheduled">Rescheduled</option>
+                  <option value="cancelled">Cancelled</option>
+                  <option value="passed">Passed</option>
+                  <option value="failed">Failed</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  HR Round Status
+                </label>
+                <select
+                  name="hrRoundStatus"
+                  value={formData.hrRoundStatus}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="not_scheduled">Not Scheduled</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="completed">Completed</option>
+                  <option value="rescheduled">Rescheduled</option>
+                  <option value="cancelled">Cancelled</option>
+                  <option value="passed">Passed</option>
+                  <option value="failed">Failed</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Admission Letter
+                </label>
+                <select
+                  name="admissionLetter"
+                  value={formData.admissionLetter}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="not_issued">Not Issued</option>
+                  <option value="issued">Issued</option>
+                  <option value="received">Received</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Fees Status
+                </label>
+                <select
+                  name="feesStatus"
+                  value={formData.feesStatus}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="not_paid">Not Paid</option>
+                  <option value="partially_paid">Partially Paid</option>
+                  <option value="fully_paid">Fully Paid</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Payment Method
+                </label>
+                <select
+                  name="paymentMethod"
+                  value={formData.paymentMethod}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="other">Other</option>
+                  <option value="UPI">UPI</option>
+                  <option value="cash">Cash</option>
+                  <option value="bank_transfer">Bank Transfer</option>
+                  <option value="cheque">Cheque</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Fees Installment Structure
+                </label>
+                <select
+                  name="feesInstallmentStructure"
+                  value={formData.feesInstallmentStructure}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="one_time">One Time</option>
+                  <option value="two_installments">Two Installments</option>
+                  <option value="three_installments">Three Installments</option>
+                  <option value="four_installments">Four Installments</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
             </div>
           </div>
         </form>

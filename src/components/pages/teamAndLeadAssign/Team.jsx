@@ -285,6 +285,10 @@ const Team = () => {
                                 ? 'bg-purple-100 text-purple-700' 
                                 : member.role === 'marketing'
                                 ? 'bg-green-100 text-green-700'
+                                : member.role === 'counsellor'
+                                ? 'bg-yellow-100 text-yellow-700'
+                                : member.role === 'telecaller'
+                                ? 'bg-indigo-100 text-indigo-700'
                                 : 'bg-blue-100 text-blue-700'
                             }`}>
                               {member.role.charAt(0).toUpperCase() + member.role.slice(1)}
