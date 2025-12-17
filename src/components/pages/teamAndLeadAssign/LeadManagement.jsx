@@ -46,6 +46,9 @@ const LeadManagement = () => {
     try {
       const response = await getTeamDetail();
       if (response.data.success) {
+        console.log('All team members:', response.data.data);
+        console.log('UserRole when fetching:', userRole);
+        console.log('UserRole lower case:', userRole.toLowerCase());
         setTeamMembers(response.data.data);
       }
     } catch (error) {
@@ -634,24 +637,26 @@ const LeadManagement = () => {
                           >
                             <Mail className="w-4 h-4" />
                           </button>
-                          {lead.assignedTo ? (
-                            <button
-                              key="reassign"
-                              onClick={() => handleAssignLeadAction(lead)}
-                              className="text-amber-600 hover:text-amber-900 p-2 rounded-full hover:bg-amber-50 transition-colors"
-                              title="Reassign Lead"
-                            >
-                              <UserPlus className="w-4 h-4" />
-                            </button>
-                          ) : (
-                            <button
-                              key="assign"
-                              onClick={() => handleAssignLeadAction(lead)}
-                              className="text-green-600 hover:text-green-900 p-2 rounded-full hover:bg-green-50 transition-colors"
-                              title="Assign Lead"
-                            >
-                              <UserPlus className="w-4 h-4" />
-                            </button>
+                          {userRole.toLowerCase() !== 'telecaller' && (
+                            lead.assignedTo ? (
+                              <button
+                                key="reassign"
+                                onClick={() => handleAssignLeadAction(lead)}
+                                className="text-amber-600 hover:text-amber-900 p-2 rounded-full hover:bg-amber-50 transition-colors"
+                                title="Reassign Lead"
+                              >
+                                <UserPlus className="w-4 h-4" />
+                              </button>
+                            ) : (
+                              <button
+                                key="assign"
+                                onClick={() => handleAssignLeadAction(lead)}
+                                className="text-green-600 hover:text-green-900 p-2 rounded-full hover:bg-green-50 transition-colors"
+                                title="Assign Lead"
+                              >
+                                <UserPlus className="w-4 h-4" />
+                              </button>
+                            )
                           )}
                           <button
                             onClick={() => handleEditLead(lead)}
@@ -761,26 +766,36 @@ const LeadManagement = () => {
                   disabled={isAssigning}
                 >
                   <option value="">Select a team member</option>
-                  {teamMembers
-                    .filter(member => {
+                  {(() => {
+                    console.log('Current user role for filtering:', userRole.toLowerCase());
+                    console.log('All team members available:', teamMembers);
+                    const filteredMembers = teamMembers.filter(member => {
                       // Admin can assign to any team member except admin
                       if (userRole.toLowerCase() === 'admin') {
+                        console.log('Admin filtering: excluding only admins');
                         return member.role !== 'admin';
                       }
                       // Counsellor can only assign to telecaller
                       else if (userRole.toLowerCase() === 'counsellor') {
-                        return member.role === 'telecaller';
+                        console.log('Counsellor filtering: including only telecallers');
+                        console.log('Checking member:', member.name, 'with role:', member.role);
+                        const isTelecaller = member.role === 'telecaller';
+                        console.log('Is telecaller?', isTelecaller);
+                        return isTelecaller;
                       }
                       // Other roles (sales, marketing, manager, telecaller) can assign to sales
                       else {
+                        console.log('Other role filtering: including only sales');
                         return member.role === 'sales';
                       }
-                    })
-                    .map(member => (
+                    });
+                    console.log('Filtered members for assignment:', filteredMembers);
+                    return filteredMembers.map(member => (
                       <option key={member._id} value={member._id}>
                         {member.name} ({member.email}) [{member.role}]
                       </option>
-                    ))}
+                    ));
+                  })()}
                 </select>
               </div>
               

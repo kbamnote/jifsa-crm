@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Users, Calendar, Phone, Mail, MapPin, Eye, UserCheck, TrendingUp, Clock } from 'lucide-react';
 import { getDetail } from '../../utils/Api';
 import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
 
 const LeadAssigned = () => {
+  const navigate = useNavigate();
   const [assignedLeads, setAssignedLeads] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -244,7 +246,7 @@ const LeadAssigned = () => {
                         <span className="text-xs text-gray-500 truncate max-w-[160px]">
                           By: {getAssignedByInfo(lead)}
                         </span>
-                        <button className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors">
+                        <button className="flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors" onClick={() => navigate(`/lead/${lead._id}`)}>
                           <Eye className="w-4 h-4 mr-1" />
                           View Details
                         </button>

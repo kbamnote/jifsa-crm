@@ -168,6 +168,7 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
                 >
                   <option value="jifsa">JIFSA</option>
                   <option value="bim">Elite BIM</option>
+                  <option value="eee-technologies">EEE Technologies</option>
                 </select>
               </div>
             </div>
@@ -644,6 +645,8 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
                   <option value="two_installments">Two Installments</option>
                   <option value="three_installments">Three Installments</option>
                   <option value="four_installments">Four Installments</option>
+                  <option value="EMI">EMI</option>
+                  <option value="Loan">Loan</option>
                   <option value="other">Other</option>
                 </select>
               </div>
