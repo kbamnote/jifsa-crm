@@ -671,36 +671,30 @@ const LeadManagement = () => {
 
         {/* Modals */}
         <AddLeadModal
-          isOpen={showAddModal}
-          onClose={() => setShowAddModal(false)}
+          showModal={showAddModal}
+          setShowModal={setShowAddModal}
           onSuccess={fetchLeads}
         />
 
         <UpdateLeadModal
-          isOpen={showUpdateModal}
-          onClose={() => {
-            setShowUpdateModal(false);
-            setLeadToUpdate(null);
-          }}
-          lead={leadToUpdate}
+          showModal={showUpdateModal}
+          setShowModal={setShowUpdateModal}
+          selectedRecord={leadToUpdate}
           onSuccess={fetchLeads}
         />
 
 
 
         <DeleteConfirmationModal
-          isOpen={showDeleteModal}
-          onClose={() => {
-            setShowDeleteModal(false);
-            setLeadToDelete(null);
-          }}
+          showModal={showDeleteModal}
+          setShowModal={setShowDeleteModal}
           onConfirm={confirmDeleteLead}
           itemName={leadToDelete?.fullName || 'this lead'}
         />
 
         {/* Assignment Modal */}
         {showAssignmentModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
               {/* Header */}
               <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
@@ -808,8 +802,8 @@ const LeadManagement = () => {
 
         {/* Mail Modal */}
         <MailModal
-          isOpen={showMailModal}
-          onClose={() => setShowMailModal(false)}
+          showModal={showMailModal}
+          setShowModal={setShowMailModal}
           attachment={mailAttachments.length > 0 ? mailAttachments[0] : null}
           imageToShare={leadToShare}
           selectedLeads={[leadToShare]}
