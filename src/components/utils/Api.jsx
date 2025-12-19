@@ -141,7 +141,7 @@ export const deleteSocialMediaPost = (id) => Api.delete(`/social-media/${id}`);
 // ============== Enrollments ==============
 export const getEnrollments = () => Api.get("/enrollment/get-all");
 
-export const updateEnrollmentStatus = (id, status) => Api.patch(`/enrollment/${id}/status`, { status });
+export const updateEnrollmentStatus = (id, statusData) => Api.patch(`/enrollment/${id}/status`, statusData);
 
 export const updateEnrollmentDetails = (id, data) => Api.patch(`/enrollment/${id}/details`, data);
 
@@ -154,6 +154,8 @@ export const importCompaniesFromExcel = (formData) =>
   });
 
 export const getAllCompanies = () => Api.get("/companies/all");
+
+export const getCompanyById = (id) => Api.get(`/companies/${id}`);
 
 export const deleteAllCompanies = () => Api.delete("/companies/all");
 

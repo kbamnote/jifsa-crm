@@ -146,10 +146,22 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       icon: <TfiGallery className="w-5 h-5" />,
     },
     {
-      id: "company-import",
-      name: "Job Listings",
-      path: "/company-import",
+      id: "companies",
+      name: "Companies",
       icon: <FaBox className="w-5 h-5" />,
+      isDropdown: true,
+      subItems: [
+        {
+          id: "job-import",
+          name: "Job Import",
+          path: "/company-import",
+        },
+        {
+          id: "job-management",
+          name: "Job Management",
+          path: "/job-management",
+        }
+      ],
     },
   ];
 

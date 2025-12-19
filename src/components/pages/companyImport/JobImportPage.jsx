@@ -7,7 +7,7 @@ import DeleteConfirmationModal from "../../modal/DeleteConfirmationModal";
 import SuccessModal from "../../modal/SuccessModal";
 import ErrorModal from "../../modal/ErrorModal";
 
-const JobListingsImport = () => {
+const JobImportPage = () => {
   const [excelFile, setExcelFile] = useState(null);
   const [jobListings, setJobListings] = useState([]);
   const [filteredJobListings, setFilteredJobListings] = useState([]);
@@ -493,7 +493,7 @@ const JobListingsImport = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center mb-6">
           <Briefcase className="w-8 h-8 text-blue-600 mr-3" />
-          <h1 className="text-3xl font-bold text-gray-800">Job Listings</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Job Import</h1>
         </div>
         
         {/* Status Bar */}
@@ -542,7 +542,7 @@ const JobListingsImport = () => {
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex items-center mb-4">
             <Upload className="w-5 h-5 text-blue-600 mr-2" />
-            <h2 className="text-xl font-semibold text-gray-800">Upload Job Listings</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Upload Job Data</h2>
           </div>
           
           <div className="mb-4">
@@ -911,4 +911,4 @@ const JobListingsImport = () => {
   );
 };
 
-export default JobListingsImport;
+export default JobImportPage;

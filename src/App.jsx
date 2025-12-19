@@ -15,7 +15,9 @@ import MailTracking from "./components/pages/mail/MailTracking";
 import ImgAndFiles from "./components/pages/image&files/ImgAndFiles";
 import SocialMedia from "./components/pages/socialMedia/SocialMedia"; 
 import EEETechnologies from './components/pages/dashboard/products/eeeTechnologies/EEETechnologies';
-import JobListingsImport from './components/pages/companyImport/JobListingsImport';
+import JobImportPage from './components/pages/companyImport/JobImportPage';
+import JobManagement from './components/pages/companyImport/JobManagement';
+import ViewJob from './components/pages/companyImport/ViewJob';
 
 function App() {
   return (
@@ -38,7 +40,9 @@ function App() {
           <Route path="/mail-track" element={<MailTracking/>}/>
           <Route path="/img-files" element={<ImgAndFiles/>}/>
           <Route path="/social-media" element={<SocialMedia/>}/> 
-          <Route path="/company-import" element={<JobListingsImport/>}/>
+          <Route path="/company-import" element={<JobImportPage/>}/>
+          <Route path="/job-management" element={<JobManagement/>}/>
+          <Route path="/job/:id" element={<ViewJob/>}/>
         </Route>
       </Routes>
     </>
