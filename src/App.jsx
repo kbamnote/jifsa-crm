@@ -15,6 +15,7 @@ import MailTracking from "./components/pages/mail/MailTracking";
 import ImgAndFiles from "./components/pages/image&files/ImgAndFiles";
 import SocialMedia from "./components/pages/socialMedia/SocialMedia"; 
 import EEETechnologies from './components/pages/dashboard/products/eeeTechnologies/EEETechnologies';
+import ViewEnrollment from './components/pages/dashboard/products/eeeTechnologies/ViewEnrollment';
 import JobImportPage from './components/pages/companyImport/JobImportPage';
 import JobManagement from './components/pages/companyImport/JobManagement';
 import ViewJob from './components/pages/companyImport/ViewJob';
@@ -30,6 +31,7 @@ function App() {
           <Route path="/jifsa" element={<JIFSA />} />
           <Route path="/bim" element={<EliteBim />} />
           <Route path="/eee" element={<EEETechnologies/>}/>
+          <Route path="/enrollment/:id" element={<ViewEnrollment/>}/>
           <Route path="/billing-details" element={<PaymentDetail/>}/>
           <Route path="/team" element={<Team/>}/>
           <Route path="/lead-assigned" element={<LeadAssigned/>}/>
