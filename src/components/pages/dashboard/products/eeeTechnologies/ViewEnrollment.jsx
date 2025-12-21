@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Mail, Phone, Calendar, Building, GraduationCap, Hash, CheckCircle, AlertCircle, ArrowLeft, Edit } from 'lucide-react';
+import { User, Mail, Phone, Calendar, Building, MapPin, FileText, Hash, Clock, CheckCircle, AlertCircle, PhoneOff, Users, Award, GraduationCap, School, Briefcase, CreditCard, Wallet, Receipt, ArrowLeft, Edit, Send } from 'lucide-react';
 import { getEnrollments, updateEnrollmentDetails, updateEnrollmentStatus } from '../../../../utils/Api';
 import UpdateEnrollmentModal from '../../../../modal/UpdateEnrollmentModal';
 
@@ -321,14 +321,48 @@ const ViewEnrollment = () => {
                 </div>
               </div>
             </div>
-
-            {/* Status Information */}
+        
+            {/* Education & Experience */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                <GraduationCap className="w-5 h-5 mr-2 text-blue-600" />
+                Education & Experience
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Experience</label>
+                  <p className="text-gray-800">{selectedRecord.experience || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Specialisation</label>
+                  <p className="text-gray-800">{selectedRecord.specialisation || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Highest Degree</label>
+                  <p className="text-gray-800">{selectedRecord.highestDegree || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">College/Institute</label>
+                  <p className="text-gray-800">{selectedRecord.collegeOrInstituteName || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">School Name</label>
+                  <p className="text-gray-800">{selectedRecord.schoolName || 'N/A'}</p>
+                </div>
+              </div>
+            </div>
+        
+            {/* Product & Status Information */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                 <Building className="w-5 h-5 mr-2 text-blue-600" />
-                Status Information
+                Product & Status Information
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Product Company</label>
+                  <p className="text-gray-800">{selectedRecord.productCompany || 'N/A'}</p>
+                </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-600 mb-1">Status</label>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusClass(selectedRecord.status)}`}>
@@ -336,8 +370,8 @@ const ViewEnrollment = () => {
                   </span>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-600 mb-1">Product Company</label>
-                  <p className="text-gray-800">{selectedRecord.productCompany || 'N/A'}</p>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Source</label>
+                  <p className="text-gray-800 capitalize">{selectedRecord.source || 'N/A'}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-semibold text-gray-600 mb-1">Message</label>
@@ -345,7 +379,7 @@ const ViewEnrollment = () => {
                 </div>
               </div>
             </div>
-
+        
             {/* CRM Tracking Fields */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
@@ -399,18 +433,70 @@ const ViewEnrollment = () => {
                 </div>
               </div>
             </div>
-
-            {/* Tracking Information */}
+        
+            {/* Assignment & Tracking Information */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                <GraduationCap className="w-5 h-5 mr-2 text-blue-600" />
-                Tracking Information
+                <Users className="w-5 h-5 mr-2 text-blue-600" />
+                Assignment & Tracking Information
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-600 mb-1">Feedback</label>
-                  <p className="text-gray-800">{selectedRecord.feedback || 'N/A'}</p>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Assigned To</label>
+                  <p className="text-gray-800">
+                    {selectedRecord.assignedTo ? 
+                      (typeof selectedRecord.assignedTo === 'string' ? 
+                        selectedRecord.assignedTo : 
+                        `${selectedRecord.assignedTo.name || 'N/A'} (${selectedRecord.assignedTo.email || 'N/A'})`) 
+                      : 'Not Assigned'}
+                  </p>
                 </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Assigned By</label>
+                  <p className="text-gray-800">
+                    {selectedRecord.assignedByName || 'N/A'}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Created By</label>
+                  <p className="text-gray-800">
+                    {selectedRecord.createdBy ? 
+                      `${selectedRecord.createdBy.name || 'N/A'} (${selectedRecord.createdBy.email || 'N/A'}) [${selectedRecord.createdBy.role || 'N/A'}]` 
+                      : 'N/A'}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1">Updated By</label>
+                  <p className="text-gray-800">
+                    {selectedRecord.updatedBy ? 
+                      `${selectedRecord.updatedBy.name || 'N/A'} (${selectedRecord.updatedBy.email || 'N/A'}) [${selectedRecord.updatedBy.role || 'N/A'}]` 
+                      : 'N/A'}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1 flex items-center">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    Created At
+                  </label>
+                  <p className="text-gray-800">{formatDate(selectedRecord.createdAt)}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-600 mb-1 flex items-center">
+                    <Clock className="w-4 h-4 mr-1" />
+                    Updated At
+                  </label>
+                  <p className="text-gray-800">{formatDate(selectedRecord.updatedAt)}</p>
+                </div>
+              </div>
+            </div>
+        
+            {/* Location Information */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                <MapPin className="w-5 h-5 mr-2 text-blue-600" />
+                Location Information
+              </h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-600 mb-1">City</label>
                   <p className="text-gray-800">{selectedRecord.city || 'N/A'}</p>
@@ -423,20 +509,18 @@ const ViewEnrollment = () => {
                   <label className="block text-sm font-semibold text-gray-600 mb-1">Pincode</label>
                   <p className="text-gray-800">{selectedRecord.pincode || 'N/A'}</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-600 mb-1 flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    Created At
-                  </label>
-                  <p className="text-gray-800">{formatDate(selectedRecord.createdAt)}</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-600 mb-1 flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    Updated At
-                  </label>
-                  <p className="text-gray-800">{formatDate(selectedRecord.updatedAt)}</p>
-                </div>
+              </div>
+            </div>
+        
+            {/* Feedback Section */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                Feedback & Notes
+              </h4>
+              <div>
+                <label className="block text-sm font-semibold text-gray-600 mb-1">Feedback</label>
+                <p className="text-gray-800 whitespace-pre-wrap">{selectedRecord.feedback || 'No feedback provided'}</p>
               </div>
             </div>
           </div>

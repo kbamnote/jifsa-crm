@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getEnrollments, deleteEnrollment } from '../../../../utils/Api';
-import { Search, Users, ChevronLeft, ChevronRight, Eye, Edit, Trash2, User, Mail, Phone, GraduationCap, X } from "lucide-react";
+import { getEnrollments, deleteEnrollment, updateEnrollmentDetails, getTeamDetail } from '../../../../utils/Api';
+import { Search, Users, ChevronLeft, ChevronRight, Eye, Edit, Trash2, User, Mail, Phone, GraduationCap, X, UserPlus, UserCheck } from "lucide-react";
 import UpdateEnrollmentModal from '../../../../modal/UpdateEnrollmentModal';
 import SuccessModal from '../../../../modal/SuccessModal';
 import DeleteConfirmationModal from '../../../../modal/DeleteConfirmationModal';
 import ErrorModal from '../../../../modal/ErrorModal';
+import AssignmentModal from '../../../../modal/AssignmentModal';
+import Cookies from 'js-cookie';
 
 const EEETechnologies = () => {
   const navigate = useNavigate();
@@ -27,6 +29,18 @@ const EEETechnologies = () => {
   const [deleteItemId, setDeleteItemId] = useState(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorModalMessage, setErrorModalMessage] = useState('');
+  
+  // Assignment states
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [enrollmentToAssign, setEnrollmentToAssign] = useState(null);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [selectedMember, setSelectedMember] = useState('');
+  const [isAssigning, setIsAssigning] = useState(false);
+  
+  // User information
+  const userEmail = Cookies.get("email") || "";
+  const userName = Cookies.get("name") || "";
+  const userRole = Cookies.get("role") || "";
 
   // Sorting helper
   const sortData = (dataToSort, field, direction) => {
@@ -66,6 +80,93 @@ const EEETechnologies = () => {
     } catch (error) {
       console.error("Error sorting data:", error);
       return [...dataToSort]; // Return unsorted data if sorting fails
+    }
+  };
+
+  // Assignment functions
+  const handleAssignEnrollmentAction = (enrollment) => {
+    // Only allow admin, manager, counsellor, and marketing roles to assign enrollments
+    if (!['admin', 'manager', 'counsellor', 'marketing'].includes(userRole.toLowerCase())) {
+      return;
+    }
+    
+    setEnrollmentToAssign(enrollment);
+    setShowAssignmentModal(true);
+    fetchTeamMembers();
+  };
+
+  const fetchTeamMembers = async () => {
+    try {
+      const response = await getTeamDetail();
+      if (response.data.success) {
+        setTeamMembers(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching team members:', error);
+      setErrorModalMessage('Failed to fetch team members');
+      setShowErrorModal(true);
+    }
+  };
+
+  const handleAssignEnrollment = async () => {
+    if (!selectedMember) {
+      setErrorModalMessage('Please select a team member');
+      setShowErrorModal(true);
+      return;
+    }
+
+    setIsAssigning(true);
+    try {
+      const selectedTeamMember = teamMembers.find(member => member._id === selectedMember);
+      if (!selectedTeamMember) {
+        setErrorModalMessage('Selected team member not found');
+        setShowErrorModal(true);
+        return;
+      }
+
+      const assignmentData = {
+        assignedTo: selectedTeamMember.email,
+        assignedBy: userEmail, // Get email from cookies
+        assignedByName: userName // Get name from cookies
+      };
+
+      await updateEnrollmentDetails(enrollmentToAssign._id, assignmentData);
+      
+      // Refresh the enrollment data
+      const response = await getEnrollments();
+      if (response.data.success) {
+        setEnrollmentData(response.data.data);
+        // Apply the existing filter logic
+        let filtered = response.data.data.filter((item) =>
+          Object.values(item).some((value) => {
+            if (value && typeof value === 'object') {
+              if (value.courseName) {
+                return value.courseName.toString().toLowerCase().includes(searchTerm.toLowerCase());
+              }
+              if (value.course && value.course.name) {
+                return value.course.name.toString().toLowerCase().includes(searchTerm.toLowerCase());
+              }
+              return JSON.stringify(value).toLowerCase().includes(searchTerm.toLowerCase());
+            }
+            return value &&
+              value.toString().toLowerCase().includes(searchTerm.toLowerCase());
+          })
+        );
+        
+        filtered = sortData(filtered, sortField, sortDirection);
+        setFilteredData(filtered);
+      }
+      
+      setShowAssignmentModal(false);
+      setSelectedMember('');
+      setSuccessMessage('Enrollment assigned successfully!');
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error('Error assigning enrollment:', error);
+      setErrorModalMessage(error.response?.data?.message || 'Failed to assign enrollment');
+      setShowErrorModal(true);
+    } finally {
+      setIsAssigning(false);
     }
   };
 
@@ -349,34 +450,48 @@ const EEETechnologies = () => {
             {formatDateShort(item.createdAt)}
           </td>
           <td className="px-4 py-3">
-            <div className="flex space-x-2">
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => handleViewDetails(item)}
-                className="text-indigo-600 hover:text-indigo-800 hover:underline"
+                className="text-gray-600 hover:text-gray-900 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                title="View Enrollment Details"
               >
-                <div className="flex items-center space-x-1">
-                  <Eye className="w-4 h-4" />
-                  <span>View</span>
-                </div>
+                <Eye className="w-5 h-5" />
               </button>
+              {/* Show assignment icons only for admin, manager, counsellor, and marketing roles */}
+              {['admin', 'manager', 'counsellor', 'marketing'].includes(userRole.toLowerCase()) && (
+                item.assignedTo ? (
+                  <button
+                    onClick={() => handleAssignEnrollmentAction(item)}
+                    className="text-amber-600 hover:text-amber-900 p-2 rounded-full hover:bg-amber-50 transition-colors"
+                    title="Reassign Enrollment"
+                  >
+                    <UserCheck className="w-5 h-5" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => handleAssignEnrollmentAction(item)}
+                    className="text-green-600 hover:text-green-900 p-2 rounded-full hover:bg-green-50 transition-colors"
+                    title="Assign Enrollment"
+                  >
+                    <UserPlus className="w-5 h-5" />
+                  </button>
+                )
+              )}
               <button
                 onClick={() => handleEditEnrollment(item)}
-                className="text-green-600 hover:text-green-800 hover:underline"
+                className="text-blue-600 hover:text-blue-900 p-2 rounded-full hover:bg-blue-50 transition-colors"
+                title="Edit Enrollment"
               >
-                <div className="flex items-center space-x-1">
-                  <Edit className="w-4 h-4" />
-                  <span>Edit</span>
-                </div>
+                <Edit className="w-5 h-5" />
               </button>
               {item._id && (
                 <button
                   onClick={() => handleDeleteEnrollment(item._id)}
-                  className="text-red-600 hover:text-red-800 hover:underline"
+                  className="text-red-600 hover:text-red-900 p-2 rounded-full hover:bg-red-50 transition-colors"
+                  title="Delete Enrollment"
                 >
-                  <div className="flex items-center space-x-1">
-                    <Trash2 className="w-4 h-4" />
-                    <span>Delete</span>
-                  </div>
+                  <Trash2 className="w-5 h-5" />
                 </button>
               )}
             </div>
@@ -475,27 +590,43 @@ const EEETechnologies = () => {
               </div>
             )}
 
-            {/* Success Modal */}
-            <SuccessModal 
-              showModal={showSuccessModal} 
-              setShowModal={setShowSuccessModal} 
-              message={successMessage} 
-            />
-            
-            {/* Delete Confirmation Modal */}
-            <DeleteConfirmationModal 
-              showModal={showDeleteModal} 
-              setShowModal={setShowDeleteModal} 
-              itemName="enrollment record" 
-              onConfirm={confirmDeleteEnrollment} 
-            />
-            
-            {/* Error Modal */}
-            <ErrorModal 
-              showModal={showErrorModal} 
-              setShowModal={setShowErrorModal} 
-              message={errorModalMessage} 
-            />
+            <>
+              {/* Success Modal */}
+              <SuccessModal 
+                showModal={showSuccessModal} 
+                setShowModal={setShowSuccessModal} 
+                message={successMessage} 
+              />
+              
+              {/* Delete Confirmation Modal */}
+              <DeleteConfirmationModal 
+                showModal={showDeleteModal} 
+                setShowModal={setShowDeleteModal} 
+                itemName="enrollment record" 
+                onConfirm={confirmDeleteEnrollment} 
+              />
+              
+              {/* Error Modal */}
+              <ErrorModal 
+                showModal={showErrorModal} 
+                setShowModal={setShowErrorModal} 
+                message={errorModalMessage} 
+              />
+              
+              {/* Assignment Modal */}
+              <AssignmentModal
+                showModal={showAssignmentModal}
+                setShowModal={setShowAssignmentModal}
+                itemToAssign={enrollmentToAssign}
+                itemType="enrollment"
+                teamMembers={teamMembers}
+                selectedMember={selectedMember}
+                setSelectedMember={setSelectedMember}
+                onAssign={handleAssignEnrollment}
+                isAssigning={isAssigning}
+                userRole={userRole}
+              />
+            </>
             
             {/* Update Enrollment Modal */}
             <UpdateEnrollmentModal

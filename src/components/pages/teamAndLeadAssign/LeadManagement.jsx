@@ -8,6 +8,7 @@ import UpdateLeadModal from '../../modal/UpdateLeadModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 import MailModal from '../../modal/MailModal';
 import FileSelectionModal from '../../modal/FileSelectionModal';
+import AssignmentModal from '../../modal/AssignmentModal';
 
 const LeadManagement = () => {
   const navigate = useNavigate();
@@ -693,7 +694,7 @@ const LeadManagement = () => {
         />
 
         {/* Assignment Modal */}
-        {showAssignmentModal && (
+        {/* Removed inline assignment modal and replaced with AssignmentModal component */}
           <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
               {/* Header */}
@@ -799,6 +800,19 @@ const LeadManagement = () => {
             </div>
           </div>
         )}
+
+        <AssignmentModal
+          showModal={showAssignmentModal}
+          setShowModal={setShowAssignmentModal}
+          itemToAssign={leadToAssign}
+          itemType="lead"
+          teamMembers={teamMembers}
+          selectedMember={selectedMember}
+          setSelectedMember={setSelectedMember}
+          onAssign={handleAssignLead}
+          isAssigning={isAssigning}
+          userRole={userRole}
+        />
 
         {/* Mail Modal */}
         <MailModal

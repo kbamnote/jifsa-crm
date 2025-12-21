@@ -14,6 +14,7 @@ const SocialMedia = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [formData, setFormData] = useState({
     productCompany: '',
+    caption: '',
     platforms: [], // Changed from single platform to array of platforms
     uploadType: '',
     date: '',
@@ -359,6 +360,21 @@ const SocialMedia = () => {
                       <option key={company.value} value={company.value}>{company.label}</option>
                     ))}
                   </select>
+                </div>
+
+                {/* Caption */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Caption (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    name="caption"
+                    value={formData.caption}
+                    onChange={handleInputChange}
+                    placeholder="Enter a caption for your post"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
                 </div>
 
                 {/* Platforms (Multiple Selection) */}

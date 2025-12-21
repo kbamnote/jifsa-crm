@@ -43,6 +43,18 @@ const FileSelectionModal = ({ onClose, onFileSelect }) => {
           <FileText className="w-8 h-8 text-blue-600" />
         </div>
       );
+    } else if (url.includes('.ppt') || url.includes('.pptx')) {
+      return (
+        <div className="bg-orange-100 p-3 rounded-lg">
+          <FileText className="w-8 h-8 text-orange-600" />
+        </div>
+      );
+    } else if (url.includes('.xls') || url.includes('.xlsx')) {
+      return (
+        <div className="bg-green-100 p-3 rounded-lg">
+          <FileText className="w-8 h-8 text-green-600" />
+        </div>
+      );
     } else {
       return (
         <div className="bg-gray-100 p-3 rounded-lg">
@@ -78,7 +90,7 @@ const FileSelectionModal = ({ onClose, onFileSelect }) => {
           <div className="p-6">
             {/* Files Grid */}
             <div>
-              <h2 className="text-lg font-semibold mb-4">Available Files</h2>
+              <h2 className="text-lg font-semibold mb-4">Organized Files</h2>
               
               {loading ? (
                 <div className="text-center py-8">
@@ -90,41 +102,63 @@ const FileSelectionModal = ({ onClose, onFileSelect }) => {
                   No files found
                 </div>
               ) : (
-                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {files.map((file) => (
-                    <div
-                      key={file._id}
-                      className={`border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col cursor-pointer ${
-                        selectedFile && selectedFile._id === file._id 
-                          ? 'ring-2 ring-blue-500 border-blue-500' 
-                          : ''
-                      }`}
-                      onClick={() => setSelectedFile(file)}
-                    >
-                      <div className="relative pb-[75%] bg-gray-50">
-                        {isImageFile(file.imageUrl) ? (
-                          <img
-                            src={file.imageUrl}
-                            alt={file.name}
-                            className="absolute inset-0 w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
-                            {getFileIcon(file.imageUrl)}
+                <>
+                  {/* Group files by product company */}
+                  {Object.entries(
+                    files.reduce((acc, file) => {
+                      const product = file.productCompany || 'Uncategorized';
+                      if (!acc[product]) {
+                        acc[product] = [];
+                      }
+                      acc[product].push(file);
+                      return acc;
+                    }, {})
+                  ).map(([product, productFiles]) => (
+                    <div key={product} className="mb-8">
+                      <h3 className="text-md font-semibold mb-4 text-gray-800 border-b pb-2">{product}</h3>
+                      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {productFiles.map((file) => (
+                          <div
+                            key={file._id}
+                            className={`border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col cursor-pointer ${
+                              selectedFile && selectedFile._id === file._id 
+                                ? 'ring-2 ring-blue-500 border-blue-500' 
+                                : ''
+                            }`}
+                            onClick={() => setSelectedFile(file)}
+                          >
+                            <div className="relative pb-[75%] bg-gray-50">
+                              {isImageFile(file.imageUrl) ? (
+                                <img
+                                  src={file.imageUrl}
+                                  alt={file.name}
+                                  className="absolute inset-0 w-full h-full object-cover"
+                                />
+                              ) : (
+                                <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
+                                  {getFileIcon(file.imageUrl)}
+                                </div>
+                              )}
+                            </div>
+                            <div className="p-3 flex-grow flex flex-col">
+                              <h3 className="font-semibold text-gray-800 truncate text-sm">
+                                {file.name}
+                              </h3>
+                              <p className="text-xs text-gray-500 mt-1 truncate">
+                                {new Date(file.createdAt).toLocaleDateString()}
+                              </p>
+                              {file.productCompany && (
+                                <p className="text-xs text-gray-500 truncate mt-1">
+                                  {file.productCompany}
+                                </p>
+                              )}
+                            </div>
                           </div>
-                        )}
-                      </div>
-                      <div className="p-3 flex-grow flex flex-col">
-                        <h3 className="font-semibold text-gray-800 truncate text-sm">
-                          {file.name}
-                        </h3>
-                        <p className="text-xs text-gray-500 mt-1 truncate">
-                          {new Date(file.createdAt).toLocaleDateString()}
-                        </p>
+                        ))}
                       </div>
                     </div>
                   ))}
-                </div>
+                </>
               )}
             </div>
             
@@ -150,6 +184,11 @@ const FileSelectionModal = ({ onClose, onFileSelect }) => {
                       <p className="text-xs text-gray-500">
                         {new Date(selectedFile.createdAt).toLocaleDateString()}
                       </p>
+                      {selectedFile.productCompany && (
+                        <p className="text-xs text-gray-500">
+                          Product: {selectedFile.productCompany}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <button

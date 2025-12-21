@@ -11,6 +11,9 @@ const ImgAndFiles = () => {
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState('JIFSA');
+  const [productFilter, setProductFilter] = useState('All');
+  const [fileTypeFilter, setFileTypeFilter] = useState('All');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -66,6 +69,7 @@ const ImgAndFiles = () => {
     const formData = new FormData();
     formData.append('image', selectedFile);
     formData.append('name', fileName);
+    formData.append('productCompany', selectedProduct);
     formData.append('createdBy', userName);
     formData.append('creatorEmail', userEmail);
     formData.append('creatorRole', userRole);
@@ -138,6 +142,16 @@ const ImgAndFiles = () => {
     return imageExtensions.some(ext => url.toLowerCase().includes(ext));
   };
 
+  // Helper function to determine file type
+  const getFileType = (url) => {
+    if (isImageFile(url)) return 'Image';
+    if (url.includes('.pdf')) return 'PDF';
+    if (url.includes('.doc') || url.includes('.docx')) return 'Word';
+    if (url.includes('.ppt') || url.includes('.pptx')) return 'PowerPoint';
+    if (url.includes('.xls') || url.includes('.xlsx')) return 'Excel';
+    return 'Other';
+  };
+
   // Helper function to get appropriate file icon
   const getFileIcon = (url) => {
     if (url.includes('.pdf')) {
@@ -152,6 +166,22 @@ const ImgAndFiles = () => {
       return (
         <div className="bg-blue-100 p-3 rounded-lg">
           <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+          </svg>
+        </div>
+      );
+    } else if (url.includes('.ppt') || url.includes('.pptx')) {
+      return (
+        <div className="bg-orange-100 p-3 rounded-lg">
+          <svg className="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+          </svg>
+        </div>
+      );
+    } else if (url.includes('.xls') || url.includes('.xlsx')) {
+      return (
+        <div className="bg-green-100 p-3 rounded-lg">
+          <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
           </svg>
         </div>
@@ -211,7 +241,7 @@ const ImgAndFiles = () => {
 
   return (
     <div className="p-4 md:p-6">
-      <h1 className="text-2xl md:text-3xl font-bold mb-6">Gallery & Documents</h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-6">File Management</h1>
 
       {/* Upload Form */}
       <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-md">
@@ -232,6 +262,25 @@ const ImgAndFiles = () => {
           </div>
 
           <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product">
+              Product/Category
+            </label>
+            <select
+              value={selectedProduct}
+              onChange={(e) => setSelectedProduct(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="JIFSA">JIFSA</option>
+              <option value="Elite-BIM">Elite BIM</option>
+              <option value="Elite-BIFS">Elite BIFS</option>
+              <option value="EEE-Technologies">EEE Technologies</option>
+              <option value="Elite-Jobs">Elite Jobs</option>
+              <option value="Elite-Cards">Elite Cards</option>
+              <option value="Elite-Management">Elite Management</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="file">
               Select File
             </label>
@@ -241,6 +290,9 @@ const ImgAndFiles = () => {
               onChange={handleFileChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            <p className="mt-2 text-sm text-gray-500">
+              Supported file types: Images (JPG, PNG, GIF, etc.), PDF, Word, Excel, PowerPoint
+            </p>
           </div>
 
           <button
@@ -254,19 +306,154 @@ const ImgAndFiles = () => {
 
       {/* Gallery Section */}
       <div>
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">Gallery</h2>
+        <h2 className="text-xl md:text-2xl font-semibold mb-4">Uploaded Files</h2>
+        
+        {/* Results Counter */}
+        {productFilter !== 'All' || fileTypeFilter !== 'All' ? (
+          <div className="mb-2 text-sm text-gray-600">
+            Showing {images.filter(image => {
+              // Apply product filter
+              if (productFilter !== 'All' && image.productCompany !== productFilter) {
+                return false;
+              }
+              // Apply file type filter
+              if (fileTypeFilter !== 'All' && getFileType(image.imageUrl) !== fileTypeFilter) {
+                return false;
+              }
+              return true;
+            }).length} of {images.length} files
+          </div>
+        ) : null}
+        
+        {/* Filters */}
+        <div className="mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Product Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Product</label>
+              <select
+                value={productFilter}
+                onChange={(e) => setProductFilter(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="All">All Products</option>
+                {[...new Set(images.map(img => img.productCompany))]
+                  .filter(product => product) // Remove undefined/null values
+                  .sort()
+                  .map(product => (
+                    <option key={product} value={product}>{product}</option>
+                  ))}
+              </select>
+            </div>
+            
+            {/* File Type Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Filter by File Type</label>
+              <select
+                value={fileTypeFilter}
+                onChange={(e) => setFileTypeFilter(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="All">All File Types</option>
+                <option value="Image">Images</option>
+                <option value="PDF">PDF</option>
+                <option value="Word">Word</option>
+                <option value="PowerPoint">PowerPoint</option>
+                <option value="Excel">Excel</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          
+          {(productFilter !== 'All' || fileTypeFilter !== 'All') && (
+            <div className="mt-3 flex items-center">
+              <span className="text-sm text-gray-600 mr-2">Filters applied:</span>
+              {productFilter !== 'All' && (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-2">
+                  Product: {productFilter}
+                  <button 
+                    onClick={() => setProductFilter('All')}
+                    className="ml-1 inline-flex items-center justify-center w-4 h-4 rounded-full hover:bg-blue-200"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+              {fileTypeFilter !== 'All' && (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  Type: {fileTypeFilter}
+                  <button 
+                    onClick={() => setFileTypeFilter('All')}
+                    className="ml-1 inline-flex items-center justify-center w-4 h-4 rounded-full hover:bg-green-200"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+              <button 
+                onClick={() => {
+                  setProductFilter('All');
+                  setFileTypeFilter('All');
+                }}
+                className="ml-3 text-sm text-blue-600 hover:text-blue-800"
+              >
+                Clear all
+              </button>
+            </div>
+          )}
+        </div>
 
         {loading ? (
           <div className="text-center py-8">Loading files...</div>
-        ) : images.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">No files found</div>
+        ) : images.filter(image => {
+          // Apply product filter
+          if (productFilter !== 'All' && image.productCompany !== productFilter) {
+            return false;
+          }
+          // Apply file type filter
+          if (fileTypeFilter !== 'All' && getFileType(image.imageUrl) !== fileTypeFilter) {
+            return false;
+          }
+          return true;
+        }).length === 0 ? (
+          <div className="text-center py-8 text-gray-500">
+            {productFilter !== 'All' || fileTypeFilter !== 'All' 
+              ? 'No files match the selected filters' 
+              : 'No files found'}
+          </div>
         ) : (
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6">
-            {images.map((image) => (
-              <div
-                key={image._id}
-                className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
-              >
+          <>
+            {/* Group images by product */}
+            {Object.entries(
+              images
+                .filter(image => {
+                  // Apply product filter
+                  if (productFilter !== 'All' && image.productCompany !== productFilter) {
+                    return false;
+                  }
+                  // Apply file type filter
+                  if (fileTypeFilter !== 'All' && getFileType(image.imageUrl) !== fileTypeFilter) {
+                    return false;
+                  }
+                  return true;
+                })
+                .reduce((acc, image) => {
+                  const product = image.productCompany || 'Uncategorized';
+                  if (!acc[product]) {
+                    acc[product] = [];
+                  }
+                  acc[product].push(image);
+                  return acc;
+                }, {})
+            ).map(([product, productImages]) => (
+              <div key={product} className="mb-8">
+                <h3 className="text-lg md:text-xl font-semibold mb-4 text-gray-800 border-b pb-2">{product}</h3>
+                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6">
+                  {productImages.map((image) => (
+                    <div
+                      key={image._id}
+                      className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
+                    >
                 <div 
                   className="relative pb-[75%] bg-gray-50 cursor-pointer"
                   onClick={() => isImageFile(image.imageUrl) && handleImagePreview(image.imageUrl)}
@@ -289,6 +476,9 @@ const ImgAndFiles = () => {
                 <div className="p-3 md:p-4 flex-grow flex flex-col">
                   <h3 className="font-semibold text-gray-800 truncate text-sm md:text-base">{image.name}</h3>
                   <p className="text-xs text-gray-500 mt-1 truncate">
+                    Product: {image.productCompany}
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">
                     Uploaded by: {image.createdBy}
                   </p>
                   <p className="text-xs text-gray-500 truncate">
@@ -339,9 +529,12 @@ const ImgAndFiles = () => {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
       </div>
 
       {/* Success Modal */}
