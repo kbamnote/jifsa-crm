@@ -5,8 +5,10 @@ import Cookies from "js-cookie";
 import TeamModal from '../../modal/TeamModal';
 import UpdateTeamModal from '../../modal/UpdateTeamModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
+import { useNavigate } from 'react-router-dom';
 
 const Team = () => {
+  const navigate = useNavigate();
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -91,8 +93,8 @@ const Team = () => {
   // Role-based permissions for team actions
   const canViewTeam = ['admin', 'manager'].includes(userRole);
   const canAddMembers = userRole === 'admin';
-  const canDeleteMembers = userRole === 'admin';
-  const canUpdateMembers = userRole === 'admin'; // Only admins can update members
+  const canDeleteMembers = userRole === 'admin'; // Only admins can delete members (UI shows icons for managers but backend restricts actions)
+  const canUpdateMembers = userRole === 'admin'; // Only admins can update members (UI shows icons for managers but backend restricts actions)
 
   // If user doesn't have permission to view team, show access denied message
   if (!canViewTeam) {
@@ -300,7 +302,7 @@ const Team = () => {
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        {canUpdateMembers && member.role !== 'manager' && ( // Only show edit icon for admins and not for managers
+                        {canUpdateMembers && (
                           <button
                             onClick={() => {
                               setMemberToUpdate(member);
@@ -323,7 +325,7 @@ const Team = () => {
                             )}
                           </button>
                         )}
-                        {canDeleteMembers && member.role !== 'manager' && ( // Only show delete icon for admins and not for managers
+                        {canDeleteMembers && (
                           <button
                             onClick={() => handleDeleteMember(member._id)}
                             className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
@@ -341,7 +343,11 @@ const Team = () => {
                         <h4 className="font-semibold text-gray-700 mb-3">Assigned Leads</h4>
                         <div className="space-y-2">
                           {member.assignedLeads.map((lead) => (
-                            <div key={lead._id} className="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
+                            <div 
+                              key={lead._id} 
+                              className="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors"
+                              onClick={() => navigate(`/lead/${lead._id}`)}
+                            >
                               <div className="flex-1">
                                 <p className="font-medium text-gray-800">{lead.fullName}</p>
                                 <div className="flex items-center gap-3 mt-1 text-sm text-gray-600">

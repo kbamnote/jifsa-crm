@@ -804,7 +804,7 @@ const LeadManagement = () => {
         <MailModal
           showModal={showMailModal}
           setShowModal={setShowMailModal}
-          attachment={mailAttachments.length > 0 ? mailAttachments[0] : null}
+          attachmentFile={mailAttachments.length > 0 ? mailAttachments[0] : null}
           imageToShare={leadToShare}
           selectedLeads={[leadToShare]}
           onAttachmentClick={handleSelectAttachment}
