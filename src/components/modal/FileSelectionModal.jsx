@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { X, Image, FileText } from 'lucide-react';
 import { getImgOrDocs } from '../utils/Api';
 
-const FileSelectionModal = ({ onClose, onFileSelect }) => {
+const FileSelectionModal = ({ isOpen, onClose, onFileSelect }) => {
+  if (!isOpen) return null;
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);

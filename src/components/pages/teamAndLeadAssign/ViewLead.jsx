@@ -541,18 +541,18 @@ const ViewLead = () => {
         showModal={showMailModal}
         setShowModal={setShowMailModal}
         attachmentFile={mailAttachments.length > 0 ? mailAttachments[0] : null}
+        imageToShare={selectedRecord}
         selectedLeads={selectedRecord ? [selectedRecord] : []}
         onAttachmentClick={handleSelectAttachment}
         mode="send"
       />
 
       {/* File Selection Modal */}
-      {showFileSelectionModal && (
-        <FileSelectionModal 
-          onClose={() => setShowFileSelectionModal(false)}
-          onFileSelect={handleFileSelectFromGallery}
-        />
-      )}
+      <FileSelectionModal 
+        isOpen={showFileSelectionModal}
+        onClose={() => setShowFileSelectionModal(false)}
+        onFileSelect={handleFileSelectFromGallery}
+      />
     </div>
   );
 };

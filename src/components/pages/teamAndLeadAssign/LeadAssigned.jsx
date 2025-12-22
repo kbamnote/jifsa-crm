@@ -576,16 +576,14 @@ const LeadAssigned = () => {
         />
         
         {/* File Selection Modal */}
-        {showFileSelectionModal && (
-          <FileSelectionModal
-            isOpen={showFileSelectionModal}
-            onClose={() => setShowFileSelectionModal(false)}
-            onFileSelect={handleFileSelectFromGallery}
-          />
-        )}
+        <FileSelectionModal
+          isOpen={showFileSelectionModal}
+          onClose={() => setShowFileSelectionModal(false)}
+          onFileSelect={handleFileSelectFromGallery}
+        />
       </div>
     </div>
   );
 };
 
-export default LeadAssigned;
+export default LeadAssigned;  

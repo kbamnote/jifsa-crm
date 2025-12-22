@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from "lucide-react";
+import { X } from 'lucide-react';
 
 const AssignmentModal = ({
   showModal,
@@ -98,7 +98,7 @@ const AssignmentModal = ({
             <select
               value={selectedMember}
               onChange={(e) => setSelectedMember(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
               disabled={isAssigning}
             >
               <option value="">Select a team member</option>

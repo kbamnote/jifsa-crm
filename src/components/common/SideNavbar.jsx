@@ -44,7 +44,11 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       mailTracking: false,
       leadManagement: false,
       billingRecords: false,
-      b2b: false
+      b2b: false,
+      products: false,
+      jifsa: false,
+      elitebim: false,
+      eeetechnologies: false
     };
     
     if (roleLower === "admin") {
@@ -85,6 +89,10 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       disabledItems.team = true;
       disabledItems.b2b = true;
       disabledItems.socialMedia = true;
+      disabledItems.products = true; // Disable Products dropdown for telecaller
+      disabledItems.jifsa = true; // Disable individual product items for telecaller
+      disabledItems.elitebim = true;
+      disabledItems.eeetechnologies = true;
       return disabledItems;
     }
     
@@ -98,6 +106,9 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       disabledItems.billingRecords = true;
       disabledItems.b2b = true;
       disabledItems.products = true; // Disable Products dropdown for marketing
+      disabledItems.jifsa = true; // Disable individual product items for marketing
+      disabledItems.elitebim = true;
+      disabledItems.eeetechnologies = true;
       return disabledItems;
     }
     
@@ -126,18 +137,21 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
           name: "JIFSA",
           path: "/jifsa",
           image: jifsaImg,
+          disabled: disabledItems.jifsa,
         },
         {
           id: "elitebim",
           name: "Elite BIM",
           path: "/bim",
           image: bimImg,
+          disabled: disabledItems.elitebim,
         },
         {
           id: "eeetechnologies",
           name: "EEE Technologies",
           path: "/eee",
           image: eeeImg,
+          disabled: disabledItems.eeetechnologies,
         },
       ],
     },

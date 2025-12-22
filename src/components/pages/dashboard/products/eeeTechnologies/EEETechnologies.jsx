@@ -7,6 +7,8 @@ import SuccessModal from '../../../../modal/SuccessModal';
 import DeleteConfirmationModal from '../../../../modal/DeleteConfirmationModal';
 import ErrorModal from '../../../../modal/ErrorModal';
 import AssignmentModal from '../../../../modal/AssignmentModal';
+import MailModal from '../../../../modal/MailModal';
+import FileSelectionModal from '../../../../modal/FileSelectionModal';
 import Cookies from 'js-cookie';
 
 const EEETechnologies = () => {
@@ -30,12 +32,20 @@ const EEETechnologies = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorModalMessage, setErrorModalMessage] = useState('');
   
+  // Mail modal states
+  const [showMailModal, setShowMailModal] = useState(false);
+  const [enrollmentToShare, setEnrollmentToShare] = useState(null);
+  const [mailAttachments, setMailAttachments] = useState([]);
+  
   // Assignment states
   const [showAssignmentModal, setShowAssignmentModal] = useState(false);
   const [enrollmentToAssign, setEnrollmentToAssign] = useState(null);
   const [teamMembers, setTeamMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState('');
   const [isAssigning, setIsAssigning] = useState(false);
+  
+  // File selection modal state
+  const [showFileSelectionModal, setShowFileSelectionModal] = useState(false);
   
   // User information
   const userEmail = Cookies.get("email") || "";
@@ -93,6 +103,113 @@ const EEETechnologies = () => {
     setEnrollmentToAssign(enrollment);
     setShowAssignmentModal(true);
     fetchTeamMembers();
+  };
+
+  const handleMailAction = (enrollment) => {
+    setEnrollmentToShare(enrollment);
+    setShowMailModal(true);
+  };
+
+  // Function to handle attachment selection
+  const handleSelectAttachment = () => {
+    setShowFileSelectionModal(true);
+  };
+
+  // Function to handle file selection from gallery
+  const handleFileSelectFromGallery = (file) => {
+    // Create attachment object similar to ImgAndFiles.jsx
+    const attachment = {
+      name: file.name,
+      url: file.imageUrl,
+      isImage: isImageFile(file.imageUrl)
+    };
+    setMailAttachments([attachment]);
+    setShowFileSelectionModal(false);
+  };
+
+  // Helper function to determine if a file is an image (copied from ImgAndFiles.jsx)
+  const isImageFile = (fileName) => {
+    if (!fileName) return false;
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'];
+    const extension = fileName.split('.').pop().toLowerCase();
+    return imageExtensions.includes(extension);
+  };
+
+  // Helper function to get file icon based on type (copied from ImgAndFiles.jsx)
+  const getFileIcon = (fileName) => {
+    if (!fileName) return '📄';
+    const extension = fileName.split('.').pop().toLowerCase();
+    
+    const iconMap = {
+      'pdf': '📑',
+      'doc': '📝',
+      'docx': '📝',
+      'xls': '📊',
+      'xlsx': '📊',
+      'ppt': '📽️',
+      'pptx': '📽️',
+      'zip': '📦',
+      'rar': '📦',
+    };
+    
+    return iconMap[extension] || '📄';
+  };
+
+  // Helper function to format file size (copied from ImgAndFiles.jsx)
+  const formatFileSize = (bytes) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  // Helper function to format date (copied from ImgAndFiles.jsx)
+  const formatDateTime = (dateString) => {
+    if (!dateString) return 'N/A';
+    return new Date(dateString).toLocaleString('en-IN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  // Helper function to truncate filename (copied from ImgAndFiles.jsx)
+  const truncateFileName = (fileName, maxLength = 20) => {
+    if (!fileName) return '';
+    if (fileName.length <= maxLength) return fileName;
+    return fileName.substring(0, maxLength - 3) + '...';
+  };
+
+  // Helper function to format file type display (copied from ImgAndFiles.jsx)
+  const formatFileType = (fileName) => {
+    if (!fileName) return 'Unknown';
+    return fileName.split('.').pop().toUpperCase();
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    return new Date(dateString).toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
+
+  const formatDateShort = (dateString) => {
+    if (!dateString) return "N/A";
+    try {
+      return new Date(dateString).toLocaleDateString("en-IN", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    } catch (error) {
+      console.error("Error formatting date:", error);
+      return "Invalid Date";
+    }
   };
 
   const fetchTeamMembers = async () => {
@@ -332,21 +449,6 @@ const EEETechnologies = () => {
   };
 
 
-
-  const formatDateShort = (dateString) => {
-    if (!dateString) return "N/A";
-    try {
-      return new Date(dateString).toLocaleDateString("en-IN", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      });
-    } catch (error) {
-      console.error("Error formatting date:", error);
-      return "Invalid Date";
-    }
-  };
-
   const getSortIcon = (field) => {
     if (sortField !== field) return null;
     return sortDirection === "asc" ? "▲" : "▼";
@@ -458,6 +560,13 @@ const EEETechnologies = () => {
               >
                 <Eye className="w-5 h-5" />
               </button>
+              <button
+                onClick={() => handleMailAction(item)}
+                className="text-indigo-600 hover:text-indigo-900 p-2 rounded-full hover:bg-indigo-50 transition-colors"
+                title="Send Mail"
+              >
+                <Mail className="w-5 h-5" />
+              </button>
               {/* Show assignment icons only for admin, manager, counsellor, and marketing roles */}
               {['admin', 'manager', 'counsellor', 'marketing'].includes(userRole.toLowerCase()) && (
                 item.assignedTo ? (
@@ -485,7 +594,7 @@ const EEETechnologies = () => {
               >
                 <Edit className="w-5 h-5" />
               </button>
-              {item._id && (
+              {item._id && userRole.toLowerCase() === 'admin' && (
                 <button
                   onClick={() => handleDeleteEnrollment(item._id)}
                   className="text-red-600 hover:text-red-900 p-2 rounded-full hover:bg-red-50 transition-colors"
@@ -625,6 +734,24 @@ const EEETechnologies = () => {
                 onAssign={handleAssignEnrollment}
                 isAssigning={isAssigning}
                 userRole={userRole}
+              />
+              
+              {/* Mail Modal */}
+              <MailModal
+                showModal={showMailModal}
+                setShowModal={setShowMailModal}
+                attachmentFile={mailAttachments.length > 0 ? mailAttachments[0] : null}
+                imageToShare={enrollmentToShare}
+                selectedLeads={enrollmentToShare ? [enrollmentToShare] : []}
+                onAttachmentClick={handleSelectAttachment}
+                mode="send"
+              />
+              
+              {/* File Selection Modal */}
+              <FileSelectionModal
+                isOpen={showFileSelectionModal}
+                onClose={() => setShowFileSelectionModal(false)}
+                onFileSelect={handleFileSelectFromGallery}
               />
             </>
             
