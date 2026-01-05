@@ -162,14 +162,14 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-6">
+      <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg sm:max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="p-4 sm:p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4 sm:mb-6">
             Add New Social Media Post
           </h2>
           
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {/* Product Company */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -268,23 +268,23 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
 
               {/* Source - Conditional based on upload type */}
               {formData.uploadType === 'post' ? (
-                <div className="md:col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Upload Image
                   </label>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <Upload className="w-8 h-8 text-gray-400" />
                         <p className="mb-2 text-sm text-gray-500">
                           <span className="font-semibold">Click to upload</span> or drag and drop
                         </p>
-                        <p className="text-xs text-gray-500">{formData.uploadType === 'flyer' ? 'Image/Video up to 10MB' : 'PNG, JPG, GIF up to 10MB'}</p>
+                        <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
                       </div>
                       <input
                         type="file"
                         className="hidden"
-                        accept={formData.uploadType === 'flyer' ? 'image/*,video/*' : 'image/*'}
+                        accept="image/*"
                         onChange={handleFileChange}
                       />
                     </label>
@@ -314,7 +314,7 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
                   </div>
                 </div>
               ) : formData.uploadType === 'reel' ? (
-                <div className="md:col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Reel URL
                   </label>
@@ -334,23 +334,23 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
                   </div>
                 </div>
               ) : formData.uploadType === 'flyer' ? (
-                <div className="md:col-span-2">
+                <div className="sm:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Upload Flyer
                   </label>
-                  <div className="flex items-center space-x-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <Upload className="w-8 h-8 text-gray-400" />
                         <p className="mb-2 text-sm text-gray-500">
                           <span className="font-semibold">Click to upload</span> or drag and drop
                         </p>
-                        <p className="text-xs text-gray-500">{formData.uploadType === 'flyer' ? 'Image/Video up to 10MB' : 'PNG, JPG, GIF up to 10MB'}</p>
+                        <p className="text-xs text-gray-500">Image/Video up to 10MB</p>
                       </div>
                       <input
                         type="file"
                         className="hidden"
-                        accept={formData.uploadType === 'flyer' ? 'image/*,video/*' : 'image/*'}
+                        accept="image/*,video/*"
                         onChange={handleFileChange}
                       />
                     </label>
@@ -383,18 +383,18 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
               ) : null}
             </div>
 
-            <div className="flex justify-end space-x-4">
+            <div className="flex flex-col sm:flex-row sm:justify-end sm:space-x-4 space-y-2 sm:space-y-0">
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                className="px-4 py-2 sm:px-6 sm:py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                 disabled={isSubmitting}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className={`px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`px-4 py-2 sm:px-6 sm:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}

@@ -342,40 +342,40 @@ const SocialMedia = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
 
         {/* Image/Video Preview Modal */}
         {showImagePreview && (
           <div 
-            className="fixed inset-0 bg-opacity-90 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
             onClick={() => setShowImagePreview(false)}
           >
             <div 
-              className="relative max-w-6xl max-h-full"
+              className="relative max-w-full max-h-full w-full"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setShowImagePreview(false)}
-                className="absolute top-4 right-4 text-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 z-10"
+                className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 z-10"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
               {previewImage && (
-                <div className="flex justify-center">
+                <div className="flex justify-center items-center min-h-[200px]">
                   {previewImage.toLowerCase().match(/\.(mp4|webm|ogg)$/i) ? (
                     <video 
                       src={previewImage} 
                       controls 
-                      className="max-w-full max-h-[90vh] object-contain"
+                      className="max-w-full max-h-[80vh] object-contain"
                     />
                   ) : (
                     <img
                       src={previewImage}
                       alt="Preview"
-                      className="max-w-full max-h-[90vh] object-contain"
+                      className="max-w-full max-h-[80vh] object-contain"
                       onError={(e) => {
                         console.error('Image failed to load:', previewImage);
                         e.target.src = '/placeholder-image.jpg'; // fallback image
@@ -410,10 +410,10 @@ const SocialMedia = () => {
           }}
         />
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Social Media Management</h1>
-            <p className="text-gray-600 mt-2">Manage social media posts and reels for all product companies</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Social Media Management</h1>
+            <p className="text-gray-600 mt-1 sm:mt-2">Manage social media posts and reels for all product companies</p>
           </div>
           {/* Allow marketing, manager, sales, and admin users to add new posts */}
           {['marketing', 'manager', 'sales', 'admin'].includes(userRole) && (
@@ -421,10 +421,10 @@ const SocialMedia = () => {
               onClick={() => {
                 setShowAddModal(true);
               }}
-              className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+              className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
             >
-              <Plus className="w-5 h-5" />
-              Add New
+              <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-sm sm:text-base">Add New</span>
             </button>
           )}
         </div>
@@ -432,33 +432,35 @@ const SocialMedia = () => {
 
 
         {/* Search and Stats */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-          <div className="relative w-full md:w-1/3">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Search by company, platform, or user..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div className="w-full sm:w-1/2 md:w-1/3">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search by company, platform, or user..."
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <div className="bg-white px-4 py-2 rounded-lg shadow">
-              <p className="text-sm text-gray-600">Total</p>
-              <p className="text-xl font-bold text-gray-800">{stats.totalPosts}</p>
+          <div className="flex flex-wrap justify-center sm:justify-end gap-2">
+            <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[70px]">
+              <p className="text-xs text-gray-600">Total</p>
+              <p className="text-sm sm:text-lg font-bold text-gray-800">{stats.totalPosts}</p>
             </div>
-            <div className="bg-white px-4 py-2 rounded-lg shadow">
-              <p className="text-sm text-gray-600">Posts</p>
-              <p className="text-xl font-bold text-blue-600">{stats.totalPostsType}</p>
+            <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[70px]">
+              <p className="text-xs text-gray-600">Posts</p>
+              <p className="text-sm sm:text-lg font-bold text-blue-600">{stats.totalPostsType}</p>
             </div>
-            <div className="bg-white px-4 py-2 rounded-lg shadow">
-              <p className="text-sm text-gray-600">Reels</p>
-              <p className="text-xl font-bold text-green-600">{stats.totalReels}</p>
+            <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[70px]">
+              <p className="text-xs text-gray-600">Reels</p>
+              <p className="text-sm sm:text-lg font-bold text-green-600">{stats.totalReels}</p>
             </div>
-            <div className="bg-white px-4 py-2 rounded-lg shadow">
-              <p className="text-sm text-gray-600">Flyers</p>
-              <p className="text-xl font-bold text-purple-600">{stats.totalFlyers}</p>
+            <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[70px]">
+              <p className="text-xs text-gray-600">Flyers</p>
+              <p className="text-sm sm:text-lg font-bold text-purple-600">{stats.totalFlyers}</p>
             </div>
           </div>
         </div>
@@ -466,26 +468,26 @@ const SocialMedia = () => {
         {/* Team Stats Section - Cards */}
         <div className="mb-8">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">Team Statistics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {Object.entries(stats.teamStats).map(([name, userStats]) => (
               <div key={name} className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
                 <h3 className="font-semibold text-gray-800 mb-2 truncate">{name}</h3>
-                <div className="space-y-2">
+                <div className="space-y-1">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Total:</span>
-                    <span className="font-medium">{userStats.total}</span>
+                    <span className="text-gray-600 text-sm">Total:</span>
+                    <span className="font-medium text-sm">{userStats.total}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Posts:</span>
-                    <span className="text-blue-600 font-medium">{userStats.posts}</span>
+                    <span className="text-gray-600 text-sm">Posts:</span>
+                    <span className="text-blue-600 font-medium text-sm">{userStats.posts}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Reels:</span>
-                    <span className="text-green-600 font-medium">{userStats.reels}</span>
+                    <span className="text-gray-600 text-sm">Reels:</span>
+                    <span className="text-green-600 font-medium text-sm">{userStats.reels}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Flyers:</span>
-                    <span className="text-purple-600 font-medium">{userStats.flyers}</span>
+                    <span className="text-gray-600 text-sm">Flyers:</span>
+                    <span className="text-purple-600 font-medium text-sm">{userStats.flyers}</span>
                   </div>
                 </div>
               </div>
@@ -501,51 +503,118 @@ const SocialMedia = () => {
         {/* Table */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
+            <table className="min-w-[800px] w-full divide-y divide-gray-200">
               <thead className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Product Company</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Platforms</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Type</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">File</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Link</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Date</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Uploaded By</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">Product Company</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">Platforms</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">Type</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">File</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">Link</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">Date</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell">Uploaded By</th>
+                  <th className="px-3 py-2 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredData.length === 0 ? (
                   <tr>
-                    <td colSpan="8" className="px-6 py-12 text-center">
+                    <td colSpan="8" className="px-3 py-8 sm:py-12 text-center">
                       <div className="flex flex-col items-center justify-center">
-                        <Calendar className="w-12 h-12 text-gray-300 mb-4" />
-                        <h3 className="text-lg font-medium text-gray-900 mb-1">No social media posts found</h3>
-                        <p className="text-gray-500">Get started by adding a new social media post.</p>
+                        <Calendar className="w-10 h-10 sm:w-12 sm:h-12 text-gray-300 mb-3 sm:mb-4" />
+                        <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-1">No social media posts found</h3>
+                        <p className="text-sm sm:text-gray-500">Get started by adding a new social media post.</p>
                       </div>
                     </td>
                   </tr>
                 ) : (
                   filteredData.map((item) => (
                     <tr key={item._id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm md:hidden">
+                        <div className="font-medium text-gray-900">Company:</div>
+                        <div className="text-gray-700">
+                          {productCompanyOptions.find(opt => opt.value === item.productCompany)?.label || item.productCompany}
+                        </div>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap hidden md:table-cell">
                         <div className="text-sm font-medium text-gray-900">
                           {productCompanyOptions.find(opt => opt.value === item.productCompany)?.label || item.productCompany}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm md:hidden">
+                        <div className="font-medium text-gray-900">Platforms:</div>
+                        <div className="text-gray-700">
+                          {item.platforms?.map(platform => 
+                            platformOptions.find(opt => opt.value === platform)?.label || platform
+                          ).join(', ') || 'N/A'}
+                        </div>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap hidden md:table-cell">
                         <div className="text-sm text-gray-900">
                           {item.platforms?.map(platform => 
                             platformOptions.find(opt => opt.value === platform)?.label || platform
                           ).join(', ') || 'N/A'}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm md:hidden">
+                        <div className="font-medium text-gray-900">Type:</div>
+                        <span className="inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                          {uploadTypeOptions.find(opt => opt.value === item.uploadType)?.label || item.uploadType}
+                        </span>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap hidden md:table-cell">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                           {uploadTypeOptions.find(opt => opt.value === item.uploadType)?.label || item.uploadType}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm md:hidden">
+                        <div className="font-medium text-gray-900">File:</div>
+                        <div className="flex items-center">
+                          {item.imageUrl && item.uploadType === 'post' && (
+                            <div 
+                              className="cursor-pointer"
+                              onClick={() => handleImagePreview(item.imageUrl)}
+                            >
+                              <img 
+                                src={item.imageUrl} 
+                                alt="Post" 
+                                className="w-8 h-8 object-cover rounded-md border border-gray-200"
+                              />
+                            </div>
+                          )}
+                          {item.imageUrl && item.uploadType === 'flyer' && (
+                            <div 
+                              className="cursor-pointer"
+                              onClick={() => handleImagePreview(item.imageUrl)}
+                            >
+                              <img 
+                                src={item.imageUrl} 
+                                alt="Flyer" 
+                                className="w-8 h-8 object-cover rounded-md border border-gray-200"
+                              />
+                            </div>
+                          )}
+                          {item.videoUrl && item.uploadType === 'flyer' && (
+                            <div 
+                              className="cursor-pointer"
+                              onClick={() => handleImagePreview(item.videoUrl)}
+                            >
+                              <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                              </svg>
+                            </div>
+                          )}
+                          {(item.uploadType === 'reel') && (
+                            <svg className="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                          {!item.imageUrl && !item.videoUrl && item.uploadType !== 'reel' && (
+                            <span className="text-gray-400 italic">No file</span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap hidden md:table-cell">
                         {item.imageUrl && item.uploadType === 'post' && (
                           <div 
                             className="cursor-pointer"
@@ -591,7 +660,45 @@ const SocialMedia = () => {
                           <span className="text-gray-400 italic">No file</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm md:hidden">
+                        <div className="font-medium text-gray-900">Link:</div>
+                        <div>
+                          {item.uploadType === 'reel' && item.sourceUrl && (
+                            <a 
+                              href={item.sourceUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 underline"
+                            >
+                              Reel
+                            </a>
+                          )}
+                          {item.uploadType === 'post' && item.sourceUrl && (
+                            <a 
+                              href={item.sourceUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 underline"
+                            >
+                              Post
+                            </a>
+                          )}
+                          {item.uploadType === 'flyer' && (item.flyerUrl || item.sourceUrl) && (
+                            <a 
+                              href={item.flyerUrl || item.sourceUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:text-blue-800 underline"
+                            >
+                              Flyer
+                            </a>
+                          )}
+                          {!item.sourceUrl && !item.flyerUrl && (
+                            <span className="text-gray-400 italic">No link</span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap hidden md:table-cell">
                         {item.uploadType === 'reel' && item.sourceUrl && (
                           <a 
                             href={item.sourceUrl}
@@ -626,15 +733,26 @@ const SocialMedia = () => {
                           <span className="text-gray-400 italic">No link</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm md:hidden">
+                        <div className="font-medium text-gray-900">Date:</div>
+                        <div className="text-gray-500">
+                          {formatDate(item.date)}
+                        </div>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap text-sm hidden md:table-cell text-gray-500">
                         {formatDate(item.date)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm md:hidden">
+                        <div className="font-medium text-gray-900">Uploaded By:</div>
+                        <div className="text-gray-900">{item.uploadedByName}</div>
+                        <div className="text-gray-500">{item.uploadedByEmail}</div>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap hidden md:table-cell">
                         <div className="text-sm text-gray-900">{item.uploadedByName}</div>
                         <div className="text-sm text-gray-500">{item.uploadedByEmail}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex items-center space-x-2">
+                      <td className="px-3 py-2 whitespace-nowrap text-sm font-medium">
+                        <div className="flex items-center space-x-1">
                           {/* Allow marketing, manager, sales, and admin users to edit */}
                           <button
                             onClick={() => handleEdit(item)}
