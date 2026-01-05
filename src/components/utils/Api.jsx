@@ -131,6 +131,8 @@ export const getSocialMediaPosts = () => Api.get("/social-media/get-all");
 
 export const getSocialMediaPostById = (id) => Api.get(`/social-media/${id}`);
 
+export const getSocialMediaStats = () => Api.get("/social-media/stats");
+
 export const updateSocialMediaPost = (id, formData) =>
   Api.put(`/social-media/${id}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
