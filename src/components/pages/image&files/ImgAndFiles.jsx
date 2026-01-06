@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Download, Share2, X, Mail } from 'lucide-react';
-import { getImgOrDocs, addImgOrDocs, deleteImgOrDocs } from '../../utils/Api';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Download, Share2, X, Mail, Plus, Calendar, BarChart3 } from 'lucide-react';
+import { getImgOrDocs, addImgOrDocs, deleteImgOrDocs, getImageStats } from '../../utils/Api';
 import Cookies from 'js-cookie';
 import SuccessModal from '../../modal/SuccessModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 import MailModal from '../../modal/MailModal';
+import AddFileModal from '../../modal/AddFileModal';
+import UpdateFileModal from '../../modal/UpdateFileModal';
 
 const ImgAndFiles = () => {
   const [images, setImages] = useState([]);
@@ -23,13 +25,49 @@ const ImgAndFiles = () => {
   const [showMailModal, setShowMailModal] = useState(false);
   const [mailAttachment, setMailAttachment] = useState(null);
   const [imageToShare, setImageToShare] = useState(null);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [itemToEdit, setItemToEdit] = useState(null);
+  const [stats, setStats] = useState({
+    totalImages: 0,
+    productCounts: {},
+    creatorCounts: {},
+    fileTypeCounts: {}
+  });
+  const [downloadMenuOpen, setDownloadMenuOpen] = useState(null);
 
   const userRole = Cookies.get("role") || "";
   const userName = Cookies.get("name") || "";
   const userEmail = Cookies.get("email") || "";
 
+  const fetchStats = async () => {
+    try {
+      const response = await getImageStats();
+      if (response.data.success) {
+        setStats(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+    }
+  };
+
   useEffect(() => {
     fetchImages();
+    fetchStats();
+  }, []);
+
+  // Close download menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.download-menu')) {
+        setDownloadMenuOpen(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const fetchImages = async () => {
@@ -82,6 +120,7 @@ const ImgAndFiles = () => {
       setSelectedFile(null);
       e.target.reset();
       fetchImages(); // Refresh the image list
+      fetchStats(); // Refresh stats
     } catch (error) {
       console.error('Error uploading file:', error);
       setSuccessMessage(error.response?.data?.message || 'Failed to upload file');
@@ -100,6 +139,7 @@ const ImgAndFiles = () => {
       setSuccessMessage('File deleted successfully!');
       setShowSuccessModal(true);
       fetchImages(); // Refresh the image list
+      fetchStats(); // Refresh stats
     } catch (error) {
       console.error('Error deleting file:', error);
       setSuccessMessage(error.response?.data?.message || 'Failed to delete file');
@@ -110,13 +150,33 @@ const ImgAndFiles = () => {
     }
   };
 
-  const handleDownload = (url, name) => {
+  const handleEdit = (item) => {
+    setItemToEdit(item);
+    setShowUpdateModal(true);
+  };
+
+  const handleDownload = (url, name, format = null) => {
+    // Use the specified format or extract from the URL
+    const extension = format || url.split('.').pop().split('?')[0].toLowerCase();
+    
+    // Construct the download filename with the correct extension
+    const downloadName = name.includes(extension) ? name : `${name}.${extension}`;
+    
     const link = document.createElement('a');
     link.href = url;
-    link.download = name;
+    link.download = downloadName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const toggleDownloadMenu = (imageId) => {
+    setDownloadMenuOpen(downloadMenuOpen === imageId ? null : imageId);
+  };
+
+  const handleDownloadOption = (url, name, format, imageId) => {
+    handleDownload(url, name, format);
+    setDownloadMenuOpen(null); // Close the menu after download
   };
 
   // Handle image preview
@@ -241,67 +301,64 @@ const ImgAndFiles = () => {
 
   return (
     <div className="p-4 md:p-6">
-      <h1 className="text-2xl md:text-3xl font-bold mb-6">File Management</h1>
-
-      {/* Upload Form */}
-      <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">Upload Image/Document</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={fileName}
-              onChange={handleNameChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter name for the file"
-            />
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">File Management</h1>
+          <p className="text-gray-600 mt-1">Manage and organize your files and documents</p>
+        </div>
+        <div className="flex flex-wrap justify-center md:justify-end gap-2">
+          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
+            <p className="text-xs text-gray-600">Total</p>
+            <p className="text-lg font-bold text-gray-800">{stats.totalImages}</p>
           </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product">
-              Product/Category
-            </label>
-            <select
-              value={selectedProduct}
-              onChange={(e) => setSelectedProduct(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="JIFSA">JIFSA</option>
-              <option value="Elite-BIM">Elite BIM</option>
-              <option value="Elite-BIFS">Elite BIFS</option>
-              <option value="EEE-Technologies">EEE Technologies</option>
-              <option value="Elite-Jobs">Elite Jobs</option>
-              <option value="Elite-Cards">Elite Cards</option>
-              <option value="Elite-Management">Elite Management</option>
-            </select>
+          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
+            <p className="text-xs text-gray-600">Images</p>
+            <p className="text-lg font-bold text-blue-600">{stats.fileTypeCounts.Image || 0}</p>
           </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="file">
-              Select File
-            </label>
-            <input
-              type="file"
-              id="file"
-              onChange={handleFileChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <p className="mt-2 text-sm text-gray-500">
-              Supported file types: Images (JPG, PNG, GIF, etc.), PDF, Word, Excel, PowerPoint
-            </p>
+          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
+            <p className="text-xs text-gray-600">PDF</p>
+            <p className="text-lg font-bold text-green-600">{stats.fileTypeCounts.PDF || 0}</p>
           </div>
-
-          <button
-            type="submit"
-            className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            Upload
-          </button>
-        </form>
+          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
+            <p className="text-xs text-gray-600">Others</p>
+            <p className="text-lg font-bold text-purple-600">{stats.fileTypeCounts.Other || 0}</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Team Stats Section - Cards */}
+      <div className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Team Statistics</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {Object.entries(stats.creatorCounts).map(([name, count]) => (
+            <div key={name} className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
+              <h3 className="font-semibold text-gray-800 mb-2 truncate">{name}</h3>
+              <div className="space-y-1">
+                <div className="flex justify-between">
+                  <span className="text-gray-600 text-sm">Files:</span>
+                  <span className="font-medium text-sm">{count}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+          {Object.keys(stats.creatorCounts).length === 0 && (
+            <div className="col-span-full text-center py-8">
+              <p className="text-gray-500">No team statistics available</p>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {/* Add Button */}
+      <div className="mb-8 flex justify-end">
+        <button
+          onClick={() => setShowAddModal(true)}
+          className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+        >
+          <Plus className="w-5 h-5" />
+          <span>Add New</span>
+        </button>
       </div>
 
       {/* Gallery Section */}
@@ -452,7 +509,7 @@ const ImgAndFiles = () => {
                   {productImages.map((image) => (
                     <div
                       key={image._id}
-                      className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
+                      className="border rounded-lg overflow-visible shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
                     >
                 <div 
                   className="relative pb-[75%] bg-gray-50 cursor-pointer"
@@ -490,13 +547,51 @@ const ImgAndFiles = () => {
                       {new Date(image.createdAt).toLocaleDateString()}
                     </span>
                     <div className="flex space-x-1 md:space-x-2">
-                      <button
-                        onClick={() => handleDownload(image.imageUrl, image.name)}
-                        className="p-1 text-gray-600 hover:text-blue-600"
-                        title="Download"
-                      >
-                        <Download className="w-4 h-4 md:w-5 md:h-5" />
-                      </button>
+                      <div className="relative flex-shrink-0">
+                        <button
+                          onClick={() => toggleDownloadMenu(image._id)}
+                          className="p-1 text-gray-600 hover:text-blue-600"
+                          title="Download"
+                        >
+                          <Download className="w-4 h-4 md:w-5 md:h-5" />
+                        </button>
+                        
+                       {downloadMenuOpen === image._id && (
+                          <div className="absolute z-50 bottom-full right-0 mb-2 w-48 bg-white rounded-md shadow-xl ring-1 ring-black ring-opacity-5 download-menu border border-gray-200"
+                            style={{ minWidth: '120px' }}>
+                            <div className="py-1" role="menu">
+                              <button
+                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'png', image._id)}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                role="menuitem"
+                              >
+                                Download as PNG
+                              </button>
+                              <button
+                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'jpg', image._id)}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                role="menuitem"
+                              >
+                                Download as JPG
+                              </button>
+                              <button
+                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'pdf', image._id)}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                role="menuitem"
+                              >
+                                Download as PDF
+                              </button>
+                              <button
+                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'original', image._id)}
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                role="menuitem"
+                              >
+                                Download Original
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                       <button
                         onClick={() => handleShare(image)}
                         className="p-1 text-gray-600 hover:text-green-600"
@@ -505,25 +600,36 @@ const ImgAndFiles = () => {
                         <Share2 className="w-4 h-4 md:w-5 md:h-5" />
                       </button>
                       {userRole === 'admin' && !image.isSocialMedia && (
-                        <button
-                          onClick={() => handleDelete(image._id)}
-                          className="p-1 text-gray-600 hover:text-red-600"
-                          title="Delete"
-                        >
-                          <svg
-                            className="w-4 h-4 md:w-5 md:h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                        <>
+                          <button
+                            onClick={() => handleEdit(image)}
+                            className="p-1 text-gray-600 hover:text-blue-600"
+                            title="Edit"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
-                        </button>
+                            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                          </button>
+                          <button
+                            onClick={() => handleDelete(image._id)}
+                            className="p-1 text-gray-600 hover:text-red-600"
+                            title="Delete"
+                          >
+                            <svg
+                              className="w-4 h-4 md:w-5 md:h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                              />
+                            </svg>
+                          </button>
+                        </>
                       )}
                     </div>
                   </div>
@@ -583,6 +689,30 @@ const ImgAndFiles = () => {
         setShowModal={setShowMailModal}
         attachmentFile={mailAttachment}
         imageToShare={imageToShare}
+      />
+
+      {/* Add File Modal */}
+      <AddFileModal
+        showModal={showAddModal}
+        setShowModal={setShowAddModal}
+        onSuccess={() => {
+          fetchImages();
+          fetchStats();
+          setShowAddModal(false);
+        }}
+      />
+
+      {/* Update File Modal */}
+      <UpdateFileModal
+        showModal={showUpdateModal}
+        setShowModal={setShowUpdateModal}
+        itemToEdit={itemToEdit}
+        onSuccess={() => {
+          fetchImages();
+          fetchStats();
+          setShowUpdateModal(false);
+          setItemToEdit(null);
+        }}
       />
     </div>
   );

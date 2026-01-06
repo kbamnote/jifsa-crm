@@ -246,7 +246,12 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
                 >
                   <option value="jifsa">JIFSA</option>
                   <option value="bim">Elite BIM</option>
+                  <option value="bifs">Elite BIFS</option>
                   <option value="eee-technologies">EEE Technologies</option>
+                  <option value="jobs">Elite Jobs</option>
+                  <option value="cards">Elite Cards</option>
+                  <option value="management">Elite Management</option>
+                  <option value="associate">Elite Associate</option>
                 </select>
               </div>
             </div>

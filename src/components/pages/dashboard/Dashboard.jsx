@@ -280,28 +280,7 @@ const Dashboard = () => {
       <div className="flex h-screen">
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="flex-1 overflow-auto p-6">
-            {/* Header Section */}
-            <div className="mb-6">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                  <h1 className="text-3xl font-bold text-gray-800">Lead Management</h1>
-                  <p className="text-gray-600 mt-1">
-                    {userRole.toLowerCase() === 'sales' 
-                      ? "Manage your assigned leads" 
-                      : "Manage and track all your leads"}
-                  </p>
-                </div>
-                {canAddLeads && (
-                  <button
-                    onClick={() => setShowAddModal(true)}
-                    className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                  >
-                    <FaPlus className="w-4 h-4" />
-                    <span className="font-medium">Add New Lead</span>
-                  </button>
-                )}
-              </div>
-            </div>
+         
 
             {/* Stats Cards */}
             <StatsCard data={data} key={refreshStats} />

@@ -199,6 +199,8 @@ const UpdateEnrollmentModal = ({ showModal, setShowModal, selectedRecord, onSucc
                   <option value="EEE-Technologies">EEE Technologies</option>
                   <option value="Elite-Jobs">Elite Jobs</option>
                   <option value="Elite-Cards">Elite Cards</option>
+                  <option value="Elite-Management">Elite Management</option>
+                  <option value="Elite-Associate">Elite Associate</option>
                 </select>
               </div>
               

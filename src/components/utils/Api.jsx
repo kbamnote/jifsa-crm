@@ -117,6 +117,13 @@ export const getImgOrDocs = () => Api.get("/image/get-all");
 
 export const deleteImgOrDocs = (id) => Api.delete(`/image/delete/${id}`);
 
+export const updateImgOrDocs = (id, formData) =>
+  Api.put(`/image/update/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const getImageStats = () => Api.get("/image/stats");
+
 // ============== Image Sharing ==============
 export const shareImage = (imageId, shareData) => 
   Api.post(`/image/share/${imageId}`, shareData);
