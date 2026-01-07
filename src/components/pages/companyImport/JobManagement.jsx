@@ -24,6 +24,10 @@ const JobManagement = () => {
   const [collectedByFilter, setCollectedByFilter] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(50);
+  
   // Modal states
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -144,8 +148,6 @@ const JobManagement = () => {
   const handleViewJob = (jobId) => {
     navigate(`/job/${jobId}`);
   };
-
-
 
   // Handle Delete Job
   const handleDeleteJob = (jobId) => {
@@ -295,7 +297,8 @@ const JobManagement = () => {
           </div>
           
           {showFilters && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 mt-4">              <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 mt-4">
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Search
                 </label>
@@ -433,8 +436,55 @@ const JobManagement = () => {
         
         {/* Job Listings Table */}
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
+          <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
             <h2 className="text-xl font-semibold text-gray-800">Job Listings</h2>
+            
+            {filteredJobListings.length > 0 && (
+              <div className="flex items-center space-x-6">
+                {/* Items per page selector */}
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-gray-700">Items per page:</span>
+                  <select
+                    value={itemsPerPage}
+                    onChange={(e) => {
+                      setItemsPerPage(Number(e.target.value));
+                      setCurrentPage(1);
+                    }}
+                    className="border border-gray-300 rounded-md px-3 py-1 text-sm"
+                  >
+                    <option value={10}>10</option>
+                    <option value={25}>25</option>
+                    <option value={50}>50</option>
+                    <option value={100}>100</option>
+                  </select>
+                </div>
+                
+                {/* Pagination controls */}
+                {filteredJobListings.length > itemsPerPage && (
+                  <div className="flex items-center space-x-3">
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                      disabled={currentPage === 1}
+                      className="px-3 py-1 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                    >
+                      Previous
+                    </button>
+                    
+                    <span className="text-sm text-gray-700">
+                      Page {currentPage} of {Math.ceil(filteredJobListings.length / itemsPerPage)}
+                    </span>
+                    
+                    <button
+                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredJobListings.length / itemsPerPage)))}
+                      disabled={currentPage === Math.ceil(filteredJobListings.length / itemsPerPage)}
+                      className="px-3 py-1 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           
           {loading ? (
@@ -450,65 +500,69 @@ const JobManagement = () => {
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    {getColumnConfig().map((column) => (
-                      <th
-                        key={column.key}
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                      >
-                        {column.label}
-                      </th>
-                    ))}
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {filteredJobListings.map((listing) => (
-                    <tr key={listing._id} className={filteredJobListings.indexOf(listing) % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+            <div>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
                       {getColumnConfig().map((column) => (
-                        <td key={column.key} className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
-                          <div className="truncate" title={column.key === 'createdAt' 
-                            ? (listing[column.key] 
-                                ? formatDate(listing[column.key]) 
-                                : 'N/A')
-                            : getNestedValue(listing, column.key)}>
-                            {column.key === 'createdAt' 
-                              ? (listing[column.key] 
-                                  ? formatDate(listing[column.key]) 
-                                  : 'N/A')
-                              : getNestedValue(listing, column.key)}
-                          </div>
-                        </td>
+                        <th
+                          key={column.key}
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          {column.label}
+                        </th>
                       ))}
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={() => handleViewJob(listing._id)}
-                            className="text-blue-600 hover:text-blue-900"
-                            title="View"
-                          >
-                            <Eye className="w-4 h-4" />
-                          </button>
-                          {isAdmin() && (
-                            <button
-                              onClick={() => handleDeleteJob(listing._id)}
-                              className="text-red-600 hover:text-red-900"
-                              title="Delete"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          )}
-                        </div>
-                      </td>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Actions
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    {filteredJobListings
+                      .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                      .map((listing) => (
+                        <tr key={listing._id} className={(filteredJobListings.indexOf(listing) - (currentPage - 1) * itemsPerPage) % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                          {getColumnConfig().map((column) => (
+                            <td key={column.key} className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
+                              <div className="truncate" title={column.key === 'createdAt' 
+                                ? (listing[column.key] 
+                                    ? formatDate(listing[column.key]) 
+                                    : 'N/A')
+                                : getNestedValue(listing, column.key)}>
+                                {column.key === 'createdAt' 
+                                  ? (listing[column.key] 
+                                      ? formatDate(listing[column.key]) 
+                                      : 'N/A')
+                                  : getNestedValue(listing, column.key)}
+                              </div>
+                            </td>
+                          ))}
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div className="flex space-x-2">
+                              <button
+                                onClick={() => handleViewJob(listing._id)}
+                                className="text-blue-600 hover:text-blue-900"
+                                title="View"
+                              >
+                                <Eye className="w-4 h-4" />
+                              </button>
+                              {isAdmin() && (
+                                <button
+                                  onClick={() => handleDeleteJob(listing._id)}
+                                  className="text-red-600 hover:text-red-900"
+                                  title="Delete"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </div>
