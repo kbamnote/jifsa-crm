@@ -32,6 +32,8 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [resumeFile, setResumeFile] = useState(null);
+  const [resumePreview, setResumePreview] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,21 +43,59 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
     }));
   };
 
+  const handleResumeChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.includes('pdf') && !file.type.includes('doc') && !file.type.includes('docx')) {
+        setError("Please upload a PDF, DOC, or DOCX file");
+        return;
+      }
+      
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError("File size should be less than 5MB");
+        return;
+      }
+      
+      setResumeFile(file);
+      setResumePreview(URL.createObjectURL(file));
+      setError("");
+    }
+  };
+
+  const removeResume = () => {
+    setResumeFile(null);
+    setResumePreview(null);
+    // Remove from form data if it was set
+    setFormData(prev => ({
+      ...prev,
+      resume: null
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
-      // Prepare data - remove empty fields
-      const submitData = Object.keys(formData).reduce((acc, key) => {
+      // Create FormData object to handle file uploads
+      const formDataToSend = new FormData();
+      
+      // Add all form fields to FormData
+      Object.keys(formData).forEach(key => {
         if (formData[key] !== "" && formData[key] !== null) {
-          acc[key] = formData[key];
+          formDataToSend.append(key, formData[key]);
         }
-        return acc;
-      }, {});
+      });
+      
+      // Add resume file if selected
+      if (resumeFile) {
+        formDataToSend.append('resume', resumeFile);
+      }
 
-      await addDetail(submitData);
+      await addDetail(formDataToSend);
       
       // Reset form
       setFormData({
@@ -84,6 +124,10 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
         paymentMethod: "other",
         feesInstallmentStructure: "one_time"
       });
+      
+      // Reset resume
+      setResumeFile(null);
+      setResumePreview(null);
 
       onSuccess();
     } catch (err) {
@@ -392,6 +436,53 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
             </div>
           </div>
 
+          {/* Resume Upload */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              Resume Upload
+            </h3>
+            <div className="space-y-4">
+              <div className="flex flex-col space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Upload Resume (PDF, DOC, DOCX)
+                </label>
+                <div className="flex items-center space-x-4">
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    onChange={handleResumeChange}
+                    className="block w-full text-sm text-gray-500
+                      file:mr-4 file:py-2 file:px-4
+                      file:rounded-lg file:border-0
+                      file:text-sm file:font-semibold
+                      file:bg-blue-50 file:text-blue-700
+                      hover:file:bg-blue-100"
+                  />
+                </div>
+                
+                {resumePreview && (
+                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-blue-600">
+                        {resumeFile?.name}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        ({(resumeFile?.size / 1024 / 1024).toFixed(2)} MB)
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={removeResume}
+                      className="text-red-500 hover:text-red-700 text-sm"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          
           {/* CRM Process Fields */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">

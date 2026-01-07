@@ -15,6 +15,7 @@ const ViewLead = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showMailModal, setShowMailModal] = useState(false);
   const [showFileSelectionModal, setShowFileSelectionModal] = useState(false);
+  const [showResumePreview, setShowResumePreview] = useState(false);
   const [mailAttachments, setMailAttachments] = useState([]);
   const [updating, setUpdating] = useState(false);
 
@@ -469,6 +470,38 @@ const ViewLead = () => {
               </div>
             </div>
 
+            {/* Resume Information */}
+            {selectedRecord.resume && (
+              <div className="bg-gray-50 rounded-lg p-6">
+                <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                  Resume Information
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-600 mb-1">Resume</label>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => setShowResumePreview(true)}
+                        className="text-blue-600 hover:text-blue-800 hover:underline flex items-center"
+                      >
+                        <span>View Resume</span>
+                      </button>
+                      <span className="text-gray-400">|</span>
+                      <a
+                        href={selectedRecord.resume}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 hover:underline flex items-center"
+                      >
+                        <span>Download Resume</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             {/* Assignment & Tracking Information */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
@@ -553,6 +586,58 @@ const ViewLead = () => {
         onClose={() => setShowFileSelectionModal(false)}
         onFileSelect={handleFileSelectFromGallery}
       />
+      
+      {/* Resume Preview Modal */}
+      {showResumePreview && selectedRecord?.resume && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+            <div className="flex justify-between items-center p-4 border-b border-gray-200">
+              <h3 className="text-xl font-bold text-gray-800">Resume Preview</h3>
+              <button
+                onClick={() => setShowResumePreview(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-4 overflow-auto max-h-[calc(90vh-100px)]">
+              {/* Preview for different file types */}
+              {selectedRecord.resume.toLowerCase().endsWith('.pdf') ? (
+                <iframe
+                  src={`${selectedRecord.resume}#toolbar=0&navpanes=0&scrollbar=0`} 
+                  width="100%"
+                  height="600px"
+                  title="Resume Preview"
+                  className="border border-gray-200 rounded"
+                  type="application/pdf"
+                />
+              ) : selectedRecord.resume.toLowerCase().match(/\.(jpg|jpeg|png|gif|bmp|webp)$/) ? (
+                <div className="flex justify-center">
+                  <img
+                    src={selectedRecord.resume}
+                    alt="Resume Preview"
+                    className="max-w-full max-h-[500px] object-contain border border-gray-200 rounded"
+                  />
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  <p>File preview not available. Please download to view.</p>
+                  <a
+                    href={selectedRecord.resume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 hover:underline mt-4 inline-block"
+                  >
+                    Download File
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

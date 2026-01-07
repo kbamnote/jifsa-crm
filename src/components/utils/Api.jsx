@@ -35,9 +35,15 @@ export const login = (post) => Apione.post("/auth/login", post);
 // ============== FORM/LEADS ==============
 export const getDetail = () => Api.get("/form/read-form");
 
-export const addDetail = (formData) => Api.post("/form/create-form", formData);
+export const addDetail = (formData) => Api.post("/form/create-form", formData, {
+  headers: { "Content-Type": "multipart/form-data" },
+});
 
 export const updateDetail = (id, formData) => Api.patch(`/form/update/${id}`, formData);
+
+export const updateDetailWithFile = (id, formData) => Api.patch(`/form/update/${id}`, formData, {
+  headers: { "Content-Type": "multipart/form-data" },
+});
 
 export const markRead = (id) => Api.patch(`/form/${id}/read`);
 
