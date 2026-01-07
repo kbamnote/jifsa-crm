@@ -37,6 +37,7 @@ const LeadManagement = () => {
   const [interviewRoundFilter, setInterviewRoundFilter] = useState('all');
   const [aptitudeRoundFilter, setAptitudeRoundFilter] = useState('all');
   const [hrRoundFilter, setHrRoundFilter] = useState('all');
+  const [createdByFilter, setCreatedByFilter] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
 
   const userRole = Cookies.get("role") || "";
@@ -71,11 +72,12 @@ const LeadManagement = () => {
 
   useEffect(() => {
     fetchLeads();
+    fetchTeamMembers();
   }, []);
 
   useEffect(() => {
     filterLeads();
-  }, [leads, searchTerm, statusFilter, productFilter, callStatusFilter, interviewRoundFilter, aptitudeRoundFilter, hrRoundFilter]);
+  }, [leads, searchTerm, statusFilter, productFilter, callStatusFilter, interviewRoundFilter, aptitudeRoundFilter, hrRoundFilter, createdByFilter]);
 
   const fetchLeads = async () => {
     try {
@@ -129,6 +131,20 @@ const LeadManagement = () => {
 
     if (hrRoundFilter !== 'all') {
       result = result.filter(lead => lead.hrRoundStatus === hrRoundFilter);
+    }
+
+    if (createdByFilter !== 'all') {
+      result = result.filter(lead => {
+        // Handle different formats of createdBy
+        if (lead.createdBy) {
+          if (typeof lead.createdBy === 'object') {
+            return lead.createdBy.email === createdByFilter || lead.createdBy.name === createdByFilter;
+          } else if (typeof lead.createdBy === 'string') {
+            return lead.createdBy === createdByFilter;
+          }
+        }
+        return false;
+      });
     }
 
     setFilteredLeads(result);
@@ -516,6 +532,46 @@ const LeadManagement = () => {
                   <option value="cancelled">Cancelled</option>
                   <option value="passed">Passed</option>
                   <option value="failed">Failed</option>
+                </select>
+              </div>
+              
+              {/* Created By Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Created By</label>
+                <select
+                  value={createdByFilter}
+                  onChange={(e) => setCreatedByFilter(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                >
+                  <option value="all">All Creators</option>
+                  {(() => {
+                    // Create a map to store unique creators
+                    const creatorsMap = new Map();
+                    
+                    // Add team members to the map
+                    teamMembers.forEach(member => {
+                      creatorsMap.set(member.email, member.name || member.email);
+                    });
+                    
+                    // Add creators from leads to the map
+                    leads.forEach(lead => {
+                      if (lead.createdBy && typeof lead.createdBy === 'object') {
+                        const email = lead.createdBy.email;
+                        const name = lead.createdBy.name || lead.createdBy.email;
+                        // Only add if not already in the map
+                        if (!creatorsMap.has(email)) {
+                          creatorsMap.set(email, name);
+                        }
+                      }
+                    });
+                    
+                    // Convert map to array and render options
+                    return Array.from(creatorsMap.entries()).map(([email, name], index) => (
+                      <option key={`creator-${index}`} value={email}>
+                        {name}
+                      </option>
+                    ));
+                  })()}
                 </select>
               </div>
             </div>
