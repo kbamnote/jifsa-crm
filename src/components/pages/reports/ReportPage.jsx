@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Download, Calendar, Clock, FileText, FileImage, File } from 'lucide-react';
+import { Plus, Edit, Trash2, Download, Calendar, Clock, FileText, FileImage, File, X } from 'lucide-react';
 import ReportModal from '../../modal/ReportModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 import {
@@ -26,6 +26,14 @@ const ReportPage = () => {
   
   // Statistics state
   const [attendanceStats, setAttendanceStats] = useState({});
+  
+  // Detail modal state
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [selectedReport, setSelectedReport] = useState(null);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // Get user role from localStorage or cookies
   useEffect(() => {
@@ -113,6 +121,12 @@ const ReportPage = () => {
     
     return true;
   });
+  
+  // Pagination calculations
+  const totalItems = filteredReports.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedReports = filteredReports.slice(startIndex, startIndex + itemsPerPage);
   
   const handleCreateReport = async (formData) => {
     try {
@@ -244,7 +258,10 @@ const ReportPage = () => {
             <input
               type="date"
               value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value)}
+              onChange={(e) => {
+                setDateFilter(e.target.value);
+                setCurrentPage(1); // Reset to first page when filter changes
+              }}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -252,7 +269,10 @@ const ReportPage = () => {
             <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Day</label>
             <select
               value={dayFilter}
-              onChange={(e) => setDayFilter(e.target.value)}
+              onChange={(e) => {
+                setDayFilter(e.target.value);
+                setCurrentPage(1); // Reset to first page when filter changes
+              }}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select a day...</option>
@@ -265,16 +285,21 @@ const ReportPage = () => {
               <option value="sunday">Sun</option>
             </select>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Name</label>
-            <input
-              type="text"
-              value={nameFilter}
-              onChange={(e) => setNameFilter(e.target.value)}
-              placeholder="Enter name to search..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+          {userRole === 'admin' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Name</label>
+              <input
+                type="text"
+                value={nameFilter}
+                onChange={(e) => {
+                  setNameFilter(e.target.value);
+                  setCurrentPage(1); // Reset to first page when filter changes
+                }}
+                placeholder="Enter name to search..."
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          )}
         </div>
 
         {error && (
@@ -282,7 +307,50 @@ const ReportPage = () => {
             Error: {error}
           </div>
         )}
-
+        
+        {/* Pagination Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
+          <div className="text-sm text-gray-700">
+            Showing <span className="font-medium">{startIndex + 1}</span> to <span className="font-medium">{Math.min(startIndex + itemsPerPage, totalItems)}</span> of <span className="font-medium">{totalItems}</span> reports
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <select
+              value={itemsPerPage}
+              onChange={(e) => {
+                setItemsPerPage(Number(e.target.value));
+                setCurrentPage(1); // Reset to first page when changing items per page
+              }}
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm"
+            >
+              <option value={5}>5 per page</option>
+              <option value={10}>10 per page</option>
+              <option value={25}>25 per page</option>
+              <option value={50}>50 per page</option>
+            </select>
+            
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            >
+              Previous
+            </button>
+            
+            <span className="text-sm text-gray-700 px-2">
+              Page {currentPage} of {totalPages}
+            </span>
+            
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || totalPages === 0}
+              className="px-3 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+        
         {/* Reports Table */}
         <div className="overflow-x-auto rounded-lg border border-gray-200">
           <table className="min-w-full divide-y divide-gray-200">
@@ -302,15 +370,18 @@ const ReportPage = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredReports.length === 0 ? (
+              {paginatedReports.length === 0 ? (
                 <tr>
                   <td colSpan={userRole === 'admin' ? 9 : 8} className="px-6 py-4 text-center text-sm text-gray-500">
                     No reports found
                   </td>
                 </tr>
               ) : (
-                filteredReports.map((report) => (
-                  <tr key={report._id} className="hover:bg-gray-50">
+                paginatedReports.map((report) => (
+                  <tr key={report._id} className="hover:bg-gray-50 cursor-pointer" onClick={() => {
+                    setSelectedReport(report);
+                    setShowDetailModal(true);
+                  }}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {report.userId?.name || report.userName}
                     </td>
@@ -318,7 +389,7 @@ const ReportPage = () => {
                       {report.userEmail}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {report.userId?.role || 'N/A'}
+                      {report.userId?.role || report.userRole || 'N/A'}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900 max-w-xs">
                       <div className="line-clamp-2">{report.reportField}</div>
@@ -330,6 +401,7 @@ const ReportPage = () => {
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="text-blue-600 hover:text-blue-800 underline break-all"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           View Link
                         </a>
@@ -373,7 +445,10 @@ const ReportPage = () => {
                               )}
                               <span className="truncate max-w-[100px]" title={file.fileName}>{file.fileName}</span>
                               <button
-                                onClick={() => handleDownloadFile(file.fileUrl, file.fileName)}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDownloadFile(file.fileUrl, file.fileName);
+                                }}
                                 className="text-blue-600 hover:text-blue-800 transition-colors"
                                 title="Download"
                               >
@@ -390,10 +465,11 @@ const ReportPage = () => {
                       {new Date(report.createdAt).toLocaleString()}
                     </td>
                     {userRole === 'admin' && (
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium" onClick={(e) => e.stopPropagation()}>
                         <div className="flex space-x-2">
                           <button
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.stopPropagation();
                               setEditingReport(report);
                               setShowModal(true);
                             }}
@@ -403,7 +479,8 @@ const ReportPage = () => {
                             <Edit className="w-5 h-5" />
                           </button>
                           <button
-                            onClick={() => {
+                            onClick={(e) => {
+                              e.stopPropagation();
                               // Set the report to delete and open confirmation modal
                               setReportToDelete(report);
                               setShowDeleteModal(true);
@@ -443,6 +520,133 @@ const ReportPage = () => {
           onConfirm={confirmDeleteReport}
           itemName={`report by ${reportToDelete?.userName || 'unknown user'}`}
         />
+      )}
+      
+      {/* Report Detail Modal */}
+      {showDetailModal && selectedReport && (
+        <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+              <h3 className="text-xl font-semibold text-gray-800">Report Details</h3>
+              <button
+                onClick={() => {
+                  setShowDetailModal(false);
+                  setSelectedReport(null);
+                }}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-600" />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                  <p className="text-gray-900">{selectedReport.userId?.name || selectedReport.userName}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <p className="text-gray-900">{selectedReport.userEmail}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                  <p className="text-gray-900">{selectedReport.userId?.role || selectedReport.userRole || 'N/A'}</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Created At</label>
+                  <p className="text-gray-900">{new Date(selectedReport.createdAt).toLocaleString()}</p>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Report</label>
+                <p className="text-gray-900 whitespace-pre-wrap">{selectedReport.reportField}</p>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+                {selectedReport.linkField ? (
+                  <a 
+                    href={selectedReport.linkField} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 underline break-all"
+                  >
+                    {selectedReport.linkField}
+                  </a>
+                ) : (
+                  <p className="text-gray-900">N/A</p>
+                )}
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Attendance</label>
+                <div className="space-y-1">
+                  {selectedReport.attendance?.date && (
+                    <div className="flex items-center space-x-1">
+                      <Calendar className="w-4 h-4 text-gray-500" />
+                      <span>{new Date(selectedReport.attendance.date).toLocaleDateString('en-US', { weekday: 'short' })}, {new Date(selectedReport.attendance.date).toLocaleDateString()}</span>
+                    </div>
+                  )}
+                  {selectedReport.attendance?.morningTime && (
+                    <div className="flex items-center space-x-1">
+                      <Clock className="w-4 h-4 text-gray-500" />
+                      <span>MT: {selectedReport.attendance.morningTime}</span>
+                    </div>
+                  )}
+                  {selectedReport.attendance?.eveningTime && (
+                    <div className="flex items-center space-x-1">
+                      <Clock className="w-4 h-4 text-gray-500" />
+                      <span>ET: {selectedReport.attendance.eveningTime}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Files</label>
+                {selectedReport.uploadFiles && selectedReport.uploadFiles.length > 0 ? (
+                  <div className="space-y-2">
+                    {selectedReport.uploadFiles.map((file, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        {file.fileType?.startsWith('image/') ? (
+                          <FileImage className="w-4 h-4 text-blue-600" />
+                        ) : file.fileType === 'application/pdf' ? (
+                          <FileText className="w-4 h-4 text-red-600" />
+                        ) : (
+                          <File className="w-4 h-4 text-gray-600" />
+                        )}
+                        <span className="truncate max-w-[200px]" title={file.fileName}>{file.fileName}</span>
+                        <button
+                          onClick={() => handleDownloadFile(file.fileUrl, file.fileName)}
+                          className="text-blue-600 hover:text-blue-800 transition-colors"
+                          title="Download"
+                        >
+                          <Download className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-900">No files</p>
+                )}
+              </div>
+              
+              <div className="flex justify-end pt-4">
+                <button
+                  onClick={() => {
+                    setShowDetailModal(false);
+                    setSelectedReport(null);
+                  }}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
