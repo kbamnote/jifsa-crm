@@ -101,10 +101,14 @@ const UpdateTeamModal = ({ showModal, setShowModal, handleUpdateMember, memberTo
               onChange={(e) => setFormData({ ...formData, role: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
+              <option value="admin">Admin</option>
+              <option value="manager">Manager</option>
               <option value="sales">Sales</option>
               <option value="marketing">Marketing</option>
               <option value="counsellor">Counsellor</option>
               <option value="telecaller">Telecaller</option>
+              <option value="developer">Developer</option>
+              <option value="analyst">Analyst</option>
             </select>
           </div>
 

@@ -18,8 +18,9 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   const navigate = useNavigate();
   const [isProductOpen, setIsProductOpen] = useState(false);
   const [isMailOpen, setIsMailOpen] = useState(false);
+  const [isLeadsOpen, setIsLeadsOpen] = useState(false);
   const [userRole, setUserRole] = useState("");
-
+  
   useEffect(() => {
     const role = Cookies.get("role");
     setUserRole(role || "User");
@@ -112,6 +113,22 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       return disabledItems;
     }
     
+    if (roleLower === "developer" || roleLower === "analyst") {
+      disabledItems.companies = false;
+      disabledItems.jobImport = true;
+      disabledItems.jobManagement = false; // Allow developers and analysts to view job management
+      disabledItems.team = true;
+      disabledItems.mailTracking = true;
+      disabledItems.billingRecords = true;
+      disabledItems.b2b = true;
+      disabledItems.socialMedia = true;
+      disabledItems.products = true; // Disable Products dropdown for developer/analyst
+      disabledItems.jifsa = true; // Disable individual product items for developer/analyst
+      disabledItems.elitebim = true;
+      disabledItems.eeetechnologies = true;
+      return disabledItems;
+    }
+    
     return disabledItems;
   };
   
@@ -184,18 +201,25 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       ],
     },
     {
-      id: "lead-assigned",
-      name: "Lead Assigned",
-      path: "/lead-assigned",
+      id: "leads",
+      name: "Leads",
       icon: <HiOutlineUserGroup className="w-5 h-5" />,
+      isDropdown: true,
       disabled: false,
-    },
-    {
-      id: "lead-management",
-      name: "Lead Management",
-      path: "/lead-management",
-      icon: <Users className="w-5 h-5" />,
-      disabled: disabledItems.leadManagement,
+      subItems: [
+        {
+          id: "lead-management",
+          name: "Lead Management",
+          path: "/lead-management",
+          disabled: disabledItems.leadManagement,
+        },
+        {
+          id: "lead-assigned",
+          name: "Lead Assigned",
+          path: "/lead-assigned",
+          disabled: false,
+        }
+      ],
     },
     {
       id: "team",
@@ -217,6 +241,13 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       path: "/social-media",
       icon: <BiSolidVideos className="w-5 h-5" />,
       disabled: disabledItems.socialMedia,
+    },
+    {
+      id: "reports",
+      name: "Reports",
+      path: "/reports",
+      icon: <HiOutlineUserGroup className="w-5 h-5" />,
+      disabled: !['admin', 'developer', 'analyst', 'marketing', 'sales', 'counsellor', 'telecaller'].includes(userRole.toLowerCase()),
     },
     {
       id: "gallery&doucments",
@@ -250,6 +281,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
 
   const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";
   const isMailActive = location.pathname === "/mail" || location.pathname === "/mail-track";
+  const isLeadsActive = location.pathname === "/lead-management" || location.pathname === "/lead-assigned";
 
   const getDisplayName = () => {
     if (userRole.toLowerCase().includes("admin")) return "Elite Admin";
@@ -312,9 +344,9 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
         <nav className="flex-1 py-6 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             if (item.isDropdown) {
-              const isDropdownOpen = item.id === "products" ? isProductOpen : isMailOpen;
-              const setDropdownOpen = item.id === "products" ? setIsProductOpen : setIsMailOpen;
-              const isDropdownActive = item.id === "products" ? isProductActive : isMailActive;
+              const isDropdownOpen = item.id === "products" ? isProductOpen : (item.id === "mail" ? isMailOpen : isLeadsOpen);
+              const setDropdownOpen = item.id === "products" ? setIsProductOpen : (item.id === "mail" ? setIsMailOpen : setIsLeadsOpen);
+              const isDropdownActive = item.id === "products" ? isProductActive : (item.id === "mail" ? isMailActive : isLeadsActive);
               
               return (
                 <div key={item.id}>

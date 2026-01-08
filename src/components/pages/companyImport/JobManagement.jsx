@@ -311,7 +311,10 @@ const JobManagement = () => {
                     className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Search jobs..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setCurrentPage(1); // Reset to first page when filter changes
+                    }}
                   />
                 </div>
               </div>
@@ -323,7 +326,10 @@ const JobManagement = () => {
                 <select
                   className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   value={locationFilter}
-                  onChange={(e) => setLocationFilter(e.target.value)}
+                  onChange={(e) => {
+                    setLocationFilter(e.target.value);
+                    setCurrentPage(1); // Reset to first page when filter changes
+                  }}
                 >
                   <option value="">All Locations</option>
                   {getUniqueLocations().map((location, index) => (
@@ -339,7 +345,10 @@ const JobManagement = () => {
                 <select
                   className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
+                  onChange={(e) => {
+                    setStatusFilter(e.target.value);
+                    setCurrentPage(1); // Reset to first page when filter changes
+                  }}
                 >
                   <option value="">All Statuses</option>
                   {getUniqueStatuses().map((status, index) => (
@@ -355,7 +364,10 @@ const JobManagement = () => {
                 <select
                   className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   value={callStatusFilter}
-                  onChange={(e) => setCallStatusFilter(e.target.value)}
+                  onChange={(e) => {
+                    setCallStatusFilter(e.target.value);
+                    setCurrentPage(1); // Reset to first page when filter changes
+                  }}
                 >
                   <option value="">All Call Statuses</option>
                   {getUniqueCallStatuses().map((callStatus, index) => (
@@ -371,7 +383,10 @@ const JobManagement = () => {
                 <select
                   className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   value={postedByFilter}
-                  onChange={(e) => setPostedByFilter(e.target.value)}
+                  onChange={(e) => {
+                    setPostedByFilter(e.target.value);
+                    setCurrentPage(1); // Reset to first page when filter changes
+                  }}
                 >
                   <option value="">All</option>
                   {getUniquePostedBy().map((postedBy, index) => (
@@ -387,7 +402,10 @@ const JobManagement = () => {
                 <select
                   className="block w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   value={collectedByFilter}
-                  onChange={(e) => setCollectedByFilter(e.target.value)}
+                  onChange={(e) => {
+                    setCollectedByFilter(e.target.value);
+                    setCurrentPage(1); // Reset to first page when filter changes
+                  }}
                 >
                   <option value="">All</option>
                   {getUniqueCollectedBy().map((collectedBy, index) => (
@@ -405,6 +423,7 @@ const JobManagement = () => {
                     setCallStatusFilter("");
                     setPostedByFilter("");
                     setCollectedByFilter("");
+                    setCurrentPage(1); // Reset to first page when clearing filters
                   }}
                   className="w-full py-2 px-4 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
@@ -419,7 +438,7 @@ const JobManagement = () => {
         <div className="flex justify-between mb-6">
           <div>
             <p className="text-gray-600">
-              Showing {filteredJobListings.length} of {jobListings.length} job listings
+              Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, filteredJobListings.length)} of {filteredJobListings.length} job listings
             </p>
           </div>
           <div>

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { User, Mail, Phone, Calendar, Building, MapPin, FileText, Hash, Clock, CheckCircle, AlertCircle, PhoneOff, Users, Award, GraduationCap, School, Briefcase, CreditCard, Wallet, Receipt, ArrowLeft, Edit, Send, Globe, IndianRupee, Clock3, CalendarDays, Navigation } from 'lucide-react';
 import { getCompanyById, updateCompany } from '../../utils/Api';
 import UpdateJobModal from '../../modal/UpdateJobModal';
+import { getUserRole } from '../../utils/AuthUtils';
 
 const ViewJob = () => {
   const { id } = useParams();
@@ -102,16 +103,10 @@ const ViewJob = () => {
   };
 
   // Render update button
-  const renderUpdateButton = () => {
-    return (
-      <button
-        onClick={() => setShowUpdateModal(true)}
-        className="ml-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center"
-      >
-        <Edit className="w-4 h-4 mr-2" />
-        Update Details
-      </button>
-    );
+  // Check if user has admin role for update access
+  const isAdminUser = () => {
+    const role = getUserRole();
+    return role === 'admin';
   };
 
   // Helper function to safely access nested properties
@@ -378,13 +373,15 @@ const ViewJob = () => {
                 </div>
               </div>
               <div className="flex gap-2">
-                <button
-                  onClick={() => setShowUpdateModal(true)}
-                  className="flex items-center gap-2 bg-green-600 backdrop-blur-sm text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  <Edit className="w-5 h-5" />
-                  <span>Update</span>
-                </button>
+                {isAdminUser() && (
+                  <button
+                    onClick={() => setShowUpdateModal(true)}
+                    className="flex items-center gap-2 bg-green-600 backdrop-blur-sm text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+                  >
+                    <Edit className="w-5 h-5" />
+                    <span>Update</span>
+                  </button>
+                )}
                 <button
                   onClick={() => navigate('/job-management')}
                   className="flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-lg hover:bg-white/30 transition-colors"

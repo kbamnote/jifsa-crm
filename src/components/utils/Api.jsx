@@ -178,4 +178,24 @@ export const deleteCompany = (id) => Api.delete(`/companies/${id}`);
 
 export const updateCompany = (id, data) => Api.put(`/companies/${id}`, data);
 
+// ============== Reports ==============
+export const createReport = (formData) =>
+  Api.post("/reports", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const getReports = () => Api.get("/reports");
+
+export const getReportById = (id) => Api.get(`/reports/${id}`);
+
+export const updateReport = (id, formData) =>
+  Api.put(`/reports/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+export const deleteReport = (id) => Api.delete(`/reports/${id}`);
+
+export const getReportsByDateRange = (startDate, endDate) =>
+  Api.get(`/reports/date-range?startDate=${startDate}&endDate=${endDate}`);
+
 export default Api;

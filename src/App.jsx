@@ -19,6 +19,7 @@ import ViewEnrollment from './components/pages/dashboard/products/eeeTechnologie
 import JobImportPage from './components/pages/companyImport/JobImportPage';
 import JobManagement from './components/pages/companyImport/JobManagement';
 import ViewJob from './components/pages/companyImport/ViewJob';
+import ReportPage from './components/pages/reports/ReportPage';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/company-import" element={<JobImportPage/>}/>
           <Route path="/job-management" element={<JobManagement/>}/>
           <Route path="/job/:id" element={<ViewJob/>}/>
+          <Route path="/reports" element={<ReportPage/>}/>
         </Route>
       </Routes>
     </>
