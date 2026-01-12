@@ -7,6 +7,9 @@ const FileSelectionModal = ({ isOpen, onClose, onFileSelect }) => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [expandedProducts, setExpandedProducts] = useState({});
+  const [productFilter, setProductFilter] = useState('All');
+  const [fileTypeFilter, setFileTypeFilter] = useState('All');
 
   useEffect(() => {
     fetchFiles();
@@ -28,6 +31,16 @@ const FileSelectionModal = ({ isOpen, onClose, onFileSelect }) => {
   const isImageFile = (url) => {
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'];
     return imageExtensions.some(ext => url.toLowerCase().includes(ext));
+  };
+
+  // Helper function to determine file type
+  const getFileType = (url) => {
+    if (isImageFile(url)) return 'Image';
+    if (url.includes('.pdf')) return 'PDF';
+    if (url.includes('.doc') || url.includes('.docx')) return 'Word';
+    if (url.includes('.ppt') || url.includes('.pptx')) return 'PowerPoint';
+    if (url.includes('.xls') || url.includes('.xlsx')) return 'Excel';
+    return 'Other';
   };
 
   // Helper function to get appropriate file icon
@@ -89,6 +102,80 @@ const FileSelectionModal = ({ isOpen, onClose, onFileSelect }) => {
         
         <div className="overflow-y-auto max-h-[calc(90vh-180px)]">
           <div className="p-6">
+            {/* Filter Controls */}
+            <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Product Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Product</label>
+                <select
+                  value={productFilter}
+                  onChange={(e) => setProductFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="All">All Products</option>
+                  {[...new Set(files.map(f => f.productCompany))]
+                    .filter(product => product) // Remove undefined/null values
+                    .sort()
+                    .map(product => (
+                      <option key={product} value={product}>{product}</option>
+                    ))}
+                </select>
+              </div>
+              
+              {/* File Type Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by File Type</label>
+                <select
+                  value={fileTypeFilter}
+                  onChange={(e) => setFileTypeFilter(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="All">All File Types</option>
+                  <option value="Image">Images</option>
+                  <option value="PDF">PDF</option>
+                  <option value="Word">Word</option>
+                  <option value="PowerPoint">PowerPoint</option>
+                  <option value="Excel">Excel</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+            
+            {/* Expand/Collapse All Button */}
+            <div className="mb-4 flex justify-end">
+              <button
+                onClick={() => {
+                  const allProducts = [...new Set(files
+                    .filter(file => {
+                      if (productFilter !== 'All' && file.productCompany !== productFilter) {
+                        return false;
+                      }
+                      if (fileTypeFilter !== 'All' && getFileType(file.imageUrl) !== fileTypeFilter) {
+                        return false;
+                      }
+                      return true;
+                    })
+                    .map(f => f.productCompany))];
+                  
+                  const allExpanded = allProducts.every(product => expandedProducts[product]);
+                  
+                  const newExpandedState = {};
+                  allProducts.forEach(product => {
+                    newExpandedState[product] = !allExpanded;
+                  });
+                  
+                  setExpandedProducts(newExpandedState);
+                }}
+                className="px-4 py-2 bg-blue-100 text-blue-800 rounded-lg hover:bg-blue-200 transition-colors text-sm font-medium"
+              >
+                {Object.keys(expandedProducts).length > 0 && 
+                 Object.values(expandedProducts).filter(v => v).length > 0 &&
+                 Object.values(expandedProducts).filter(v => v).length === 
+                 Object.keys(expandedProducts).length
+                 ? 'Collapse All' : 'Expand All'}
+              </button>
+            </div>
+            
             {/* Files Grid */}
             <div>
               <h2 className="text-lg font-semibold mb-4">Organized Files</h2>
@@ -104,61 +191,116 @@ const FileSelectionModal = ({ isOpen, onClose, onFileSelect }) => {
                 </div>
               ) : (
                 <>
-                  {/* Group files by product company */}
+                  {/* Group files by product company with accordion functionality */}
                   {Object.entries(
-                    files.reduce((acc, file) => {
-                      const product = file.productCompany || 'Uncategorized';
-                      if (!acc[product]) {
-                        acc[product] = [];
-                      }
-                      acc[product].push(file);
-                      return acc;
-                    }, {})
-                  ).map(([product, productFiles]) => (
-                    <div key={product} className="mb-8">
-                      <h3 className="text-md font-semibold mb-4 text-gray-800 border-b pb-2">{product}</h3>
-                      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {productFiles.map((file) => (
-                          <div
-                            key={file._id}
-                            className={`border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col cursor-pointer ${
-                              selectedFile && selectedFile._id === file._id 
-                                ? 'ring-2 ring-blue-500 border-blue-500' 
-                                : ''
-                            }`}
-                            onClick={() => setSelectedFile(file)}
-                          >
-                            <div className="relative pb-[75%] bg-gray-50">
-                              {isImageFile(file.imageUrl) ? (
-                                <img
-                                  src={file.imageUrl}
-                                  alt={file.name}
-                                  className="absolute inset-0 w-full h-full object-cover"
-                                />
-                              ) : (
-                                <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
-                                  {getFileIcon(file.imageUrl)}
-                                </div>
-                              )}
+                    files
+                      .filter(file => {
+                        // Apply product filter
+                        if (productFilter !== 'All' && file.productCompany !== productFilter) {
+                          return false;
+                        }
+                        // Apply file type filter
+                        if (fileTypeFilter !== 'All' && getFileType(file.imageUrl) !== fileTypeFilter) {
+                          return false;
+                        }
+                        return true;
+                      })
+                      .reduce((acc, file) => {
+                        const product = file.productCompany || 'Uncategorized';
+                        if (!acc[product]) {
+                          acc[product] = [];
+                        }
+                        acc[product].push(file);
+                        return acc;
+                      }, {})
+                  ).map(([product, productFiles]) => {
+                    const isExpanded = expandedProducts[product] || false;
+                    
+                    const toggleExpand = () => {
+                      setExpandedProducts(prev => ({
+                        ...prev,
+                        [product]: !prev[product]
+                      }));
+                    };
+                    
+                    return (
+                      <div key={product} className="mb-6 border rounded-xl overflow-hidden shadow-md">
+                        {/* Accordion Header */}
+                        <div 
+                          className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 cursor-pointer flex justify-between items-center"
+                          onClick={toggleExpand}
+                        >
+                          <div className="flex items-center space-x-3">
+                            <div className="bg-gradient-to-br from-blue-600 to-indigo-600 w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                              {product.charAt(0)}
                             </div>
-                            <div className="p-3 flex-grow flex flex-col">
-                              <h3 className="font-semibold text-gray-800 truncate text-sm">
-                                {file.name}
-                              </h3>
-                              <p className="text-xs text-gray-500 mt-1 truncate">
-                                {new Date(file.createdAt).toLocaleDateString()}
-                              </p>
-                              {file.productCompany && (
-                                <p className="text-xs text-gray-500 truncate mt-1">
-                                  {file.productCompany}
-                                </p>
-                              )}
+                            <div>
+                              <h3 className="text-md font-semibold text-gray-800">{product}</h3>
+                              <p className="text-xs text-gray-600">{productFiles.length} file{productFiles.length !== 1 ? 's' : ''}</p>
                             </div>
                           </div>
-                        ))}
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs text-gray-600 hidden sm:inline">Click to {isExpanded ? 'collapse' : 'expand'}</span>
+                            <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Accordion Content */}
+                        {isExpanded && (
+                          <div className="p-4 bg-white">
+                            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                              {productFiles.map((file) => (
+                                <div
+                                  key={file._id}
+                                  className={`border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full flex flex-col cursor-pointer ${
+                                    selectedFile && selectedFile._id === file._id 
+                                      ? 'ring-2 ring-blue-500 border-blue-500' 
+                                      : ''
+                                  }`}
+                                  onClick={() => setSelectedFile(file)}
+                                >
+                                  <div className="relative pb-[75%] bg-gray-50">
+                                    {isImageFile(file.imageUrl) ? (
+                                      <img
+                                        src={file.imageUrl}
+                                        alt={file.name}
+                                        className="absolute inset-0 w-full h-full object-cover"
+                                      />
+                                    ) : (
+                                      <div className="absolute inset-0 flex flex-col items-center justify-center p-2">
+                                        {getFileIcon(file.imageUrl)}
+                                      </div>
+                                    )}
+                                  </div>
+                                  <div className="p-3 flex-grow flex flex-col">
+                                    <h3 className="font-semibold text-gray-800 truncate text-sm">
+                                      {file.name}
+                                    </h3>
+                                    <p className="text-xs text-gray-500 mt-1 truncate">
+                                      {new Date(file.createdAt).toLocaleDateString('en-IN', {
+                                                              day: 'numeric',
+                                                              month: 'short',
+                                                              year: 'numeric',
+                                                            })}
+                                    </p>
+                                    {file.productCompany && (
+                                      <p className="text-xs text-gray-500 truncate mt-1">
+                                        {file.productCompany}
+                                      </p>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </>
               )}
             </div>
@@ -183,7 +325,11 @@ const FileSelectionModal = ({ isOpen, onClose, onFileSelect }) => {
                     <div>
                       <p className="font-medium text-gray-900">{selectedFile.name}</p>
                       <p className="text-xs text-gray-500">
-                        {new Date(selectedFile.createdAt).toLocaleDateString()}
+                        {new Date(selectedFile.createdAt).toLocaleDateString('en-IN', {
+                                                day: 'numeric',
+                                                month: 'short',
+                                                year: 'numeric',
+                                              })}
                       </p>
                       {selectedFile.productCompany && (
                         <p className="text-xs text-gray-500">
@@ -212,14 +358,23 @@ const FileSelectionModal = ({ isOpen, onClose, onFileSelect }) => {
           >
             Cancel
           </button>
-          {!selectedFile && (
-            <button
-              disabled
-              className="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed"
-            >
-              Attach File
-            </button>
-          )}
+          <div>
+            {selectedFile ? (
+              <button
+                onClick={handleSelect}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Attach File
+              </button>
+            ) : (
+              <button
+                disabled
+                className="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed"
+              >
+                Attach File
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

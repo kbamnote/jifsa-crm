@@ -35,6 +35,7 @@ const ImgAndFiles = () => {
     fileTypeCounts: {}
   });
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(null);
+  const [expandedProducts, setExpandedProducts] = useState({});
 
   const userRole = Cookies.get("role") || "";
   const userName = Cookies.get("name") || "";
@@ -302,42 +303,54 @@ const ImgAndFiles = () => {
   return (
     <div className="p-4 md:p-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">File Management</h1>
-          <p className="text-gray-600 mt-1">Manage and organize your files and documents</p>
-        </div>
-        <div className="flex flex-wrap justify-center md:justify-end gap-2">
-          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
-            <p className="text-xs text-gray-600">Total</p>
-            <p className="text-lg font-bold text-gray-800">{stats.totalImages}</p>
-          </div>
-          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
-            <p className="text-xs text-gray-600">Images</p>
-            <p className="text-lg font-bold text-blue-600">{stats.fileTypeCounts.Image || 0}</p>
-          </div>
-          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
-            <p className="text-xs text-gray-600">PDF</p>
-            <p className="text-lg font-bold text-green-600">{stats.fileTypeCounts.PDF || 0}</p>
-          </div>
-          <div className="bg-white px-3 py-2 rounded-lg shadow min-w-[80px]">
-            <p className="text-xs text-gray-600">Others</p>
-            <p className="text-lg font-bold text-purple-600">{stats.fileTypeCounts.Other || 0}</p>
+      <div className="mb-8">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-xl p-6 text-white mb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold mb-2">File Management</h1>
+              <p className="text-blue-100">Manage and organize your files and documents</p>
+            </div>
+            <div className="flex flex-wrap justify-center md:justify-end gap-3">
+              <div className="bg-white/20 backdrop-blur-sm px-4 py-3 rounded-lg min-w-[100px] border border-white/30">
+                <p className="text-xs text-blue-100 font-medium">Total</p>
+                <p className="text-xl font-bold">{stats.totalImages}</p>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm px-4 py-3 rounded-lg min-w-[100px] border border-white/30">
+                <p className="text-xs text-blue-100 font-medium">Images</p>
+                <p className="text-xl font-bold text-blue-200">{stats.fileTypeCounts.Image || 0}</p>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm px-4 py-3 rounded-lg min-w-[100px] border border-white/30">
+                <p className="text-xs text-blue-100 font-medium">PDF</p>
+                <p className="text-xl font-bold text-green-200">{stats.fileTypeCounts.PDF || 0}</p>
+              </div>
+              <div className="bg-white/20 backdrop-blur-sm px-4 py-3 rounded-lg min-w-[100px] border border-white/30">
+                <p className="text-xs text-blue-100 font-medium">Others</p>
+                <p className="text-xl font-bold text-purple-200">{stats.fileTypeCounts.Other || 0}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       
       {/* Team Stats Section - Cards */}
       <div className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Team Statistics</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <BarChart3 className="w-5 h-5" />
+          Team Statistics
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {Object.entries(stats.creatorCounts).map(([name, count]) => (
-            <div key={name} className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
-              <h3 className="font-semibold text-gray-800 mb-2 truncate">{name}</h3>
-              <div className="space-y-1">
-                <div className="flex justify-between">
-                  <span className="text-gray-600 text-sm">Files:</span>
-                  <span className="font-medium text-sm">{count}</span>
+            <div key={name} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3">
+                <div className="bg-gradient-to-br from-blue-600 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
+                  {name.charAt(0).toUpperCase()}
+                </div>
+                <h3 className="font-semibold text-gray-800 truncate">{name}</h3>
+              </div>
+              <div className="mt-3 pt-3 border-t border-gray-200">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600 text-sm">Files Uploaded:</span>
+                  <span className="font-bold text-lg text-blue-600">{count}</span>
                 </div>
               </div>
             </div>
@@ -354,7 +367,7 @@ const ImgAndFiles = () => {
       <div className="mb-8 flex justify-end">
         <button
           onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
           <Plus className="w-5 h-5" />
           <span>Add New</span>
@@ -363,7 +376,10 @@ const ImgAndFiles = () => {
 
       {/* Gallery Section */}
       <div>
-        <h2 className="text-xl md:text-2xl font-semibold mb-4">Uploaded Files</h2>
+        <h2 className="text-xl md:text-2xl font-semibold mb-4 flex items-center gap-2">
+          <Calendar className="w-5 h-5 text-blue-600" />
+          Uploaded Files
+        </h2>
         
         {/* Results Counter */}
         {productFilter !== 'All' || fileTypeFilter !== 'All' ? (
@@ -381,6 +397,41 @@ const ImgAndFiles = () => {
             }).length} of {images.length} files
           </div>
         ) : null}
+        
+        {/* Expand/Collapse All Button */}
+        <div className="mb-4 flex justify-end">
+          <button
+            onClick={() => {
+              const allProducts = [...new Set(images
+                .filter(image => {
+                  if (productFilter !== 'All' && image.productCompany !== productFilter) {
+                    return false;
+                  }
+                  if (fileTypeFilter !== 'All' && getFileType(image.imageUrl) !== fileTypeFilter) {
+                    return false;
+                  }
+                  return true;
+                })
+                .map(img => img.productCompany))];
+              
+              const allExpanded = allProducts.every(product => expandedProducts[product]);
+              
+              const newExpandedState = {};
+              allProducts.forEach(product => {
+                newExpandedState[product] = !allExpanded;
+              });
+              
+              setExpandedProducts(newExpandedState);
+            }}
+            className="px-4 py-2 bg-blue-100 text-blue-800 rounded-lg hover:bg-blue-200 transition-colors text-sm font-medium"
+          >
+            {Object.keys(expandedProducts).length > 0 && 
+             Object.values(expandedProducts).filter(v => v).length > 0 &&
+             Object.values(expandedProducts).filter(v => v).length === 
+             Object.keys(expandedProducts).length
+             ? 'Collapse All' : 'Expand All'}
+          </button>
+        </div>
         
         {/* Filters */}
         <div className="mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
@@ -480,7 +531,7 @@ const ImgAndFiles = () => {
           </div>
         ) : (
           <>
-            {/* Group images by product */}
+            {/* Group images by product with accordion functionality */}
             {Object.entries(
               images
                 .filter(image => {
@@ -502,143 +553,186 @@ const ImgAndFiles = () => {
                   acc[product].push(image);
                   return acc;
                 }, {})
-            ).map(([product, productImages]) => (
-              <div key={product} className="mb-8">
-                <h3 className="text-lg md:text-xl font-semibold mb-4 text-gray-800 border-b pb-2">{product}</h3>
-                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6">
-                  {productImages.map((image) => (
-                    <div
-                      key={image._id}
-                      className="border rounded-lg overflow-visible shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
+            ).map(([product, productImages]) => {
+              const isExpanded = expandedProducts[product] || false;
+              
+              const toggleExpand = () => {
+                setExpandedProducts(prev => ({
+                  ...prev,
+                  [product]: !prev[product]
+                }));
+              };
+              
+              return (
+                <div key={product} className="mb-6 border rounded-xl overflow-hidden shadow-md">
+                  {/* Accordion Header */}
+                  <div 
+                    className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 cursor-pointer flex justify-between items-center"
+                    onClick={toggleExpand}
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="bg-gradient-to-br from-blue-600 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
+                        {product.charAt(0)}
+                      </div>
+                      <div>
+                        <h3 className="text-lg md:text-xl font-semibold text-gray-800">{product}</h3>
+                        <p className="text-sm text-gray-600">{productImages.length} file{productImages.length !== 1 ? 's' : ''}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm text-gray-600 hidden sm:inline">Click to {isExpanded ? 'collapse' : 'expand'}</span>
+                      <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                        <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Accordion Content */}
+                  {isExpanded && (
+                    <div className="p-4 bg-white">
+                      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6">
+                        {productImages.map((image) => (
+                          <div
+                            key={image._id}
+                            className="border rounded-lg overflow-visible shadow-md hover:shadow-lg transition-shadow h-full flex flex-col"
+                          >
+                    <div 
+                      className="relative pb-[75%] bg-gray-50 cursor-pointer"
+                      onClick={() => isImageFile(image.imageUrl) && handleImagePreview(image.imageUrl)}
                     >
-                <div 
-                  className="relative pb-[75%] bg-gray-50 cursor-pointer"
-                  onClick={() => isImageFile(image.imageUrl) && handleImagePreview(image.imageUrl)}
-                >
-                  {isImageFile(image.imageUrl) ? (
-                    <img
-                      src={image.imageUrl}
-                      alt={image.name}
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-2 md:p-4">
-                      {getFileIcon(image.imageUrl)}
-                      <span className="mt-2 text-xs md:text-sm text-center text-gray-600 truncate w-full px-1">
-                        {image.name}
-                      </span>
+                      {isImageFile(image.imageUrl) ? (
+                        <img
+                          src={image.imageUrl}
+                          alt={image.name}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center p-2 md:p-4">
+                          {getFileIcon(image.imageUrl)}
+                          <span className="mt-2 text-xs md:text-sm text-center text-gray-600 truncate w-full px-1">
+                            {image.name}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-3 md:p-4 flex-grow flex flex-col">
+                      <h3 className="font-semibold text-gray-800 truncate text-sm md:text-base">{image.name}</h3>
+                      <p className="text-xs text-gray-500 mt-1 truncate">
+                        Product: {image.productCompany}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate">
+                        Uploaded by: {image.createdBy}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate">
+                        Role: {image.creatorRole}
+                        {image.isSocialMedia && " (Social Media)"}
+                      </p>
+                      <div className="mt-2 md:mt-3 flex justify-between items-center flex-grow">
+                        <span className="text-xs text-gray-500">
+                          {new Date(image.createdAt).toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                          })}
+                        </span>
+                        <div className="flex space-x-1 md:space-x-2">
+                          <div className="relative flex-shrink-0">
+                            <button
+                              onClick={() => toggleDownloadMenu(image._id)}
+                              className="p-1 text-gray-600 hover:text-blue-600"
+                              title="Download"
+                            >
+                              <Download className="w-4 h-4 md:w-5 md:h-5" />
+                            </button>
+                            
+                           {downloadMenuOpen === image._id && (
+                              <div className="absolute z-50 bottom-full right-0 mb-2 w-48 bg-white rounded-md shadow-xl ring-1 ring-black ring-opacity-5 download-menu border border-gray-200"
+                                style={{ minWidth: '120px' }}>
+                                <div className="py-1" role="menu">
+                                  <button
+                                    onClick={() => handleDownloadOption(image.imageUrl, image.name, 'png', image._id)}
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                    role="menuitem"
+                                  >
+                                    Download as PNG
+                                  </button>
+                                  <button
+                                    onClick={() => handleDownloadOption(image.imageUrl, image.name, 'jpg', image._id)}
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                    role="menuitem"
+                                  >
+                                    Download as JPG
+                                  </button>
+                                  <button
+                                    onClick={() => handleDownloadOption(image.imageUrl, image.name, 'pdf', image._id)}
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                    role="menuitem"
+                                  >
+                                    Download as PDF
+                                  </button>
+                                  <button
+                                    onClick={() => handleDownloadOption(image.imageUrl, image.name, 'original', image._id)}
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
+                                    role="menuitem"
+                                  >
+                                    Download Original
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                          <button
+                            onClick={() => handleShare(image)}
+                            className="p-1 text-gray-600 hover:text-green-600"
+                            title="Share"
+                          >
+                            <Share2 className="w-4 h-4 md:w-5 md:h-5" />
+                          </button>
+                          {userRole === 'admin' && !image.isSocialMedia && (
+                            <>
+                              <button
+                                onClick={() => handleEdit(image)}
+                                className="p-1 text-gray-600 hover:text-blue-600"
+                                title="Edit"
+                              >
+                                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                              </button>
+                              <button
+                                onClick={() => handleDelete(image._id)}
+                                className="p-1 text-gray-600 hover:text-red-600"
+                                title="Delete"
+                              >
+                                <svg
+                                  className="w-4 h-4 md:w-5 md:h-5"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                  />
+                                </svg>
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
-                <div className="p-3 md:p-4 flex-grow flex flex-col">
-                  <h3 className="font-semibold text-gray-800 truncate text-sm md:text-base">{image.name}</h3>
-                  <p className="text-xs text-gray-500 mt-1 truncate">
-                    Product: {image.productCompany}
-                  </p>
-                  <p className="text-xs text-gray-500 truncate">
-                    Uploaded by: {image.createdBy}
-                  </p>
-                  <p className="text-xs text-gray-500 truncate">
-                    Role: {image.creatorRole}
-                    {image.isSocialMedia && " (Social Media)"}
-                  </p>
-                  <div className="mt-2 md:mt-3 flex justify-between items-center flex-grow">
-                    <span className="text-xs text-gray-500">
-                      {new Date(image.createdAt).toLocaleDateString()}
-                    </span>
-                    <div className="flex space-x-1 md:space-x-2">
-                      <div className="relative flex-shrink-0">
-                        <button
-                          onClick={() => toggleDownloadMenu(image._id)}
-                          className="p-1 text-gray-600 hover:text-blue-600"
-                          title="Download"
-                        >
-                          <Download className="w-4 h-4 md:w-5 md:h-5" />
-                        </button>
-                        
-                       {downloadMenuOpen === image._id && (
-                          <div className="absolute z-50 bottom-full right-0 mb-2 w-48 bg-white rounded-md shadow-xl ring-1 ring-black ring-opacity-5 download-menu border border-gray-200"
-                            style={{ minWidth: '120px' }}>
-                            <div className="py-1" role="menu">
-                              <button
-                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'png', image._id)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
-                                role="menuitem"
-                              >
-                                Download as PNG
-                              </button>
-                              <button
-                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'jpg', image._id)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
-                                role="menuitem"
-                              >
-                                Download as JPG
-                              </button>
-                              <button
-                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'pdf', image._id)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
-                                role="menuitem"
-                              >
-                                Download as PDF
-                              </button>
-                              <button
-                                onClick={() => handleDownloadOption(image.imageUrl, image.name, 'original', image._id)}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-100 w-full text-left transition-colors"
-                                role="menuitem"
-                              >
-                                Download Original
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => handleShare(image)}
-                        className="p-1 text-gray-600 hover:text-green-600"
-                        title="Share"
-                      >
-                        <Share2 className="w-4 h-4 md:w-5 md:h-5" />
-                      </button>
-                      {userRole === 'admin' && !image.isSocialMedia && (
-                        <>
-                          <button
-                            onClick={() => handleEdit(image)}
-                            className="p-1 text-gray-600 hover:text-blue-600"
-                            title="Edit"
-                          >
-                            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                            </svg>
-                          </button>
-                          <button
-                            onClick={() => handleDelete(image._id)}
-                            className="p-1 text-gray-600 hover:text-red-600"
-                            title="Delete"
-                          >
-                            <svg
-                              className="w-4 h-4 md:w-5 md:h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+              );
+            })}
             </>
           )}
       </div>

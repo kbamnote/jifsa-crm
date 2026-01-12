@@ -19,7 +19,7 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
     highestDegree: "",
     collegeOrInstituteName: "",
     schoolName: "",
-    productCompany: "jifsa",
+    productCompany: "eee-technologies",
     callStatus: "not_called",
     interviewRoundStatus: "not_scheduled",
     aptitudeRoundStatus: "not_scheduled",
@@ -114,7 +114,7 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
         highestDegree: "",
         collegeOrInstituteName: "",
         schoolName: "",
-        productCompany: "jifsa",
+        productCompany: "eee-technologies",
         callStatus: "not_called",
         interviewRoundStatus: "not_scheduled",
         aptitudeRoundStatus: "not_scheduled",
@@ -288,10 +288,10 @@ const AddLeadModal = ({ showModal, setShowModal, onSuccess }) => {
                   required
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                 >
-                  <option value="jifsa">JIFSA</option>
+                  <option value="eee-technologies">EEE Technologies</option>
                   <option value="bim">Elite BIM</option>
                   <option value="bifs">Elite BIFS</option>
-                  <option value="eee-technologies">EEE Technologies</option>
+                  <option value="jifsa">JIFSA</option>
                   <option value="jobs">Elite Jobs</option>
                   <option value="cards">Elite Cards</option>
                   <option value="management">Elite Management</option>

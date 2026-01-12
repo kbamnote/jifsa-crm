@@ -51,6 +51,10 @@ export const updateStatus = (id, status) => Api.patch(`/form/${id}/status`, { st
 
 export const deleteForm = (id) => Api.delete(`/form/delete-form/${id}`);
 
+export const updateEducation = (id, educationField) => Api.put(`/form/update-education/${id}`, { educationField });
+
+export const addRemark = (id, remarkData) => Api.post(`/form/add-remark/${id}`, remarkData);
+
 export const assignLead = (id, assignmentData) => {
   console.log(`Assigning lead with ID: ${id}`);
   console.log('Assignment data:', assignmentData);
@@ -140,7 +144,7 @@ export const createSocialMediaPost = (formData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
-export const getSocialMediaPosts = () => Api.get("/social-media/get-all");
+export const getSocialMediaPosts = (page = 1, limit = 10) => Api.get(`/social-media/get-all?page=${page}&limit=${limit}`);
 
 export const getSocialMediaPostById = (id) => Api.get(`/social-media/${id}`);
 
@@ -184,7 +188,20 @@ export const createReport = (formData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
-export const getReports = () => Api.get("/reports");
+export const getReports = (page = 1, limit = 10, filters = {}) => {
+  const params = new URLSearchParams();
+  params.append('page', page);
+  params.append('limit', limit);
+  
+  // Add filters if provided
+  if (filters.userId) params.append('userId', filters.userId);
+  if (filters.userName) params.append('userName', filters.userName);
+  if (filters.day) params.append('day', filters.day);
+  if (filters.startDate) params.append('startDate', filters.startDate);
+  if (filters.endDate) params.append('endDate', filters.endDate);
+  
+  return Api.get(`/reports?${params.toString()}`);
+};
 
 export const getReportById = (id) => Api.get(`/reports/${id}`);
 
@@ -197,5 +214,7 @@ export const deleteReport = (id) => Api.delete(`/reports/${id}`);
 
 export const getReportsByDateRange = (startDate, endDate) =>
   Api.get(`/reports/date-range?startDate=${startDate}&endDate=${endDate}`);
+
+export const getAttendanceStats = () => Api.get('/reports/attendance-stats');
 
 export default Api;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaTimes, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendar, FaGraduationCap, FaCity, FaFlag, FaHashtag } from "react-icons/fa";
-import { updateDetail } from "../utils/Api";
+import { updateDetail, updateDetailWithFile } from "../utils/Api";
 
 const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -32,7 +32,14 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
     admissionLetter: "not_issued",
     feesStatus: "not_paid",
     paymentMethod: "other",
-    feesInstallmentStructure: "one_time"
+    feesInstallmentStructure: "one_time",
+    education: {
+      tenth: false,
+      twelfth: false,
+      undergraduate: false,
+      postgraduate: false,
+      phd: false
+    }
   });
 
   const [loading, setLoading] = useState(false);
@@ -73,7 +80,14 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
         admissionLetter: selectedRecord.admissionLetter || "not_issued",
         feesStatus: selectedRecord.feesStatus || "not_paid",
         paymentMethod: selectedRecord.paymentMethod || "other",
-        feesInstallmentStructure: selectedRecord.feesInstallmentStructure || "one_time"
+        feesInstallmentStructure: selectedRecord.feesInstallmentStructure || "one_time",
+        education: selectedRecord.education || {
+          tenth: false,
+          twelfth: false,
+          undergraduate: false,
+          postgraduate: false,
+          phd: false
+        }
       });
       
       // Set current resume if exists
@@ -135,7 +149,12 @@ const UpdateLeadModal = ({ showModal, setShowModal, selectedRecord, onSuccess })
       
       // Add all form fields to FormData
       Object.keys(formData).forEach(key => {
-        if (formData[key] !== "" && formData[key] !== null) {
+        if (key === 'education') {
+          // Handle nested education object by adding each field separately
+          Object.keys(formData[key]).forEach(eduKey => {
+            formDataToSend.append(`education.${eduKey}`, formData[key][eduKey]);
+          });
+        } else if (formData[key] !== "" && formData[key] !== null) {
           formDataToSend.append(key, formData[key]);
         }
       });

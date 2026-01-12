@@ -17,6 +17,31 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+/* Show scrollbars for table containers */
+.overflow-x-auto:not(.hide-scrollbar)::-webkit-scrollbar {
+  display: block;
+  height: 12px;
+}
+
+.overflow-x-auto:not(.hide-scrollbar)::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.overflow-x-auto:not(.hide-scrollbar)::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 10px;
+}
+
+.overflow-x-auto:not(.hide-scrollbar)::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.overflow-x-auto:not(.hide-scrollbar) {
+  -ms-overflow-style: scrollbar;  /* IE and Edge */
+  scrollbar-width: auto;  /* Firefox */
+}
+
 /* Alternative: If you want to hide scrollbar only for specific elements */
 /* Uncomment below and comment above if needed */
 

@@ -386,6 +386,61 @@ const ViewLead = () => {
                   <p className="text-gray-800">{selectedRecord.schoolName || 'N/A'}</p>
                 </div>
               </div>
+              
+              {/* Education Qualifications */}
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <h5 className="text-md font-semibold text-gray-800 mb-3 flex items-center">
+                  <School className="w-4 h-4 mr-2 text-blue-600" />
+                  Education Qualifications
+                </h5>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedRecord.education?.tenth || false}
+                      disabled
+                      className="rounded text-blue-600 focus:ring-blue-500 mr-2"
+                    />
+                    <label className="text-sm text-gray-700">10th</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedRecord.education?.twelfth || false}
+                      disabled
+                      className="rounded text-blue-600 focus:ring-blue-500 mr-2"
+                    />
+                    <label className="text-sm text-gray-700">12th</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedRecord.education?.undergraduate || false}
+                      disabled
+                      className="rounded text-blue-600 focus:ring-blue-500 mr-2"
+                    />
+                    <label className="text-sm text-gray-700">UG</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedRecord.education?.postgraduate || false}
+                      disabled
+                      className="rounded text-blue-600 focus:ring-blue-500 mr-2"
+                    />
+                    <label className="text-sm text-gray-700">PG</label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedRecord.education?.phd || false}
+                      disabled
+                      className="rounded text-blue-600 focus:ring-blue-500 mr-2"
+                    />
+                    <label className="text-sm text-gray-700">PhD</label>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Product & Status Information */}
@@ -557,6 +612,60 @@ const ViewLead = () => {
                 </div>
               </div>
             </div>
+            
+            {/* Remarks Section */}
+            {selectedRecord.remarks && selectedRecord.remarks.length > 0 && (
+              <div className="bg-gray-50 rounded-lg p-6">
+                <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                  <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                  All Remarks
+                </h4>
+                <div className="space-y-4">
+                  {selectedRecord.remarks.map((remark, index) => (
+                    <div key={remark._id || index} className="border border-gray-200 rounded-lg p-4 bg-white">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-3">
+                          <span className="font-semibold text-gray-800">Remark {index + 1}</span>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            remark.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                            remark.status === 'interested' ? 'bg-green-100 text-green-800' :
+                            remark.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                            remark.status === 'confirm_selected' ? 'bg-purple-100 text-purple-800' :
+                            'bg-blue-100 text-blue-800'
+                          }`}>
+                            {remark.status.replace('_', ' ').toUpperCase()}
+                          </span>
+                        </div>
+                        <span className="text-xs text-gray-500">
+                          {new Date(remark.createdAt).toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                          })}
+                        </span>
+                      </div>
+                      <div className="text-sm text-gray-700 mb-2">
+                        {remark.message}
+                      </div>
+                      {remark.reminderDate && (
+                        <div className="text-xs text-gray-500">
+                          Reminder: {new Date(remark.reminderDate).toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                          })}
+                        </div>
+                      )}
+                      {remark.createdBy && (
+                        <div className="text-xs text-gray-500 mt-1">
+                          By: {remark.createdBy.name || remark.createdBy.email || 'Unknown'}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

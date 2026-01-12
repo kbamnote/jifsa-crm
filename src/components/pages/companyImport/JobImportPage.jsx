@@ -400,7 +400,11 @@ const JobImportPage = () => {
     if (!obj) return 'N/A';
     
     if (path === 'createdAt') {
-      return obj[path] ? new Date(obj[path]).toLocaleDateString() : 'N/A';
+      return obj[path] ? new Date(obj[path]).toLocaleDateString('en-IN', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            }) : 'N/A';
     }
 
     const hasNestedStructure = obj.title !== undefined && obj.company !== undefined && typeof obj.company === 'object';
@@ -835,7 +839,11 @@ const JobImportPage = () => {
                                 className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
                               >
                                 {column.key === 'createdAt'
-                                  ? (listing[column.key] ? new Date(listing[column.key]).toLocaleDateString() : 'N/A')
+                                  ? (listing[column.key] ? new Date(listing[column.key]).toLocaleDateString('en-IN', {
+                                                                          day: 'numeric',
+                                                                          month: 'short',
+                                                                          year: 'numeric',
+                                                                        }) : 'N/A')
                                   : getNestedValue(listing, column.key)}
                               </td>
                             ))}

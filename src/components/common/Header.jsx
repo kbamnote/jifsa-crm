@@ -19,7 +19,11 @@ const Header = () => {
           <div className="flex items-center justify-between sm:justify-end">
             <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-700 font-bold">
               <Calendar className="w-4 h-4" />
-              <span>{new Date().toLocaleDateString('en-IN')}</span>
+              <span>{new Date().toLocaleDateString('en-IN', {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric',
+                                  })}</span>
             </div>
           </div>
         </div>

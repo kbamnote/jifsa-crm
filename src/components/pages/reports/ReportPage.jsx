@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Download, Calendar, Clock, FileText, FileImage, File, X } from 'lucide-react';
+import { Plus, Edit, Trash2, Download, Calendar, Clock, FileText, FileImage, File, X, ChevronDown, ChevronRight, Users, UserCircle, BarChart3, User, Link as LinkIcon } from 'lucide-react';
 import ReportModal from '../../modal/ReportModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 import {
   getReports as fetchReportsApi,
   createReport,
   updateReport,
-  deleteReport
+  deleteReport,
+  getAttendanceStats as getAttendanceStatsApi
 } from '../../utils/Api';
 
 const ReportPage = () => {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingStats, setLoadingStats] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingReport, setEditingReport] = useState(null);
   const [error, setError] = useState('');
@@ -22,7 +24,7 @@ const ReportPage = () => {
   // Filter states
   const [dateFilter, setDateFilter] = useState('');
   const [dayFilter, setDayFilter] = useState('');
-  const [nameFilter, setNameFilter] = useState('');
+  const [nameFilter, setNameFilter] = useState(''); // Changed to be used as a dropdown option
   
   // Statistics state
   const [attendanceStats, setAttendanceStats] = useState({});
@@ -31,9 +33,14 @@ const ReportPage = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedReport, setSelectedReport] = useState(null);
   
-  // Pagination state
+  // Accordion state for attendance stats
+  const [expandedUsers, setExpandedUsers] = useState({});
+  
+  // Pagination state - Updated to support backend pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
 
   // Get user role from localStorage or cookies
   useEffect(() => {
@@ -41,17 +48,41 @@ const ReportPage = () => {
     setUserRole(role || '');
   }, []);
 
-  // Fetch reports from API
+  // Fetch reports and attendance stats from API
   useEffect(() => {
-    fetchReports();
-  }, []);
+    const fetchData = async () => {
+      // Only show loading indicator for reports initially
+      setLoading(true);
+      await Promise.allSettled([
+        fetchReports(),
+        fetchAttendanceStats()
+      ]);
+      // Set loading to false after reports are loaded
+      // Stats can load in background
+    };
+    
+    fetchData();
+  }, [currentPage, itemsPerPage, dateFilter, dayFilter, nameFilter]);
 
   const fetchReports = async () => {
     try {
       setLoading(true);
-      const response = await fetchReportsApi();
+      const filters = {};
+      if (dateFilter) {
+        filters.startDate = dateFilter;
+        filters.endDate = dateFilter; // Same date for both if only date filter is applied
+      }
+      if (nameFilter) {
+        filters.userName = nameFilter;
+      }
+      if (dayFilter) {
+        filters.day = dayFilter;
+      }
+      
+      const response = await fetchReportsApi(currentPage, itemsPerPage, filters);
       setReports(response.data.data || []);
-      calculateAttendanceStats(response.data.data || []);
+      setTotalPages(response.data.totalPages || 1);
+      setTotalItems(response.data.totalItems || 0);
       console.log('Fetched reports:', response.data.data);
     } catch (err) {
       setError(err.message || 'Failed to fetch reports');
@@ -60,73 +91,25 @@ const ReportPage = () => {
       setLoading(false);
     }
   };
-
-  // Calculate attendance statistics
-  const calculateAttendanceStats = (reports) => {
-    const stats = {};
-    
-    reports.forEach(report => {
-      const userId = report.userId._id || report.userId;
-      const userName = report.userId?.name || report.userName;
-      
-      if (!stats[userId]) {
-        stats[userId] = {
-          name: userName,
-          presentDays: 0,
-          absentDays: 0,
-          totalDays: 0
-        };
-      }
-      
-      // Count as present if there's a report with attendance date
-      if (report.attendance?.date) {
-        stats[userId].presentDays += 1;
-      } else {
-        stats[userId].absentDays += 1;
-      }
-      
-      stats[userId].totalDays += 1;
-    });
-    
-    setAttendanceStats(stats);
+  
+  const fetchAttendanceStats = async () => {
+    try {
+      setLoadingStats(true);
+      const response = await getAttendanceStatsApi();
+      setAttendanceStats(response.data.data || {});
+      console.log('Fetched attendance stats:', response.data.data);
+    } catch (err) {
+      console.error('Error fetching attendance stats:', err);
+    } finally {
+      setLoadingStats(false);
+    }
   };
+
+
   
-  // Apply filters
-  const filteredReports = reports.filter(report => {
-    const reportDate = report.attendance?.date ? new Date(report.attendance.date) : null;
-    const reportDay = reportDate ? reportDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase() : '';
-    const reportUserName = report.userId?.name || report.userName;
-    
-    // Date filter
-    if (dateFilter && reportDate) {
-      const filterDate = new Date(dateFilter);
-      if (
-        reportDate.getDate() !== filterDate.getDate() ||
-        reportDate.getMonth() !== filterDate.getMonth() ||
-        reportDate.getFullYear() !== filterDate.getFullYear()
-      ) {
-        return false;
-      }
-    }
-    
-    // Day filter - match the selected day option with the report day
-    if (dayFilter && reportDay.indexOf(dayFilter) === -1) {
-      return false;
-    }
-    
-    // Name filter
-    if (nameFilter && reportUserName.toLowerCase().indexOf(nameFilter.toLowerCase()) === -1) {
-      return false;
-    }
-    
-    return true;
-  });
-  
-  // Pagination calculations
-  const totalItems = filteredReports.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedReports = filteredReports.slice(startIndex, startIndex + itemsPerPage);
+  // Since we're using backend pagination, we don't need client-side filtering and pagination
+  // The reports state already contains the paginated results from the backend
+  const paginatedReports = reports;
   
   const handleCreateReport = async (formData) => {
     try {
@@ -188,19 +171,85 @@ const ReportPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 sm:p-6">
         <div className="max-w-7xl mx-auto">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/3 mb-6"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map(item => (
-                <div key={item} className="bg-white rounded-xl shadow-md p-6">
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                </div>
-              ))}
+          {/* Page Header Loading */}
+          <div className="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-gray-100">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <div className="h-8 bg-gray-200 rounded w-48 mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-64"></div>
+              </div>
+              <div className="h-12 bg-gray-200 rounded-lg w-40"></div>
             </div>
+          </div>
+          
+          {/* Attendance Stats Loading */}
+          <div className="mb-8 border rounded-xl overflow-hidden shadow-md">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
+              <div className="h-6 bg-gray-200 rounded w-64 mb-3"></div>
+              <div className="h-4 bg-gray-200 rounded w-40"></div>
+            </div>
+            <div className="p-4 bg-white">
+              <div className="mb-3 border rounded-lg overflow-hidden">
+                <div className="bg-gray-50 p-3">
+                  <div className="h-4 bg-gray-200 rounded w-48"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Filters Loading */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div>
+              <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
+              <div className="h-12 bg-gray-200 rounded-xl"></div>
+            </div>
+            <div>
+              <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
+              <div className="h-12 bg-gray-200 rounded-xl"></div>
+            </div>
+            <div>
+              <div className="h-4 bg-gray-200 rounded w-32 mb-2"></div>
+              <div className="h-12 bg-gray-200 rounded-xl"></div>
+            </div>
+          </div>
+          
+          {/* Pagination Loading */}
+          <div className="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
+            <div className="h-4 bg-gray-200 rounded w-48"></div>
+            <div className="flex items-center space-x-2">
+              <div className="h-10 w-24 bg-gray-200 rounded-md"></div>
+              <div className="h-10 w-24 bg-gray-200 rounded-md"></div>
+              <div className="h-10 w-16 bg-gray-200 rounded-md"></div>
+              <div className="h-10 w-24 bg-gray-200 rounded-md"></div>
+            </div>
+          </div>
+          
+          {/* Table Loading */}
+          <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
+                <tr>
+                  {[...Array(7)].map((_, i) => (
+                    <th key={i} className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                      <div className="h-4 bg-gray-200 rounded w-20"></div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {[...Array(5)].map((_, i) => (
+                  <tr key={i} className="hover:bg-blue-50">
+                    {[...Array(7)].map((_, j) => (
+                      <td key={j} className="px-6 py-4 whitespace-nowrap">
+                        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -208,53 +257,134 @@ const ReportPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-800">Daily Reports</h1>
-            <p className="text-gray-600 mt-2">
-              Manage your daily reports and track your work progress
-            </p>
+        <div className="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-gray-100">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Daily Reports</h1>
+              <p className="text-gray-600 mt-1 sm:mt-2">Manage your daily reports and track your work progress</p>
+            </div>
+            {canCreateUpdateReports && (
+              <button
+                onClick={() => {
+                  setEditingReport(null);
+                  setShowModal(true);
+                }}
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base font-medium">Create Report</span>
+              </button>
+            )}
           </div>
-          {canCreateUpdateReports && (
-            <button
-              onClick={() => {
-                setEditingReport(null);
-                setShowModal(true);
-              }}
-              className="mt-4 sm:mt-0 flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-md"
-            >
-              <Plus className="w-5 h-5" />
-              <span>Create Report</span>
-            </button>
-          )}
         </div>
         
-        {/* Attendance Statistics */}
+        {/* Attendance Statistics - Accordion Style */}
         {userRole === 'admin' && Object.keys(attendanceStats).length > 0 && (
-          <div className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {Object.entries(attendanceStats).map(([userId, stats]) => (
-              <div key={userId} className="bg-white p-4 rounded-lg shadow border border-gray-200">
-                <h3 className="font-semibold text-gray-800 mb-2">{stats.name}</h3>
-                <div className="space-y-1 text-sm">
-                  <p className="text-green-600">Present: {stats.presentDays} days</p>
-                  <p className="text-red-600">Absent: {stats.absentDays} days</p>
-                  <p className="text-gray-600">Total: {stats.totalDays} days</p>
-                  <p className="text-blue-600 font-medium">
-                    {stats.totalDays > 0 ? Math.round((stats.presentDays / stats.totalDays) * 100) : 0}%
-                  </p>
+          <div className="mb-8 border rounded-xl overflow-hidden shadow-md">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 cursor-pointer flex justify-between items-center"
+              onClick={() => {
+                // Toggle expand/collapse all
+                const allExpanded = Object.values(expandedUsers).every(v => v);
+                const newExpandedState = {};
+                Object.keys(attendanceStats).forEach(userId => {
+                  newExpandedState[userId] = !allExpanded;
+                });
+                setExpandedUsers(newExpandedState);
+              }}
+            >
+              <div className="flex items-center space-x-3">
+                <div className="bg-gradient-to-br from-blue-600 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800">Attendance Statistics</h3>
+                  <p className="text-sm text-gray-600">{Object.keys(attendanceStats).length} users</p>
                 </div>
               </div>
-            ))}
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-600 hidden sm:inline">
+                  Click to expand/collapse all
+                </span>
+              </div>
+            </div>
+            
+            <div className="p-4 bg-white">
+              {Object.entries(attendanceStats).map(([userId, stats]) => {
+                const isExpanded = expandedUsers[userId] || false;
+                
+                const toggleExpand = () => {
+                  setExpandedUsers(prev => ({
+                    ...prev,
+                    [userId]: !prev[userId]
+                  }));
+                };
+                
+                return (
+                  <div key={userId} className="mb-3 border rounded-lg overflow-hidden last:mb-0">
+                    <div 
+                      className="bg-gray-50 p-3 cursor-pointer flex justify-between items-center"
+                      onClick={toggleExpand}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <div className="bg-gradient-to-br from-blue-600 to-indigo-600 w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold">
+                          {stats.name?.charAt(0)?.toUpperCase()}
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-gray-800">{stats.name}</h4>
+                          <p className="text-xs text-gray-600">{stats.totalDays} days tracked</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="text-right">
+                          <p className="text-sm font-medium">{stats.totalDays > 0 ? Math.round((stats.presentDays / stats.totalDays) * 100) : 0}%</p>
+                          <p className="text-xs text-gray-500">Attendance</p>
+                        </div>
+                        <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                          {isExpanded ? <ChevronDown className="w-5 h-5 text-gray-600" /> : <ChevronRight className="w-5 h-5 text-gray-600" />}
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {isExpanded && (
+                      <div className="p-3 bg-white">
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                            <p className="text-green-800 font-semibold text-center">{stats.presentDays}</p>
+                            <p className="text-green-600 text-xs text-center mt-1">Present Days</p>
+                          </div>
+                          <div className="bg-red-50 p-3 rounded-lg border border-red-200">
+                            <p className="text-red-800 font-semibold text-center">{stats.absentDays}</p>
+                            <p className="text-red-600 text-xs text-center mt-1">Absent Days</p>
+                          </div>
+                        </div>
+                        <div className="mt-3 pt-3 border-t border-gray-100">
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div 
+                              className="bg-blue-600 h-2 rounded-full" 
+                              style={{ width: `${stats.totalDays > 0 ? (stats.presentDays / stats.totalDays) * 100 : 0}%` }}
+                            ></div>
+                          </div>
+                          <div className="flex justify-between text-xs text-gray-600 mt-1">
+                            <span>Total: {stats.totalDays} days</span>
+                            <span>{stats.totalDays > 0 ? Math.round((stats.presentDays / stats.totalDays) * 100) : 0}%</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
         
         {/* Filters */}
-        <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50 rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Date</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Date</label>
             <input
               type="date"
               value={dateFilter}
@@ -262,42 +392,45 @@ const ReportPage = () => {
                 setDateFilter(e.target.value);
                 setCurrentPage(1); // Reset to first page when filter changes
               }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Day</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Day</label>
             <select
               value={dayFilter}
               onChange={(e) => {
                 setDayFilter(e.target.value);
                 setCurrentPage(1); // Reset to first page when filter changes
               }}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
             >
               <option value="">Select a day...</option>
-              <option value="monday">Mon</option>
-              <option value="tuesday">Tue</option>
-              <option value="wednesday">Wed</option>
-              <option value="thursday">Thu</option>
-              <option value="friday">Fri</option>
-              <option value="saturday">Sat</option>
-              <option value="sunday">Sun</option>
+              <option value="monday">Monday</option>
+              <option value="tuesday">Tuesday</option>
+              <option value="wednesday">Wednesday</option>
+              <option value="thursday">Thursday</option>
+              <option value="friday">Friday</option>
+              <option value="saturday">Saturday</option>
+              <option value="sunday">Sunday</option>
             </select>
           </div>
           {userRole === 'admin' && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Name</label>
-              <input
-                type="text"
+              <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Name</label>
+              <select
                 value={nameFilter}
                 onChange={(e) => {
                   setNameFilter(e.target.value);
                   setCurrentPage(1); // Reset to first page when filter changes
                 }}
-                placeholder="Enter name to search..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
+              >
+                <option value="">All Names</option>
+                {Array.from(new Set(reports.map(report => report.userId?.name || (report.userName && report.userName.split('@')[0])))).filter(Boolean).map((name, index) => (
+                  <option key={index} value={name}>{name}</option>
+                ))}
+              </select>
             </div>
           )}
         </div>
@@ -311,7 +444,7 @@ const ReportPage = () => {
         {/* Pagination Controls */}
         <div className="flex flex-col sm:flex-row items-center justify-between mb-4 gap-4">
           <div className="text-sm text-gray-700">
-            Showing <span className="font-medium">{startIndex + 1}</span> to <span className="font-medium">{Math.min(startIndex + itemsPerPage, totalItems)}</span> of <span className="font-medium">{totalItems}</span> reports
+            Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> to <span className="font-medium">{Math.min(currentPage * itemsPerPage, totalItems)}</span> of <span className="font-medium">{totalItems}</span> reports
           </div>
           
           <div className="flex items-center space-x-2">
@@ -352,49 +485,49 @@ const ReportPage = () => {
         </div>
         
         {/* Reports Table */}
-        <div className="overflow-x-auto rounded-lg border border-gray-200">
+        <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+            <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Report</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Attendance</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Files</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
+                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Name</th>
+                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Role</th>
+                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Report</th>
+                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Link</th>
+                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Attendance</th>
+                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Files</th>
+                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Created At</th>
                 {userRole === 'admin' && (
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
                 )}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {paginatedReports.length === 0 ? (
                 <tr>
-                  <td colSpan={userRole === 'admin' ? 9 : 8} className="px-6 py-4 text-center text-sm text-gray-500">
-                    No reports found
+                  <td colSpan={userRole === 'admin' ? 8 : 7} className="px-6 py-12 text-center text-base text-gray-500">
+                    <div className="flex flex-col items-center justify-center">
+                      <FileText className="w-12 h-12 text-gray-300 mb-3" />
+                      <p>No reports found</p>
+                      <p className="text-sm text-gray-400 mt-1">Try adjusting your filters or create a new report</p>
+                    </div>
                   </td>
                 </tr>
               ) : (
                 paginatedReports.map((report) => (
-                  <tr key={report._id} className="hover:bg-gray-50 cursor-pointer" onClick={() => {
+                  <tr key={report._id} className="hover:bg-blue-50 cursor-pointer transition-colors duration-200" onClick={() => {
                     setSelectedReport(report);
                     setShowDetailModal(true);
                   }}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {report.userId?.name || report.userName}
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {report.userId?.name || report.userName?.split('@')[0] || 'N/A'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {report.userEmail}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                       {report.userId?.role || report.userRole || 'N/A'}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900 max-w-xs">
+                    <td className="px-6 py-4 text-sm text-gray-700 max-w-xs">
                       <div className="line-clamp-2">{report.reportField}</div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
+                    <td className="px-6 py-4 text-sm">
                       {report.linkField ? (
                         <a 
                           href={report.linkField} 
@@ -406,50 +539,54 @@ const ReportPage = () => {
                           View Link
                         </a>
                       ) : (
-                        'N/A'
+                        <span className="text-gray-400">N/A</span>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
+                    <td className="px-6 py-4 text-sm text-gray-700">
                       <div className="space-y-1">
                         {report.attendance?.date && (
-                          <div className="flex items-center space-x-1">
-                            <Calendar className="w-4 h-4 text-gray-500" />
-                            <span>{new Date(report.attendance.date).toLocaleDateString('en-US', { weekday: 'short' })}, {new Date(report.attendance.date).toLocaleDateString()}</span>
+                          <div className="flex items-center space-x-2">
+                            <Calendar className="w-4 h-4 text-blue-500" />
+                            <span>{new Date(report.attendance.date).toLocaleDateString('en-US', { weekday: 'short' })}, {new Date(report.attendance.date).toLocaleDateString('en-IN', {
+                                                    day: 'numeric',
+                                                    month: 'short',
+                                                    year: 'numeric',
+                                                  })}</span>
                           </div>
                         )}
                         {report.attendance?.morningTime && (
-                          <div className="flex items-center space-x-1">
-                            <Clock className="w-4 h-4 text-gray-500" />
+                          <div className="flex items-center space-x-2">
+                            <Clock className="w-4 h-4 text-green-500" />
                             <span>MT: {report.attendance.morningTime}</span>
                           </div>
                         )}
                         {report.attendance?.eveningTime && (
-                          <div className="flex items-center space-x-1">
-                            <Clock className="w-4 h-4 text-gray-500" />
+                          <div className="flex items-center space-x-2">
+                            <Clock className="w-4 h-4 text-purple-500" />
                             <span>ET: {report.attendance.eveningTime}</span>
                           </div>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
+                    <td className="px-6 py-4 text-sm text-gray-700">
                       {report.uploadFiles && report.uploadFiles.length > 0 ? (
                         <div className="space-y-1">
                           {report.uploadFiles.map((file, index) => (
-                            <div key={index} className="flex items-center space-x-1">
+                            <div key={index} className="flex items-center space-x-2">
                               {file.fileType?.startsWith('image/') ? (
-                                <FileImage className="w-4 h-4 text-blue-600" />
+                                <FileImage className="w-4 h-4 text-blue-500" />
                               ) : file.fileType === 'application/pdf' ? (
-                                <FileText className="w-4 h-4 text-red-600" />
+                                <FileText className="w-4 h-4 text-red-500" />
                               ) : (
-                                <File className="w-4 h-4 text-gray-600" />
+                                <File className="w-4 h-4 text-gray-500" />
                               )}
-                              <span className="truncate max-w-[100px]" title={file.fileName}>{file.fileName}</span>
+                              <span className="truncate max-w-[120px]" title={file.fileName}>{file.fileName}</span>
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleDownloadFile(file.fileUrl, file.fileName);
                                 }}
-                                className="text-blue-600 hover:text-blue-800 transition-colors"
+                                className="text-blue-500 hover:text-blue-700 transition-colors"
                                 title="Download"
                               >
                                 <Download className="w-4 h-4" />
@@ -458,22 +595,26 @@ const ReportPage = () => {
                           ))}
                         </div>
                       ) : (
-                        'No files'
+                        <span className="text-gray-400">No files</span>
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(report.createdAt).toLocaleString()}
+                      {new Date(report.createdAt).toLocaleDateString('en-IN', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      })}
                     </td>
                     {userRole === 'admin' && (
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-3">
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               setEditingReport(report);
                               setShowModal(true);
                             }}
-                            className="text-blue-600 hover:text-blue-900 transition-colors"
+                            className="text-blue-500 hover:text-blue-700 transition-colors p-1 rounded hover:bg-blue-100"
                             title="Edit Report"
                           >
                             <Edit className="w-5 h-5" />
@@ -485,7 +626,7 @@ const ReportPage = () => {
                               setReportToDelete(report);
                               setShowDeleteModal(true);
                             }}
-                            className="text-red-600 hover:text-red-900 transition-colors"
+                            className="text-red-500 hover:text-red-700 transition-colors p-1 rounded hover:bg-red-100"
                             title="Delete Report"
                           >
                             <Trash2 className="w-5 h-5" />
@@ -524,16 +665,19 @@ const ReportPage = () => {
       
       {/* Report Detail Modal */}
       {showDetailModal && selectedReport && (
-        <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
-              <h3 className="text-xl font-semibold text-gray-800">Report Details</h3>
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-t-2xl">
+              <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                <FileText className="w-6 h-6 text-blue-600" />
+                Report Details
+              </h3>
               <button
                 onClick={() => {
                   setShowDetailModal(false);
                   setSelectedReport(null);
                 }}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
                 <X className="w-5 h-5 text-gray-600" />
               </button>
@@ -542,85 +686,116 @@ const ReportPage = () => {
             <div className="p-6 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <p className="text-gray-900">{selectedReport.userId?.name || selectedReport.userName}</p>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                    <UserCircle className="w-4 h-4 text-blue-500" />
+                    Name
+                  </label>
+                  <p className="text-gray-900 font-medium">{selectedReport.userId?.name || selectedReport.userName?.split('@')[0] || 'N/A'}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <p className="text-gray-900">{selectedReport.userEmail}</p>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                    <User className="w-4 h-4 text-purple-500" />
+                    Role
+                  </label>
+                  <p className="text-gray-900 font-medium">{selectedReport.userId?.role || selectedReport.userRole || 'N/A'}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-                  <p className="text-gray-900">{selectedReport.userId?.role || selectedReport.userRole || 'N/A'}</p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Created At</label>
-                  <p className="text-gray-900">{new Date(selectedReport.createdAt).toLocaleString()}</p>
+                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                    <Calendar className="w-4 h-4 text-green-500" />
+                    Created At
+                  </label>
+                  <p className="text-gray-900">{new Date(selectedReport.createdAt).toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })}</p>
                 </div>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Report</label>
-                <p className="text-gray-900 whitespace-pre-wrap">{selectedReport.reportField}</p>
+                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                  <FileText className="w-4 h-4 text-indigo-500" />
+                  Report
+                </label>
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <p className="text-gray-800 whitespace-pre-line">{selectedReport.reportField}</p>
+                </div>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                  <LinkIcon className="w-4 h-4 text-blue-500" />
+                  Link
+                </label>
                 {selectedReport.linkField ? (
-                  <a 
-                    href={selectedReport.linkField} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 underline break-all"
-                  >
-                    {selectedReport.linkField}
-                  </a>
+                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <a 
+                      href={selectedReport.linkField} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 underline break-all font-medium"
+                    >
+                      {selectedReport.linkField}
+                    </a>
+                  </div>
                 ) : (
-                  <p className="text-gray-900">N/A</p>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-gray-500">
+                    N/A
+                  </div>
                 )}
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Attendance</label>
-                <div className="space-y-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                  <Calendar className="w-4 h-4 text-green-500" />
+                  Attendance
+                </label>
+                <div className="space-y-2">
                   {selectedReport.attendance?.date && (
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="w-4 h-4 text-gray-500" />
-                      <span>{new Date(selectedReport.attendance.date).toLocaleDateString('en-US', { weekday: 'short' })}, {new Date(selectedReport.attendance.date).toLocaleDateString()}</span>
+                    <div className="flex items-center space-x-2 p-3 bg-green-50 rounded-lg border border-green-200">
+                      <Calendar className="w-4 h-4 text-green-500" />
+                      <span className="text-gray-700">{new Date(selectedReport.attendance.date).toLocaleDateString('en-US', { weekday: 'short' })}, {new Date(selectedReport.attendance.date).toLocaleDateString('en-IN', {
+                                              day: 'numeric',
+                                              month: 'short',
+                                              year: 'numeric',
+                                            })}</span>
                     </div>
                   )}
                   {selectedReport.attendance?.morningTime && (
-                    <div className="flex items-center space-x-1">
-                      <Clock className="w-4 h-4 text-gray-500" />
-                      <span>MT: {selectedReport.attendance.morningTime}</span>
+                    <div className="flex items-center space-x-2 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <Clock className="w-4 h-4 text-blue-500" />
+                      <span className="text-gray-700">Morning Time: {selectedReport.attendance.morningTime}</span>
                     </div>
                   )}
                   {selectedReport.attendance?.eveningTime && (
-                    <div className="flex items-center space-x-1">
-                      <Clock className="w-4 h-4 text-gray-500" />
-                      <span>ET: {selectedReport.attendance.eveningTime}</span>
+                    <div className="flex items-center space-x-2 p-3 bg-purple-50 rounded-lg border border-purple-200">
+                      <Clock className="w-4 h-4 text-purple-500" />
+                      <span className="text-gray-700">Evening Time: {selectedReport.attendance.eveningTime}</span>
                     </div>
                   )}
                 </div>
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Files</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                  <FileImage className="w-4 h-4 text-gray-500" />
+                  Files
+                </label>
                 {selectedReport.uploadFiles && selectedReport.uploadFiles.length > 0 ? (
                   <div className="space-y-2">
                     {selectedReport.uploadFiles.map((file, index) => (
-                      <div key={index} className="flex items-center space-x-2">
+                      <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
                         {file.fileType?.startsWith('image/') ? (
-                          <FileImage className="w-4 h-4 text-blue-600" />
+                          <FileImage className="w-5 h-5 text-blue-500" />
                         ) : file.fileType === 'application/pdf' ? (
-                          <FileText className="w-4 h-4 text-red-600" />
+                          <FileText className="w-5 h-5 text-red-500" />
                         ) : (
-                          <File className="w-4 h-4 text-gray-600" />
+                          <File className="w-5 h-5 text-gray-500" />
                         )}
-                        <span className="truncate max-w-[200px]" title={file.fileName}>{file.fileName}</span>
+                        <span className="truncate max-w-[200px] font-medium" title={file.fileName}>{file.fileName}</span>
                         <button
                           onClick={() => handleDownloadFile(file.fileUrl, file.fileName)}
-                          className="text-blue-600 hover:text-blue-800 transition-colors"
+                          className="ml-auto text-blue-500 hover:text-blue-700 transition-colors p-1 rounded hover:bg-blue-100"
                           title="Download"
                         >
                           <Download className="w-4 h-4" />
@@ -629,7 +804,9 @@ const ReportPage = () => {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-900">No files</p>
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 text-gray-500">
+                    No files attached
+                  </div>
                 )}
               </div>
               
@@ -639,7 +816,7 @@ const ReportPage = () => {
                     setShowDetailModal(false);
                     setSelectedReport(null);
                   }}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg"
                 >
                   Close
                 </button>
