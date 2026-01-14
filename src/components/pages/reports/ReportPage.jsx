@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Download, Calendar, Clock, FileText, FileImage, File, X, ChevronDown, ChevronRight, Users, UserCircle, BarChart3, User, Link as LinkIcon } from 'lucide-react';
+import { Plus, Edit, Trash2, Download, Calendar, Clock, FileText, FileImage, File, X, ChevronDown, ChevronRight, Users, UserCircle, BarChart3, User, Link as LinkIcon, BarChart3 as BarChart3Icon } from 'lucide-react';
 import ReportModal from '../../modal/ReportModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
+import AttendanceStatsModal from '../../modal/AttendanceStatsModal';
 import {
   getReports as fetchReportsApi,
   createReport,
@@ -35,6 +36,9 @@ const ReportPage = () => {
   
   // Accordion state for attendance stats
   const [expandedUsers, setExpandedUsers] = useState({});
+  
+  // Attendance stats modal state
+  const [showAttendanceStatsModal, setShowAttendanceStatsModal] = useState(false);
   
   // Pagination state - Updated to support backend pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -231,7 +235,7 @@ const ReportPage = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gradient-to-r from-blue-50 to-indigo-50">
                 <tr>
-                  {[...Array(7)].map((_, i) => (
+                  {[...Array(6)].map((_, i) => (
                     <th key={i} className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
                       <div className="h-4 bg-gray-200 rounded w-20"></div>
                     </th>
@@ -241,7 +245,7 @@ const ReportPage = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {[...Array(5)].map((_, i) => (
                   <tr key={i} className="hover:bg-blue-50">
-                    {[...Array(7)].map((_, j) => (
+                    {[...Array(6)].map((_, j) => (
                       <td key={j} className="px-6 py-4 whitespace-nowrap">
                         <div className="h-4 bg-gray-200 rounded w-3/4"></div>
                       </td>
@@ -281,102 +285,24 @@ const ReportPage = () => {
           </div>
         </div>
         
-        {/* Attendance Statistics - Accordion Style */}
+        {/* Attendance Statistics Button */}
         {userRole === 'admin' && Object.keys(attendanceStats).length > 0 && (
-          <div className="mb-8 border rounded-xl overflow-hidden shadow-md">
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 cursor-pointer flex justify-between items-center"
-              onClick={() => {
-                // Toggle expand/collapse all
-                const allExpanded = Object.values(expandedUsers).every(v => v);
-                const newExpandedState = {};
-                Object.keys(attendanceStats).forEach(userId => {
-                  newExpandedState[userId] = !allExpanded;
-                });
-                setExpandedUsers(newExpandedState);
-              }}
-            >
-              <div className="flex items-center space-x-3">
-                <div className="bg-gradient-to-br from-blue-600 to-indigo-600 w-10 h-10 rounded-lg flex items-center justify-center text-white font-bold">
-                  <Users className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800">Attendance Statistics</h3>
-                  <p className="text-sm text-gray-600">{Object.keys(attendanceStats).length} users</p>
-                </div>
+          <div className="mb-6 bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                  <BarChart3 className="w-6 h-6 text-blue-600" />
+                  Attendance Overview
+                </h2>
+                <p className="text-gray-600 mt-1">{Object.keys(attendanceStats).length} users tracked</p>
               </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600 hidden sm:inline">
-                  Click to expand/collapse all
-                </span>
-              </div>
-            </div>
-            
-            <div className="p-4 bg-white">
-              {Object.entries(attendanceStats).map(([userId, stats]) => {
-                const isExpanded = expandedUsers[userId] || false;
-                
-                const toggleExpand = () => {
-                  setExpandedUsers(prev => ({
-                    ...prev,
-                    [userId]: !prev[userId]
-                  }));
-                };
-                
-                return (
-                  <div key={userId} className="mb-3 border rounded-lg overflow-hidden last:mb-0">
-                    <div 
-                      className="bg-gray-50 p-3 cursor-pointer flex justify-between items-center"
-                      onClick={toggleExpand}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <div className="bg-gradient-to-br from-blue-600 to-indigo-600 w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold">
-                          {stats.name?.charAt(0)?.toUpperCase()}
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-gray-800">{stats.name}</h4>
-                          <p className="text-xs text-gray-600">{stats.totalDays} days tracked</p>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className="text-right">
-                          <p className="text-sm font-medium">{stats.totalDays > 0 ? Math.round((stats.presentDays / stats.totalDays) * 100) : 0}%</p>
-                          <p className="text-xs text-gray-500">Attendance</p>
-                        </div>
-                        <div className={`transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-                          {isExpanded ? <ChevronDown className="w-5 h-5 text-gray-600" /> : <ChevronRight className="w-5 h-5 text-gray-600" />}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {isExpanded && (
-                      <div className="p-3 bg-white">
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="bg-green-50 p-3 rounded-lg border border-green-200">
-                            <p className="text-green-800 font-semibold text-center">{stats.presentDays}</p>
-                            <p className="text-green-600 text-xs text-center mt-1">Present Days</p>
-                          </div>
-                          <div className="bg-red-50 p-3 rounded-lg border border-red-200">
-                            <p className="text-red-800 font-semibold text-center">{stats.absentDays}</p>
-                            <p className="text-red-600 text-xs text-center mt-1">Absent Days</p>
-                          </div>
-                        </div>
-                        <div className="mt-3 pt-3 border-t border-gray-100">
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-blue-600 h-2 rounded-full" 
-                              style={{ width: `${stats.totalDays > 0 ? (stats.presentDays / stats.totalDays) * 100 : 0}%` }}
-                            ></div>
-                          </div>
-                          <div className="flex justify-between text-xs text-gray-600 mt-1">
-                            <span>Total: {stats.totalDays} days</span>
-                            <span>{stats.totalDays > 0 ? Math.round((stats.presentDays / stats.totalDays) * 100) : 0}%</span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+              <button
+                onClick={() => setShowAttendanceStatsModal(true)}
+                className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base font-medium">View Attendance Stats</span>
+              </button>
             </div>
           </div>
         )}
@@ -494,7 +420,6 @@ const ReportPage = () => {
                 <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Report</th>
                 <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Link</th>
                 <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Attendance</th>
-                <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Files</th>
                 <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Created At</th>
                 {userRole === 'admin' && (
                   <th scope="col" className="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
@@ -504,7 +429,7 @@ const ReportPage = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {paginatedReports.length === 0 ? (
                 <tr>
-                  <td colSpan={userRole === 'admin' ? 8 : 7} className="px-6 py-12 text-center text-base text-gray-500">
+                  <td colSpan={userRole === 'admin' ? 7 : 6} className="px-6 py-12 text-center text-base text-gray-500">
                     <div className="flex flex-col items-center justify-center">
                       <FileText className="w-12 h-12 text-gray-300 mb-3" />
                       <p>No reports found</p>
@@ -567,36 +492,6 @@ const ReportPage = () => {
                           </div>
                         )}
                       </div>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-700">
-                      {report.uploadFiles && report.uploadFiles.length > 0 ? (
-                        <div className="space-y-1">
-                          {report.uploadFiles.map((file, index) => (
-                            <div key={index} className="flex items-center space-x-2">
-                              {file.fileType?.startsWith('image/') ? (
-                                <FileImage className="w-4 h-4 text-blue-500" />
-                              ) : file.fileType === 'application/pdf' ? (
-                                <FileText className="w-4 h-4 text-red-500" />
-                              ) : (
-                                <File className="w-4 h-4 text-gray-500" />
-                              )}
-                              <span className="truncate max-w-[120px]" title={file.fileName}>{file.fileName}</span>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleDownloadFile(file.fileUrl, file.fileName);
-                                }}
-                                className="text-blue-500 hover:text-blue-700 transition-colors"
-                                title="Download"
-                              >
-                                <Download className="w-4 h-4" />
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <span className="text-gray-400">No files</span>
-                      )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {new Date(report.createdAt).toLocaleDateString('en-IN', {
@@ -825,6 +720,15 @@ const ReportPage = () => {
           </div>
         </div>
       )}
+      
+      {/* Attendance Stats Modal */}
+      <AttendanceStatsModal
+        showModal={showAttendanceStatsModal}
+        setShowModal={setShowAttendanceStatsModal}
+        attendanceStats={attendanceStats}
+        expandedUsers={expandedUsers}
+        setExpandedUsers={setExpandedUsers}
+      />
     </div>
   );
 };

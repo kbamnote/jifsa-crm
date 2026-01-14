@@ -9,6 +9,7 @@ const Mail = () => {
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [productCompanyFilter, setProductCompanyFilter] = useState("");
   const [selectedLeads, setSelectedLeads] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
   const [attachments, setAttachments] = useState([]);
@@ -31,6 +32,7 @@ const Mail = () => {
       setLoading(true);
       const response = await getDetail();
       const allLeads = response.data || [];
+      console.log(response, "Mail");
       
       // For sales persons, only show leads assigned to them
       let filteredLeads = allLeads;
@@ -63,20 +65,46 @@ const Mail = () => {
     fetchLeads();
   }, []);
 
-  // Filter leads based on search term
+  // Format product company names
+  const formatCompanyName = (companyValue) => {
+    const companyMap = {
+      'eee-technologies': 'EEE Technologies',
+      'bim': 'Elite BIM',
+      'bifs': 'Elite BIFS',
+      'jifsa': 'JIFSA',
+      'jobs': 'Elite Jobs',
+      'cards': 'Elite Cards',
+      'management': 'Elite Management',
+      'associate': 'Elite Associate'
+    };
+    return companyMap[companyValue] || companyValue;
+  };
+
+  // Extract unique product companies for filter dropdown
+  const uniqueProductCompanies = [...new Set(leads.map(lead => lead.productCompany).filter(company => company))];
+
+  // Filter leads based on search term and product company
   useEffect(() => {
-    if (!searchTerm) {
-      setFilteredLeads(leads);
-    } else {
-      const filtered = leads.filter(lead => 
+    let filtered = leads;
+    
+    // Apply product company filter first
+    if (productCompanyFilter) {
+      filtered = filtered.filter(lead => 
+        lead.productCompany && lead.productCompany.toLowerCase().includes(productCompanyFilter.toLowerCase())
+      );
+    }
+    
+    // Then apply search term filter
+    if (searchTerm) {
+      filtered = filtered.filter(lead => 
         (lead.fullName && lead.fullName.toLowerCase().includes(searchTerm.toLowerCase())) ||
         (lead.email && lead.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (lead.phoneNo && lead.phoneNo.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (lead.productCompany && lead.productCompany.toLowerCase().includes(searchTerm.toLowerCase()))
+        (lead.phoneNo && lead.phoneNo.toLowerCase().includes(searchTerm.toLowerCase()))
       );
-      setFilteredLeads(filtered);
     }
-  }, [searchTerm, leads]);
+    
+    setFilteredLeads(filtered);
+  }, [searchTerm, productCompanyFilter, leads]);
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -413,16 +441,32 @@ const Mail = () => {
                     </p>
                   </div>
                   
-                  {/* Search Bar */}
-                  <div className="relative">
-                    <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <input
-                      type="text"
-                      placeholder="Search leads..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-                    />
+                  <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                    {/* Product Company Filter */}
+                    <div className="relative">
+                      <select
+                        value={productCompanyFilter}
+                        onChange={(e) => setProductCompanyFilter(e.target.value)}
+                        className="pr-8 pl-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      >
+                        <option value="">All Companies</option>
+                        {uniqueProductCompanies.map((company, index) => (
+                          <option key={index} value={company}>{formatCompanyName(company)}</option>
+                        ))}
+                      </select>
+                    </div>
+                    
+                    {/* Search Bar */}
+                    <div className="relative flex-grow">
+                      <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="Search leads..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none w-full"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

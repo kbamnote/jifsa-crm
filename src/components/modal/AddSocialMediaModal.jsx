@@ -31,13 +31,15 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
     { value: 'instagram', label: 'Instagram' },
     { value: 'whatsapp', label: 'WhatsApp' },
     { value: 'linkedin', label: 'LinkedIn' },
-    { value: 'X', label: 'X (Twitter)' }
+    { value: 'X', label: 'X (Twitter)' },
+    { value: 'youtube', label: 'YouTube' }
   ];
 
   const uploadTypeOptions = [
     { value: 'post', label: 'Post' },
     { value: 'reel', label: 'Reel' },
-    { value: 'flyer', label: 'Flyer' }
+    { value: 'flyer', label: 'Flyer' },
+    { value: 'video', label: 'Video' }
   ];
 
   const handleInputChange = (e) => {
@@ -102,6 +104,11 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
       return;
     }
     
+    if (formData.uploadType === 'video' && !formData.sourceUrl) {
+      alert('Please enter a video URL');
+      return;
+    }
+    
     // For posts and flyers, ensure at least one of image or URL is provided
     if ((formData.uploadType === 'post' || formData.uploadType === 'flyer') && !formData.source && !formData.sourceUrl) {
       alert('Please select an image to upload or enter a URL');
@@ -124,7 +131,7 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
       
       if ((formData.uploadType === 'post' || formData.uploadType === 'flyer') && formData.source) {
         formDataToSend.append('source', formData.source);
-      } else if (formData.uploadType === 'reel') {
+      } else if (formData.uploadType === 'reel' || formData.uploadType === 'video') {
         formDataToSend.append('sourceUrl', formData.sourceUrl);
       }
       
@@ -378,6 +385,26 @@ const AddSocialMediaModal = ({ showModal, setShowModal, onSuccess }) => {
                         required={formData.uploadType === 'flyer'}
                       />
                     </div>
+                  </div>
+                </div>
+              ) : formData.uploadType === 'video' ? (
+                <div className="sm:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Video URL
+                  </label>
+                  <div className="flex">
+                    <div className="flex items-center justify-center px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l-lg">
+                      <LinkIcon className="w-5 h-5 text-gray-400" />
+                    </div>
+                    <input
+                      type="url"
+                      name="sourceUrl"
+                      value={formData.sourceUrl}
+                      onChange={handleInputChange}
+                      placeholder="https://youtube.com/video"
+                      className="flex-1 px-4 py-2 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      required={formData.uploadType === 'video'}
+                    />
                   </div>
                 </div>
               ) : null}
