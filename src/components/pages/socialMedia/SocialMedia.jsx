@@ -19,6 +19,17 @@ const SocialMedia = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [pageSize, setPageSize] = useState(10);
+  
+  // Filter states
+  const [filters, setFilters] = useState({
+    productCompany: '',
+    platform: '',
+    uploadType: '',
+    startDate: '',
+    endDate: '',
+    uploadedBy: ''
+  });
+  const [showFilters, setShowFilters] = useState(false);
   const [formData, setFormData] = useState({
     productCompany: '',
     caption: '',
@@ -98,17 +109,28 @@ const SocialMedia = () => {
   }, []);
 
   useEffect(() => {
-    // Reset to first page when search term changes
-    if (searchTerm) {
+    // Reset to first page when search term or filters change
+    if (searchTerm || Object.values(filters).some(value => value !== '')) {
       setCurrentPage(1);
     }
     filterData();
-  }, [searchTerm, socialMediaData]);
+  }, [searchTerm, socialMediaData, filters]);
 
   const fetchSocialMediaData = async (page = 1) => {
     try {
       setLoading(true);
-      const response = await getSocialMediaPosts(page, pageSize);
+      // Prepare filters for API call
+      const apiFilters = {
+        productCompany: filters.productCompany || undefined,
+        platform: filters.platform || undefined,
+        uploadType: filters.uploadType || undefined,
+        startDate: filters.startDate || undefined,
+        endDate: filters.endDate || undefined,
+        uploadedBy: filters.uploadedBy || undefined,
+        search: searchTerm || undefined
+      };
+      
+      const response = await getSocialMediaPosts(page, pageSize, apiFilters);
       if (response.data.success) {
         setSocialMediaData(response.data.data);
         setTotalPages(response.data.totalPages || 1);
@@ -124,20 +146,87 @@ const SocialMedia = () => {
     }
   };
 
+  const handleFilterChange = (filterName, value) => {
+    setFilters(prev => ({
+      ...prev,
+      [filterName]: value
+    }));
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      productCompany: '',
+      platform: '',
+      uploadType: '',
+      startDate: '',
+      endDate: '',
+      uploadedBy: ''
+    });
+    setSearchTerm('');
+    setCurrentPage(1);
+  };
+
+  const getActiveFilterCount = () => {
+    return Object.values(filters).filter(value => value !== '').length + (searchTerm ? 1 : 0);
+  };
+
   const filterData = () => {
+    let filtered = [...socialMediaData];
+    
+    // Apply search term filter
     if (searchTerm) {
-      // If search term exists, filter the current data
-      let filtered = socialMediaData.filter(item =>
+      filtered = filtered.filter(item =>
         item.productCompany.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.platforms.some(platform => platform.toLowerCase().includes(searchTerm.toLowerCase())) ||
         item.uploadType.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.uploadedByName.toLowerCase().includes(searchTerm.toLowerCase())
       );
-      setFilteredData(filtered);
-    } else {
-      // If no search term, show paginated data
-      setFilteredData(socialMediaData);
     }
+    
+    // Apply product company filter
+    if (filters.productCompany) {
+      filtered = filtered.filter(item => 
+        item.productCompany === filters.productCompany
+      );
+    }
+    
+    // Apply platform filter
+    if (filters.platform) {
+      filtered = filtered.filter(item => 
+        item.platforms.includes(filters.platform)
+      );
+    }
+    
+    // Apply upload type filter
+    if (filters.uploadType) {
+      filtered = filtered.filter(item => 
+        item.uploadType === filters.uploadType
+      );
+    }
+    
+    // Apply date range filter
+    if (filters.startDate) {
+      filtered = filtered.filter(item => 
+        new Date(item.date) >= new Date(filters.startDate)
+      );
+    }
+    
+    if (filters.endDate) {
+      const endDate = new Date(filters.endDate);
+      endDate.setHours(23, 59, 59, 999); // End of day
+      filtered = filtered.filter(item => 
+        new Date(item.date) <= endDate
+      );
+    }
+    
+    // Apply uploaded by filter
+    if (filters.uploadedBy) {
+      filtered = filtered.filter(item => 
+        item.uploadedByName.toLowerCase().includes(filters.uploadedBy.toLowerCase())
+      );
+    }
+    
+    setFilteredData(filtered);
   };
 
   const handleInputChange = (e) => {
@@ -446,7 +535,7 @@ const SocialMedia = () => {
 
 
 
-        {/* Search and Stats */}
+        {/* Search and Filters */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
           <div className="w-full lg:w-1/3">
             <div className="relative">
@@ -459,6 +548,36 @@ const SocialMedia = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
+          </div>
+          
+          {/* Filter Controls */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${showFilters ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'} shadow-sm`}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+              </svg>
+              <span className="text-sm font-medium">Filters</span>
+              {getActiveFilterCount() > 0 && (
+                <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {getActiveFilterCount()}
+                </span>
+              )}
+            </button>
+            
+            {(getActiveFilterCount() > 0 || searchTerm) && (
+              <button
+                onClick={clearFilters}
+                className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-300 text-sm"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Clear
+              </button>
+            )}
           </div>
           <div className="flex flex-wrap justify-center lg:justify-end gap-3">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-3 rounded-xl shadow-sm border border-blue-100 min-w-[100px] text-center">
@@ -479,6 +598,178 @@ const SocialMedia = () => {
             </div>
           </div>
         </div>
+
+        {/* Advanced Filters Panel */}
+        {showFilters && (
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-200 animate-fadeIn">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Product Company Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Product Company</label>
+                <select
+                  value={filters.productCompany}
+                  onChange={(e) => handleFilterChange('productCompany', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                >
+                  <option value="">All Companies</option>
+                  {productCompanyOptions.map(option => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Platform Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Platform</label>
+                <select
+                  value={filters.platform}
+                  onChange={(e) => handleFilterChange('platform', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                >
+                  <option value="">All Platforms</option>
+                  {platformOptions.map(option => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Upload Type Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Upload Type</label>
+                <select
+                  value={filters.uploadType}
+                  onChange={(e) => handleFilterChange('uploadType', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                >
+                  <option value="">All Types</option>
+                  {uploadTypeOptions.map(option => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Start Date Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+                <input
+                  type="date"
+                  value={filters.startDate}
+                  onChange={(e) => handleFilterChange('startDate', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                />
+              </div>
+
+              {/* End Date Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+                <input
+                  type="date"
+                  value={filters.endDate}
+                  onChange={(e) => handleFilterChange('endDate', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                />
+              </div>
+
+              {/* Uploaded By Filter */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Uploaded By</label>
+                <input
+                  type="text"
+                  placeholder="Search user name..."
+                  value={filters.uploadedBy}
+                  onChange={(e) => handleFilterChange('uploadedBy', e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
+                />
+              </div>
+            </div>
+
+            {/* Active Filters Display */}
+            {getActiveFilterCount() > 0 && (
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm font-medium text-gray-700">Active filters:</span>
+                  {filters.productCompany && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      {productCompanyOptions.find(opt => opt.value === filters.productCompany)?.label}
+                      <button
+                        onClick={() => handleFilterChange('productCompany', '')}
+                        className="ml-1 text-blue-600 hover:text-blue-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+                  {filters.platform && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                      {platformOptions.find(opt => opt.value === filters.platform)?.label}
+                      <button
+                        onClick={() => handleFilterChange('platform', '')}
+                        className="ml-1 text-green-600 hover:text-green-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+                  {filters.uploadType && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                      {uploadTypeOptions.find(opt => opt.value === filters.uploadType)?.label}
+                      <button
+                        onClick={() => handleFilterChange('uploadType', '')}
+                        className="ml-1 text-purple-600 hover:text-purple-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+                  {filters.startDate && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                      From: {formatDate(filters.startDate)}
+                      <button
+                        onClick={() => handleFilterChange('startDate', '')}
+                        className="ml-1 text-yellow-600 hover:text-yellow-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+                  {filters.endDate && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                      To: {formatDate(filters.endDate)}
+                      <button
+                        onClick={() => handleFilterChange('endDate', '')}
+                        className="ml-1 text-orange-600 hover:text-orange-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+                  {filters.uploadedBy && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                      By: {filters.uploadedBy}
+                      <button
+                        onClick={() => handleFilterChange('uploadedBy', '')}
+                        className="ml-1 text-indigo-600 hover:text-indigo-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+                  {searchTerm && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                      Search: "{searchTerm}"
+                      <button
+                        onClick={() => setSearchTerm('')}
+                        className="ml-1 text-gray-600 hover:text-gray-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Team Stats Section - Cards */}
         <div className="mb-8">

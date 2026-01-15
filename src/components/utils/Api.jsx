@@ -144,7 +144,22 @@ export const createSocialMediaPost = (formData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
-export const getSocialMediaPosts = (page = 1, limit = 10) => Api.get(`/social-media/get-all?page=${page}&limit=${limit}`);
+export const getSocialMediaPosts = (page = 1, limit = 10, filters = {}) => {
+  const params = new URLSearchParams();
+  params.append('page', page);
+  params.append('limit', limit);
+  
+  // Add filters if provided
+  if (filters.productCompany) params.append('productCompany', filters.productCompany);
+  if (filters.platform) params.append('platform', filters.platform);
+  if (filters.uploadType) params.append('uploadType', filters.uploadType);
+  if (filters.startDate) params.append('startDate', filters.startDate);
+  if (filters.endDate) params.append('endDate', filters.endDate);
+  if (filters.uploadedBy) params.append('uploadedBy', filters.uploadedBy);
+  if (filters.search) params.append('search', filters.search);
+  
+  return Api.get(`/social-media/get-all?${params.toString()}`);
+};
 
 export const getSocialMediaPostById = (id) => Api.get(`/social-media/${id}`);
 

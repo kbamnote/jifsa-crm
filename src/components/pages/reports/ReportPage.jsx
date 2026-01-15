@@ -25,7 +25,10 @@ const ReportPage = () => {
   // Filter states
   const [dateFilter, setDateFilter] = useState('');
   const [dayFilter, setDayFilter] = useState('');
-  const [nameFilter, setNameFilter] = useState(''); // Changed to be used as a dropdown option
+  const [nameFilter, setNameFilter] = useState('');
+  const [startDateFilter, setStartDateFilter] = useState('');
+  const [endDateFilter, setEndDateFilter] = useState('');
+  const [activeFilters, setActiveFilters] = useState({});
   
   // Statistics state
   const [attendanceStats, setAttendanceStats] = useState({});
@@ -66,16 +69,22 @@ const ReportPage = () => {
     };
     
     fetchData();
-  }, [currentPage, itemsPerPage, dateFilter, dayFilter, nameFilter]);
+  }, [currentPage, itemsPerPage, activeFilters]);
 
   const fetchReports = async () => {
     try {
       setLoading(true);
       const filters = {};
+      
+      // Handle date filtering
       if (dateFilter) {
         filters.startDate = dateFilter;
-        filters.endDate = dateFilter; // Same date for both if only date filter is applied
+        filters.endDate = dateFilter;
+      } else if (startDateFilter || endDateFilter) {
+        if (startDateFilter) filters.startDate = startDateFilter;
+        if (endDateFilter) filters.endDate = endDateFilter;
       }
+      
       if (nameFilter) {
         filters.userName = nameFilter;
       }
@@ -87,13 +96,60 @@ const ReportPage = () => {
       setReports(response.data.data || []);
       setTotalPages(response.data.totalPages || 1);
       setTotalItems(response.data.totalItems || 0);
-      console.log('Fetched reports:', response.data.data);
+      console.log('Fetched reports with filters:', filters, response.data.data);
     } catch (err) {
       setError(err.message || 'Failed to fetch reports');
       console.error('Error fetching reports:', err);
     } finally {
       setLoading(false);
     }
+  };
+  
+  // Update active filters whenever filter states change
+  useEffect(() => {
+    const filters = {};
+    if (dateFilter) filters.date = dateFilter;
+    if (startDateFilter) filters.startDate = startDateFilter;
+    if (endDateFilter) filters.endDate = endDateFilter;
+    if (nameFilter) filters.name = nameFilter;
+    if (dayFilter) filters.day = dayFilter;
+    setActiveFilters(filters);
+  }, [dateFilter, startDateFilter, endDateFilter, nameFilter, dayFilter]);
+  
+  const clearFilters = () => {
+    setDateFilter('');
+    setStartDateFilter('');
+    setEndDateFilter('');
+    setNameFilter('');
+    setDayFilter('');
+    setCurrentPage(1);
+  };
+  
+  const removeFilter = (filterKey) => {
+    switch (filterKey) {
+      case 'date':
+        setDateFilter('');
+        break;
+      case 'startDate':
+        setStartDateFilter('');
+        break;
+      case 'endDate':
+        setEndDateFilter('');
+        break;
+      case 'name':
+        setNameFilter('');
+        break;
+      case 'day':
+        setDayFilter('');
+        break;
+      default:
+        break;
+    }
+    setCurrentPage(1);
+  };
+  
+  const getActiveFilterCount = () => {
+    return Object.keys(activeFilters).length;
   };
   
   const fetchAttendanceStats = async () => {
@@ -308,55 +364,168 @@ const ReportPage = () => {
         )}
         
         {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Date</label>
-            <input
-              type="date"
-              value={dateFilter}
-              onChange={(e) => {
-                setDateFilter(e.target.value);
-                setCurrentPage(1); // Reset to first page when filter changes
-              }}
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Day</label>
-            <select
-              value={dayFilter}
-              onChange={(e) => {
-                setDayFilter(e.target.value);
-                setCurrentPage(1); // Reset to first page when filter changes
-              }}
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
-            >
-              <option value="">Select a day...</option>
-              <option value="monday">Monday</option>
-              <option value="tuesday">Tuesday</option>
-              <option value="wednesday">Wednesday</option>
-              <option value="thursday">Thursday</option>
-              <option value="friday">Friday</option>
-              <option value="saturday">Saturday</option>
-              <option value="sunday">Sunday</option>
-            </select>
-          </div>
-          {userRole === 'admin' && (
+        <div className="mb-6">
+          {/* Filter Controls */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Name</label>
-              <select
-                value={nameFilter}
+              <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Specific Date</label>
+              <input
+                type="date"
+                value={dateFilter}
                 onChange={(e) => {
-                  setNameFilter(e.target.value);
-                  setCurrentPage(1); // Reset to first page when filter changes
+                  setDateFilter(e.target.value);
+                  setStartDateFilter('');
+                  setEndDateFilter('');
+                  setCurrentPage(1);
+                }}
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
+                disabled={startDateFilter || endDateFilter}
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Start Date Range</label>
+              <input
+                type="date"
+                value={startDateFilter}
+                onChange={(e) => {
+                  setStartDateFilter(e.target.value);
+                  setDateFilter('');
+                  setCurrentPage(1);
+                }}
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
+                disabled={dateFilter}
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">End Date Range</label>
+              <input
+                type="date"
+                value={endDateFilter}
+                onChange={(e) => {
+                  setEndDateFilter(e.target.value);
+                  setDateFilter('');
+                  setCurrentPage(1);
+                }}
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
+                disabled={dateFilter}
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Day</label>
+              <select
+                value={dayFilter}
+                onChange={(e) => {
+                  setDayFilter(e.target.value);
+                  setCurrentPage(1);
                 }}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
               >
-                <option value="">All Names</option>
-                {Array.from(new Set(reports.map(report => report.userId?.name || (report.userName && report.userName.split('@')[0])))).filter(Boolean).map((name, index) => (
-                  <option key={index} value={name}>{name}</option>
-                ))}
+                <option value="">Select a day...</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
               </select>
+            </div>
+          </div>
+          
+          {userRole === 'admin' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Name</label>
+                <select
+                  value={nameFilter}
+                  onChange={(e) => {
+                    setNameFilter(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
+                >
+                  <option value="">All Names</option>
+                  {Array.from(new Set(reports.map(report => report.userId?.name || (report.userName && report.userName.split('@')[0])))).filter(Boolean).map((name, index) => (
+                    <option key={index} value={name}>{name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+          
+          {/* Active Filters Display */}
+          {getActiveFilterCount() > 0 && (
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className="text-sm font-medium text-blue-800">Active filters:</span>
+                {activeFilters.date && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    Date: {new Date(activeFilters.date).toLocaleDateString()}
+                    <button
+                      onClick={() => removeFilter('date')}
+                      className="ml-2 text-blue-600 hover:text-blue-800"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {activeFilters.startDate && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    From: {new Date(activeFilters.startDate).toLocaleDateString()}
+                    <button
+                      onClick={() => removeFilter('startDate')}
+                      className="ml-2 text-green-600 hover:text-green-800"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {activeFilters.endDate && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                    To: {new Date(activeFilters.endDate).toLocaleDateString()}
+                    <button
+                      onClick={() => removeFilter('endDate')}
+                      className="ml-2 text-purple-600 hover:text-purple-800"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {activeFilters.name && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                    Name: {activeFilters.name}
+                    <button
+                      onClick={() => removeFilter('name')}
+                      className="ml-2 text-indigo-600 hover:text-indigo-800"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {activeFilters.day && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+                    Day: {activeFilters.day.charAt(0).toUpperCase() + activeFilters.day.slice(1)}
+                    <button
+                      onClick={() => removeFilter('day')}
+                      className="ml-2 text-yellow-600 hover:text-yellow-800"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={clearFilters}
+                className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Clear all filters
+              </button>
             </div>
           )}
         </div>

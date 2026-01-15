@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getDetail, sendGroupMail } from "../../utils/Api";
-import { FaEnvelope, FaPaperPlane, FaUser, FaCheckSquare, FaSquare, FaSearch, FaPaperclip, FaTimes } from "react-icons/fa";
+import { FaEnvelope, FaPaperPlane, FaUser, FaCheckSquare, FaSquare, FaSearch, FaPaperclip, FaTimes, FaImages } from "react-icons/fa";
 import Cookies from "js-cookie";
+import FileSelectionModal from "../../modal/FileSelectionModal.jsx";
 
 const Mail = () => {
   const [leads, setLeads] = useState([]);
@@ -22,6 +23,7 @@ const Mail = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showFileModal, setShowFileModal] = useState(false);
 
   const userRole = Cookies.get("role") || "";
   const userEmail = Cookies.get("email") || "";
@@ -192,10 +194,29 @@ const Mail = () => {
       formData.append('subject', mailData.subject);
       formData.append('message', mailData.message);
       
-      // Append attachments
-      attachments.forEach(file => {
-        formData.append('attachments', file);
-      });
+      // Process attachments - handle both local files and gallery files
+      for (const file of attachments) {
+        if (file.galleryUrl) {
+          // This is a gallery file, need to fetch it first
+          try {
+            const response = await fetch(file.galleryUrl);
+            if (!response.ok) {
+              throw new Error(`Failed to fetch gallery file: ${response.status} ${response.statusText}`);
+            }
+            const blob = await response.blob();
+            
+            // Create a new File object with the actual content
+            const fileWithContent = new File([blob], file.name, { type: file.type });
+            formData.append('attachments', fileWithContent);
+          } catch (error) {
+            console.error('Error fetching gallery file:', error);
+            throw new Error(`Could not process gallery file: ${file.name}`);
+          }
+        } else {
+          // This is a local file
+          formData.append('attachments', file);
+        }
+      }
       
       await sendGroupMail(formData);
       
@@ -212,7 +233,7 @@ const Mail = () => {
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {
       console.error("Error sending mail:", error);
-      setErrorMessage(error.response?.data?.message || "Failed to send mail. Please try again.");
+      setErrorMessage(error.response?.data?.message || error.message || "Failed to send mail. Please try again.");
       setShowError(true);
       setTimeout(() => setShowError(false), 5000);
     } finally {
@@ -230,6 +251,64 @@ const Mail = () => {
     return lead.email || 'No email';
   };
 
+  // Handle file selection from gallery
+  const handleFileSelectFromGallery = async (selectedFile) => {
+    try {
+      // Create a temporary file object using the URL
+      // First, get the file extension to determine the type
+      const mimeType = getMimeType(selectedFile.name);
+      
+      // For gallery files, we'll create a placeholder File object
+      // We'll handle the actual file retrieval during form submission
+      const file = new File([], selectedFile.name, { type: mimeType });
+      
+      // Add a custom property to identify this as a gallery file
+      file.galleryUrl = selectedFile.imageUrl;
+      
+      // Validate file type
+      if (mimeType === 'application/pdf' || mimeType.startsWith('image/')) {
+        setAttachments(prev => [...prev, file]);
+      } else {
+        setErrorMessage(`File "${selectedFile.name}" is not a valid PDF or image file`);
+        setShowError(true);
+        setTimeout(() => setShowError(false), 3000);
+        return; // Don't close modal if validation fails
+      }
+      
+      setShowFileModal(false);
+    } catch (error) {
+      console.error('Error processing file from gallery:', error);
+      setErrorMessage('Failed to process the selected file: ' + error.message);
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
+      setShowFileModal(false); // Close modal even on error
+    }
+  };
+  
+  // Helper function to get mime type based on file extension
+  const getMimeType = (fileName) => {
+    const extension = fileName.split('.').pop().toLowerCase();
+    const mimeTypes = {
+      'pdf': 'application/pdf',
+      'jpg': 'image/jpeg',
+      'jpeg': 'image/jpeg',
+      'png': 'image/png',
+      'gif': 'image/gif',
+      'bmp': 'image/bmp',
+      'webp': 'image/webp',
+      'svg': 'image/svg+xml'
+    };
+    return mimeTypes[extension] || 'application/octet-stream';
+  };
+  
+
+  // Helper function to determine if a file is an image
+  const isImageFile = (fileName) => {
+    if (!fileName) return false;
+    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.svg'];
+    return imageExtensions.some(ext => fileName.toLowerCase().includes(ext));
+  };
+  
   // Format file size
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
@@ -238,6 +317,8 @@ const Mail = () => {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   };
+  
+
 
   if (loading) {
     return (
@@ -355,18 +436,29 @@ const Mail = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Attachments (PDF & Images)
                     </label>
-                    
-                    <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
-                      <FaPaperclip className="text-gray-500" />
-                      <span className="text-sm text-gray-600">Choose files</span>
-                      <input
-                        type="file"
-                        multiple
-                        accept=".pdf,image/*"
-                        onChange={handleFileChange}
-                        className="hidden"
-                      />
-                    </label>
+                                        
+                    <div className="flex gap-2">
+                      <label className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all flex-1">
+                        <FaPaperclip className="text-gray-500" />
+                        <span className="text-sm text-gray-600">Choose files</span>
+                        <input
+                          type="file"
+                          multiple
+                          accept=".pdf,image/*"
+                          onChange={handleFileChange}
+                          className="hidden"
+                        />
+                      </label>
+                                          
+                      <button
+                        type="button"
+                        onClick={() => setShowFileModal(true)}
+                        className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all"
+                      >
+                        <FaImages className="text-gray-500" />
+                        <span className="text-sm text-gray-600">Gallery</span>
+                      </button>
+                    </div>
                     
                     {/* Attachment List */}
                     {attachments.length > 0 && (
@@ -427,6 +519,13 @@ const Mail = () => {
               </form>
             </div>
           </div>
+          
+          {/* File Selection Modal */}
+          <FileSelectionModal 
+            isOpen={showFileModal} 
+            onClose={() => setShowFileModal(false)} 
+            onFileSelect={handleFileSelectFromGallery}
+          />
           
           {/* Leads Selection Panel */}
           <div className="lg:col-span-2">
