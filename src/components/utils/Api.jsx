@@ -175,9 +175,15 @@ export const deleteSocialMediaPost = (id) => Api.delete(`/social-media/${id}`);
 // ============== Enrollments ==============
 export const getEnrollments = () => Api.get("/enrollment/get-all");
 
+export const getEnrollmentById = (id) => Api.get(`/enrollment/${id}`);
+
 export const updateEnrollmentStatus = (id, statusData) => Api.patch(`/enrollment/${id}/status`, statusData);
 
 export const updateEnrollmentDetails = (id, data) => Api.patch(`/enrollment/${id}/details`, data);
+
+export const updateEnrollmentEducation = (id, educationField) => Api.put(`/enrollment/${id}/education`, { educationField });
+
+export const addEnrollmentRemark = (id, remarkData) => Api.post(`/enrollment/${id}/remark`, remarkData);
 
 export const deleteEnrollment = (id) => Api.delete(`/enrollment/${id}`);
 
@@ -231,5 +237,35 @@ export const getReportsByDateRange = (startDate, endDate) =>
   Api.get(`/reports/date-range?startDate=${startDate}&endDate=${endDate}`);
 
 export const getAttendanceStats = () => Api.get('/reports/attendance-stats');
+
+// ============== INTERN APPLIED DATA ==============
+export const createInternApplication = (formData) =>
+  Api.post('/intern-applied-data', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+export const getInternApplications = (page = 1, limit = 10, filters = {}) => {
+  const params = new URLSearchParams();
+  params.append('page', page);
+  params.append('limit', limit);
+  
+  // Add filters if provided
+  if (filters.search) params.append('search', filters.search);
+  if (filters.fullName) params.append('fullName', filters.fullName);
+  if (filters.email) params.append('email', filters.email);
+  if (filters.phoneNo1) params.append('phoneNo1', filters.phoneNo1);
+  if (filters.postAppliedFor) params.append('postAppliedFor', filters.postAppliedFor);
+  
+  return Api.get(`/intern-applied-data?${params.toString()}`);
+};
+
+export const getInternApplicationById = (id) => Api.get(`/intern-applied-data/${id}`);
+
+export const updateInternApplication = (id, formData) =>
+  Api.put(`/intern-applied-data/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+export const deleteInternApplication = (id) => Api.delete(`/intern-applied-data/${id}`);
 
 export default Api;

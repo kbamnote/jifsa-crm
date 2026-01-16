@@ -28,6 +28,11 @@ const UpdateEnrollmentModal = ({ showModal, setShowModal, selectedRecord, onSucc
     gender: "",
     location: "",
     qualification: "",
+    experience: "",
+    specialisation: "",
+    highestDegree: "",
+    collegeOrInstituteName: "",
+    schoolName: "",
     
     // Tracking fields
     feedback: "",
@@ -67,6 +72,11 @@ const UpdateEnrollmentModal = ({ showModal, setShowModal, selectedRecord, onSucc
         gender: selectedRecord.gender || "",
         location: selectedRecord.location || "",
         qualification: selectedRecord.qualification || "",
+        experience: selectedRecord.experience || "",
+        specialisation: selectedRecord.specialisation || "",
+        highestDegree: selectedRecord.highestDegree || "",
+        collegeOrInstituteName: selectedRecord.collegeOrInstituteName || "",
+        schoolName: selectedRecord.schoolName || "",
         
         // Tracking fields
         feedback: selectedRecord.feedback || "",
@@ -482,6 +492,76 @@ const UpdateEnrollmentModal = ({ showModal, setShowModal, selectedRecord, onSucc
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
                   placeholder="Enter qualification"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Experience
+                </label>
+                <input
+                  type="text"
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                  placeholder="Enter experience"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Specialisation
+                </label>
+                <input
+                  type="text"
+                  name="specialisation"
+                  value={formData.specialisation}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                  placeholder="Enter specialisation"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Highest Degree
+                </label>
+                <input
+                  type="text"
+                  name="highestDegree"
+                  value={formData.highestDegree}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                  placeholder="Enter highest degree"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  College/Institute Name
+                </label>
+                <input
+                  type="text"
+                  name="collegeOrInstituteName"
+                  value={formData.collegeOrInstituteName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                  placeholder="Enter college/institute name"
+                />
+              </div>
+              
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  School Name
+                </label>
+                <input
+                  type="text"
+                  name="schoolName"
+                  value={formData.schoolName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none"
+                  placeholder="Enter school name"
                 />
               </div>
             </div>

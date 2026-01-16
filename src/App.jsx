@@ -20,6 +20,7 @@ import JobImportPage from './components/pages/companyImport/JobImportPage';
 import JobManagement from './components/pages/companyImport/JobManagement';
 import ViewJob from './components/pages/companyImport/ViewJob';
 import ReportPage from './components/pages/reports/ReportPage';
+import InternAppliedDataPage from './components/pages/internAppliedData/InternAppliedDataPage';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/mail-track" element={<MailTracking/>}/>
           <Route path="/img-files" element={<ImgAndFiles/>}/>
           <Route path="/social-media" element={<SocialMedia/>}/> 
+          <Route path="/intern-applied-data" element={<InternAppliedDataPage/>}/>
           <Route path="/company-import" element={<JobImportPage/>}/>
           <Route path="/job-management" element={<JobManagement/>}/>
           <Route path="/job/:id" element={<ViewJob/>}/>

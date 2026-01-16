@@ -243,6 +243,13 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       disabled: disabledItems.socialMedia,
     },
     {
+      id: "intern-applied-data",
+      name: "Intern Applications",
+      path: "/intern-applied-data",
+      icon: <Users className="w-5 h-5" />,
+      disabled: false,
+    },
+    {
       id: "reports",
       name: "Reports",
       path: "/reports",

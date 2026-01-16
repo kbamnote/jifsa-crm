@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Mail, Phone, Calendar, Building, MapPin, FileText, Hash, Clock, CheckCircle, AlertCircle, PhoneOff, Users, Award, GraduationCap, School, Briefcase, CreditCard, Wallet, Receipt, ArrowLeft, Edit, Send } from 'lucide-react';
-import { getEnrollments, updateEnrollmentDetails, updateEnrollmentStatus } from '../../../../utils/Api';
+import { User, Mail, Phone, Calendar, Building, MapPin, FileText, Hash, Clock, CheckCircle, AlertCircle, PhoneOff, Users, Award, GraduationCap, School, Briefcase, CreditCard, Wallet, Receipt, ArrowLeft, Edit, Send, X } from 'lucide-react';
+import { getEnrollmentById, updateEnrollmentDetails, updateEnrollmentStatus, updateEnrollmentEducation, addEnrollmentRemark } from '../../../../utils/Api';
 import UpdateEnrollmentModal from '../../../../modal/UpdateEnrollmentModal';
+import RemarkModal from '../../../../modal/RemarkModal';
+import AllRemarksModal from '../../../../modal/AllRemarksModal';
 
 const ViewEnrollment = () => {
   const { id } = useParams();
@@ -12,37 +14,18 @@ const ViewEnrollment = () => {
   const [error, setError] = useState(null);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updating, setUpdating] = useState(false);
+  const [showRemarksModal, setShowRemarksModal] = useState(false);
+  const [showAllRemarksModal, setShowAllRemarksModal] = useState(false);
+  const [currentEnrollment, setCurrentEnrollment] = useState(null);
 
   useEffect(() => {
-    const fetchEnrollments = async () => {
+    const fetchEnrollment = async () => {
       try {
         setLoading(true);
-        const response = await getEnrollments();
+        const response = await getEnrollmentById(id);
         
-        // Handle different response structures
-        let allEnrollments = [];
-        if (response && response.data) {
-          // Check if it's an array or object with data property
-          if (Array.isArray(response.data)) {
-            allEnrollments = response.data;
-          } else if (response.data.data && Array.isArray(response.data.data)) {
-            allEnrollments = response.data.data;
-          } else if (typeof response.data === 'object' && !Array.isArray(response.data)) {
-            // If it's an object but not an array, try to use it as is
-            allEnrollments = [response.data];
-          }
-        }
-        
-        // Ensure allEnrollments is an array before using find
-        if (!Array.isArray(allEnrollments)) {
-          console.error('Expected allEnrollments to be an array, got:', typeof allEnrollments, allEnrollments);
-          setError('Failed to load enrollment data');
-          return;
-        }
-        
-        const enrollment = allEnrollments.find(enrollment => enrollment._id === id);
-        if (enrollment) {
-          setSelectedRecord(enrollment);
+        if (response && response.data && response.data.success) {
+          setSelectedRecord(response.data.data);
         } else {
           setError('Enrollment not found');
         }
@@ -55,7 +38,7 @@ const ViewEnrollment = () => {
     };
 
     if (id) {
-      fetchEnrollments();
+      fetchEnrollment();
     }
   }, [id]);
 
@@ -68,6 +51,16 @@ const ViewEnrollment = () => {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+
+  const formatDateTime = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return `${date.toLocaleDateString('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })} at ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
   };
 
   const getStatusClass = (status) => {
@@ -155,32 +148,10 @@ const ViewEnrollment = () => {
     try {
       setUpdating(true);
       // Refresh the enrollment data
-      const response = await getEnrollments();
+      const response = await getEnrollmentById(id);
       
-      // Handle different response structures
-      let allEnrollments = [];
-      if (response && response.data) {
-        // Check if it's an array or object with data property
-        if (Array.isArray(response.data)) {
-          allEnrollments = response.data;
-        } else if (response.data.data && Array.isArray(response.data.data)) {
-          allEnrollments = response.data.data;
-        } else if (typeof response.data === 'object' && !Array.isArray(response.data)) {
-          // If it's an object but not an array, try to use it as is
-          allEnrollments = [response.data];
-        }
-      }
-      
-      // Ensure allEnrollments is an array before using find
-      if (!Array.isArray(allEnrollments)) {
-        console.error('Expected allEnrollments to be an array, got:', typeof allEnrollments, allEnrollments);
-        alert('Failed to update enrollment data');
-        return;
-      }
-      
-      const enrollment = allEnrollments.find(enrollment => enrollment._id === id);
-      if (enrollment) {
-        setSelectedRecord(enrollment);
+      if (response && response.data && response.data.success) {
+        setSelectedRecord(response.data.data);
       }
       setShowUpdateModal(false);
     } catch (err) {
@@ -189,6 +160,42 @@ const ViewEnrollment = () => {
     } finally {
       setUpdating(false);
     }
+  };
+
+  // Function to open remarks modal
+  const openRemarksModal = (enrollment) => {
+    setCurrentEnrollment(enrollment);
+    if (!enrollment.remarks || enrollment.remarks.length === 0) {
+      setShowRemarksModal(true);
+    } else {
+      setShowAllRemarksModal(true);
+    }
+  };
+
+  // Function to add a remark
+  const addRemarkToEnrollment = async (remarkData) => {
+    try {
+      const response = await addEnrollmentRemark(remarkData.leadId, {
+        message: remarkData.message,
+        status: remarkData.status,
+        reminderDate: remarkData.reminderDate
+      });
+      
+      // Update the local state
+      setSelectedRecord(response.data.updatedEnrollment);
+      
+      // Close the modal
+      setShowRemarksModal(false);
+      setShowAllRemarksModal(false);
+      setCurrentEnrollment(null);
+    } catch (error) {
+      console.error('Error adding remark:', error);
+      alert('Failed to add remark');
+    }
+  };
+
+  const handleRemarkSubmit = async (remarkData) => {
+    await addRemarkToEnrollment(remarkData);
   };
 
   if (loading) {
@@ -322,12 +329,60 @@ const ViewEnrollment = () => {
               </div>
             </div>
         
-            {/* Education & Experience */}
+            {/* Education Qualifications */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                 <GraduationCap className="w-5 h-5 mr-2 text-blue-600" />
-                Education & Experience
+                Education Qualifications
               </h4>
+              <div className="flex flex-wrap gap-2 mb-4">
+                <label className="flex items-center gap-1 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={selectedRecord.education?.tenth || false}
+                    disabled
+                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="font-medium">10th</span>
+                </label>
+                <label className="flex items-center gap-1 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={selectedRecord.education?.twelfth || false}
+                    disabled
+                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="font-medium">12th</span>
+                </label>
+                <label className="flex items-center gap-1 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={selectedRecord.education?.undergraduate || false}
+                    disabled
+                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="font-medium">UG</span>
+                </label>
+                <label className="flex items-center gap-1 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={selectedRecord.education?.postgraduate || false}
+                    disabled
+                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="font-medium">PG</span>
+                </label>
+                <label className="flex items-center gap-1 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={selectedRecord.education?.phd || false}
+                    disabled
+                    className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                  />
+                  <span className="font-medium">PhD</span>
+                </label>
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-600 mb-1">Experience</label>
@@ -490,6 +545,60 @@ const ViewEnrollment = () => {
               </div>
             </div>
         
+            {/* Remarks Section */}
+            <div className="bg-gray-50 rounded-lg p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h4 className="text-lg font-semibold text-gray-800 flex items-center">
+                  <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                  Remarks
+                </h4>
+                <button
+                  onClick={() => openRemarksModal(selectedRecord)}
+                  className="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                >
+                  {(!selectedRecord.remarks || selectedRecord.remarks.length === 0) ? 'Add Remark' : 'All Remarks'}
+                </button>
+              </div>
+              
+              {selectedRecord.remarks && selectedRecord.remarks.length > 0 ? (
+                <div className="space-y-3">
+                  {selectedRecord.remarks
+                    .filter(remark => remark.isActive !== false) // Filter out inactive remarks
+                    .map((remark, index) => (
+                      <div key={index} className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="flex justify-between items-start mb-2">
+                          <div>
+                            <span className="font-medium text-gray-800">
+                              {remark.sequenceNumber}. {remark.message}
+                            </span>
+                          </div>
+                          <span className="text-xs text-gray-500">
+                            {remark.createdAt ? new Date(remark.createdAt).toLocaleDateString() : 'N/A'}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-xs text-gray-500">
+                          <span>
+                            Status: <span className="font-medium">{remark.status}</span>
+                          </span>
+                          {remark.createdBy && (
+                            <span>
+                              By: {remark.createdBy.name || remark.createdBy.email || 'Unknown'}
+                            </span>
+                          )}
+                          {remark.reminderDate && (
+                            <span>
+                              Reminder: {formatDateTime(remark.reminderDate)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 italic">No remarks yet</p>
+              )}
+            </div>
+        
             {/* Location Information */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
@@ -534,6 +643,35 @@ const ViewEnrollment = () => {
         selectedRecord={selectedRecord}
         onSuccess={handleUpdateSubmit}
       />
+      
+      {/* Remark Modal */}
+      {showRemarksModal && currentEnrollment && (
+        <RemarkModal
+          showModal={showRemarksModal}
+          setShowModal={setShowRemarksModal}
+          lead={currentEnrollment}
+          onSubmit={handleRemarkSubmit}
+          onCancel={() => {
+            setShowRemarksModal(false);
+            setCurrentEnrollment(null);
+          }}
+        />
+      )}
+
+      {/* All Remarks Modal */}
+      {showAllRemarksModal && currentEnrollment && (
+        <AllRemarksModal
+          showModal={showAllRemarksModal}
+          setShowModal={setShowAllRemarksModal}
+          lead={currentEnrollment}
+          allRemarks={currentEnrollment.remarks || []}
+          onSubmit={handleRemarkSubmit}
+          onCancel={() => {
+            setShowAllRemarksModal(false);
+            setCurrentEnrollment(null);
+          }}
+        />
+      )}
     </div>
   );
 };

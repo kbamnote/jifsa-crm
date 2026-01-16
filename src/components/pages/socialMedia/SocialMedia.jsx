@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Plus, Search, Edit, Eye, Calendar, Upload, Link as LinkIcon, Trash2, X } from 'lucide-react';
 import { Users, UserCircle, BarChart3, Image, Video, FileText, Building, Globe, Tag, Camera, PlayCircle, User, ArrowLeft, ArrowRight } from 'lucide-react';
 import { createSocialMediaPost, getSocialMediaPosts, updateSocialMediaPost, deleteSocialMediaPost, getSocialMediaStats } from '../../utils/Api';
@@ -9,6 +10,8 @@ import AddSocialMediaModal from '../../modal/AddSocialMediaModal';
 import UpdateSocialMediaModal from '../../modal/UpdateSocialMediaModal';
 
 const SocialMedia = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [userRole, setUserRole] = useState("");
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -30,6 +33,7 @@ const SocialMedia = () => {
     uploadedBy: ''
   });
   const [showFilters, setShowFilters] = useState(false);
+  const [uniqueUploadedBy, setUniqueUploadedBy] = useState([]);
   const [formData, setFormData] = useState({
     productCompany: '',
     caption: '',
@@ -105,7 +109,26 @@ const SocialMedia = () => {
   useEffect(() => {
     const role = Cookies.get("role");
     setUserRole(role || "");
-    fetchSocialMediaData(currentPage);
+    
+    // Parse URL parameters on component mount
+    const urlParams = new URLSearchParams(location.search);
+    const pageParam = parseInt(urlParams.get('page')) || 1;
+    const searchParam = urlParams.get('search') || '';
+    
+    const filterParams = {
+      productCompany: urlParams.get('productCompany') || '',
+      platform: urlParams.get('platform') || '',
+      uploadType: urlParams.get('uploadType') || '',
+      startDate: urlParams.get('startDate') || '',
+      endDate: urlParams.get('endDate') || '',
+      uploadedBy: urlParams.get('uploadedBy') || ''
+    };
+    
+    setSearchTerm(searchParam);
+    setFilters(filterParams);
+    setCurrentPage(pageParam);
+    
+    fetchSocialMediaData(pageParam);
   }, []);
 
   useEffect(() => {
@@ -136,6 +159,9 @@ const SocialMedia = () => {
         setTotalPages(response.data.totalPages || 1);
         setTotalItems(response.data.totalItems || response.data.data.length);
         setCurrentPage(response.data.currentPage || page);
+        
+        // Update URL with current state
+        updateURLParams(filters, page, searchTerm);
       }
       // Refresh stats after fetching data
       fetchStats();
@@ -152,18 +178,56 @@ const SocialMedia = () => {
       [filterName]: value
     }));
   };
+  
+  // Update URL with current filters and page
+  const updateURLParams = (newFilters, newPage, newSearch) => {
+    const params = new URLSearchParams();
+    
+    // Add filters
+    Object.entries(newFilters).forEach(([key, value]) => {
+      if (value) params.set(key, value);
+    });
+    
+    // Add search term
+    if (newSearch) params.set('search', newSearch);
+    
+    // Add page
+    if (newPage && newPage > 1) params.set('page', newPage);
+    
+    // Update URL without reloading
+    const newUrl = `${location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+    navigate(newUrl, { replace: true });
+  };
+  
+  // Extract unique uploaded by names from data
+  useEffect(() => {
+    if (socialMediaData.length > 0) {
+      const uniqueNames = [...new Set(socialMediaData.map(item => item.uploadedByName))]
+        .filter(name => name)
+        .sort();
+      setUniqueUploadedBy(uniqueNames);
+    }
+  }, [socialMediaData]);
 
   const clearFilters = () => {
-    setFilters({
+    const clearedFilters = {
       productCompany: '',
       platform: '',
       uploadType: '',
       startDate: '',
       endDate: '',
       uploadedBy: ''
-    });
+    };
+    
+    setFilters(clearedFilters);
     setSearchTerm('');
     setCurrentPage(1);
+    
+    // Update URL
+    updateURLParams(clearedFilters, 1, '');
+    
+    // Refetch data
+    fetchSocialMediaData(1);
   };
 
   const getActiveFilterCount = () => {
@@ -673,13 +737,16 @@ const SocialMedia = () => {
               {/* Uploaded By Filter */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Uploaded By</label>
-                <input
-                  type="text"
-                  placeholder="Search user name..."
+                <select
                   value={filters.uploadedBy}
                   onChange={(e) => handleFilterChange('uploadedBy', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
-                />
+                >
+                  <option value="">All Users</option>
+                  {uniqueUploadedBy.map((name, index) => (
+                    <option key={index} value={name}>{name}</option>
+                  ))}
+                </select>
               </div>
             </div>
 
