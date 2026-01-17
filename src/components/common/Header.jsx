@@ -9,7 +9,7 @@ const Header = () => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
           <div className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
-              <img src={logo} className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center" alt="Logo" />
+              
               <div>
                 <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Elite Dashboard</h1>
                 <p className="text-xs sm:text-sm text-gray-600">Client Management System</p>

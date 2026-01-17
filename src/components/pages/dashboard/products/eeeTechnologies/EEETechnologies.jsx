@@ -388,10 +388,36 @@ const EEETechnologies = () => {
         }
       }
         
-      setEnrollmentData(enrollmentDataResult);
+      // Filter data based on user role
+      let filteredEnrollmentData = enrollmentDataResult;
+      
+      // For telecallers, only show enrollments assigned to them
+      if (userRole.toLowerCase() === 'telecaller') {
+        filteredEnrollmentData = enrollmentDataResult.filter(enrollment => {
+          // Check if enrollment is assigned to current telecaller
+          const isAssignedToMe = enrollment.assignedTo && 
+            (enrollment.assignedTo.email === userEmail || 
+             enrollment.assignedTo === userEmail ||
+             (typeof enrollment.assignedTo === 'object' && enrollment.assignedTo.email === userEmail));
+          
+          // Also check if assignedTo field contains the telecaller's email
+          const assignedToEmail = typeof enrollment.assignedTo === 'string' ? 
+            enrollment.assignedTo : 
+            (enrollment.assignedTo && enrollment.assignedTo.email) || '';
+          
+          return isAssignedToMe || assignedToEmail.includes(userEmail);
+        });
+        
+        console.log(`Telecaller ${userName} (${userEmail}) - Showing ${filteredEnrollmentData.length} assigned enrollments out of ${enrollmentDataResult.length} total`);
+      } else {
+        // For other roles, show all enrollments
+        filteredEnrollmentData = enrollmentDataResult;
+      }
+        
+      setEnrollmentData(filteredEnrollmentData);
         
       // Set initial filtered data
-      const sorted = sortData(enrollmentDataResult, "createdAt", "desc");
+      const sorted = sortData(filteredEnrollmentData, "createdAt", "desc");
       setFilteredData(sorted);
     } catch (err) {
       console.error("Error fetching data:", err);
@@ -522,10 +548,34 @@ const EEETechnologies = () => {
         }
       }
       
-      setEnrollmentData(enrollmentDataResult);
+      // Apply same filtering logic as in fetchEnrollmentData
+      let filteredEnrollmentData = enrollmentDataResult;
+      
+      // For telecallers, only show enrollments assigned to them
+      if (userRole.toLowerCase() === 'telecaller') {
+        filteredEnrollmentData = enrollmentDataResult.filter(enrollment => {
+          // Check if enrollment is assigned to current telecaller
+          const isAssignedToMe = enrollment.assignedTo && 
+            (enrollment.assignedTo.email === userEmail || 
+             enrollment.assignedTo === userEmail ||
+             (typeof enrollment.assignedTo === 'object' && enrollment.assignedTo.email === userEmail));
+          
+          // Also check if assignedTo field contains the telecaller's email
+          const assignedToEmail = typeof enrollment.assignedTo === 'string' ? 
+            enrollment.assignedTo : 
+            (enrollment.assignedTo && enrollment.assignedTo.email) || '';
+          
+          return isAssignedToMe || assignedToEmail.includes(userEmail);
+        });
+      } else {
+        // For other roles, show all enrollments
+        filteredEnrollmentData = enrollmentDataResult;
+      }
+      
+      setEnrollmentData(filteredEnrollmentData);
       
       // Set initial filtered data
-      const sorted = sortData(enrollmentDataResult, "createdAt", "desc");
+      const sorted = sortData(filteredEnrollmentData, "createdAt", "desc");
       setFilteredData(sorted);
       
       setShowUpdateModal(false);
@@ -835,167 +885,187 @@ const EEETechnologies = () => {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="flex h-screen">
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col overflow-hidden lg:ml-0">
-          
-          {/* Main Content */}
-          <div className="flex-1 overflow-auto p-6">
-            <h1 className="text-2xl font-semibold text-gray-800 mb-4">
-              EEE Technologies - Enrollment Records
-            </h1>
-
-            {/* Search */}
-            <div className="mb-6">
-              <div className="relative w-full md:w-1/3">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search enrollment records..."
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 md:p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-6">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-xl p-6">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-white">EEE Technologies</h1>
+                <p className="text-blue-100 mt-2">Manage enrollment records and student information</p>
               </div>
             </div>
-
-            {/* Table */}
-            <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
-              <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
-                <h2 className="text-lg font-bold text-gray-900">EEE Technologies - Enrollment Records</h2>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="min-w-full">
-                  <thead>
-                    {renderTableHeaders()}
-                  </thead>
-                  <tbody className="divide-y divide-gray-200 bg-white">
-                    {renderTableRows()}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex justify-between items-center mt-6">
-                <button
-                  disabled={currentPage === 1}
-                  onClick={() => setCurrentPage((prev) => prev - 1)}
-                  className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                  <span>Prev</span>
-                </button>
-                <span className="text-gray-600 font-medium">
-                  Page {currentPage} of {totalPages} ({filteredData.length} records)
-                </span>
-                <button
-                  disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage((prev) => prev + 1)}
-                  className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
-                >
-                  <span>Next</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-
-            <>
-              {/* Success Modal */}
-              <SuccessModal 
-                showModal={showSuccessModal} 
-                setShowModal={setShowSuccessModal} 
-                message={successMessage} 
-              />
-              
-              {/* Delete Confirmation Modal */}
-              <DeleteConfirmationModal 
-                showModal={showDeleteModal} 
-                setShowModal={setShowDeleteModal} 
-                itemName="enrollment record" 
-                onConfirm={confirmDeleteEnrollment} 
-              />
-              
-              {/* Error Modal */}
-              <ErrorModal 
-                showModal={showErrorModal} 
-                setShowModal={setShowErrorModal} 
-                message={errorModalMessage} 
-              />
-              
-              {/* Assignment Modal */}
-              <AssignmentModal
-                showModal={showAssignmentModal}
-                setShowModal={setShowAssignmentModal}
-                itemToAssign={enrollmentToAssign}
-                itemType="enrollment"
-                teamMembers={teamMembers}
-                selectedMember={selectedMember}
-                setSelectedMember={setSelectedMember}
-                onAssign={handleAssignEnrollment}
-                isAssigning={isAssigning}
-                userRole={userRole}
-              />
-              
-              {/* Mail Modal */}
-              <MailModal
-                showModal={showMailModal}
-                setShowModal={setShowMailModal}
-                attachmentFile={mailAttachments.length > 0 ? mailAttachments[0] : null}
-                imageToShare={enrollmentToShare}
-                selectedLeads={enrollmentToShare ? [enrollmentToShare] : []}
-                onAttachmentClick={handleSelectAttachment}
-                mode="send"
-              />
-              
-              {/* File Selection Modal */}
-              <FileSelectionModal
-                isOpen={showFileSelectionModal}
-                onClose={() => setShowFileSelectionModal(false)}
-                onFileSelect={handleFileSelectFromGallery}
-              />
-
-              {/* Remark Modal */}
-              {showRemarksModal && currentEnrollment && (
-                <RemarkModal
-                  showModal={showRemarksModal}
-                  setShowModal={setShowRemarksModal}
-                  lead={currentEnrollment}
-                  onSubmit={handleRemarkSubmit}
-                  onCancel={() => {
-                    setShowRemarksModal(false);
-                    setCurrentEnrollment(null);
-                  }}
-                />
-              )}
-
-              {/* All Remarks Modal */}
-              {showAllRemarksModal && currentEnrollmentAllRemarks && (
-                <AllRemarksModal
-                  showModal={showAllRemarksModal}
-                  setShowModal={setShowAllRemarksModal}
-                  lead={currentEnrollmentAllRemarks}
-                  allRemarks={currentEnrollmentAllRemarks.remarks || []}
-                  onSubmit={handleRemarkSubmit}
-                  onCancel={() => {
-                    setShowAllRemarksModal(false);
-                    setCurrentEnrollmentAllRemarks(null);
-                  }}
-                />
-              )}
-            </>
-
-            {/* Update Enrollment Modal */}
-            <UpdateEnrollmentModal
-              showModal={showUpdateModal}
-              setShowModal={setShowUpdateModal}
-              selectedRecord={selectedRecord}
-              onSuccess={handleUpdateSuccess}
-            />
           </div>
         </div>
+
+        {/* Telecaller Notification */}
+        {userRole.toLowerCase() === 'telecaller' && (
+          <div className="mb-6 bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-xl p-4 shadow-sm">
+            <div className="flex items-start gap-3">
+              <div className="bg-yellow-100 p-2 rounded-lg">
+                <UserCheck className="w-5 h-5 text-yellow-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-yellow-800">Assigned Enrollments Only</h3>
+                <p className="text-yellow-700 text-sm mt-1">
+                  As a telecaller, you can only view enrollments that have been assigned to you by counselors, managers, or admins.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Search and Filters */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search enrollments..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Table */}
+        <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+            <h2 className="text-lg font-bold text-gray-900">EEE Technologies - Enrollment Records</h2>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full">
+              <thead>
+                {renderTableHeaders()}
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {renderTableRows()}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-between items-center mt-6">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+              className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>Prev</span>
+            </button>
+            <span className="text-gray-600 font-medium">
+              Page {currentPage} of {totalPages} ({filteredData.length} records)
+            </span>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+              className="flex items-center space-x-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 transition"
+            >
+              <span>Next</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+
+        <>
+          {/* Success Modal */}
+          <SuccessModal 
+            showModal={showSuccessModal} 
+            setShowModal={setShowSuccessModal} 
+            message={successMessage} 
+          />
+          
+          {/* Delete Confirmation Modal */}
+          <DeleteConfirmationModal 
+            showModal={showDeleteModal} 
+            setShowModal={setShowDeleteModal} 
+            itemName="enrollment record" 
+            onConfirm={confirmDeleteEnrollment} 
+          />
+          
+          {/* Error Modal */}
+          <ErrorModal 
+            showModal={showErrorModal} 
+            setShowModal={setShowErrorModal} 
+            message={errorModalMessage} 
+          />
+          
+          {/* Assignment Modal */}
+          <AssignmentModal
+            showModal={showAssignmentModal}
+            setShowModal={setShowAssignmentModal}
+            itemToAssign={enrollmentToAssign}
+            itemType="enrollment"
+            teamMembers={teamMembers}
+            selectedMember={selectedMember}
+            setSelectedMember={setSelectedMember}
+            onAssign={handleAssignEnrollment}
+            isAssigning={isAssigning}
+            userRole={userRole}
+          />
+          
+          {/* Mail Modal */}
+          <MailModal
+            showModal={showMailModal}
+            setShowModal={setShowMailModal}
+            attachmentFile={mailAttachments.length > 0 ? mailAttachments[0] : null}
+            imageToShare={enrollmentToShare}
+            selectedLeads={enrollmentToShare ? [enrollmentToShare] : []}
+            onAttachmentClick={handleSelectAttachment}
+            mode="send"
+          />
+          
+          {/* File Selection Modal */}
+          <FileSelectionModal
+            isOpen={showFileSelectionModal}
+            onClose={() => setShowFileSelectionModal(false)}
+            onFileSelect={handleFileSelectFromGallery}
+          />
+
+          {/* Remark Modal */}
+          {showRemarksModal && currentEnrollment && (
+            <RemarkModal
+              showModal={showRemarksModal}
+              setShowModal={setShowRemarksModal}
+              lead={currentEnrollment}
+              onSubmit={handleRemarkSubmit}
+              onCancel={() => {
+                setShowRemarksModal(false);
+                setCurrentEnrollment(null);
+              }}
+            />
+          )}
+
+          {/* All Remarks Modal */}
+          {showAllRemarksModal && currentEnrollmentAllRemarks && (
+            <AllRemarksModal
+              showModal={showAllRemarksModal}
+              setShowModal={setShowAllRemarksModal}
+              lead={currentEnrollmentAllRemarks}
+              allRemarks={currentEnrollmentAllRemarks.remarks || []}
+              onSubmit={handleRemarkSubmit}
+              onCancel={() => {
+                setShowAllRemarksModal(false);
+                setCurrentEnrollmentAllRemarks(null);
+              }}
+            />
+          )}
+        </>
+
+        {/* Update Enrollment Modal */}
+        <UpdateEnrollmentModal
+          showModal={showUpdateModal}
+          setShowModal={setShowUpdateModal}
+          selectedRecord={selectedRecord}
+          onSuccess={handleUpdateSuccess}
+        />
       </div>
     </div>
   );

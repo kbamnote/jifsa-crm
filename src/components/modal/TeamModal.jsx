@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Lock, X } from 'lucide-react';
+import { User, Mail, Lock, X, Eye, EyeOff } from 'lucide-react';
 
 const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +8,8 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
     password: '',
     role: 'sales'
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,13 +71,23 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
                 Password
               </div>
             </label>
-            <input
-              type="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                title={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
 
           <div>
@@ -95,6 +107,7 @@ const TeamModal = ({ showModal, setShowModal, handleAddMember }) => {
               <option value="sales">Sales</option>
               <option value="marketing">Marketing</option>
               <option value="counsellor">Counsellor</option>
+              <option value="hr">HR</option>
               <option value="telecaller">Telecaller</option>
               <option value="developer">Developer</option>
               <option value="analyst">Analyst</option>

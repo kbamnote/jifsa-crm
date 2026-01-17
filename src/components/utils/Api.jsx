@@ -66,6 +66,8 @@ export const addMember = (memberData) => Api.post(`/team/create`, memberData);
 
 export const getTeamDetail = () => Api.get(`/team/get-all`);
 
+export const getTeamMemberById = (id) => Api.get(`/team/${id}`);
+
 export const deleteMember = (id) => Api.delete(`/team/${id}`);
 
 export const updateMember = (id, memberData) => Api.put(`/team/${id}`, memberData);

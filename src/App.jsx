@@ -6,6 +6,7 @@ import EliteBim from "./components/pages/dashboard/products/EliteBIM/EliteBim";
 import Layout from "./components/common/Layout";
 import PaymentDetail from "./components/pages/paymentDetail/PaymentDetail";
 import Team from "./components/pages/teamAndLeadAssign/Team";
+import TeamDetails from "./components/pages/teamAndLeadAssign/TeamDetails";
 import LeadAssigned from "./components/pages/teamAndLeadAssign/LeadAssigned";
 import LeadManagement from "./components/pages/teamAndLeadAssign/LeadManagement";
 import ViewLead from "./components/pages/teamAndLeadAssign/ViewLead";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/enrollment/:id" element={<ViewEnrollment/>}/>
           <Route path="/billing-details" element={<PaymentDetail/>}/>
           <Route path="/team" element={<Team/>}/>
+          <Route path="/team/:id" element={<TeamDetails/>}/>
           <Route path="/lead-assigned" element={<LeadAssigned/>}/>
           <Route path="/lead-management" element={<LeadManagement/>}/>
           <Route path="/lead/:id" element={<ViewLead/>}/>

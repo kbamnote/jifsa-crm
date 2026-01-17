@@ -63,7 +63,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       return disabledItems;
     }
     
-    if (roleLower === "counsellor") {
+    if (roleLower === "counsellor" || roleLower === "hr") {
       disabledItems.companies = true;
       disabledItems.jobImport = true;
       disabledItems.jobManagement = true;
@@ -90,10 +90,11 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       disabledItems.team = true;
       disabledItems.b2b = true;
       disabledItems.socialMedia = true;
-      disabledItems.products = true; // Disable Products dropdown for telecaller
-      disabledItems.jifsa = true; // Disable individual product items for telecaller
+      // Enable EEETechnologies for telecaller
+      disabledItems.products = false; // Enable Products dropdown for telecaller
+      disabledItems.jifsa = true; // Keep individual product items disabled except EEE Technologies
       disabledItems.elitebim = true;
-      disabledItems.eeetechnologies = true;
+      disabledItems.eeetechnologies = false; // Enable EEE Technologies for telecaller
       return disabledItems;
     }
     
@@ -254,7 +255,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       name: "Reports",
       path: "/reports",
       icon: <HiOutlineUserGroup className="w-5 h-5" />,
-      disabled: !['admin', 'developer', 'analyst', 'marketing', 'sales', 'counsellor', 'telecaller'].includes(userRole.toLowerCase()),
+      disabled: !['admin', 'developer', 'analyst', 'marketing', 'sales', 'counsellor', 'hr', 'telecaller'].includes(userRole.toLowerCase()),
     },
     {
       id: "gallery&doucments",
