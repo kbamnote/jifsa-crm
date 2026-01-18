@@ -132,10 +132,8 @@ const SocialMedia = () => {
   }, []);
 
   useEffect(() => {
-    // Reset to first page when search term or filters change
-    if (searchTerm || Object.values(filters).some(value => value !== '')) {
-      setCurrentPage(1);
-    }
+    // Only apply client-side filtering when search term changes
+    // For filter changes, we already fetch from server
     filterData();
   }, [searchTerm, socialMediaData, filters]);
 
@@ -177,6 +175,10 @@ const SocialMedia = () => {
       ...prev,
       [filterName]: value
     }));
+    
+    // Reset to page 1 and fetch new data when filter changes
+    setCurrentPage(1);
+    fetchSocialMediaData(1);
   };
   
   // Update URL with current filters and page
@@ -601,29 +603,18 @@ const SocialMedia = () => {
 
         {/* Search and Filters */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
-          <div className="w-full lg:w-1/3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search by company, platform, or user..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-          </div>
+       
           
           {/* Filter Controls */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 ${showFilters ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'} shadow-sm`}
+              className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-all duration-300 ${showFilters ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'} shadow-sm`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
               </svg>
-              <span className="text-sm font-medium">Filters</span>
+              <span className="text-sm font-semibold">Filters</span>
               {getActiveFilterCount() > 0 && (
                 <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {getActiveFilterCount()}

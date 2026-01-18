@@ -55,6 +55,8 @@ export const updateEducation = (id, educationField) => Api.put(`/form/update-edu
 
 export const addRemark = (id, remarkData) => Api.post(`/form/add-remark/${id}`, remarkData);
 
+export const getLeadStats = () => Api.get("/form/stats");
+
 export const assignLead = (id, assignmentData) => {
   console.log(`Assigning lead with ID: ${id}`);
   console.log('Assignment data:', assignmentData);
