@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Download, Search, X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Plus, Edit, Trash2, Download, Search, X, ArrowLeft, ArrowRight, Eye } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { 
   getInternApplications, 
   createInternApplication, 
@@ -12,6 +13,7 @@ import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 import SuccessModal from '../../modal/SuccessModal';
 
 const InternAppliedDataPage = () => {
+  const navigate = useNavigate();
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -131,6 +133,10 @@ const InternAppliedDataPage = () => {
 
   const getActiveFilterCount = () => {
     return Object.values(filters).filter(value => value !== '').length + (searchTerm ? 1 : 0);
+  };
+
+  const handleRowClick = (applicationId) => {
+    navigate(`/intern-application/${applicationId}`);
   };
 
   if (loading) {
@@ -317,14 +323,9 @@ const InternAppliedDataPage = () => {
                   <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Full Name</th>
                   <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Email</th>
                   <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Phone 1</th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Phone 2</th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Post Applied</th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Company</th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Resume</th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Photo</th>
                   <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
                   <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Date Applied</th>
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -342,7 +343,7 @@ const InternAppliedDataPage = () => {
                   </tr>
                 ) : (
                   applications.map((application) => (
-                    <tr key={application._id} className="hover:bg-gradient-to-r from-blue-50 to-purple-50 transition-all duration-200">
+                    <tr key={application._id} className="hover:bg-gradient-to-r from-blue-50 to-purple-50 transition-all duration-200 cursor-pointer" onClick={() => handleRowClick(application._id)}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {application.fullName}
                       </td>
@@ -351,45 +352,6 @@ const InternAppliedDataPage = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                         {application.phoneNo1}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                        {application.phoneNo2 || '-'}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                        {application.postAppliedFor}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                        {application.productCompany}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                        {application.resumeUrl ? (
-                          <a
-                            href={application.resumeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:text-blue-800 underline flex items-center gap-1"
-                          >
-                            <Download className="w-4 h-4" />
-                            Download
-                          </a>
-                        ) : (
-                          <span className="text-gray-400">No resume</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                        {application.photoUrl ? (
-                          <a
-                            href={application.photoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 hover:text-blue-800 underline flex items-center gap-1"
-                          >
-                            <Download className="w-4 h-4" />
-                            View
-                          </a>
-                        ) : (
-                          <span className="text-gray-400">No photo</span>
-                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -413,14 +375,20 @@ const InternAppliedDataPage = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex items-center space-x-3">
                           <button
-                            onClick={() => handleEdit(application)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEdit(application);
+                            }}
                             className="text-blue-600 hover:text-blue-800 transition-colors p-1 rounded hover:bg-blue-100"
                             title="Edit Application"
                           >
                             <Edit className="w-4 h-4" />
                           </button>
                           <button
-                            onClick={() => handleDelete(application._id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDelete(application._id);
+                            }}
                             className="text-red-600 hover:text-red-800 transition-colors p-1 rounded hover:bg-red-100"
                             title="Delete Application"
                           >

@@ -70,6 +70,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       disabledItems.b2b = true;
       disabledItems.socialMedia = true;
       disabledItems.team = true;
+      disabledItems.billingRecords = true;
       return disabledItems;
     }
     
