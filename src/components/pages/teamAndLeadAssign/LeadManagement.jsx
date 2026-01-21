@@ -116,7 +116,7 @@ const LeadManagement = () => {
 
   useEffect(() => {
     filterLeads();
-  }, [leads, searchTerm, statusFilter, productFilter, callStatusFilter, interviewRoundFilter, aptitudeRoundFilter, hrRoundFilter, createdByFilter]);
+  }, [leads, searchTerm, statusFilter, productFilter, callStatusFilter, interviewRoundFilter, aptitudeRoundFilter, hrRoundFilter, createdByFilter, remarkStatusFilter]);
 
   const fetchLeads = async () => {
     try {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Upload, FileText, Camera } from 'lucide-react';
+import { updateInternApplication } from '../utils/Api';
 
 const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,56 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
     postAppliedFor: '',
     productCompany: '', // Added productCompany field
     resume: null,
-    photo: null
+    photo: null,
+    // Personal Information
+    fatherName: '',
+    fathersContactNo: '',
+    address: '',
+    gender: '',
+    dateOfBirth: '',
+    age: '',
+    maritalStatus: '',
+    category: '',
+    nationality: '',
+    religion: '',
+    // Education Information
+    highestDegree: '',
+    specialization: '',
+    collegeOrInstituteName: '',
+    schoolName: '',
+    experience: '',
+    skills: '',
+    previousCompany: '',
+    previousSalary: '',
+    // Application Information
+    modeOfTraining: '',
+    expectedJoiningDate: '',
+    expectedSalary: '',
+    currentSalary: '',
+    noticePeriod: '',
+    source: '',
+    sourceName: '',
+    // Status fields
+    status: 'unread',
+    callStatus: 'not_called',
+    interviewRoundStatus: 'not_scheduled',
+    aptitudeRoundStatus: 'not_scheduled',
+    hrRoundStatus: 'not_scheduled',
+    admissionLetter: 'not_issued',
+    feesStatus: 'not_paid',
+    paymentMethod: 'other',
+    feesInstallmentStructure: 'one_time',
+    // Additional fields
+    feedback: '',
+    city: '',
+    state: '',
+    pincode: '',
+    // Assignment fields
+    assignedTo: null,
+    assignedBy: null,
+    assignedByName: '',
+    // Source field
+    sourceName: ''
   });
   
   const [errors, setErrors] = useState({});
@@ -34,26 +84,83 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
 
   // Initialize form data when itemToEdit changes
   useEffect(() => {
+    console.log('Initialize form data useEffect triggered with itemToEdit:', itemToEdit);
     if (itemToEdit) {
-      setFormData({
+      const newFormData = {
         fullName: itemToEdit.fullName || '',
         email: itemToEdit.email || '',
         phoneNo1: itemToEdit.phoneNo1 || '',
         phoneNo2: itemToEdit.phoneNo2 || '',
         postAppliedFor: itemToEdit.postAppliedFor || '',
-        productCompany: itemToEdit.productCompany || '', // Added productCompany
+        productCompany: itemToEdit.productCompany || '',
         resume: null, // Don't set existing file here
-        photo: null   // Don't set existing file here
-      });
-      setUploadedFiles({
+        photo: null,  // Don't set existing file here
+        // Personal Information
+        fatherName: itemToEdit.fatherName || '',
+        fathersContactNo: itemToEdit.fathersContactNo || '',
+        address: itemToEdit.address || '',
+        gender: itemToEdit.gender || '',
+        dateOfBirth: itemToEdit.dateOfBirth || '',
+        age: itemToEdit.age || '',
+        maritalStatus: itemToEdit.maritalStatus || '',
+        category: itemToEdit.category || '',
+        nationality: itemToEdit.nationality || '',
+        religion: itemToEdit.religion || '',
+        // Education Information
+        highestDegree: itemToEdit.highestDegree || '',
+        specialization: itemToEdit.specialization || '',
+        collegeOrInstituteName: itemToEdit.collegeOrInstituteName || '',
+        schoolName: itemToEdit.schoolName || '',
+        experience: itemToEdit.experience || '',
+        skills: itemToEdit.skills || '',
+        previousCompany: itemToEdit.previousCompany || '',
+        previousSalary: itemToEdit.previousSalary || '',
+        // Application Information
+        modeOfTraining: itemToEdit.modeOfTraining || '',
+        expectedJoiningDate: itemToEdit.expectedJoiningDate || '',
+        expectedSalary: itemToEdit.expectedSalary || '',
+        currentSalary: itemToEdit.currentSalary || '',
+        noticePeriod: itemToEdit.noticePeriod || '',
+        source: itemToEdit.source || '',
+        sourceName: itemToEdit.sourceName || '',
+        // Status fields
+        status: itemToEdit.status || 'unread',
+        callStatus: itemToEdit.callStatus || 'not_called',
+        interviewRoundStatus: itemToEdit.interviewRoundStatus || 'not_scheduled',
+        aptitudeRoundStatus: itemToEdit.aptitudeRoundStatus || 'not_scheduled',
+        hrRoundStatus: itemToEdit.hrRoundStatus || 'not_scheduled',
+        admissionLetter: itemToEdit.admissionLetter || 'not_issued',
+        feesStatus: itemToEdit.feesStatus || 'not_paid',
+        paymentMethod: itemToEdit.paymentMethod || 'other',
+        feesInstallmentStructure: itemToEdit.feesInstallmentStructure || 'one_time',
+        // Additional fields
+        feedback: itemToEdit.feedback || '',
+        city: itemToEdit.city || '',
+        state: itemToEdit.state || '',
+        pincode: itemToEdit.pincode || '',
+        // Assignment fields
+        assignedTo: itemToEdit.assignedTo || null,
+        assignedBy: itemToEdit.assignedBy || null,
+        assignedByName: itemToEdit.assignedByName || '',
+        // Source field - removed duplicate
+        sourceName: itemToEdit.sourceName || ''
+      };
+      
+      console.log('Setting form data to:', newFormData);
+      setFormData(newFormData);
+      
+      const newUploadedFiles = {
         resumeName: itemToEdit.resumeUrl ? 'Current Resume.pdf' : '',
         photoName: itemToEdit.photoUrl ? 'Current Photo.jpg' : ''
-      });
+      };
+      console.log('Setting uploaded files to:', newUploadedFiles);
+      setUploadedFiles(newUploadedFiles);
     }
   }, [itemToEdit]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Field ${name} changed from '${formData[name]}' to '${value}'`);
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -69,6 +176,7 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
   };
 
   const handleSelectChange = (name, value) => {
+    console.log(`Select field ${name} changed from '${formData[name]}' to '${value}'`);
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -86,6 +194,8 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     const file = files[0];
+    
+    console.log(`File field ${name} changed, file selected:`, file?.name || 'none');
     
     if (file) {
       // Validate file type
@@ -172,6 +282,8 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
     return Object.keys(newErrors).length === 0;
   };
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -182,6 +294,16 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
     setIsSubmitting(true);
     
     try {
+      console.log('Updating intern application with ID:', itemToEdit._id);
+      console.log('Current form data:', formData);
+      console.log('Changed fields compared to original:', 
+        Object.keys(formData).filter(key => 
+          formData[key] !== itemToEdit[key] && 
+          !(formData[key] === '' && itemToEdit[key] == null) &&
+          !(formData[key] == null && itemToEdit[key] === '')
+        )
+      );
+      
       const formDataToSend = new FormData();
       formDataToSend.append('fullName', formData.fullName);
       formDataToSend.append('email', formData.email);
@@ -192,9 +314,64 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
       }
       
       formDataToSend.append('postAppliedFor', formData.postAppliedFor);
-      formDataToSend.append('productCompany', formData.productCompany); // Added productCompany
+      formDataToSend.append('productCompany', formData.productCompany);
+      formDataToSend.append('status', formData.status);
+      formDataToSend.append('feedback', formData.feedback || '');
+      formDataToSend.append('city', formData.city || '');
+      formDataToSend.append('state', formData.state || '');
+      formDataToSend.append('pincode', formData.pincode || '');
       
-      // Only append files if they were changed
+      // Assignment fields
+      formDataToSend.append('assignedTo', formData.assignedTo || '');
+      formDataToSend.append('assignedBy', formData.assignedBy || '');
+      formDataToSend.append('assignedByName', formData.assignedByName || '');
+      
+      // Source field
+      formDataToSend.append('source', formData.source || 'other');
+      
+      // Interview tracking fields
+      formDataToSend.append('callStatus', formData.callStatus);
+      formDataToSend.append('interviewRoundStatus', formData.interviewRoundStatus);
+      formDataToSend.append('aptitudeRoundStatus', formData.aptitudeRoundStatus);
+      formDataToSend.append('hrRoundStatus', formData.hrRoundStatus);
+      formDataToSend.append('admissionLetter', formData.admissionLetter);
+      
+      // Fees and payment fields
+      formDataToSend.append('feesStatus', formData.feesStatus);
+      formDataToSend.append('paymentMethod', formData.paymentMethod);
+      formDataToSend.append('feesInstallmentStructure', formData.feesInstallmentStructure);
+      
+      // Personal Information
+      formDataToSend.append('fatherName', formData.fatherName || '');
+      formDataToSend.append('fathersContactNo', formData.fathersContactNo || '');
+      formDataToSend.append('address', formData.address || '');
+      formDataToSend.append('gender', formData.gender || '');
+      formDataToSend.append('dateOfBirth', formData.dateOfBirth || '');
+      formDataToSend.append('age', formData.age || '');
+      formDataToSend.append('maritalStatus', formData.maritalStatus || '');
+      formDataToSend.append('category', formData.category || '');
+      formDataToSend.append('nationality', formData.nationality || '');
+      formDataToSend.append('religion', formData.religion || '');
+      
+      // Education Information
+      formDataToSend.append('highestDegree', formData.highestDegree || '');
+      formDataToSend.append('specialization', formData.specialization || '');
+      formDataToSend.append('collegeOrInstituteName', formData.collegeOrInstituteName || '');
+      formDataToSend.append('schoolName', formData.schoolName || '');
+      formDataToSend.append('experience', formData.experience || '');
+      formDataToSend.append('skills', formData.skills || '');
+      formDataToSend.append('previousCompany', formData.previousCompany || '');
+      formDataToSend.append('previousSalary', formData.previousSalary || '');
+      
+      // Application Information
+      formDataToSend.append('modeOfTraining', formData.modeOfTraining || '');
+      formDataToSend.append('expectedJoiningDate', formData.expectedJoiningDate || '');
+      formDataToSend.append('expectedSalary', formData.expectedSalary || '');
+      formDataToSend.append('currentSalary', formData.currentSalary || '');
+      formDataToSend.append('noticePeriod', formData.noticePeriod || '');
+      formDataToSend.append('sourceName', formData.sourceName || '');
+      
+      // Files
       if (formData.resume) {
         formDataToSend.append('resume', formData.resume);
       }
@@ -202,22 +379,26 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
         formDataToSend.append('photo', formData.photo);
       }
 
-      const response = await fetch(`https://elite-backend-production.up.railway.app/intern-applied-data/${itemToEdit._id}`, {
-        method: 'PUT',
-        body: formDataToSend,
-        credentials: 'include'
-      });
+      console.log('FormData being sent to update API:');
+      for (let [key, value] of formDataToSend.entries()) {
+        console.log(`${key}:`, value instanceof File ? `File(${value.name})` : value);
+      }
+      
+      // Use the API function instead of direct fetch
+      const result = await updateInternApplication(itemToEdit._id, formDataToSend);
+      
+      console.log('Update API response:', result);
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (result.data.success) {
+        console.log('Application updated successfully:', result.data.data);
         setShowModal(false);
-        onSuccess(result.data);
+        onSuccess(result.data.data);
       } else {
-        throw new Error(result.message || 'Failed to update application');
+        throw new Error(result.data.message || 'Failed to update application');
       }
     } catch (error) {
       console.error('Error updating application:', error);
+      console.error('Error details:', error.response || error.message);
       alert(error.message || 'An error occurred while updating the application');
     } finally {
       setIsSubmitting(false);
@@ -225,14 +406,66 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
   };
 
   const closeModal = () => {
+    console.log('Closing update modal and resetting form data');
     setFormData({
       fullName: '',
       email: '',
       phoneNo1: '',
       phoneNo2: '',
       postAppliedFor: '',
+      productCompany: '',
       resume: null,
-      photo: null
+      photo: null,
+      // Personal Information
+      fatherName: '',
+      fathersContactNo: '',
+      address: '',
+      gender: '',
+      dateOfBirth: '',
+      age: '',
+      maritalStatus: '',
+      category: '',
+      nationality: '',
+      religion: '',
+      // Education Information
+      highestDegree: '',
+      specialization: '',
+      collegeOrInstituteName: '',
+      schoolName: '',
+      experience: '',
+      skills: '',
+      previousCompany: '',
+      previousSalary: '',
+      // Application Information
+      modeOfTraining: '',
+      expectedJoiningDate: '',
+      expectedSalary: '',
+      currentSalary: '',
+      noticePeriod: '',
+      source: '',
+      sourceName: '',
+      // Status fields
+      status: 'unread',
+      callStatus: 'not_called',
+      interviewRoundStatus: 'not_scheduled',
+      aptitudeRoundStatus: 'not_scheduled',
+      hrRoundStatus: 'not_scheduled',
+      admissionLetter: 'not_issued',
+      feesStatus: 'not_paid',
+      paymentMethod: 'other',
+      feesInstallmentStructure: 'one_time',
+      // Additional fields
+      feedback: '',
+      city: '',
+      state: '',
+      pincode: '',
+      // Assignment fields
+      assignedTo: null,
+      assignedBy: null,
+      assignedByName: '',
+      // Source field
+      source: 'other',
+      sourceName: ''
     });
     setUploadedFiles({
       resumeName: '',
@@ -242,10 +475,17 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
     setShowModal(false);
   };
 
-  if (!showModal || !itemToEdit) return null;
-
+  if (!showModal || !itemToEdit) {
+    console.log('UpdateInternAppliedDataModal: Modal is not shown or itemToEdit is null');
+    return null;
+  }
+  
+  console.log('UpdateInternAppliedDataModal: Rendering with itemToEdit:', itemToEdit, 'and formData:', formData);
+  console.log('Form data keys:', Object.keys(formData));
+  console.log('Full name in form data:', formData.fullName);
+  
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-t-2xl">
           <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
@@ -472,6 +712,168 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
             </div>
           </div>
 
+          {/* CRM Process Fields */}
+          <div className="mb-6">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              CRM Process Status
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Call Status
+                </label>
+                <select
+                  name="callStatus"
+                  value={formData.callStatus}
+                  onChange={(e) => handleSelectChange('callStatus', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="not_called">Not Called</option>
+                  <option value="called">Called</option>
+                  <option value="follow_up_required">Follow Up Required</option>
+                  <option value="not_reachable">Not Reachable</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Interview Round Status
+                </label>
+                <select
+                  name="interviewRoundStatus"
+                  value={formData.interviewRoundStatus}
+                  onChange={(e) => handleSelectChange('interviewRoundStatus', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="not_scheduled">Not Scheduled</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="completed">Completed</option>
+                  <option value="rescheduled">Rescheduled</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Aptitude Round Status
+                </label>
+                <select
+                  name="aptitudeRoundStatus"
+                  value={formData.aptitudeRoundStatus}
+                  onChange={(e) => handleSelectChange('aptitudeRoundStatus', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="not_scheduled">Not Scheduled</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="completed">Completed</option>
+                  <option value="rescheduled">Rescheduled</option>
+                  <option value="cancelled">Cancelled</option>
+                  <option value="passed">Passed</option>
+                  <option value="failed">Failed</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  HR Round Status
+                </label>
+                <select
+                  name="hrRoundStatus"
+                  value={formData.hrRoundStatus}
+                  onChange={(e) => handleSelectChange('hrRoundStatus', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="not_scheduled">Not Scheduled</option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="completed">Completed</option>
+                  <option value="rescheduled">Rescheduled</option>
+                  <option value="cancelled">Cancelled</option>
+                  <option value="passed">Passed</option>
+                  <option value="failed">Failed</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Admission Letter
+                </label>
+                <select
+                  name="admissionLetter"
+                  value={formData.admissionLetter}
+                  onChange={(e) => handleSelectChange('admissionLetter', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="not_issued">Not Issued</option>
+                  <option value="issued">Issued</option>
+                  <option value="received">Received</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Fees Status
+                </label>
+                <select
+                  name="feesStatus"
+                  value={formData.feesStatus}
+                  onChange={(e) => handleSelectChange('feesStatus', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="not_paid">Not Paid</option>
+                  <option value="partially_paid">Partially Paid</option>
+                  <option value="fully_paid">Fully Paid</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Payment Method
+                </label>
+                <select
+                  name="paymentMethod"
+                  value={formData.paymentMethod}
+                  onChange={(e) => handleSelectChange('paymentMethod', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="other">Other</option>
+                  <option value="UPI">UPI</option>
+                  <option value="cash">Cash</option>
+                  <option value="bank_transfer">Bank Transfer</option>
+                  <option value="cheque">Cheque</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Fees Installment Structure
+                </label>
+                <select
+                  name="feesInstallmentStructure"
+                  value={formData.feesInstallmentStructure}
+                  onChange={(e) => handleSelectChange('feesInstallmentStructure', e.target.value)}
+                  className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 border-gray-300"
+                  disabled={isSubmitting}
+                >
+                  <option value="one_time">One Time</option>
+                  <option value="two_installments">Two Installments</option>
+                  <option value="three_installments">Three Installments</option>
+                  <option value="four_installments">Four Installments</option>
+                  <option value="EMI">EMI</option>
+                  <option value="Loan">Loan</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
           <div className="flex justify-end gap-3 pt-4">
             <button
               type="button"
@@ -497,6 +899,8 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
             </button>
           </div>
         </form>
+
+
       </div>
     </div>
   );

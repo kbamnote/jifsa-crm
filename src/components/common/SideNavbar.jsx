@@ -63,7 +63,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       return disabledItems;
     }
     
-    if (roleLower === "counsellor" || roleLower === "hr") {
+    if (roleLower === "counsellor") {
       disabledItems.companies = true;
       disabledItems.jobImport = true;
       disabledItems.jobManagement = true;
@@ -71,6 +71,18 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       disabledItems.socialMedia = true;
       disabledItems.team = true;
       disabledItems.billingRecords = true;
+      return disabledItems;
+    }
+
+    if (roleLower === "hr"){
+      disabledItems.companies = true;
+      disabledItems.jobImport = true;
+      disabledItems.jobManagement = true;
+      disabledItems.b2b = true;
+      disabledItems.socialMedia = true;
+      disabledItems.team = true;
+      disabledItems.billingRecords = true;
+      disabledItems.leadManagement = true;
       return disabledItems;
     }
     

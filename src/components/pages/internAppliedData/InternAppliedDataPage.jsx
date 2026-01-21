@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Download, Search, X, ArrowLeft, ArrowRight, Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import { 
   getInternApplications, 
   createInternApplication, 
@@ -33,26 +34,23 @@ const InternAppliedDataPage = () => {
 
   // Filter state
   const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({
-    fullName: '',
-    email: '',
-    phoneNo1: '',
-    postAppliedFor: ''
-  });
 
   // Fetch applications
   const fetchApplications = async (page = 1) => {
+    console.log('Fetching applications with page:', page, ', itemsPerPage:', itemsPerPage, ', searchTerm:', searchTerm);
     try {
       setLoading(true);
       
       const filterParams = {
-        ...filters,
         search: searchTerm || undefined
       };
       
       const response = await getInternApplications(page, itemsPerPage, filterParams);
       
+      console.log('Applications API response:', response);
+      
       if (response.data.success) {
+        console.log('Setting applications data:', response.data.data);
         setApplications(response.data.data || []);
         setTotalPages(response.data.totalPages || 1);
         setTotalItems(response.data.totalItems || 0);
@@ -61,16 +59,19 @@ const InternAppliedDataPage = () => {
     } catch (err) {
       setError(err.message || 'Failed to fetch applications');
       console.error('Error fetching applications:', err);
+      console.error('Error details:', err.response || err.message);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchApplications(currentPage);
-  }, [currentPage, itemsPerPage, filters, searchTerm]);
+    console.log('Effect triggered - currentPage:', currentPage, 'itemsPerPage:', itemsPerPage, 'searchTerm:', searchTerm);
+    fetchApplications(1); // Reset to page 1 when pagination or search term changes
+  }, [currentPage, itemsPerPage, searchTerm]);
 
   const handleCreateSuccess = (newApplication) => {
+    console.log('Handle create success with new application:', newApplication);
     setApplications(prev => [newApplication, ...prev]);
     setShowAddModal(false);
     setSuccessMessage('Intern application created successfully!');
@@ -78,6 +79,7 @@ const InternAppliedDataPage = () => {
   };
 
   const handleUpdateSuccess = (updatedApplication) => {
+    console.log('Handle update success with updated application:', updatedApplication);
     setApplications(prev => 
       prev.map(app => app._id === updatedApplication._id ? updatedApplication : app)
     );
@@ -87,19 +89,23 @@ const InternAppliedDataPage = () => {
   };
 
   const handleDelete = (id) => {
+    console.log('Handle delete for ID:', id);
     setItemToDelete(id);
     setShowDeleteModal(true);
   };
 
   const confirmDelete = async () => {
+    console.log('Confirming deletion for ID:', itemToDelete);
     try {
-      await deleteInternApplication(itemToDelete);
+      const response = await deleteInternApplication(itemToDelete);
+      console.log('Delete API response:', response);
       setApplications(prev => prev.filter(app => app._id !== itemToDelete));
       setSuccessMessage('Intern application deleted successfully!');
       setShowSuccessModal(true);
     } catch (err) {
       setError(err.message || 'Failed to delete application');
       console.error('Error deleting application:', err);
+      console.error('Error details:', err.response || err.message);
     } finally {
       setShowDeleteModal(false);
       setItemToDelete(null);
@@ -107,39 +113,31 @@ const InternAppliedDataPage = () => {
   };
 
   const handleEdit = (application) => {
+    console.log('Handle edit for application:', application);
     setItemToEdit(application);
     setShowUpdateModal(true);
   };
 
-  const handleFilterChange = (field, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [field]: value
-    }));
-    setCurrentPage(1); // Reset to first page when filters change
-  };
+
 
   const clearFilters = () => {
-    setFilters({
-      fullName: '',
-      email: '',
-      phoneNo1: '',
-      postAppliedFor: '',
-      productCompany: '' // Added productCompany to clear filters
-    });
     setSearchTerm('');
     setCurrentPage(1);
   };
 
   const getActiveFilterCount = () => {
-    return Object.values(filters).filter(value => value !== '').length + (searchTerm ? 1 : 0);
+    return searchTerm ? 1 : 0;
   };
 
   const handleRowClick = (applicationId) => {
     navigate(`/intern-application/${applicationId}`);
   };
 
+  const currentUserRole = Cookies.get('role');
+  console.log('Rendering InternAppliedDataPage with applications:', applications, 'loading:', loading, 'current user role:', currentUserRole);
+  
   if (loading) {
+    console.log('Showing loading state');
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4 sm:p-6">
         <div className="max-w-7xl mx-auto">
@@ -241,72 +239,7 @@ const InternAppliedDataPage = () => {
           </div>
         </div>
 
-        {/* Filter Inputs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6"> {/* Updated grid columns */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-            <input
-              type="text"
-              value={filters.fullName}
-              onChange={(e) => handleFilterChange('fullName', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
-              placeholder="Filter by name"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-            <input
-              type="text"
-              value={filters.email}
-              onChange={(e) => handleFilterChange('email', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
-              placeholder="Filter by email"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-            <input
-              type="text"
-              value={filters.phoneNo1}
-              onChange={(e) => handleFilterChange('phoneNo1', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
-              placeholder="Filter by phone"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Post Applied For</label>
-            <input
-              type="text"
-              value={filters.postAppliedFor}
-              onChange={(e) => handleFilterChange('postAppliedFor', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
-              placeholder="Filter by post"
-            />
-          </div>
-          
-          {/* Product Company Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Company</label>
-            <select
-              value={filters.productCompany}
-              onChange={(e) => handleFilterChange('productCompany', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300"
-            >
-              <option value="">All Companies</option>
-              <option value="Elite-Associate">Elite Associate</option>
-              <option value="JIFSA">JIFSA</option>
-              <option value="Elite-BIM">Elite BIM</option>
-              <option value="Elite-BIFS">Elite BIFS</option>
-              <option value="EEE-Technologies">EEE Technologies</option>
-              <option value="Elite-Jobs">Elite Jobs</option>
-              <option value="Elite-Cards">Elite Cards</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
+
 
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
@@ -384,16 +317,18 @@ const InternAppliedDataPage = () => {
                           >
                             <Edit className="w-4 h-4" />
                           </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDelete(application._id);
-                            }}
-                            className="text-red-600 hover:text-red-800 transition-colors p-1 rounded hover:bg-red-100"
-                            title="Delete Application"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                          {Cookies.get('role') === 'admin' && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDelete(application._id);
+                              }}
+                              className="text-red-600 hover:text-red-800 transition-colors p-1 rounded hover:bg-red-100"
+                              title="Delete Application"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>

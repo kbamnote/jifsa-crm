@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Upload, FileText, Camera } from 'lucide-react';
+import { createInternApplication } from '../utils/Api';
 
 const AddInternAppliedDataModal = ({ showModal, setShowModal, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,51 @@ const AddInternAppliedDataModal = ({ showModal, setShowModal, onSuccess }) => {
     postAppliedFor: '',
     productCompany: '',
     resume: null,
-    photo: null
+    photo: null,
+    // Personal Information
+    fatherName: '',
+    fathersContactNo: '',
+    address: '',
+    gender: '',
+    dateOfBirth: '',
+    age: '',
+    maritalStatus: '',
+    category: '',
+    nationality: '',
+    religion: '',
+    // Education Information
+    highestDegree: '',
+    specialization: '',
+    collegeOrInstituteName: '',
+    schoolName: '',
+    experience: '',
+    skills: '',
+    previousCompany: '',
+    previousSalary: '',
+    // Application Information
+    modeOfTraining: '',
+    expectedJoiningDate: '',
+    expectedSalary: '',
+    currentSalary: '',
+    noticePeriod: '',
+    source: '',
+    sourceName: '',
+    // Status fields
+    status: 'unread',
+    callStatus: 'not_called',
+    interviewRoundStatus: 'not_scheduled',
+    aptitudeRoundStatus: 'not_scheduled',
+    hrRoundStatus: 'not_scheduled',
+    admissionLetter: 'not_issued',
+    feesStatus: 'not_paid',
+    paymentMethod: 'other',
+    feesInstallmentStructure: 'one_time',
+    // Additional fields
+    feedback: '',
+    city: '',
+    state: '',
+    pincode: '',
+
   });
   
   const [errors, setErrors] = useState({});
@@ -170,6 +215,8 @@ const AddInternAppliedDataModal = ({ showModal, setShowModal, onSuccess }) => {
     setIsSubmitting(true);
     
     try {
+      console.log('Creating intern application with form data:', formData);
+      
       const formDataToSend = new FormData();
       formDataToSend.append('fullName', formData.fullName);
       formDataToSend.append('email', formData.email);
@@ -180,39 +227,138 @@ const AddInternAppliedDataModal = ({ showModal, setShowModal, onSuccess }) => {
       }
       
       formDataToSend.append('postAppliedFor', formData.postAppliedFor);
-      formDataToSend.append('productCompany', formData.productCompany); // Added productCompany
-      formDataToSend.append('resume', formData.resume);
-      formDataToSend.append('photo', formData.photo);
+      formDataToSend.append('productCompany', formData.productCompany);
+      formDataToSend.append('status', formData.status);
+      formDataToSend.append('callStatus', formData.callStatus);
+      formDataToSend.append('feedback', formData.feedback || '');
+      formDataToSend.append('city', formData.city || '');
+      formDataToSend.append('state', formData.state || '');
+      formDataToSend.append('pincode', formData.pincode || '');
+            
+      // Personal Information
+      formDataToSend.append('fatherName', formData.fatherName || '');
+      formDataToSend.append('fathersContactNo', formData.fathersContactNo || '');
+      formDataToSend.append('address', formData.address || '');
+      formDataToSend.append('gender', formData.gender || '');
+      formDataToSend.append('dateOfBirth', formData.dateOfBirth || '');
+      formDataToSend.append('age', formData.age || '');
+      formDataToSend.append('maritalStatus', formData.maritalStatus || '');
+      formDataToSend.append('category', formData.category || '');
+      formDataToSend.append('nationality', formData.nationality || '');
+      formDataToSend.append('religion', formData.religion || '');
+            
+      // Education Information
+      formDataToSend.append('highestDegree', formData.highestDegree || '');
+      formDataToSend.append('specialization', formData.specialization || '');
+      formDataToSend.append('collegeOrInstituteName', formData.collegeOrInstituteName || '');
+      formDataToSend.append('schoolName', formData.schoolName || '');
+      formDataToSend.append('experience', formData.experience || '');
+      formDataToSend.append('skills', formData.skills || '');
+      formDataToSend.append('previousCompany', formData.previousCompany || '');
+      formDataToSend.append('previousSalary', formData.previousSalary || '');
+            
+      // Application Information
+      formDataToSend.append('modeOfTraining', formData.modeOfTraining || '');
+      formDataToSend.append('expectedJoiningDate', formData.expectedJoiningDate || '');
+      formDataToSend.append('expectedSalary', formData.expectedSalary || '');
+      formDataToSend.append('currentSalary', formData.currentSalary || '');
+      formDataToSend.append('noticePeriod', formData.noticePeriod || '');
+      formDataToSend.append('source', formData.source || '');
+      formDataToSend.append('sourceName', formData.sourceName || '');
+            
+      // Interview tracking fields
+      formDataToSend.append('interviewRoundStatus', formData.interviewRoundStatus);
+      formDataToSend.append('aptitudeRoundStatus', formData.aptitudeRoundStatus);
+      formDataToSend.append('hrRoundStatus', formData.hrRoundStatus);
+      formDataToSend.append('admissionLetter', formData.admissionLetter);
+      
+      // Fees and payment fields
+      formDataToSend.append('feesStatus', formData.feesStatus);
+      formDataToSend.append('paymentMethod', formData.paymentMethod);
+      formDataToSend.append('feesInstallmentStructure', formData.feesInstallmentStructure);
+      
+      // Files
+      if (formData.resume) {
+        formDataToSend.append('resume', formData.resume);
+      }
+      if (formData.photo) {
+        formDataToSend.append('photo', formData.photo);
+      }
 
-      const response = await fetch('https://elite-backend-production.up.railway.app/intern-applied-data', {
-        method: 'POST',
-        body: formDataToSend,
-        credentials: 'include'
-      });
+      console.log('FormData being sent to API:', Array.from(formDataToSend.entries()));
+      
+      // Use the API function instead of direct fetch
+      const result = await createInternApplication(formDataToSend);
+      
+      console.log('API response:', result);
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (result.data.success) {
+        console.log('Application created successfully:', result.data.data);
         setFormData({
           fullName: '',
           email: '',
           phoneNo1: '',
           phoneNo2: '',
           postAppliedFor: '',
+          productCompany: '',
           resume: null,
-          photo: null
+          photo: null,
+          // Personal Information
+          fatherName: '',
+          fathersContactNo: '',
+          address: '',
+          gender: '',
+          dateOfBirth: '',
+          age: '',
+          maritalStatus: '',
+          category: '',
+          nationality: '',
+          religion: '',
+          // Education Information
+          highestDegree: '',
+          specialization: '',
+          collegeOrInstituteName: '',
+          schoolName: '',
+          experience: '',
+          skills: '',
+          previousCompany: '',
+          previousSalary: '',
+          // Application Information
+          modeOfTraining: '',
+          expectedJoiningDate: '',
+          expectedSalary: '',
+          currentSalary: '',
+          noticePeriod: '',
+          source: '',
+          sourceName: '',
+          // Status fields
+          status: 'unread',
+          callStatus: 'not_called',
+          interviewRoundStatus: 'not_scheduled',
+          aptitudeRoundStatus: 'not_scheduled',
+          hrRoundStatus: 'not_scheduled',
+          admissionLetter: 'not_issued',
+          feesStatus: 'not_paid',
+          paymentMethod: 'other',
+          feesInstallmentStructure: 'one_time',
+          // Additional fields
+          feedback: '',
+          city: '',
+          state: '',
+          pincode: ''
         });
         setUploadedFiles({
           resumeName: '',
           photoName: ''
         });
         setShowModal(false);
-        onSuccess(result.data);
+        onSuccess(result.data.data);
       } else {
-        throw new Error(result.message || 'Failed to submit application');
+        throw new Error(result.data.message || 'Failed to submit application');
       }
     } catch (error) {
       console.error('Error submitting application:', error);
+      console.error('Error details:', error.response || error.message);
       alert(error.message || 'An error occurred while submitting the application');
     } finally {
       setIsSubmitting(false);
@@ -220,14 +366,59 @@ const AddInternAppliedDataModal = ({ showModal, setShowModal, onSuccess }) => {
   };
 
   const closeModal = () => {
+    console.log('Closing modal and resetting form data');
     setFormData({
       fullName: '',
       email: '',
       phoneNo1: '',
       phoneNo2: '',
       postAppliedFor: '',
+      productCompany: '',
       resume: null,
-      photo: null
+      photo: null,
+      // Personal Information
+      fatherName: '',
+      fathersContactNo: '',
+      address: '',
+      gender: '',
+      dateOfBirth: '',
+      age: '',
+      maritalStatus: '',
+      category: '',
+      nationality: '',
+      religion: '',
+      // Education Information
+      highestDegree: '',
+      specialization: '',
+      collegeOrInstituteName: '',
+      schoolName: '',
+      experience: '',
+      skills: '',
+      previousCompany: '',
+      previousSalary: '',
+      // Application Information
+      modeOfTraining: '',
+      expectedJoiningDate: '',
+      expectedSalary: '',
+      currentSalary: '',
+      noticePeriod: '',
+      source: '',
+      sourceName: '',
+      // Status fields
+      status: 'unread',
+      callStatus: 'not_called',
+      interviewRoundStatus: 'not_scheduled',
+      aptitudeRoundStatus: 'not_scheduled',
+      hrRoundStatus: 'not_scheduled',
+      admissionLetter: 'not_issued',
+      feesStatus: 'not_paid',
+      paymentMethod: 'other',
+      feesInstallmentStructure: 'one_time',
+      // Additional fields
+      feedback: '',
+      city: '',
+      state: '',
+      pincode: '',
     });
     setUploadedFiles({
       resumeName: '',
@@ -237,10 +428,15 @@ const AddInternAppliedDataModal = ({ showModal, setShowModal, onSuccess }) => {
     setShowModal(false);
   };
 
-  if (!showModal) return null;
-
+  if (!showModal) {
+    console.log('AddInternAppliedDataModal: Modal is not shown');
+    return null;
+  }
+  
+  console.log('AddInternAppliedDataModal: Rendering with formData:', formData);
+  
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-t-2xl">
           <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
@@ -464,6 +660,250 @@ const AddInternAppliedDataModal = ({ showModal, setShowModal, onSuccess }) => {
               {errors.photo && (
                 <p className="mt-1 text-sm text-red-600">{errors.photo}</p>
               )}
+            </div>
+
+            {/* Personal Information Section */}
+            <div className="md:col-span-2 bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-medium text-gray-800 mb-3">Personal Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Father's Name
+                  </label>
+                  <input
+                    type="text"
+                    name="fatherName"
+                    value={formData.fatherName}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.fatherName ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter father's name"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Father's Contact
+                  </label>
+                  <input
+                    type="text"
+                    name="fathersContactNo"
+                    value={formData.fathersContactNo}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.fathersContactNo ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter father's contact number"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.address ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter full address"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Gender
+                  </label>
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.gender ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    disabled={isSubmitting}
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Date of Birth
+                  </label>
+                  <input
+                    type="date"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Age
+                  </label>
+                  <input
+                    type="number"
+                    name="age"
+                    value={formData.age}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.age ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter age"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Marital Status
+                  </label>
+                  <select
+                    name="maritalStatus"
+                    value={formData.maritalStatus}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.maritalStatus ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    disabled={isSubmitting}
+                  >
+                    <option value="">Select Marital Status</option>
+                    <option value="Single">Single</option>
+                    <option value="Married">Married</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Widowed">Widowed</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Category
+                  </label>
+                  <input
+                    type="text"
+                    name="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.category ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter category"
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Education Information Section */}
+            <div className="md:col-span-2 bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-medium text-gray-800 mb-3">Education Information</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Highest Degree
+                  </label>
+                  <input
+                    type="text"
+                    name="highestDegree"
+                    value={formData.highestDegree}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.highestDegree ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter highest degree"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Specialization
+                  </label>
+                  <input
+                    type="text"
+                    name="specialization"
+                    value={formData.specialization}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.specialization ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter specialization"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    College/Institute Name
+                  </label>
+                  <input
+                    type="text"
+                    name="collegeOrInstituteName"
+                    value={formData.collegeOrInstituteName}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.collegeOrInstituteName ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter college/institute name"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    School Name
+                  </label>
+                  <input
+                    type="text"
+                    name="schoolName"
+                    value={formData.schoolName}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.schoolName ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter school name"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Experience
+                  </label>
+                  <input
+                    type="text"
+                    name="experience"
+                    value={formData.experience}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.experience ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter experience"
+                    disabled={isSubmitting}
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Skills
+                  </label>
+                  <input
+                    type="text"
+                    name="skills"
+                    value={formData.skills}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 ${
+                      errors.skills ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter skills separated by commas"
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
