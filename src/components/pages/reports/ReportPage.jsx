@@ -8,7 +8,8 @@ import {
   createReport,
   updateReport,
   deleteReport,
-  getAttendanceStats as getAttendanceStatsApi
+  getAttendanceStats as getAttendanceStatsApi,
+  getAllTeamMembers as getAllTeamMembersApi
 } from '../../utils/Api';
 
 const ReportPage = () => {
@@ -33,6 +34,9 @@ const ReportPage = () => {
   // Statistics state
   const [attendanceStats, setAttendanceStats] = useState({});
   
+  // Team members state
+  const [teamMembers, setTeamMembers] = useState([]);
+  
   // Detail modal state
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedReport, setSelectedReport] = useState(null);
@@ -55,17 +59,18 @@ const ReportPage = () => {
     setUserRole(role || '');
   }, []);
 
-  // Fetch reports and attendance stats from API
+  // Fetch reports, attendance stats, and team members from API
   useEffect(() => {
     const fetchData = async () => {
       // Only show loading indicator for reports initially
       setLoading(true);
       await Promise.allSettled([
         fetchReports(),
-        fetchAttendanceStats()
+        fetchAttendanceStats(),
+        fetchTeamMembers()
       ]);
       // Set loading to false after reports are loaded
-      // Stats can load in background
+      // Stats and team members can load in background
     };
     
     fetchData();
@@ -165,6 +170,16 @@ const ReportPage = () => {
     }
   };
 
+  const fetchTeamMembers = async () => {
+    try {
+      const response = await getAllTeamMembersApi();
+      setTeamMembers(response.data.data || []);
+      console.log('Fetched team members:', response.data.data);
+    } catch (err) {
+      console.error('Error fetching team members:', err);
+    }
+  };
+
 
   
   // Since we're using backend pagination, we don't need client-side filtering and pagination
@@ -226,7 +241,7 @@ const ReportPage = () => {
     document.body.removeChild(link);
   };
 
-  const canCreateUpdateReports = ['admin', 'developer', 'analyst', 'marketing', 'sales', 'counsellor', 'telecaller'].includes(userRole);
+  const canCreateUpdateReports = ['admin', 'developer', 'analyst', 'marketing', 'sales', 'counsellor', 'telecaller', 'hr'].includes(userRole);
   const canDeleteReports = userRole === 'admin';
 
   if (loading) {
@@ -448,8 +463,8 @@ const ReportPage = () => {
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
                 >
                   <option value="">All Names</option>
-                  {Array.from(new Set(reports.map(report => report.userId?.name || (report.userName && report.userName.split('@')[0])))).filter(Boolean).map((name, index) => (
-                    <option key={index} value={name}>{name}</option>
+                  {teamMembers.map((member, index) => (
+                    <option key={index} value={member.name}>{member.name}</option>
                   ))}
                 </select>
               </div>
@@ -616,7 +631,13 @@ const ReportPage = () => {
                       {report.userId?.name || report.userName?.split('@')[0] || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                      {report.userId?.role || report.userRole || 'N/A'}
+                      {report.userId?.role 
+                        ? report.userId.role.charAt(0).toUpperCase() + report.userId.role.slice(1)
+                        : (report.userRole 
+                            ? report.userRole.charAt(0).toUpperCase() + report.userRole.slice(1)
+                            : 'N/A'
+                          )
+                      }
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700 max-w-xs">
                       <div className="line-clamp-2">{report.reportField}</div>

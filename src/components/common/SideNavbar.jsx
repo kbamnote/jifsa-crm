@@ -268,7 +268,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       name: "Reports",
       path: "/reports",
       icon: <HiOutlineUserGroup className="w-5 h-5" />,
-      disabled: !['admin', 'developer', 'analyst', 'marketing', 'sales', 'counsellor', 'hr', 'telecaller'].includes(userRole.toLowerCase()),
+      disabled: false,
     },
     {
       id: "gallery&doucments",

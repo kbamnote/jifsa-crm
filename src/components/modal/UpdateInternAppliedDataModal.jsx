@@ -58,9 +58,7 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
     // Assignment fields
     assignedTo: null,
     assignedBy: null,
-    assignedByName: '',
-    // Source field
-    sourceName: ''
+    assignedByName: ''
   });
   
   const [errors, setErrors] = useState({});
@@ -141,9 +139,7 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
         // Assignment fields
         assignedTo: itemToEdit.assignedTo || null,
         assignedBy: itemToEdit.assignedBy || null,
-        assignedByName: itemToEdit.assignedByName || '',
-        // Source field - removed duplicate
-        sourceName: itemToEdit.sourceName || ''
+        assignedByName: itemToEdit.assignedByName || ''
       };
       
       console.log('Setting form data to:', newFormData);
@@ -462,10 +458,7 @@ const UpdateInternAppliedDataModal = ({ showModal, setShowModal, itemToEdit, onS
       // Assignment fields
       assignedTo: null,
       assignedBy: null,
-      assignedByName: '',
-      // Source field
-      source: 'other',
-      sourceName: ''
+      assignedByName: ''
     });
     setUploadedFiles({
       resumeName: '',

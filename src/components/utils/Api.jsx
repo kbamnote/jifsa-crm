@@ -242,6 +242,8 @@ export const getReportsByDateRange = (startDate, endDate) =>
 
 export const getAttendanceStats = () => Api.get('/reports/attendance-stats');
 
+export const getAllTeamMembers = () => Api.get('/reports/team-members');
+
 // ============== INTERN APPLIED DATA ==============
 export const createInternApplication = (formData) =>
   Api.post('/intern-applied-data', formData, {
