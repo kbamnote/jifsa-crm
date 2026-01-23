@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 // Custom scrollbar CSS
 const scrollbarCSS = `
@@ -27,7 +28,7 @@ const scrollbarCSS = `
   }
 `;
 import { Users, Calendar, Phone, Mail, MapPin, Eye, UserCheck, TrendingUp, Clock, Plus, Edit, Filter, Search, X, CheckSquare, Square } from 'lucide-react';
-import { getDetail, updateEducation as updateEducationApi, addRemark } from '../../utils/Api';
+import { getTeamDetail, getAssignedLeads, updateEducation as updateEducationApi, addRemark } from '../../utils/Api';
 import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 import AddLeadModal from '../../modal/AddLeadModal';
@@ -39,10 +40,26 @@ import AllRemarksModal from '../../modal/AllRemarksModal';
 
 const LeadAssigned = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+    
+  // Initialize state from URL parameters
+  const initialCurrentPage = parseInt(searchParams.get('page')) || 1;
+  const initialItemsPerPage = parseInt(searchParams.get('limit')) || 10;
+    
   const [assignedLeads, setAssignedLeads] = useState([]);
   const [filteredLeads, setFilteredLeads] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+    
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(initialCurrentPage);
+  const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
+  const [paginationInfo, setPaginationInfo] = useState({
+    totalPages: 1,
+    totalItems: 0,
+    hasNextPage: false,
+    hasPrevPage: false
+  });
   
   // Modal states
   const [showAddModal, setShowAddModal] = useState(false);
@@ -52,121 +69,183 @@ const LeadAssigned = () => {
   const [mailAttachments, setMailAttachments] = useState([]);
   const [leadToUpdate, setLeadToUpdate] = useState(null);
   const [leadToShare, setLeadToShare] = useState(null);
-  
+    
   // Filter states
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [productFilter, setProductFilter] = useState('all');
-  const [callStatusFilter, setCallStatusFilter] = useState('all');
-  const [remarkStatusFilter, setRemarkStatusFilter] = useState('all');
-  const [dateFilter, setDateFilter] = useState('');
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+  const [statusFilter, setStatusFilter] = useState(searchParams.get('status') || 'all');
+  const [productFilter, setProductFilter] = useState(searchParams.get('product') || 'all');
+  const [callStatusFilter, setCallStatusFilter] = useState(searchParams.get('callStatus') || 'all');
+  const [remarkStatusFilter, setRemarkStatusFilter] = useState(searchParams.get('remarkStatus') || 'all');
+  const [dateFilter, setDateFilter] = useState(searchParams.get('date') || '');
   const [showFilters, setShowFilters] = useState(false);
   
   const userRole = Cookies.get("role") || "";
   const userEmail = Cookies.get("email") || "";
+  
+  const isInitialRender = useRef(true);
 
   useEffect(() => {
-    fetchLeads();
+    fetchLeads(initialCurrentPage, initialItemsPerPage);
   }, []);
   
   useEffect(() => {
-    applyFilters();
-  }, [assignedLeads, searchTerm, statusFilter, productFilter, callStatusFilter]);
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return; // Skip on initial render
+    }
+    
+    // Reset to first page when filters change
+    fetchLeads(1, itemsPerPage);
+  }, [searchTerm, statusFilter, productFilter, callStatusFilter, remarkStatusFilter, dateFilter]);
+  
+  // Effect to update filteredLeads when assignedLeads or filters change
+  useEffect(() => {
+    console.log('Updating filteredLeads:', assignedLeads.length, 'total leads');
+    console.log('Filters - searchTerm:', searchTerm, 'statusFilter:', statusFilter, 'productFilter:', productFilter, 'callStatusFilter:', callStatusFilter, 'remarkStatusFilter:', remarkStatusFilter, 'dateFilter:', dateFilter);
+    
+    let filtered = assignedLeads;
+    
+    // Apply filters
+    if (searchTerm) {
+      filtered = filtered.filter(lead =>
+        (lead.fullName && lead.fullName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (lead.email && lead.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (lead.phoneNo && lead.phoneNo.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (lead.productCompany && lead.productCompany.toLowerCase().includes(searchTerm.toLowerCase()))
+      );
+    }
+    
+    if (statusFilter !== 'all') {
+      filtered = filtered.filter(lead => {
+        const leadStatus = lead.status?.toLowerCase();
+        if (statusFilter === 'read') {
+          return leadStatus === 'read';
+        } else if (statusFilter === 'unread') {
+          return leadStatus === 'unread';
+        }
+        return leadStatus === statusFilter.toLowerCase();
+      });
+    }
+    
+    if (productFilter !== 'all') {
+      filtered = filtered.filter(lead =>
+        lead.productCompany && lead.productCompany.toLowerCase() === productFilter.toLowerCase()
+      );
+    }
+    
+    if (callStatusFilter !== 'all') {
+      filtered = filtered.filter(lead =>
+        lead.callStatus && lead.callStatus.toLowerCase() === callStatusFilter.toLowerCase()
+      );
+    }
+    
+    if (remarkStatusFilter !== 'all') {
+      if (remarkStatusFilter === 'no_remarks') {
+        filtered = filtered.filter(lead => !lead.remarks || lead.remarks.length === 0);
+      } else {
+        filtered = filtered.filter(lead =>
+          lead.remarks && lead.remarks.some(remark => remark.status === remarkStatusFilter)
+        );
+      }
+    }
+    
+    if (dateFilter) {
+      filtered = filtered.filter(lead => {
+        const leadDate = new Date(lead.createdAt);
+        const filterDate = new Date(dateFilter);
+        return leadDate.toDateString() === filterDate.toDateString();
+      });
+    }
+    
+    console.log('Filtered leads result:', filtered.length);
+    setFilteredLeads(filtered);
+  }, [assignedLeads, searchTerm, statusFilter, productFilter, callStatusFilter, remarkStatusFilter, dateFilter]);
   
   // Calculate statistics
-  const interestedLeads = assignedLeads.filter(lead => lead.status?.toLowerCase() === 'interested').length;
-  const notInterestedLeads = assignedLeads.filter(lead => lead.status?.toLowerCase() === 'not_interested').length;
-  const recentLeads = assignedLeads.filter(lead => {
+  const interestedLeads = filteredLeads.filter(lead => lead.status?.toLowerCase() === 'interested').length;
+  const notInterestedLeads = filteredLeads.filter(lead => lead.status?.toLowerCase() === 'not_interested').length;
+  const recentLeads = filteredLeads.filter(lead => {
     const createdDate = new Date(lead.createdAt);
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
     return createdDate >= sevenDaysAgo;
   }).length;
 
-  const fetchLeads = async () => {
+  const fetchLeads = async (page = 1, limit = 10, filters = {}) => {
     try {
       setLoading(true);
       setError(null);
-      
-      // Fetch all leads
-      const allLeadsResponse = await getDetail();
-      const allLeads = allLeadsResponse.data || [];
-      
-      // Filter assigned leads for current user
-      const userAssignedLeads = allLeads.filter(lead => {
-        // Check if lead is assigned to current user
-        if (!lead.assignedTo) return false;
         
-        // Handle both string and object formats for assignedTo
-        if (typeof lead.assignedTo === 'string') {
-          return lead.assignedTo.toLowerCase() === userEmail.toLowerCase();
-        } else if (typeof lead.assignedTo === 'object' && lead.assignedTo.email) {
-          return lead.assignedTo.email.toLowerCase() === userEmail.toLowerCase();
+      console.log('Fetching assigned leads for user:', userEmail);
+        
+      // Get team member ID based on email
+      const teamMembersResponse = await getTeamDetail();
+      console.log('Team members response:', teamMembersResponse);
+        
+      const teamMembers = teamMembersResponse.data.data || [];
+      console.log('Team members:', teamMembers);
+        
+      const currentUser = teamMembers.find(member => member.email === userEmail);
+      console.log('Current user found:', currentUser);
+        
+      if (!currentUser) {
+        setError('Current user not found in team');
+        console.error('User not found in team:', userEmail);
+        return;
+      }
+        
+      console.log('Current user ID:', currentUser._id);
+        
+      // Build filter parameters
+      const params = {
+        page: page,
+        limit: limit
+      };
+        
+      // Fetch assigned leads for current user
+      console.log('Calling getAssignedLeads with params:', currentUser._id, params);
+      const assignedLeadsResponse = await getAssignedLeads(currentUser._id, params);
+        
+      console.log('Assigned leads response:', assignedLeadsResponse);
+        
+      if (assignedLeadsResponse.data.success) {
+        console.log('Setting assigned leads:', assignedLeadsResponse.data.data);
+        setAssignedLeads(assignedLeadsResponse.data.data || []);
+          
+        // Update pagination info
+        if (assignedLeadsResponse.data.pagination) {
+          console.log('Setting pagination info:', assignedLeadsResponse.data.pagination);
+          setPaginationInfo(assignedLeadsResponse.data.pagination);
+          setCurrentPage(assignedLeadsResponse.data.pagination.currentPage);
         }
+      } else {
+        // Fallback for backward compatibility
+        console.log('Response not successful, using fallback');
+        const assignedLeads = assignedLeadsResponse.data || [];
+        setAssignedLeads(assignedLeads);
+      }
         
-        return false;
-      });
-      
-      setAssignedLeads(userAssignedLeads);
+      // Update URL parameters to persist pagination and filters
+      const newSearchParams = new URLSearchParams();
+      if (page !== 1) newSearchParams.set('page', page);
+      if (limit !== 10) newSearchParams.set('limit', limit);
+      if (searchTerm) newSearchParams.set('search', searchTerm);
+      if (statusFilter !== 'all') newSearchParams.set('status', statusFilter);
+      if (productFilter !== 'all') newSearchParams.set('product', productFilter);
+      if (callStatusFilter !== 'all') newSearchParams.set('callStatus', callStatusFilter);
+      if (remarkStatusFilter !== 'all') newSearchParams.set('remarkStatus', remarkStatusFilter);
+      if (dateFilter) newSearchParams.set('date', dateFilter);
+        
+      setSearchParams(newSearchParams);
     } catch (error) {
-      console.error('Error fetching leads:', error);
-      setError('Failed to load leads');
+      console.error('Error fetching assigned leads:', error);
+      setError('Failed to load assigned leads');
     } finally {
       setLoading(false);
     }
   };
   
-  const applyFilters = () => {
-    let result = [...assignedLeads];
-    
-    // Apply search filter
-    if (searchTerm) {
-      const term = searchTerm.toLowerCase();
-      result = result.filter(lead => 
-        (lead.fullName && lead.fullName.toLowerCase().includes(term)) ||
-        (lead.email && lead.email.toLowerCase().includes(term)) ||
-        (lead.phoneNo && lead.phoneNo.includes(term)) ||
-        (lead.productCompany && lead.productCompany.toLowerCase().includes(term))
-      );
-    }
-    
-    // Apply status filter
-    if (statusFilter !== 'all') {
-      result = result.filter(lead => lead.status === statusFilter);
-    }
-    
-    // Apply product filter
-    if (productFilter !== 'all') {
-      result = result.filter(lead => lead.productCompany?.toLowerCase().replace(/\s+/g, '-') === productFilter);
-    }
-    
-    // Apply call status filter
-    if (callStatusFilter !== 'all') {
-      result = result.filter(lead => lead.callStatus === callStatusFilter);
-    }
-    
-    // Apply remark status filter
-    if (remarkStatusFilter !== 'all') {
-      result = result.filter(lead => {
-        if (!lead.remarks || lead.remarks.length === 0) {
-          return remarkStatusFilter === 'no_remarks';
-        }
-        return lead.remarks.some(remark => remark.status === remarkStatusFilter);
-      });
-    }
-    
-    // Apply date filter
-    if (dateFilter) {
-      const filterDate = new Date(dateFilter);
-      result = result.filter(lead => {
-        const leadDate = new Date(lead.createdAt);
-        // Compare dates only (ignore time)
-        return leadDate.toDateString() === filterDate.toDateString();
-      });
-    }
-    
-    setFilteredLeads(result);
-  };
+
   
   const handleAddLead = () => {
     setShowAddModal(true);
@@ -999,6 +1078,62 @@ const LeadAssigned = () => {
                     ))}
                   </tbody>
                 </table>
+                {/* Pagination Controls */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-3 bg-gray-50 border-t border-gray-200">
+                  <div className="text-sm text-gray-700">
+                    Showing <span className="font-medium">{Math.min((currentPage - 1) * itemsPerPage + 1, filteredLeads.length)}</span> to{' '}
+                    <span className="font-medium">
+                      {Math.min(currentPage * itemsPerPage, filteredLeads.length)}
+                    </span>{' '}
+                    of <span className="font-medium">{paginationInfo.totalItems}</span> results
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <select
+                      value={itemsPerPage}
+                      onChange={(e) => {
+                        setItemsPerPage(Number(e.target.value));
+                        setCurrentPage(1); // Reset to first page when changing items per page
+                        fetchLeads(1, Number(e.target.value));
+                      }}
+                      className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="5">5 per page</option>
+                      <option value="10">10 per page</option>
+                      <option value="25">25 per page</option>
+                      <option value="50">50 per page</option>
+                    </select>
+                    
+                    <button
+                      onClick={() => {
+                        const newPage = currentPage - 1;
+                        setCurrentPage(newPage);
+                        fetchLeads(newPage, itemsPerPage);
+                      }}
+                      disabled={!paginationInfo.hasPrevPage || loading}
+                      className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Previous
+                    </button>
+                    
+                    <span className="px-4 py-2 text-sm text-gray-700">
+                      Page <span className="font-medium">{currentPage}</span> of{' '}
+                      <span className="font-medium">{paginationInfo.totalPages}</span>
+                    </span>
+                    
+                    <button
+                      onClick={() => {
+                        const newPage = currentPage + 1;
+                        setCurrentPage(newPage);
+                        fetchLeads(newPage, itemsPerPage);
+                      }}
+                      disabled={!paginationInfo.hasNextPage || loading}
+                      className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -1007,7 +1142,7 @@ const LeadAssigned = () => {
         <AddLeadModal
           showModal={showAddModal}
           setShowModal={setShowAddModal}
-          onSuccess={fetchLeads}
+          onSuccess={() => fetchLeads(currentPage, itemsPerPage)}
         />
         
 
@@ -1016,7 +1151,7 @@ const LeadAssigned = () => {
           showModal={showUpdateModal}
           setShowModal={setShowUpdateModal}
           selectedRecord={leadToUpdate}
-          onSuccess={fetchLeads}
+          onSuccess={() => fetchLeads(currentPage, itemsPerPage)}
         />
         
         <MailModal

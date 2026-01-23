@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 // Custom scrollbar CSS
 const scrollbarCSS = `
@@ -56,20 +57,36 @@ const LeadManagement = () => {
   const [leadToUpdate, setLeadToUpdate] = useState(null);
   const [leadToAssign, setLeadToAssign] = useState(null);
   const [leadToShare, setLeadToShare] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  // Initialize state from URL parameters
+  const initialCurrentPage = parseInt(searchParams.get('page')) || 1;
+  const initialItemsPerPage = parseInt(searchParams.get('limit')) || 10;
+  
   const [teamMembers, setTeamMembers] = useState([]);
   const [selectedMember, setSelectedMember] = useState('');
   const [isAssigning, setIsAssigning] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [productFilter, setProductFilter] = useState('all');
-  const [callStatusFilter, setCallStatusFilter] = useState('all');
-  const [interviewRoundFilter, setInterviewRoundFilter] = useState('all');
-  const [aptitudeRoundFilter, setAptitudeRoundFilter] = useState('all');
-  const [hrRoundFilter, setHrRoundFilter] = useState('all');
-  const [createdByFilter, setCreatedByFilter] = useState('all');
-  const [remarkStatusFilter, setRemarkStatusFilter] = useState('all');
-  const [dateFilter, setDateFilter] = useState('');
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+  const [statusFilter, setStatusFilter] = useState(searchParams.get('status') || 'all');
+  const [productFilter, setProductFilter] = useState(searchParams.get('product') || 'all');
+  const [callStatusFilter, setCallStatusFilter] = useState(searchParams.get('callStatus') || 'all');
+  const [interviewRoundFilter, setInterviewRoundFilter] = useState(searchParams.get('interviewRound') || 'all');
+  const [aptitudeRoundFilter, setAptitudeRoundFilter] = useState(searchParams.get('aptitudeRound') || 'all');
+  const [hrRoundFilter, setHrRoundFilter] = useState(searchParams.get('hrRound') || 'all');
+  const [createdByFilter, setCreatedByFilter] = useState(searchParams.get('createdBy') || 'all');
+  const [remarkStatusFilter, setRemarkStatusFilter] = useState(searchParams.get('remarkStatus') || 'all');
+  const [dateFilter, setDateFilter] = useState(searchParams.get('date') || '');
   const [showFilters, setShowFilters] = useState(false);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(initialCurrentPage);
+  const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
+  const [paginationInfo, setPaginationInfo] = useState({
+    totalPages: 1,
+    totalItems: 0,
+    hasNextPage: false,
+    hasPrevPage: false
+  });
 
   // State for managing remark modals
   const [showRemarkModal, setShowRemarkModal] = useState(false);
@@ -82,6 +99,8 @@ const LeadManagement = () => {
 
   const userRole = Cookies.get("role") || "";
   const userEmail = Cookies.get("email") || "";
+  
+  const isInitialRender = useRef(true);
 
   // Reset modal states on mount to prevent stuck modals
   useEffect(() => {
@@ -110,21 +129,78 @@ const LeadManagement = () => {
   };
 
   useEffect(() => {
-    fetchLeads();
+    fetchLeads(initialCurrentPage, initialItemsPerPage);
     fetchTeamMembers();
   }, []);
 
   useEffect(() => {
-    filterLeads();
-  }, [leads, searchTerm, statusFilter, productFilter, callStatusFilter, interviewRoundFilter, aptitudeRoundFilter, hrRoundFilter, createdByFilter, remarkStatusFilter]);
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return; // Skip on initial render
+    }
+    
+    // Reset to first page when filters change
+    fetchLeads(1, itemsPerPage);
+  }, [searchTerm, statusFilter, productFilter, callStatusFilter, interviewRoundFilter, aptitudeRoundFilter, hrRoundFilter, createdByFilter, remarkStatusFilter, dateFilter]);
 
-  const fetchLeads = async () => {
+  const fetchLeads = async (page = 1, limit = 10, filters = {}) => {
     try {
       setLoading(true);
       setError(null);
-      const response = await getDetail();
-      const allLeads = response.data || [];
-      setLeads(allLeads);
+      
+      // Build filter parameters
+      const params = {
+        page: page,
+        limit: limit
+      };
+      
+      // Add filter parameters
+      if (searchTerm) params.searchTerm = searchTerm;
+      if (statusFilter && statusFilter !== 'all') params.status = statusFilter;
+      if (productFilter && productFilter !== 'all') params.productCompany = productFilter.replace(/-/g, ' ');
+      if (callStatusFilter && callStatusFilter !== 'all') params.callStatus = callStatusFilter;
+      if (interviewRoundFilter && interviewRoundFilter !== 'all') params.interviewRoundStatus = interviewRoundFilter;
+      if (aptitudeRoundFilter && aptitudeRoundFilter !== 'all') params.aptitudeRoundStatus = aptitudeRoundFilter;
+      if (hrRoundFilter && hrRoundFilter !== 'all') params.hrRoundStatus = hrRoundFilter;
+      if (createdByFilter && createdByFilter !== 'all') params.createdBy = createdByFilter;
+      if (remarkStatusFilter && remarkStatusFilter !== 'all') params.remarkStatus = remarkStatusFilter;
+      if (dateFilter) params.date = dateFilter;
+      
+      // Fetch paginated leads with filters
+      const response = await getDetail(params);
+      
+      if (response.data.success) {
+        setLeads(response.data.data || []);
+        setFilteredLeads(response.data.data || []);
+        
+        // Update pagination info
+        if (response.data.pagination) {
+          setPaginationInfo(response.data.pagination);
+          setCurrentPage(response.data.pagination.currentPage);
+        }
+      } else {
+        // Fallback for backward compatibility
+        const allLeads = response.data || [];
+        setLeads(allLeads);
+        setFilteredLeads(allLeads);
+      }
+      
+      // Update URL parameters to persist pagination and filters
+      const newSearchParams = new URLSearchParams();
+      if (page !== 1) newSearchParams.set('page', page);
+      if (limit !== 10) newSearchParams.set('limit', limit);
+      if (searchTerm) newSearchParams.set('search', searchTerm);
+      if (statusFilter !== 'all') newSearchParams.set('status', statusFilter);
+      if (productFilter !== 'all') newSearchParams.set('product', productFilter);
+      if (callStatusFilter !== 'all') newSearchParams.set('callStatus', callStatusFilter);
+      if (interviewRoundFilter !== 'all') newSearchParams.set('interviewRound', interviewRoundFilter);
+      if (aptitudeRoundFilter !== 'all') newSearchParams.set('aptitudeRound', aptitudeRoundFilter);
+      if (hrRoundFilter !== 'all') newSearchParams.set('hrRound', hrRoundFilter);
+      if (createdByFilter !== 'all') newSearchParams.set('createdBy', createdByFilter);
+      if (remarkStatusFilter !== 'all') newSearchParams.set('remarkStatus', remarkStatusFilter);
+      if (dateFilter) newSearchParams.set('date', dateFilter);
+      
+      setSearchParams(newSearchParams);
     } catch (error) {
       console.error('Error fetching leads:', error);
       setError('Failed to load leads');
@@ -242,7 +318,7 @@ const LeadManagement = () => {
     if (leadToDelete) {
       try {
         await deleteForm(leadToDelete._id);
-        fetchLeads();
+        fetchLeads(currentPage, itemsPerPage);
         setShowDeleteModal(false);
         setLeadToDelete(null);
       } catch (error) {
@@ -286,7 +362,7 @@ const LeadManagement = () => {
       setShowAssignmentModal(false);
       setSelectedMember('');
       setLeadToAssign(null);
-      fetchLeads();
+      fetchLeads(currentPage, itemsPerPage);
     } catch (error) {
       console.error('Error assigning lead:', error);
       alert('Failed to assign lead: ' + (error.response?.data?.message || error.message || 'Please try again.'));
@@ -494,6 +570,9 @@ const LeadManagement = () => {
         }
         return lead;
       }));
+      
+      // Refresh the leads to get updated pagination data
+      fetchLeads(currentPage, itemsPerPage);
       
       // Close the modal
       setShowRemarkModal(false);
@@ -1090,22 +1169,78 @@ const LeadManagement = () => {
                   ))}
                 </tbody>
               </table>
-            </div>
-          )}
+                {/* Pagination Controls */}
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-3 bg-gray-50 border-t border-gray-200">
+                  <div className="text-sm text-gray-700">
+                    Showing <span className="font-medium">{Math.min((currentPage - 1) * itemsPerPage + 1, filteredLeads.length)}</span> to{' '}
+                    <span className="font-medium">
+                      {Math.min(currentPage * itemsPerPage, filteredLeads.length)}
+                    </span>{' '}
+                    of <span className="font-medium">{paginationInfo.totalItems}</span> results
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <select
+                      value={itemsPerPage}
+                      onChange={(e) => {
+                        setItemsPerPage(Number(e.target.value));
+                        setCurrentPage(1); // Reset to first page when changing items per page
+                        fetchLeads(1, Number(e.target.value));
+                      }}
+                      className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="5">5 per page</option>
+                      <option value="10">10 per page</option>
+                      <option value="25">25 per page</option>
+                      <option value="50">50 per page</option>
+                    </select>
+                    
+                    <button
+                      onClick={() => {
+                        const newPage = currentPage - 1;
+                        setCurrentPage(newPage);
+                        fetchLeads(newPage, itemsPerPage);
+                      }}
+                      disabled={!paginationInfo.hasPrevPage || loading}
+                      className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Previous
+                    </button>
+                    
+                    <span className="px-4 py-2 text-sm text-gray-700">
+                      Page <span className="font-medium">{currentPage}</span> of{' '}
+                      <span className="font-medium">{paginationInfo.totalPages}</span>
+                    </span>
+                    
+                    <button
+                      onClick={() => {
+                        const newPage = currentPage + 1;
+                        setCurrentPage(newPage);
+                        fetchLeads(newPage, itemsPerPage);
+                      }}
+                      disabled={!paginationInfo.hasNextPage || loading}
+                      className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
         </div>
 
         {/* Modals */}
         <AddLeadModal
           showModal={showAddModal}
           setShowModal={setShowAddModal}
-          onSuccess={fetchLeads}
+          onSuccess={() => fetchLeads(currentPage, itemsPerPage)}
         />
 
         <UpdateLeadModal
           showModal={showUpdateModal}
           setShowModal={setShowUpdateModal}
           selectedRecord={leadToUpdate}
-          onSuccess={fetchLeads}
+          onSuccess={() => fetchLeads(currentPage, itemsPerPage)}
         />
 
         <DeleteConfirmationModal

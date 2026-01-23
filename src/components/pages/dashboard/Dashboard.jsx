@@ -41,7 +41,7 @@ const Dashboard = () => {
     try {
       const response = await getDetail();
       console.log(response)
-      const allData = response.data || [];
+      const allData = response.data.success ? response.data.data || [] : response.data || [];
       
       // For sales persons, only show leads assigned to them
       let filteredLeads = allData;

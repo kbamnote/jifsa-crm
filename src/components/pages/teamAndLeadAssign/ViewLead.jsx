@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { User, Mail, Phone, Calendar, Building, MapPin, FileText, Hash, Clock, CheckCircle, AlertCircle, PhoneOff, Users, Award, GraduationCap, School, Briefcase, CreditCard, Wallet, Receipt, ArrowLeft, Edit, Send } from 'lucide-react';
-import { getDetail, updateDetail, sendGroupMail } from '../../utils/Api';
+import { getDetail, getLeadById, updateDetail, sendGroupMail } from '../../utils/Api';
 import UpdateLeadModal from '../../modal/UpdateLeadModal';
 import MailModal from '../../modal/MailModal';
 import FileSelectionModal from '../../modal/FileSelectionModal';
@@ -20,14 +20,12 @@ const ViewLead = () => {
   const [updating, setUpdating] = useState(false);
 
   useEffect(() => {
-    const fetchLeads = async () => {
+    const fetchLead = async () => {
       try {
         setLoading(true);
-        const response = await getDetail();
-        const allLeads = response.data || [];
-        const lead = allLeads.find(lead => lead._id === id);
-        if (lead) {
-          setSelectedRecord(lead);
+        const response = await getLeadById(id);
+        if (response.data.success && response.data.data) {
+          setSelectedRecord(response.data.data);
         } else {
           setError('Lead not found');
         }
@@ -40,7 +38,7 @@ const ViewLead = () => {
     };
 
     if (id) {
-      fetchLeads();
+      fetchLead();
     }
   }, [id]);
 
@@ -143,13 +141,11 @@ const ViewLead = () => {
   const handleUpdateSubmit = async (updatedData) => {
     try {
       setUpdating(true);
-      await updateDetail(id, updatedData);
+      const response = await updateDetail(id, updatedData);
       // Refresh the lead data
-      const response = await getDetail();
-      const allLeads = response.data || [];
-      const lead = allLeads.find(lead => lead._id === id);
-      if (lead) {
-        setSelectedRecord(lead);
+      const leadResponse = await getLeadById(id);
+      if (leadResponse.data.success && leadResponse.data.data) {
+        setSelectedRecord(leadResponse.data.data);
       }
       setShowUpdateModal(false);
     } catch (err) {

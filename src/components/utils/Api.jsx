@@ -2,11 +2,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const Api = axios.create({
-  baseURL: "https://elite-backend-production.up.railway.app",
+  baseURL: "http://localhost:3000",
 });
 
 const Apione = axios.create({
-  baseURL: "https://elite-backend-production.up.railway.app",
+  baseURL: "http://localhost:3000",
 });
 
 Api.interceptors.request.use(
@@ -33,7 +33,15 @@ Api.interceptors.response.use(
 export const login = (post) => Apione.post("/auth/login", post);
 
 // ============== FORM/LEADS ==============
-export const getDetail = () => Api.get("/form/read-form");
+export const getDetail = (params) => Api.get("/form/read-form", { params });
+
+export const getAllLeads = (params) => Api.get("/form/read-all-forms", { params });
+
+export const getUnassignedLeads = (params) => Api.get("/form/unassigned", { params });
+
+export const getAssignedLeads = (salesId, params) => Api.get(`/form/assigned/${salesId}`, { params });
+
+export const getLeadById = (id) => Api.get(`/form/form/${id}`);
 
 export const addDetail = (formData) => Api.post("/form/create-form", formData, {
   headers: { "Content-Type": "multipart/form-data" },
