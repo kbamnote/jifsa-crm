@@ -19,6 +19,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   const [isProductOpen, setIsProductOpen] = useState(false);
   const [isMailOpen, setIsMailOpen] = useState(false);
   const [isLeadsOpen, setIsLeadsOpen] = useState(false);
+  const [isMarketingOpen, setIsMarketingOpen] = useState(false);
   const [userRole, setUserRole] = useState("");
   
   useEffect(() => {
@@ -250,11 +251,31 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       disabled: disabledItems.b2b,
     },
     {
-      id: "social-media",
-      name: "Social Media",
-      path: "/social-media",
+      id: "marketing",
+      name: "Marketing",
       icon: <BiSolidVideos className="w-5 h-5" />,
-      disabled: disabledItems.socialMedia,
+      isDropdown: true,
+      disabled: false,
+      subItems: [
+        {
+          id: "social-media",
+          name: "Social Media",
+          path: "/social-media",
+          disabled: disabledItems.socialMedia,
+        },
+        {
+          id: "seo",
+          name: "SEO Management",
+          path: "/seo",
+          disabled: false,
+        },
+        {
+          id: "blog",
+          name: "Blog Management",
+          path: "/blog",
+          disabled: false,
+        }
+      ],
     },
     {
       id: "intern-applied-data",
@@ -270,6 +291,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
       icon: <HiOutlineUserGroup className="w-5 h-5" />,
       disabled: false,
     },
+
     {
       id: "gallery&doucments",
       name: "Gallery & Docs",
@@ -303,6 +325,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   const isProductActive = location.pathname === "/jifsa" || location.pathname === "/bim";
   const isMailActive = location.pathname === "/mail" || location.pathname === "/mail-track";
   const isLeadsActive = location.pathname === "/lead-management" || location.pathname === "/lead-assigned";
+  const isMarketingActive = location.pathname === "/social-media" || location.pathname === "/seo" || location.pathname === "/blog";
 
   const getDisplayName = () => {
     if (userRole.toLowerCase().includes("admin")) return "Elite Admin";
@@ -365,9 +388,25 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
         <nav className="flex-1 py-6 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             if (item.isDropdown) {
-              const isDropdownOpen = item.id === "products" ? isProductOpen : (item.id === "mail" ? isMailOpen : isLeadsOpen);
-              const setDropdownOpen = item.id === "products" ? setIsProductOpen : (item.id === "mail" ? setIsMailOpen : setIsLeadsOpen);
-              const isDropdownActive = item.id === "products" ? isProductActive : (item.id === "mail" ? isMailActive : isLeadsActive);
+              let isDropdownOpen, setDropdownOpen, isDropdownActive;
+              
+              if (item.id === "products") {
+                isDropdownOpen = isProductOpen;
+                setDropdownOpen = setIsProductOpen;
+                isDropdownActive = isProductActive;
+              } else if (item.id === "mail") {
+                isDropdownOpen = isMailOpen;
+                setDropdownOpen = setIsMailOpen;
+                isDropdownActive = isMailActive;
+              } else if (item.id === "leads") {
+                isDropdownOpen = isLeadsOpen;
+                setDropdownOpen = setIsLeadsOpen;
+                isDropdownActive = isLeadsActive;
+              } else if (item.id === "marketing") {
+                isDropdownOpen = isMarketingOpen;
+                setDropdownOpen = setIsMarketingOpen;
+                isDropdownActive = isMarketingActive;
+              }
               
               return (
                 <div key={item.id}>

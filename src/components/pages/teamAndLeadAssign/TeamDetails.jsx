@@ -51,10 +51,9 @@ const TeamDetails = () => {
         }
         
         // Fetch all leads to analyze remark system
-        const allLeadsResponse = await getDetail();
-        if (allLeadsResponse.data) {
-          setAllLeads(allLeadsResponse.data);
-        }
+        const allLeadsResponse = await getDetail({ page: 1, limit: 1000 });
+        const allLeadsData = allLeadsResponse.data.success ? allLeadsResponse.data.data || [] : allLeadsResponse.data || [];
+        setAllLeads(allLeadsData);
       } catch (err) {
         setError('Failed to load team member details');
         console.error('Error fetching team member:', err);

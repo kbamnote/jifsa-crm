@@ -32,8 +32,9 @@ const Mail = () => {
   const fetchLeads = async () => {
     try {
       setLoading(true);
-      const response = await getDetail();
-      const allLeads = response.data || [];
+      // Fetch all leads by setting a high limit
+      const response = await getDetail({ page: 1, limit: 1000 });
+      const allLeads = response.data.success ? response.data.data || [] : response.data || [];
       console.log(response, "Mail");
       
       // For sales persons, only show leads assigned to them

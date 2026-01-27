@@ -23,6 +23,8 @@ import ViewJob from './components/pages/companyImport/ViewJob';
 import ReportPage from './components/pages/reports/ReportPage';
 import InternAppliedDataPage from './components/pages/internAppliedData/InternAppliedDataPage';
 import InternApplicationDetailView from './components/pages/internAppliedData/InternApplicationDetailView';
+import Seo from "./components/pages/seo-and-blogs/Seo";
+import Blog from "./components/pages/seo-and-blogs/Blog";
 
 function App() {
   return (
@@ -53,6 +55,8 @@ function App() {
           <Route path="/job-management" element={<JobManagement/>}/>
           <Route path="/job/:id" element={<ViewJob/>}/>
           <Route path="/reports" element={<ReportPage/>}/>
+          <Route path="/seo" element={<Seo/>}/>
+          <Route path="/blog" element={<Blog/>}/>
         </Route>
       </Routes>
     </>

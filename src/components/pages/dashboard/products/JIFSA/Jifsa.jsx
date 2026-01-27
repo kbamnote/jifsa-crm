@@ -60,16 +60,25 @@ const JIFSA = () => {
   // API calls - Fetch all data
   useEffect(() => {
     setLoading(true);
-    Promise.all([getDetail(), getComplaint(), getAdmissionForm()])
+    Promise.all([
+      getDetail({ page: 1, limit: 1000 }),
+      getComplaint(),
+      getAdmissionForm()
+    ])
       .then(([enquiryRes, complaintRes, admissionRes]) => {
+        // Handle paginated response structures
+        const allEnquiryData = enquiryRes.data.success ? enquiryRes.data.data || [] : enquiryRes.data || [];
+        const allComplaintData = complaintRes.data.success ? complaintRes.data.data || [] : complaintRes.data || [];
+        const allAdmissionData = admissionRes.data.success ? admissionRes.data.data || [] : admissionRes.data || [];
+        
         // Filter only JIFSA data for enquiry
-        const jifsaEnquiry = enquiryRes.data.filter(
+        const jifsaEnquiry = allEnquiryData.filter(
           item => item.productCompany === 'JIFSA'
         );
         
         setEnquiryData(jifsaEnquiry);
-        setComplaintData(complaintRes.data);
-        setAdmissionData(admissionRes.data);
+        setComplaintData(allComplaintData);
+        setAdmissionData(allAdmissionData);
         
         // Set initial filtered data based on active tab
         const sorted = sortData(jifsaEnquiry, "createdAt", "desc");

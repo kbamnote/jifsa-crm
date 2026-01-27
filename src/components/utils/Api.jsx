@@ -252,6 +252,61 @@ export const getAttendanceStats = () => Api.get('/reports/attendance-stats');
 
 export const getAllTeamMembers = () => Api.get('/reports/team-members');
 
+// ============== SEO MANAGEMENT ==============
+export const createSeoEntry = (seoData) => Api.post('/seo', seoData);
+
+export const getAllSeoEntries = (page = 1, limit = 10, filters = {}) => {
+  const params = new URLSearchParams();
+  params.append('page', page);
+  params.append('limit', limit);
+  
+  // Add filters if provided
+  if (filters.productCompany) params.append('productCompany', filters.productCompany);
+  if (filters.submissionEntity) params.append('submissionEntity', filters.submissionEntity);
+  
+  return Api.get(`/seo?${params.toString()}`);
+};
+
+export const getSeoEntryById = (id) => Api.get(`/seo/${id}`);
+
+export const updateSeoEntry = (id, seoData) => Api.put(`/seo/${id}`, seoData);
+
+export const deleteSeoEntry = (id) => Api.delete(`/seo/${id}`);
+
+// ============== BLOG MANAGEMENT ==============
+export const createBlogPost = (formData) => 
+  Api.post('/blogs', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+export const getAllBlogPosts = (page = 1, limit = 10, filters = {}) => {
+  const params = new URLSearchParams();
+  params.append('page', page);
+  params.append('limit', limit);
+  
+  // Add filters if provided
+  if (filters.productCompany) params.append('productCompany', filters.productCompany);
+  if (filters.category) params.append('category', filters.category);
+  if (filters.status) params.append('status', filters.status);
+  
+  return Api.get(`/blogs?${params.toString()}`);
+};
+
+export const getBlogPostById = (id) => Api.get(`/blogs/${id}`);
+
+export const updateBlogPost = (id, formData) => 
+  Api.put(`/blogs/${id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+
+export const deleteBlogPost = (id) => Api.delete(`/blogs/${id}`);
+
+export const likeBlogPost = (id) => Api.post(`/blogs/${id}/like`);
+
+export const getBlogCategories = () => Api.get('/blogs/categories');
+
+export const getBlogProductCompanies = () => Api.get('/blogs/product-companies');
+
 // ============== INTERN APPLIED DATA ==============
 export const createInternApplication = (formData) =>
   Api.post('/intern-applied-data', formData, {

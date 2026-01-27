@@ -69,10 +69,13 @@ const EliteBim = () => {
   // Fetch only Elite-BIM data
   useEffect(() => {
     setLoading(true);
-    getDetail()
+    getDetail({ page: 1, limit: 1000 })
       .then((res) => {
+        // Handle paginated response structure
+        const allData = res.data.success ? res.data.data || [] : res.data || [];
+        
         // Filter only Elite-BIM data
-        const eliteBimData = res.data.filter(
+        const eliteBimData = allData.filter(
           item => item.productCompany === 'Elite-BIM'
         );
         
