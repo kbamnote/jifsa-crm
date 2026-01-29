@@ -1,33 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { FileText, Image, Trash2, Upload, Eye, X, CheckCircle, AlertCircle, Calendar, DollarSign, Bell, Clock, Check, XCircle, CreditCard } from "lucide-react";
-import { createPayDetail, checkPayDetails, deletePayDetail } from '../../utils/Api';
+import { FileText, Image, Trash2, Upload, Eye, X, CheckCircle, AlertCircle, Calendar, DollarSign, Bell, Clock, Check, XCircle, CreditCard, Plus } from "lucide-react";
+import { createPayDetail, checkPayDetails, deletePayDetail, updatePayDetail } from '../../utils/Api';
 import ClientModal from '../../modal/ClientModal';
 import SuccessModal from '../../modal/SuccessModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
+import AddPaymentDetailModal from '../../modal/AddPaymentDetailModal';
+import UpdatePaymentDetailModal from '../../modal/UpdatePaymentDetailModal';
 
 const PaymentDetail = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    details: "",
-    startDate: "",
-    endDate: "",
-    amount: "",
-    currency: "INR",
-    billingType: "one-time",
-    status: "pending",
-    reminderDate: "",
-    uploadImg: null,
-  });
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(true);
-  const [previewUrl, setPreviewUrl] = useState(null);
   
   // Modal states
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
 
@@ -47,59 +38,44 @@ const PaymentDetail = () => {
     fetchPayments();
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (files && files[0]) {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: files[0],
-      }));
-      setPreviewUrl(URL.createObjectURL(files[0]));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+  const handleAddClick = () => {
+    setSelectedPayment(null);
+    setShowAddModal(true);
+  };
+
+  const handleCreatePayment = async (formData) => {
+    try {
+      setLoading(true);
+      await createPayDetail(formData);
+      setSuccessMessage('Payment detail created successfully!');
+      setShowSuccessModal(true);
+      fetchPayments();
+      setShowAddModal(false);
+    } catch (error) {
+      console.error(error);
+      setSuccessMessage('Error creating payment detail. Please try again.');
+      setShowSuccessModal(true);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const fd = new FormData();
-    fd.append("name", formData.name);
-    if (formData.details) fd.append("details", formData.details);
-    if (formData.startDate) fd.append("startDate", formData.startDate);
-    if (formData.endDate) fd.append("endDate", formData.endDate);
-    if (formData.amount) fd.append("amount", formData.amount);
-    fd.append("currency", formData.currency);
-    fd.append("billingType", formData.billingType);
-    fd.append("status", formData.status);
-    if (formData.reminderDate) fd.append("reminderDate", formData.reminderDate);
-    fd.append("uploadImg", formData.uploadImg);
+  const handleEditClick = (payment) => {
+    setSelectedPayment(payment);
+    setShowEditModal(true);
+  };
 
+  const handleUpdatePayment = async (id, formData) => {
     try {
-      await createPayDetail(fd);
-      setSuccessMessage('Payment detail uploaded successfully!');
+      setLoading(true);
+      await updatePayDetail(id, formData);
+      setSuccessMessage('Payment detail updated successfully!');
       setShowSuccessModal(true);
       fetchPayments();
-      setFormData({ 
-        name: "", 
-        details: "", 
-        startDate: "",
-        endDate: "",
-        amount: "",
-        currency: "INR",
-        billingType: "one-time",
-        status: "pending",
-        reminderDate: "",
-        uploadImg: null 
-      });
-      setPreviewUrl(null);
-      e.target.reset();
+      setShowEditModal(false);
     } catch (error) {
       console.error(error);
-      setSuccessMessage('Error uploading payment detail. Please try again.');
+      setSuccessMessage('Error updating payment detail. Please try again.');
       setShowSuccessModal(true);
     } finally {
       setLoading(false);
@@ -189,208 +165,15 @@ const PaymentDetail = () => {
           <p className="text-gray-600 text-lg">Manage one-time, monthly, and yearly billing with customizable reminders</p>
         </div>
 
-        {/* Upload Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-8 border border-gray-100">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg">
-              <CreditCard className="w-6 h-6 text-white" />
-            </div>
-            <h2 className="text-2xl font-bold text-gray-800">Add New Billing Record</h2>
-          </div>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Billing Name *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="e.g., Service Fee, Subscription, Annual License"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                  required
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Billing Type
-                </label>
-                <select
-                  name="billingType"
-                  value={formData.billingType}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                >
-                  <option value="one-time">One-time Payment</option>
-                  <option value="monthly">Monthly Billing</option>
-                  <option value="yearly">Yearly Billing</option>
-                  <option value="quarterly">Quarterly Billing</option>
-                </select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Status
-                </label>
-                <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                >
-                  <option value="pending">Pending</option>
-                  <option value="paid">Paid</option>
-                  <option value="overdue">Overdue</option>
-                  <option value="cancelled">Cancelled</option>
-                </select>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Amount
-                </label>
-                <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="number"
-                    name="amount"
-                    placeholder="0.00 (optional)"
-                    value={formData.amount}
-                    onChange={handleChange}
-                    min="0"
-                    step="0.01"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Currency
-                </label>
-                <select
-                  name="currency"
-                  value={formData.currency}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                >
-                  <option value="INR">₹ INR (Indian Rupee)</option>
-                  <option value="USD">$ USD (US Dollar)</option>
-                  <option value="EUR">€ EUR (Euro)</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Start Date
-                </label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="date"
-                    name="startDate"
-                    value={formData.startDate}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  End Date
-                </label>
-                <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="date"
-                    name="endDate"
-                    value={formData.endDate}
-                    onChange={handleChange}
-                    min={formData.startDate}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Reminder Date
-                </label>
-                <div className="relative">
-                  <Bell className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="date"
-                    name="reminderDate"
-                    value={formData.reminderDate}
-                    onChange={handleChange}
-                    min={new Date().toISOString().split('T')[0]}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Additional Details
-                </label>
-                <input
-                  type="text"
-                  name="details"
-                  placeholder="Additional information (optional)"
-                  value={formData.details}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Upload Document (Image or PDF) *
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  name="uploadImg"
-                  accept="image/*,.pdf"
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-blue-500 transition file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gradient-to-r file:from-blue-500 file:to-purple-600 file:text-white file:font-semibold hover:file:opacity-90 shadow-sm"
-                  required
-                />
-              </div>
-              {previewUrl && (
-                <div className="mt-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                  <p className="text-sm text-gray-600 mb-2 flex items-center gap-2">
-                    <Eye className="w-4 h-4" />
-                    Preview:
-                  </p>
-                  <img src={previewUrl} alt="Preview" className="max-h-32 rounded-lg shadow-sm" />
-                </div>
-              )}
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
-            >
-              {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Processing...
-                </span>
-              ) : (
-                "Upload Billing Record"
-              )}
-            </button>
-          </form>
+        {/* Add New Button */}
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={handleAddClick}
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            <Plus className="w-5 h-5" />
+            Add New Billing Record
+          </button>
         </div>
 
         {/* Payment Summary Cards */}
@@ -478,7 +261,7 @@ const PaymentDetail = () => {
                 <FileText className="w-8 h-8 text-gray-400" />
               </div>
               <p className="text-gray-500 text-lg">No billing records found</p>
-              <p className="text-gray-400 text-sm mt-1">Upload your first billing record to get started</p>
+              <p className="text-gray-400 text-sm mt-1">Click "Add New Billing Record" to get started</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -565,6 +348,16 @@ const PaymentDetail = () => {
                       <td className="px-6 py-4">
                         <div className="flex items-center justify-center gap-2">
                           <button
+                            onClick={() => handleEditClick(payment)}
+                            className="p-2 bg-yellow-100 text-yellow-600 rounded-lg hover:bg-yellow-200 transition"
+                            title="Edit"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                          </button>
+                          <button
                             onClick={() => handleViewClick(payment)}
                             className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition"
                             title="View Details"
@@ -589,14 +382,26 @@ const PaymentDetail = () => {
         </div>
       </div>
 
-      {/* Success Modal */}
+      {/* Modals */}
+      <AddPaymentDetailModal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSave={handleCreatePayment}
+      />
+
+      <UpdatePaymentDetailModal
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        onSave={handleUpdatePayment}
+        paymentDetail={selectedPayment}
+      />
+
       <SuccessModal
         showModal={showSuccessModal}
         setShowModal={setShowSuccessModal}
         message={successMessage}
       />
 
-      {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         showModal={showDeleteConfirmModal}
         setShowModal={setShowDeleteConfirmModal}
@@ -604,7 +409,6 @@ const PaymentDetail = () => {
         itemName="payment detail"
       />
 
-      {/* View Modal using ClientModal */}
       <ClientModal
         showModal={showViewModal}
         selectedRecord={selectedPayment}

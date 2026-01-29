@@ -20,6 +20,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   const [isMailOpen, setIsMailOpen] = useState(false);
   const [isLeadsOpen, setIsLeadsOpen] = useState(false);
   const [isMarketingOpen, setIsMarketingOpen] = useState(false);
+  const [isCompaniesOpen, setIsCompaniesOpen] = useState(false);
   const [userRole, setUserRole] = useState("");
   
   useEffect(() => {
@@ -326,6 +327,7 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
   const isMailActive = location.pathname === "/mail" || location.pathname === "/mail-track";
   const isLeadsActive = location.pathname === "/lead-management" || location.pathname === "/lead-assigned";
   const isMarketingActive = location.pathname === "/social-media" || location.pathname === "/seo" || location.pathname === "/blog";
+  const isCompaniesActive = location.pathname === "/company-import" || location.pathname === "/job-management";
 
   const getDisplayName = () => {
     if (userRole.toLowerCase().includes("admin")) return "Elite Admin";
@@ -406,6 +408,10 @@ const SideNavbar = ({ isOpen, setIsOpen }) => {
                 isDropdownOpen = isMarketingOpen;
                 setDropdownOpen = setIsMarketingOpen;
                 isDropdownActive = isMarketingActive;
+              } else if (item.id === "companies") {
+                isDropdownOpen = isCompaniesOpen;
+                setDropdownOpen = setIsCompaniesOpen;
+                isDropdownActive = isCompaniesActive;
               }
               
               return (

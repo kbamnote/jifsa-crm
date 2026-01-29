@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Download, Calendar, Clock, FileText, FileImage, File, X, ChevronDown, ChevronRight, Users, UserCircle, BarChart3, User, Link as LinkIcon, BarChart3 as BarChart3Icon } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ReportModal from '../../modal/ReportModal';
 import DeleteConfirmationModal from '../../modal/DeleteConfirmationModal';
 import AttendanceStatsModal from '../../modal/AttendanceStatsModal';
@@ -13,6 +14,8 @@ import {
 } from '../../utils/Api';
 
 const ReportPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingStats, setLoadingStats] = useState(true);
@@ -29,6 +32,7 @@ const ReportPage = () => {
   const [nameFilter, setNameFilter] = useState('');
   const [startDateFilter, setStartDateFilter] = useState('');
   const [endDateFilter, setEndDateFilter] = useState('');
+  const [roleFilter, setRoleFilter] = useState('');
   const [activeFilters, setActiveFilters] = useState({});
   
   // Statistics state
@@ -59,6 +63,27 @@ const ReportPage = () => {
     setUserRole(role || '');
   }, []);
 
+  // Parse URL parameters on component mount and initialize filters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    
+    const pageParam = parseInt(urlParams.get('page')) || 1;
+    const dateParam = urlParams.get('date') || '';
+    const startDateParam = urlParams.get('startDate') || '';
+    const endDateParam = urlParams.get('endDate') || '';
+    const userNameParam = urlParams.get('userName') || ''; // Changed from 'name' to 'userName'
+    const dayParam = urlParams.get('day') || '';
+    const userRoleParam = urlParams.get('userRole') || ''; // Changed from 'role' to 'userRole'
+
+    setDateFilter(dateParam);
+    setStartDateFilter(startDateParam);
+    setEndDateFilter(endDateParam);
+    setNameFilter(userNameParam); // Use userNameParam instead of nameParam
+    setDayFilter(dayParam);
+    setRoleFilter(userRoleParam); // Use userRoleParam instead of roleParam
+    setCurrentPage(pageParam);
+  }, []);
+
   // Fetch reports, attendance stats, and team members from API
   useEffect(() => {
     const fetchData = async () => {
@@ -83,8 +108,7 @@ const ReportPage = () => {
       
       // Handle date filtering
       if (dateFilter) {
-        filters.startDate = dateFilter;
-        filters.endDate = dateFilter;
+        filters.date = dateFilter;
       } else if (startDateFilter || endDateFilter) {
         if (startDateFilter) filters.startDate = startDateFilter;
         if (endDateFilter) filters.endDate = endDateFilter;
@@ -95,6 +119,9 @@ const ReportPage = () => {
       }
       if (dayFilter) {
         filters.day = dayFilter;
+      }
+      if (roleFilter) {
+        filters.userRole = roleFilter;
       }
       
       const response = await fetchReportsApi(currentPage, itemsPerPage, filters);
@@ -118,8 +145,65 @@ const ReportPage = () => {
     if (endDateFilter) filters.endDate = endDateFilter;
     if (nameFilter) filters.name = nameFilter;
     if (dayFilter) filters.day = dayFilter;
+    if (roleFilter) filters.role = roleFilter;
     setActiveFilters(filters);
-  }, [dateFilter, startDateFilter, endDateFilter, nameFilter, dayFilter]);
+  }, [dateFilter, startDateFilter, endDateFilter, nameFilter, dayFilter, roleFilter]);
+  
+  // Update URL when filters change
+  useEffect(() => {
+    updateURLParams();
+  }, [activeFilters, currentPage]);
+
+  const updateURLParams = () => {
+    const params = new URLSearchParams();
+    
+    // Add filters - use parameter names that match the API expectations
+    if (activeFilters.date) params.set('date', activeFilters.date);
+    if (activeFilters.startDate) params.set('startDate', activeFilters.startDate);
+    if (activeFilters.endDate) params.set('endDate', activeFilters.endDate);
+    if (activeFilters.name) params.set('userName', activeFilters.name); // Changed from 'name' to 'userName'
+    if (activeFilters.day) params.set('day', activeFilters.day);
+    if (activeFilters.role) params.set('userRole', activeFilters.role); // Changed from 'role' to 'userRole'
+    
+    // Add pagination
+    if (currentPage && currentPage > 1) params.set('page', currentPage);
+    
+    // Update URL without reloading
+    const newUrl = `${location.pathname}${params.toString() ? '?' + params.toString() : ''}`;
+    navigate(newUrl, { replace: true });
+  };
+
+  const handleFilterChange = (filterName, value) => {
+    switch (filterName) {
+      case 'date':
+        setDateFilter(value);
+        setStartDateFilter('');
+        setEndDateFilter('');
+        break;
+      case 'startDate':
+        setStartDateFilter(value);
+        setDateFilter('');
+        break;
+      case 'endDate':
+        setEndDateFilter(value);
+        setDateFilter('');
+        break;
+      case 'name':
+        setNameFilter(value);
+        break;
+      case 'day':
+        setDayFilter(value);
+        break;
+      case 'role':
+        setRoleFilter(value);
+        break;
+      default:
+        break;
+    }
+    
+    // Reset to page 1 when filter changes
+    setCurrentPage(1);
+  };
   
   const clearFilters = () => {
     setDateFilter('');
@@ -127,6 +211,7 @@ const ReportPage = () => {
     setEndDateFilter('');
     setNameFilter('');
     setDayFilter('');
+    setRoleFilter('');
     setCurrentPage(1);
   };
   
@@ -147,6 +232,9 @@ const ReportPage = () => {
       case 'day':
         setDayFilter('');
         break;
+      case 'role':
+        setRoleFilter('');
+        break;
       default:
         break;
     }
@@ -154,7 +242,7 @@ const ReportPage = () => {
   };
   
   const getActiveFilterCount = () => {
-    return Object.keys(activeFilters).length;
+    return Object.keys(activeFilters).filter(key => activeFilters[key]).length;
   };
   
   const fetchAttendanceStats = async () => {
@@ -387,12 +475,7 @@ const ReportPage = () => {
               <input
                 type="date"
                 value={dateFilter}
-                onChange={(e) => {
-                  setDateFilter(e.target.value);
-                  setStartDateFilter('');
-                  setEndDateFilter('');
-                  setCurrentPage(1);
-                }}
+                onChange={(e) => handleFilterChange('date', e.target.value)}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
                 disabled={startDateFilter || endDateFilter}
               />
@@ -403,11 +486,7 @@ const ReportPage = () => {
               <input
                 type="date"
                 value={startDateFilter}
-                onChange={(e) => {
-                  setStartDateFilter(e.target.value);
-                  setDateFilter('');
-                  setCurrentPage(1);
-                }}
+                onChange={(e) => handleFilterChange('startDate', e.target.value)}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
                 disabled={dateFilter}
               />
@@ -418,11 +497,7 @@ const ReportPage = () => {
               <input
                 type="date"
                 value={endDateFilter}
-                onChange={(e) => {
-                  setEndDateFilter(e.target.value);
-                  setDateFilter('');
-                  setCurrentPage(1);
-                }}
+                onChange={(e) => handleFilterChange('endDate', e.target.value)}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
                 disabled={dateFilter}
               />
@@ -432,10 +507,7 @@ const ReportPage = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Day</label>
               <select
                 value={dayFilter}
-                onChange={(e) => {
-                  setDayFilter(e.target.value);
-                  setCurrentPage(1);
-                }}
+                onChange={(e) => handleFilterChange('day', e.target.value)}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
               >
                 <option value="">Select a day...</option>
@@ -450,22 +522,38 @@ const ReportPage = () => {
             </div>
           </div>
           
-          {userRole === 'admin' && (
+          {(userRole === 'admin') && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Name</label>
                 <select
                   value={nameFilter}
-                  onChange={(e) => {
-                    setNameFilter(e.target.value);
-                    setCurrentPage(1);
-                  }}
+                  onChange={(e) => handleFilterChange('name', e.target.value)}
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
                 >
                   <option value="">All Names</option>
                   {teamMembers.map((member, index) => (
                     <option key={index} value={member.name}>{member.name}</option>
                   ))}
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Role</label>
+                <select
+                  value={roleFilter}
+                  onChange={(e) => handleFilterChange('role', e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 shadow-sm"
+                >
+                  <option value="">All Roles</option>
+                  <option value="admin">Admin</option>
+                  <option value="developer">Developer</option>
+                  <option value="analyst">Analyst</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="sales">Sales</option>
+                  <option value="counsellor">Counsellor</option>
+                  <option value="telecaller">Telecaller</option>
+                  <option value="hr">HR</option>
                 </select>
               </div>
             </div>
@@ -478,7 +566,11 @@ const ReportPage = () => {
                 <span className="text-sm font-medium text-blue-800">Active filters:</span>
                 {activeFilters.date && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                    Date: {new Date(activeFilters.date).toLocaleDateString()}
+                    Date: {new Date(activeFilters.date).toLocaleDateString('en-IN', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
                     <button
                       onClick={() => removeFilter('date')}
                       className="ml-2 text-blue-600 hover:text-blue-800"
@@ -489,7 +581,11 @@ const ReportPage = () => {
                 )}
                 {activeFilters.startDate && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
-                    From: {new Date(activeFilters.startDate).toLocaleDateString()}
+                    From: {new Date(activeFilters.startDate).toLocaleDateString('en-IN', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
                     <button
                       onClick={() => removeFilter('startDate')}
                       className="ml-2 text-green-600 hover:text-green-800"
@@ -500,7 +596,11 @@ const ReportPage = () => {
                 )}
                 {activeFilters.endDate && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                    To: {new Date(activeFilters.endDate).toLocaleDateString()}
+                    To: {new Date(activeFilters.endDate).toLocaleDateString('en-IN', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
                     <button
                       onClick={() => removeFilter('endDate')}
                       className="ml-2 text-purple-600 hover:text-purple-800"
@@ -526,6 +626,17 @@ const ReportPage = () => {
                     <button
                       onClick={() => removeFilter('day')}
                       className="ml-2 text-yellow-600 hover:text-yellow-800"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {activeFilters.role && (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                    Role: {activeFilters.role.charAt(0).toUpperCase() + activeFilters.role.slice(1)}
+                    <button
+                      onClick={() => removeFilter('role')}
+                      className="ml-2 text-red-600 hover:text-red-800"
                     >
                       ×
                     </button>

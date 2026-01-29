@@ -102,6 +102,11 @@ export const createPayDetail = (formData) =>
 
 export const checkPayDetails = () => Api.get("/payment-detail/get-all");
 
+export const updatePayDetail = (id, formData) =>
+  Api.put(`/payment-detail/update/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
 export const deletePayDetail = (id) => Api.delete(`/payment-detail/delete/${id}`);
 
 // ============== MAIL ==============
@@ -229,7 +234,9 @@ export const getReports = (page = 1, limit = 10, filters = {}) => {
   // Add filters if provided
   if (filters.userId) params.append('userId', filters.userId);
   if (filters.userName) params.append('userName', filters.userName);
+  if (filters.userRole) params.append('userRole', filters.userRole);
   if (filters.day) params.append('day', filters.day);
+  if (filters.date) params.append('date', filters.date);
   if (filters.startDate) params.append('startDate', filters.startDate);
   if (filters.endDate) params.append('endDate', filters.endDate);
   
