@@ -100,7 +100,22 @@ export const createPayDetail = (formData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
-export const checkPayDetails = () => Api.get("/payment-detail/get-all");
+export const checkPayDetails = (params) => {
+  const queryParams = new URLSearchParams();
+  
+  if (params) {
+    Object.keys(params).forEach(key => {
+      if (params[key] !== undefined && params[key] !== null && params[key] !== '') {
+        queryParams.append(key, params[key]);
+      }
+    });
+  }
+  
+  const queryString = queryParams.toString();
+  return Api.get(`/payment-detail/get-all${queryString ? '?' + queryString : ''}`);
+};
+
+export const getPaymentCategories = () => Api.get('/payment-detail/categories');
 
 export const updatePayDetail = (id, formData) =>
   Api.put(`/payment-detail/update/${id}`, formData, {

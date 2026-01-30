@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, DollarSign, Bell, Upload, Eye, FileText } from 'lucide-react';
+import { X, Calendar, DollarSign, Bell, Upload, Eye, FileText, Folder, Plus } from 'lucide-react';
+import { getPaymentCategories } from '../utils/Api';
 
 const AddPaymentDetailModal = ({ isOpen, onClose, onSave, editingItem }) => {
   const [formData, setFormData] = useState({
@@ -12,13 +13,20 @@ const AddPaymentDetailModal = ({ isOpen, onClose, onSave, editingItem }) => {
     billingType: "one-time",
     status: "pending",
     reminderDate: "",
+    category: "",
     uploadImg: null,
   });
   const [previewUrl, setPreviewUrl] = useState(null);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
 
   useEffect(() => {
+    if (isOpen) {
+      fetchCategories();
+    }
+    
     if (editingItem) {
       setFormData({
         name: editingItem.name || "",
@@ -30,6 +38,7 @@ const AddPaymentDetailModal = ({ isOpen, onClose, onSave, editingItem }) => {
         billingType: editingItem.billingType || "one-time",
         status: editingItem.status || "pending",
         reminderDate: editingItem.reminderDate ? new Date(editingItem.reminderDate).toISOString().split('T')[0] : "",
+        category: editingItem.category || "",
         uploadImg: editingItem.uploadImg || null,
       });
       if (editingItem.uploadImg) {
@@ -46,12 +55,23 @@ const AddPaymentDetailModal = ({ isOpen, onClose, onSave, editingItem }) => {
         billingType: "one-time",
         status: "pending",
         reminderDate: "",
+        category: "",
         uploadImg: null,
       });
       setPreviewUrl(null);
     }
     setErrors({});
+    setShowNewCategoryInput(false);
   }, [editingItem, isOpen]);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await getPaymentCategories();
+      setCategories(res.data.data || []);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -96,6 +116,7 @@ const AddPaymentDetailModal = ({ isOpen, onClose, onSave, editingItem }) => {
       fd.append("billingType", formData.billingType);
       fd.append("status", formData.status);
       if (formData.reminderDate) fd.append("reminderDate", formData.reminderDate);
+      if (formData.category) fd.append("category", formData.category);
       if (formData.uploadImg && typeof formData.uploadImg !== 'string') {
         fd.append("uploadImg", formData.uploadImg);
       }
@@ -114,7 +135,7 @@ const AddPaymentDetailModal = ({ isOpen, onClose, onSave, editingItem }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 p-4 bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50">
           <h2 className="text-2xl font-bold text-gray-800">
@@ -267,6 +288,73 @@ const AddPaymentDetailModal = ({ isOpen, onClose, onSave, editingItem }) => {
                   min={new Date().toISOString().split('T')[0]}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
                 />
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Category/Folder
+              </label>
+              <div className="space-y-2">
+                {!showNewCategoryInput ? (
+                  <div className="relative">
+                    <select
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
+                    >
+                      <option value="">Select existing category or create new</option>
+                      {categories.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
+                    <Folder className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="category"
+                      placeholder="Enter new category name"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 pl-10 border border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
+                      autoFocus
+                    />
+                    <Folder className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5" />
+                  </div>
+                )}
+                
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (showNewCategoryInput) {
+                      // Cancel creating new category
+                      setFormData(prev => ({ ...prev, category: '' }));
+                      setShowNewCategoryInput(false);
+                    } else {
+                      // Start creating new category
+                      setShowNewCategoryInput(true);
+                      setFormData(prev => ({ ...prev, category: '' }));
+                    }
+                  }}
+                  className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition ${showNewCategoryInput ? 'bg-red-100 text-red-700 hover:bg-red-200' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'}`}
+                >
+                  {showNewCategoryInput ? (
+                    <>
+                      <X className="w-4 h-4" />
+                      Cancel
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4" />
+                      Create New Category
+                    </>
+                  )}
+                </button>
               </div>
             </div>
             

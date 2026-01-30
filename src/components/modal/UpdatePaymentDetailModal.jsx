@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, Calendar, DollarSign, Bell, Upload, Eye, FileText } from 'lucide-react';
+import { X, Calendar, DollarSign, Bell, Upload, Eye, FileText, Folder, Plus } from 'lucide-react';
+import { getPaymentCategories } from '../utils/Api';
 
 const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) => {
   const [formData, setFormData] = useState({
@@ -11,14 +12,20 @@ const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) =>
     currency: "INR",
     billingType: "one-time",
     status: "pending",
-    reminderDate: "",
+    category: "",
     uploadImg: null,
   });
   const [previewUrl, setPreviewUrl] = useState(null);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
 
   useEffect(() => {
+    if (isOpen) {
+      fetchCategories();
+    }
+    
     if (paymentDetail && isOpen) {
       setFormData({
         name: paymentDetail.name || "",
@@ -29,7 +36,7 @@ const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) =>
         currency: paymentDetail.currency || "INR",
         billingType: paymentDetail.billingType || "one-time",
         status: paymentDetail.status || "pending",
-        reminderDate: paymentDetail.reminderDate ? new Date(paymentDetail.reminderDate).toISOString().split('T')[0] : "",
+        category: paymentDetail.category || "",
         uploadImg: paymentDetail.uploadImg || null,
       });
       if (paymentDetail.uploadImg) {
@@ -45,13 +52,23 @@ const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) =>
         currency: "INR",
         billingType: "one-time",
         status: "pending",
-        reminderDate: "",
+        category: "",
         uploadImg: null,
       });
       setPreviewUrl(null);
     }
     setErrors({});
+    setShowNewCategoryInput(false);
   }, [paymentDetail, isOpen]);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await getPaymentCategories();
+      setCategories(res.data.data || []);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -94,7 +111,7 @@ const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) =>
       fd.append("currency", formData.currency);
       fd.append("billingType", formData.billingType);
       fd.append("status", formData.status);
-      if (formData.reminderDate) fd.append("reminderDate", formData.reminderDate);
+      if (formData.category) fd.append("category", formData.category);
       if (formData.uploadImg && typeof formData.uploadImg !== 'string') {
         fd.append("uploadImg", formData.uploadImg);
       }
@@ -103,6 +120,19 @@ const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) =>
       onClose();
     } catch (error) {
       console.error('Error updating payment detail:', error);
+      // More detailed error handling
+      if (error.response) {
+        // Server responded with error
+        const errorMessage = error.response.data?.message || 'Failed to update payment detail';
+        console.error('Server error:', errorMessage);
+        // You could set an error state here to display to user
+      } else if (error.request) {
+        // Request was made but no response received
+        console.error('No response received from server');
+      } else {
+        // Something else happened
+        console.error('Error setting up request:', error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -113,7 +143,7 @@ const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) =>
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 p-4 bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-yellow-50 to-orange-50">
           <h2 className="text-2xl font-bold text-gray-800">
@@ -252,20 +282,72 @@ const UpdatePaymentDetailModal = ({ isOpen, onClose, onSave, paymentDetail }) =>
               </div>
             </div>
             
+
+            
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Reminder Date
+                Category/Folder
               </label>
-              <div className="relative">
-                <Bell className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="date"
-                  name="reminderDate"
-                  value={formData.reminderDate}
-                  onChange={handleChange}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
-                />
+              <div className="space-y-2">
+                {!showNewCategoryInput ? (
+                  <div className="relative">
+                    <select
+                      name="category"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
+                    >
+                      <option value="">Select existing category or create new</option>
+                      {categories.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
+                    <Folder className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="category"
+                      placeholder="Enter new category name"
+                      value={formData.category}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 pl-10 border border-blue-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition shadow-sm"
+                      autoFocus
+                    />
+                    <Folder className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-500 w-5 h-5" />
+                  </div>
+                )}
+                
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (showNewCategoryInput) {
+                      // Cancel creating new category
+                      setFormData(prev => ({ ...prev, category: '' }));
+                      setShowNewCategoryInput(false);
+                    } else {
+                      // Start creating new category
+                      setShowNewCategoryInput(true);
+                      setFormData(prev => ({ ...prev, category: '' }));
+                    }
+                  }}
+                  className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition ${showNewCategoryInput ? 'bg-red-100 text-red-700 hover:bg-red-200' : 'bg-blue-100 text-blue-700 hover:bg-blue-200'}`}
+                >
+                  {showNewCategoryInput ? (
+                    <>
+                      <X className="w-4 h-4" />
+                      Cancel
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4" />
+                      Create New Category
+                    </>
+                  )}
+                </button>
               </div>
             </div>
             
