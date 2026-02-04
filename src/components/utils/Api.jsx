@@ -2,11 +2,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const Api = axios.create({
-  baseURL: "https://elite-backend-production.up.railway.app/",
+  baseURL: "https://api.elitebmi.in/",
 });
 
 const Apione = axios.create({
-  baseURL: "https://elite-backend-production.up.railway.app/",
+  baseURL: "https://api.elitebmi.in/",
 });
 
 Api.interceptors.request.use(
